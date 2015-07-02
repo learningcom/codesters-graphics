@@ -1,9 +1,10 @@
 from Tkinter import *
+root = Tk()
 from Environment import *
 from Circle import *
 from Sprite import *
 
-root = Tk()
+
 
 #A list of whatever exists at this time.
 Elements = []
@@ -16,7 +17,7 @@ canvas.pack()
 #This allows the user to call codesters.Sprite() and so on, and it creates the relevant sprite WITH canvas through here.
 #All things made here are added to Elements
 def Stage():
-    Elements.append(StageClass(canvas, Elements))
+    Elements.append(StageClass(canvas, Elements, root))
     return Elements[-1]
 def Circle():
     Elements.append(CircleClass(canvas, Elements))
