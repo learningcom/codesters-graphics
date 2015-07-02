@@ -1,6 +1,6 @@
 from Tkinter import *
 
-class CircleClass:
+class SpriteClass:
     #Placeholders
     xcor = 0
     ycor = 0
