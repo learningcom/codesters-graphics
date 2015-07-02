@@ -13,7 +13,6 @@ class SpriteClass:
     photo = PhotoImage(file = "./codesters/sprites/codestersLogo.gif")
 
     def __init__(self,canvas, Elements, image):
-        print image
         self.heading = 0
         self.canvas = canvas
         self.Elements = Elements

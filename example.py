@@ -5,7 +5,7 @@ import time
 stage = codesters.Stage()
 
 #Making a circle
-circle = codesters.Sprite()
+circle = codesters.Sprite("turtle")
 circle.set_x(100)
 circle.set_y(100)
 circle.set_speed(1)
