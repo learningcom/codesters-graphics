@@ -13,6 +13,8 @@ stage = codesters.Stage()
 #
 # circle.glide_to(100,100)
 
+sprite = codesters.Sprite("Alien1")
+sprite.go_to(50,200)
 stage.draw()
 stage.set_background("Winterscape")
 
