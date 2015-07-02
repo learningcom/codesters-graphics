@@ -24,7 +24,7 @@ class SpriteClass:
 
     def draw(self):
         if self.photo != None:
-            self.canvas.create_image((self.xcor-(self.size/2),self.ycor-(self.size/2)), image = self.photo)
+            self.canvas.create_image((self.xcor,self.ycor), image = self.photo)
         else:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
