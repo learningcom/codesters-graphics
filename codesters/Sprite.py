@@ -1,5 +1,6 @@
 from Tkinter import *
 import math
+import time
 
 class SpriteClass:
     #Default values
@@ -50,31 +51,60 @@ class SpriteClass:
         self.heading = degrees * math.pi * 2 / 360
 
     #Basic motion
+    #Step functions to build other functions
+    def step_forward(self):
+        self.set_x(self.xcor + self.speed*math.cos(self.heading))
+        self.set_y(self.ycor + self.speed*math.sin(self.heading))
+    def step_backward(self):
+        self.set_x(self.xcor - self.speed*math.cos(self.heading))
+        self.set_y(self.ycor - self.speed*math.sin(self.heading))
     def move_forward(self, amount):
-        self.set_x(self.xcor + amount*math.cos(self.heading))
-        self.set_y(self.ycor + amount*math.sin(self.heading))
+        dist = amount
+        while dist > 0:
+            self.step_forward()
+            dist -= self.speed
+            time.sleep(0.01)
     def move_backward(self, amount):
-        self.set_x(self.xcor - amount*math.cos(self.heading))
-        self.set_y(self.ycor - amount*math.sin(self.heading))
+        dist = amount
+        while dist > 0:
+            self.step_backward()
+            dist -= self.speed
+            time.sleep(0.01)
     def move_left(self, amount):
-        self.set_x(self.xcor - amount)
+        dist = amount
+        while dist > 0:
+            self.set_x(self.xcor - self.speed)
+            dist -= self.speed
+            time.sleep(0.01)
     def move_right(self, amount):
-        self.set_x(self.xcor + amount)
+        dist = amount
+        while dist > 0:
+            self.set_x(self.xcor + self.speed)
+            dist -= self.speed
+            time.sleep(0.01)
     def move_up(self, amount):
-        self.set_y(self.ycor - amount)
+        dist = amount
+        while dist > 0:
+            self.set_y(self.ycor - self.speed)
+            dist -= self.speed
+            time.sleep(0.01)
     def move_down(self, amount):
-        self.set_y(self.ycor + amount)
+        dist = amount
+        while dist > 0:
+            self.set_y(self.ycor + self.speed)
+            dist -= self.speed
+            time.sleep(0.01)
 
     #More complex motion
+    def go_to(self, newx, newy):
+        self.set_x(newx)
+        self.set_y(newy)
     def glide_to(self, newx, newy):
         xdist = newx - self.xcor
         ydist = newy - self.ycor
         dist = math.sqrt(xdist**2 + ydist**2)
         tempheading = self.heading
         self.heading = math.atan(ydist/xdist)
-
-        print xdist * ydist
-        print self.heading
 
         #Trig stuff
         while dist > self.speed:
