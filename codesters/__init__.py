@@ -25,11 +25,11 @@ def Sprite():
     Elements.append(SpriteClass(canvas, Elements))
     return Elements[-1]
 
-#In each class, declaration, this must happen:
+#In each class declaration, this must happen:
 #        self.canvas = canvas
 #        self.Elements = Elements
 
-#In each method for these classes, these three lines must happen:
+#In each method for these classes that causes something visible to change, these three lines must happen:
 #
 #        for e in self.Elements:
 #            e.draw()
