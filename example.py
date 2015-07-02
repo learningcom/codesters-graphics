@@ -15,10 +15,16 @@ stage = codesters.Stage()
 
 
 
+
+
+
+
 stage.draw()
-stage.set_background("Winterscape")
+stage.set_background("summer")
+#stage.set_background_x(0)
+stage.set_background_scaleX(.25)
+stage.set_background_scaleY(.25)
 sprite = codesters.Sprite("Alien1")
 sprite.go_to(50,200)
-
 #Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
 codesters.root.mainloop()
