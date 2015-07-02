@@ -10,20 +10,22 @@ class SpriteClass:
     size = 50
     color = 'white'
     heading = 0
-    photo = None
+    photo = PhotoImage(file = "./codesters/sprites/codestersLogo.gif")
 
-    def __init__(self,canvas, Elements, image = ''):
+    def __init__(self,canvas, Elements, image):
+        print image
+        self.heading = 0
         self.canvas = canvas
         self.Elements = Elements
         if image != '':
-            self.photo = PhotoImage(file = "/sprite_images_default/"+image+".png")
+            self.photo = PhotoImage(file = "./codesters/sprites/"+image+".gif")
         for e in self.Elements:
             e.draw()
         self.canvas.update()
 
     def draw(self):
         if self.photo != None:
-            self.canvas.create_image((self.xcor-(self.size/2),self.ycor-(self.size/2)), image = photo)
+            self.canvas.create_image((self.xcor-(self.size/2),self.ycor-(self.size/2)), image = self.photo)
         else:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
