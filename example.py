@@ -13,10 +13,12 @@ stage = codesters.Stage()
 #
 # circle.glide_to(100,100)
 
-sprite = codesters.Sprite("Alien1")
-sprite.go_to(50,200)
+
+
 stage.draw()
 stage.set_background("Winterscape")
+sprite = codesters.Sprite("Alien1")
+sprite.go_to(50,200)
 
 #Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
 codesters.root.mainloop()
