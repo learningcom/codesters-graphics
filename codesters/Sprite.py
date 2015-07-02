@@ -10,16 +10,22 @@ class SpriteClass:
     size = 50
     color = 'white'
     heading = 0
+    photo = None
 
-    def __init__(self,canvas, Elements):
+    def __init__(self,canvas, Elements, image = ''):
         self.canvas = canvas
         self.Elements = Elements
+        if image != '':
+            self.photo = PhotoImage(file = "/sprite_images_default/"+image+".png")
         for e in self.Elements:
             e.draw()
         self.canvas.update()
 
     def draw(self):
-        self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
+        if self.photo != None:
+            self.canvas.create_image((self.xcor-(self.size/2),self.ycor-(self.size/2)), image = photo)
+        else:
+            self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
     #Set variables
     def set_x(self, newx):
@@ -58,6 +64,8 @@ class SpriteClass:
     def step_backward(self):
         self.set_x(self.xcor - self.speed*math.cos(self.heading))
         self.set_y(self.ycor - self.speed*math.sin(self.heading))
+    #ALL ONCOMING LOOPS POTENTIALLY INEFFICIENT
+    # TODO MAKE LOOPS NOT TERRIBLY INEFFICIENT
     def move_forward(self, amount):
         dist = amount
         while dist > 0:
@@ -105,7 +113,6 @@ class SpriteClass:
         dist = math.sqrt(xdist**2 + ydist**2)
         tempheading = self.heading
         self.heading = math.atan(ydist/xdist)
-
         #Trig stuff
         while dist > self.speed:
             if xdist > 0:
@@ -119,7 +126,7 @@ class SpriteClass:
             xdist = newx - self.xcor
             ydist = newy - self.ycor
             dist = math.sqrt(xdist**2 + ydist**2)
-
+        #Just to make sure it does end up in the right spot
         self.set_x(newx)
         self.set_y(newy)
         self.heading = tempheading

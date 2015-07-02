@@ -21,8 +21,8 @@ def Stage():
 def Circle():
     Elements.append(CircleClass(canvas, Elements))
     return Elements[-1]
-def Sprite():
-    Elements.append(SpriteClass(canvas, Elements))
+def Sprite(image = ''):
+    Elements.append(SpriteClass(canvas, Elements, image = image))
     return Elements[-1]
 
 #In each class declaration, this must happen:
@@ -30,6 +30,8 @@ def Sprite():
 #        self.Elements = Elements
 
 #In each method for these classes that causes something visible to change, these three lines must happen:
+    #POTENTIALLY INEFFICIENT
+    #TODO MAKE MORE EFFICIENT
 #
 #        for e in self.Elements:
 #            e.draw()
