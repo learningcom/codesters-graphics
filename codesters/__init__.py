@@ -1,9 +1,9 @@
 from Tkinter import *
+root = Tk()
+
 from Environment import *
 from Circle import *
 from Sprite import *
-
-root = Tk()
 
 #A list of whatever exists at this time.
 Elements = []
