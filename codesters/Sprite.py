@@ -31,14 +31,15 @@ class SpriteClass:
     #Set variables
     def set_x(self, newx):
         self.xcor = newx+self.canvas.winfo_width()/2
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
     def set_y(self, newy):
         self.ycor = self.canvas.winfo_height()/2-newy
         for e in self.Elements:
             e.draw()
         self.canvas.update()
+    def get_x(self):
+        return self.xcor
+    def get_y(self):
+        return self.ycor
     def set_speed(self, newspeed):
         self.speed = newspeed
         for e in self.Elements:

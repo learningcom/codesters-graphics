@@ -12,10 +12,11 @@ class StageClass:
     scaled_image = None
     def __init__(self, canvas, Elements, root):
         #Placeholders
-        xcor = 0
-        ycor = 200
-        size = 1
         self.canvas = canvas
+        #self.canvas.bind("<Button-1>", self.click_x)
+        #self.canvas.bind("<Button-1>", self.click_y)
+        #self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
+        self.canvas.focus_set()
         self.Elements = Elements
         for e in self.Elements:
             e.draw()
@@ -59,5 +60,51 @@ class StageClass:
             e.draw()
             print e
         self.canvas.update()
+
+    def click_x(self, event):
+        #print "x coord", event.x
+        return event.x-250
+
+    def click_y(self, event):
+        #print "y coord", event.y
+        return (event.y*-1)+250
+
+    def event_click(self, function):
+        self.canvas.bind("<Button-1>", function)
+
+    def event_up_key(self, function):
+        self.canvas.bind("<Up>", function)
+
+    def event_down_key(self, function):
+        self.canvas.bind("<Down>", function)
+
+    def event_left_key(self, function):
+        self.canvas.bind("<Left>", function)
+
+    def event_right_key(self, function):
+        self.canvas.bind("<Right>", function)
+
+    def event_space_key(self, function):
+        self.canvas.bind("<space>", function)
+
+    def event_click_up(self, function):
+        self.canvas.bind("<ButtonRelease-1>", function)
+
+    def event_key(self, key, function):
+        bound_key_name = key
+        if key == "left":
+            bound_key_name = "<Left>"
+        if key == "right":
+            bound_key_name = "<Right>"
+        if key == "up":
+            bound_key_name = "<Up>"
+        if key == "down":
+            bound_key_name = "<Down>"
+        if key == "space":
+            bound_key_name = "<space>"
+        print bound_key_name
+        self.canvas.bind(bound_key_name, function)
+
+
 
 
