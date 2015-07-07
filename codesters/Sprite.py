@@ -6,12 +6,13 @@ class SpriteClass:
     #Default values
     xcor = 0
     ycor = 0
-    speed = 1
+    xspeed = 0
+    yspeed = 0
     size = 50
     color = 'white'
     heading = 0
     photo = PhotoImage(file = "./codesters/sprites/codestersLogo.gif")
-
+    hidden= False
     def __init__(self,canvas, Elements, image):
         self.heading = 0
         self.canvas = canvas
@@ -23,33 +24,34 @@ class SpriteClass:
         self.canvas.update()
 
     def draw(self):
-        if self.photo != None:
+        if self.photo != None and self.hidden == False:
             self.canvas.create_image((self.xcor,self.ycor), image = self.photo)
-        else:
+        elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
+    def hide(self):
+        self.hidden=True
+    def show(self):
+        self.hidden=False
     #Set variables
     def set_x(self, newx):
         self.xcor = newx+self.canvas.winfo_width()/2
     def set_y(self, newy):
         self.ycor = self.canvas.winfo_height()/2-newy
-        self.canvas.delete("all")
     def get_x(self):
         return self.xcor
     def get_y(self):
         return self.ycor
-    def set_speed(self, newspeed):
-        self.speed = newspeed
-        self.canvas.delete("all")
+    def set_x_speed(self, newspeed):
+        self.xspeed = newspeed
+    def set_y_speed(self, newspeed):
+        self.yspeed = newspeed
+    def jump(self, newspeed):
+        self.yspeed = newspeed
     def set_size(self, newsize):
         self.size = 50 * newsize
-        self.canvas.delete("all")
     def set_color(self, newcolor):
         self.color = newcolor
-        self.canvas.delete("all")
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
     def set_heading(self, degrees):
         self.heading = degrees * math.pi * 2 / 360
 
@@ -61,8 +63,6 @@ class SpriteClass:
     def step_backward(self):
         self.set_x(self.xcor - self.speed*math.cos(self.heading))
         self.set_y(self.ycor - self.speed*math.sin(self.heading))
-    #ALL ONCOMING LOOPS POTENTIALLY INEFFICIENT
-    # TODO MAKE LOOPS NOT TERRIBLY INEFFICIENT
     def move_forward(self, amount):
         dist = amount
         while dist > 0:
@@ -104,6 +104,11 @@ class SpriteClass:
     def go_to(self, newx, newy):
         self.set_x(newx)
         self.set_y(newy)
+
+    def goto(self, newx, newy):
+        self.set_x(newx)
+        self.set_y(newy)
+
     def glide_to(self, newx, newy):
         xdist = newx - self.xcor
         ydist = newy - self.ycor

@@ -51,16 +51,22 @@ class App(object):
             print "x coord: ", self.clickedX, " y coord: ", self.clickedY
             self.sprite.go_to(self.clickedX, self.clickedY)
         self.stage.event_click_up(checkCors)
-
+        #self.manager.updatePhyiscs()
+        print self.Elements
+        self.sprite.hide()
+        print self.sprite.hidden
         def spriteCors(event):
             self.spriteX=self.sprite.get_x()
             self.spriteY=self.sprite.get_y()
+            self.sprite.show()
+            self.sprite.set_x_speed(3)
+            self.sprite.jump(2)
             print "x coord: ", self.spriteX, "y coord: ", self.spriteY
-        self.stage.event_key("p", spriteCors)
+        self.stage.event_key("space", spriteCors)
 
     def moveOne(self):
         self.manager.run()
-        self.animate = self.root.after(10, self.moveOne)
+        self.animate = self.root.after(100, self.moveOne)
 
 #Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
 app = App()
