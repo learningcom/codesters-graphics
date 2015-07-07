@@ -13,14 +13,12 @@ class StageClass:
     def __init__(self, canvas, Elements, root):
         #Placeholders
         self.canvas = canvas
+        self.canvas.create_rectangle((0,0,500,500), fill='white')
         #self.canvas.bind("<Button-1>", self.click_x)
         #self.canvas.bind("<Button-1>", self.click_y)
         #self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
         self.canvas.focus_set()
         self.Elements = Elements
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
         self.xcor = self.canvas.winfo_width()/2
         self.ycor = self.canvas.winfo_height()/2
         self.size = 1
@@ -56,9 +54,6 @@ class StageClass:
         amount=1/amount
         amount=int(amount)
         self.bg_scale_y=amount
-        for e in self.Elements:
-            e.draw()
-            print e
         self.canvas.update()
 
     def click_x(self, event):

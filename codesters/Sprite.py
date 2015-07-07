@@ -33,25 +33,20 @@ class SpriteClass:
         self.xcor = newx+self.canvas.winfo_width()/2
     def set_y(self, newy):
         self.ycor = self.canvas.winfo_height()/2-newy
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
+        self.canvas.delete("all")
     def get_x(self):
         return self.xcor
     def get_y(self):
         return self.ycor
     def set_speed(self, newspeed):
         self.speed = newspeed
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
+        self.canvas.delete("all")
     def set_size(self, newsize):
         self.size = 50 * newsize
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
+        self.canvas.delete("all")
     def set_color(self, newcolor):
         self.color = newcolor
+        self.canvas.delete("all")
         for e in self.Elements:
             e.draw()
         self.canvas.update()
@@ -132,6 +127,4 @@ class SpriteClass:
         self.set_x(newx)
         self.set_y(newy)
         self.heading = tempheading
-        for e in self.Elements:
-            e.draw()
-        self.canvas.update()
+        self.canvas.delete("all")
