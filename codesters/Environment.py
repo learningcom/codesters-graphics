@@ -1,4 +1,5 @@
 from Tkinter import *
+from PIL import Image, ImageTk
 
 class StageClass:
     #Placeholders
@@ -19,8 +20,8 @@ class StageClass:
         #self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
         self.canvas.focus_set()
         self.Elements = Elements
-        self.xcor = self.canvas.winfo_width()/2
-        self.ycor = self.canvas.winfo_height()/2
+        self.xcor = self.canvas.winfo_reqwidth()/2
+        self.ycor = self.canvas.winfo_reqheight()/2
         self.size = 1
         self.root=root
 
@@ -30,14 +31,15 @@ class StageClass:
             # background_label.place(x=self.xcor, y=self.ycor, relwidth=1, relheight=1)
             # background_label.image=self.bg_image
             #print self.canvas.winfo_width()
-            self.scaled_image= self.bg_image.subsample(self.bg_scale_x,self.bg_scale_y)
-            self.canvas.create_image(self.xcor, self.ycor, image=self.scaled_image)
+            self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
+            self.canvas.create_image(self.xcor, self.ycor, image=self.bg_photoimg)
         else:
             self.canvas.create_rectangle((0,0,500,500), fill='white')
 
     def set_background(self, image):
         self.bg_image_name= image
-        self.bg_image= PhotoImage(file = "./codesters/sprites/"+image+".gif")
+        self.bg_image= Image.open("./codesters/sprites/"+image+".gif")
+        #print self.bg_image.height, "blah"
 
     def set_background_x(self, amount):
         self.xcor=amount+self.canvas.winfo_width()
