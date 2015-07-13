@@ -26,7 +26,7 @@ class SpriteClass:
     future_y= 0
     angle = 0
     step_size = 0
-    wait_time = 0
+    wait_time = []
     total_wait_time = 0
     ## PIVOTAL FUNCTIONS ##
     def __init__(self,canvas, Elements, image):
@@ -149,6 +149,7 @@ class SpriteClass:
 
     def glide_to(self, newx, newy):
         print self.future_x, " ", self.future_y
+        print newx, self.future_x
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
@@ -163,11 +164,16 @@ class SpriteClass:
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
+            print self.animation_x_coords, self.animation_y_coords
         print self.future_x, " ", self.future_y
         self.future_x = self.animation_x_coords[-1]
         self.future_y = self.animation_y_coords[-1]
+        self.animation_x_coords.append("Finished current animation")
+        self.animation_y_coords.append("Finished current animation")
+        print self.future_x, "future_x"
+        self.modes.append("translate")
         print '###########'
-        #print self.animation_x_coords, self.animation_y_coords
+
 
         # tempheading = self.heading
         # self.heading = math.atan(ydist/xdist)
@@ -202,6 +208,8 @@ class SpriteClass:
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
+        self.animation_rotation_degrees.append("Finished current animation")
+        self.modes.append("rotate")
         self.future_heading = destination
     def point_towards(self, tox, toy):
         self.set_direction(tox, toy)
@@ -213,6 +221,8 @@ class SpriteClass:
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
+        self.animation_rotation_degrees.append("Finished current animation")
+        self.modes.append("rotate")
         self.future_heading = destination
     def turn_right(self, degrees):
         self.turn_clockwise(degrees)
@@ -226,6 +236,8 @@ class SpriteClass:
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
+        self.animation_rotation_degrees.append("Finished current animation")
+        self.modes.append("rotate")
         self.future_heading = destination
     def turn_left(self,degrees):
         self.turn_counterclockwise(degrees)
@@ -233,7 +245,10 @@ class SpriteClass:
         self.turn_counterclockwise(degrees)
     ##
     def wait(self, seconds):
-        self.wait_time += seconds * 10
+        self.modes.append("wait")
+        self.wait_time.append(seconds*10)
+        self.wait_time.append("Finished current animation")
+        print self.wait_time
         self.total_wait_time += seconds
 
     #Set variables
