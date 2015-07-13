@@ -35,8 +35,10 @@ class ManagerClass:
                     if len(e.animation_y_coords)>0 and len(e.animation_x_coords)>0:
                         e.set_x(e.animation_x_coords.pop(0))
                         e.set_y(e.animation_y_coords.pop(0))
-                        # print e.animation_x_coords
-                        # print e.animation_y_coords
+                        if len(e.animation_x_coords)>0:
+                            e.future_x = e.animation_x_coords[-1]
+                        if len(e.animation_y_coords)>0:
+                            e.future_y = e.animation_y_coords[-1]
                     if len(e.animation_rotation_degrees)>0 :
                         e.heading = e.animation_rotation_degrees.pop(0)
                         im2 = e.base_photo.convert('RGBA')
@@ -48,3 +50,5 @@ class ManagerClass:
                         rot.close()
                         fff.close()
                         im2.close()
+                    # print e.animation_x_coords
+                    # print e.animation_y_coords
