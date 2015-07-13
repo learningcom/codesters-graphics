@@ -20,11 +20,14 @@ class SpriteClass:
     animation_duration = 0
     animation_x_coords = []
     animation_y_coords = []
+    animation_rotation_degrees = []
     animation_index = 0
-    future_x=0
-    future_y=0
+    future_x= 0
+    future_y= 0
     angle = 0
-    step_size=0
+    step_size = 0
+    wait_time = 0
+    total_wait_time = 0
     ## PIVOTAL FUNCTIONS ##
     def __init__(self,canvas, Elements, image):
         self.heading = 0
@@ -33,14 +36,17 @@ class SpriteClass:
         self.animation_duration=1000
         self.speed = 1
         self.rotation_direction=1
-        self.xcor= self.canvas.winfo_reqwidth()/2
-        self.ycor = self.canvas.winfo_reqheight()/2
+        self.xcor= 0
+        self.modes=[]
+        print self.xcor
+        self.ycor = 0
         if image != '':
+            self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
-            # im2 = self.photo.convert('RGBA')
-            # rot = im2.rotate(self.heading, expand=1)
-            # fff =  Image.new("RGBA", rot.size, (0,)*4)
-            # self.photo = Image.composite(rot,fff,rot)
+            im2 = self.photo.convert('RGBA')
+            rot = im2.rotate(self.heading, expand=1)
+            fff =  Image.new("RGBA", rot.size, (0,)*4)
+            self.photo = Image.composite(rot,fff,rot)
 
 
 
@@ -155,6 +161,8 @@ class SpriteClass:
             self.animation_y_coords.append(self.future_y+(y_step_size+(y_step_size * n)))
         self.future_x = self.animation_x_coords[-1]
         self.future_y = self.animation_y_coords[-1]
+        # self.animation_x_coords.append("end phase")
+        # self.animation_y_coords.append("end phase")
         #print self.future_x, " ", self.future_y
         #print self.animation_x_coords, self.animation_y_coords
 
@@ -182,13 +190,49 @@ class SpriteClass:
 
     ##
     def set_direction(self, tox, toy):
-        self.future_heading = math.atan(float(toy)/float(tox))
-        print self.future_heading
+        if (tox==0):
+            tox=.000001
+        destination = math.atan(float(toy)/float(tox))*(180/math.pi)
         frames_needed = (self.animation_duration / 22)
-        degree_rot = self.future_heading - self.heading
-        self.step_size = .3 #degree_rot/frames_needed
+        degree_rot = destination - self.future_heading
+        self.step_size = degree_rot/frames_needed
+        for n in range(int(frames_needed)):
+            self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
+        self.animation_rotation_degrees[-1] = destination
+        self.future_heading = destination
+    def point_towards(self, tox, toy):
+        self.set_direction(tox, toy)
+    def turn_clockwise(self, degrees):
+        destination = self.future_heading - degrees
+        frames_needed = (self.animation_duration / 22)
+        degree_rot = destination - self.future_heading
+        self.step_size = degree_rot/frames_needed
+        for n in range(int(frames_needed)):
+            self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
+        self.animation_rotation_degrees[-1] = destination
+        self.future_heading = destination
+    def turn_right(self, degrees):
+        self.turn_clockwise(degrees)
+    def right(self, degrees):
+        self.turn_clockwise(degrees)
+    def turn_counterclockwise(self,degrees):
+        destination = self.future_heading + degrees
+        frames_needed = (self.animation_duration / 22)
+        degree_rot = destination - self.future_heading
+        self.step_size = degree_rot/frames_needed
+        for n in range(int(frames_needed)):
+            self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
+        self.animation_rotation_degrees[-1] = destination
+        self.future_heading = destination
+    def turn_left(self,degrees):
+        self.turn_counterclockwise(degrees)
+    def left(self,degrees):
+        self.turn_counterclockwise(degrees)
+    ##
+    def wait(self, seconds):
+        self.wait_time += seconds * 10
+        self.total_wait_time += seconds
 
-        print self.future_heading
     #Set variables
     def set_x(self, newx):
         self.xcor = newx

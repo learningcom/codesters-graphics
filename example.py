@@ -44,21 +44,25 @@ class App(object):
         # self.stage.set_background_scaleX(.25)
         # self.stage.set_background_scaleY(.25)
         self.sprite = self.Sprite("Alien1")
-        self.sprite.set_speed(0.5)
-        #self.sprite.move_left(100)
-        #self.sprite.move_up(100)
-        #self.sprite.glide_to(230,70)
-        #self.sprite.set_heading(160)
-        #self.sprite.move_forward(200)
+        self.sprite.set_speed(2)
+        # self.sprite.move_left(100)
+        # self.sprite.move_up(100)
+        # self.sprite.glide_to(230,70)
+        # self.sprite.set_heading(160)
+        # self.sprite.move_forward(200)
+        #
+        # self.sprite.set_x(0)
+        # self.sprite.set_y(100)
+        #
+        # print self.sprite.future_x
+        #
+        # def moveToMouse(event):
+        #     self.sprite.glide_to(event.x-250, (event.y-250)*-1)
+        # self.stage.event_click(moveToMouse)
 
-        self.sprite.set_x(0)
-        self.sprite.set_y(100)
-
-        print self.sprite.future_x
-
-        def moveToMouse(event):
-            self.sprite.glide_to(event.x-250, (event.y-250)*-1)
-        self.stage.event_click(moveToMouse)
+        self.sprite.turn_left(90)
+        self.sprite.wait(2)
+        self.sprite.left(270)
 
         # def checkCors(event):
         #      self.clickedX=self.stage.click_x(event)

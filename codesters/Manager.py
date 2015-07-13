@@ -29,20 +29,22 @@ class ManagerClass:
     def updateAnimation(self):
         for e in self.Elements:
             if isinstance(e, SpriteClass):
-                if len(e.animation_y_coords)>0 and len(e.animation_x_coords)>0:
-                    e.set_x(e.animation_x_coords.pop(0))
-                    e.set_y(e.animation_y_coords.pop(0))
-                    # print e.animation_x_coords
-                    # print e.animation_y_coords
-                if (abs(e.future_heading - e.heading) >.1) :
-                    print e.future_heading-e.heading
-                    im2 = e.photo.convert('RGBA')
-                    e.photo.close()
-                    rot = im2.rotate(e.step_size, expand=1)
-                    fff = Image.new("RGBA", rot.size, (0,)*4)
-                    e.photo = Image.composite(rot,fff,rot)
-                    e.photo.save("check.gif")
-                    rot.close()
-                    fff.close()
-                    im2.close()
-                    e.heading += e.step_size
+                if e.wait_time > 0:
+                    e.wait_time = e.wait_time - 1
+                else:
+                    if len(e.animation_y_coords)>0 and len(e.animation_x_coords)>0:
+                        e.set_x(e.animation_x_coords.pop(0))
+                        e.set_y(e.animation_y_coords.pop(0))
+                        # print e.animation_x_coords
+                        # print e.animation_y_coords
+                    if len(e.animation_rotation_degrees)>0 :
+                        e.heading = e.animation_rotation_degrees.pop(0)
+                        im2 = e.base_photo.convert('RGBA')
+                        #e.base_photo.close()
+                        rot = im2.rotate(e.heading, expand=1)
+                        fff = Image.new("RGBA", rot.size, (0,)*4)
+                        e.photo = Image.composite(rot,fff,rot)
+                        e.photo.save("check.gif")
+                        rot.close()
+                        fff.close()
+                        im2.close()
