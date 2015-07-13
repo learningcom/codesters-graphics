@@ -15,6 +15,7 @@ class App(object):
         self.manager = self.Manager()
         self.do()
         self.animate=self.moveOne()
+        self.stage.draw()
 
 
     def Stage(self):
@@ -38,20 +39,27 @@ class App(object):
     #
     # circle.glide_to(100,100)
     def do(self):
-        self.stage.draw()
         self.stage.set_background("summer")
         #stage.set_background_x(0)
         # self.stage.set_background_scaleX(.25)
         # self.stage.set_background_scaleY(.25)
         self.sprite = self.Sprite("Alien1")
-        # self.sprite.set_x_speed(-3)
-        self.sprite.set_direction(1,90)
-        # self.sprite.glide_to(100,100)
-        # self.sprite.move_down(100)
-        # self.sprite.move_left(100)
-        # self.sprite.move_up(100)
-        # self.sprite.glide_to(230,70)
-        #
+        self.sprite.set_speed(0.5)
+        #self.sprite.move_left(100)
+        #self.sprite.move_up(100)
+        #self.sprite.glide_to(230,70)
+        #self.sprite.set_heading(160)
+        #self.sprite.move_forward(200)
+
+        self.sprite.set_x(0)
+        self.sprite.set_y(100)
+
+        print self.sprite.future_x
+
+        def moveToMouse(event):
+            self.sprite.glide_to(event.x-250, (event.y-250)*-1)
+        self.stage.event_click(moveToMouse)
+
         # def checkCors(event):
         #      self.clickedX=self.stage.click_x(event)
         #      self.clickedY=self.stage.click_y(event)

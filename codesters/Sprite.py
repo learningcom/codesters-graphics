@@ -35,6 +35,7 @@ class SpriteClass:
         self.rotation_direction=1
         self.xcor= self.canvas.winfo_reqwidth()/2
         self.ycor = self.canvas.winfo_reqheight()/2
+
         if image != '':
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
             # im2 = self.photo.convert('RGBA')
@@ -65,10 +66,7 @@ class SpriteClass:
             # fff.close()
             # im2.close()
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
-
-            self.canvas.create_image((self.xcor,self.ycor), image = self.bg_photoimg)
-
-
+            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
         elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
@@ -78,6 +76,10 @@ class SpriteClass:
         self.hidden=True
     def show(self):
         self.hidden=False
+
+
+
+    #Basic motion
     def move_right(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
     def move_left(self, amount):
@@ -125,25 +127,37 @@ class SpriteClass:
 
     #More complex motion
     def go_to(self, newx, newy):
-        self.set_x(newx)
-        self.set_y(newy)
+        self.animation_x_coords.append(newx)
+        self.animation_y_coords.append(newy)
+        self.xcor = newx
+        self.ycor = newy
+        self.future_x = newx
+        self.future_y = newy
+
     def goto(self, newx, newy):
-        self.set_x(newx)
-        self.set_y(newy)
+        self.animation_x_coords.append(newx)
+        self.animation_y_coords.append(newy)
+        self.xcor = newx
+        self.ycor = newy
+        self.future_x = newx
+        self.future_y = newy
+
     def glide_to(self, newx, newy):
+        print self.future_x, " ", self.future_y
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
-        #dist = math.sqrt(xdist**2 + ydist**2)
+        dist = math.sqrt(xdist**2 + ydist**2)
+        self.animation_duration = dist/self.speed
         frames_needed = (self.animation_duration / 22)
         x_step_size = xdist/frames_needed
         y_step_size = ydist/frames_needed
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(self.future_x+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(self.future_y+(y_step_size+(y_step_size * n)))
-        self.future_x = newx
-        self.future_y = newy
-        print self.future_x, " ", self.future_y
-        print self.animation_x_coords, self.animation_y_coords
+        self.future_x = self.animation_x_coords[-1]
+        self.future_y = self.animation_y_coords[-1]
+        #print self.future_x, " ", self.future_y
+        #print self.animation_x_coords, self.animation_y_coords
 
         # tempheading = self.heading
         # self.heading = math.atan(ydist/xdist)
