@@ -150,12 +150,15 @@ class SpriteClass:
         frames_needed = (self.animation_duration / 22)
         x_step_size = xdist/frames_needed
         y_step_size = ydist/frames_needed
+        tempx = self.future_x
+        tempy = self.future_y
+        self.future_x = newx
+        self.future_y = newy
         for n in range(int(frames_needed)):
-            self.animation_x_coords.append(self.future_x+(x_step_size+(x_step_size * n)))
-            self.animation_y_coords.append(self.future_y+(y_step_size+(y_step_size * n)))
-        self.future_x = self.animation_x_coords[-1]
-        self.future_y = self.animation_y_coords[-1]
-        #print self.future_x, " ", self.future_y
+            self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
+            self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
+        print self.future_x, " ", self.future_y
+        print '###########'
         #print self.animation_x_coords, self.animation_y_coords
 
         # tempheading = self.heading

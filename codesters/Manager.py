@@ -32,6 +32,10 @@ class ManagerClass:
                 if len(e.animation_y_coords)>0 and len(e.animation_x_coords)>0:
                     e.set_x(e.animation_x_coords.pop(0))
                     e.set_y(e.animation_y_coords.pop(0))
+                    if len(e.animation_x_coords)>0:
+                        e.future_x = e.animation_x_coords[-1]
+                    if len(e.animation_y_coords)>0:
+                        e.future_y = e.animation_y_coords[-1]
                     # print e.animation_x_coords
                     # print e.animation_y_coords
                 if (abs(e.future_heading - e.heading) >.1) :
