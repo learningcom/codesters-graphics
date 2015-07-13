@@ -35,7 +35,6 @@ class SpriteClass:
         self.rotation_direction=1
         self.xcor= self.canvas.winfo_reqwidth()/2
         self.ycor = self.canvas.winfo_reqheight()/2
-
         if image != '':
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
             # im2 = self.photo.convert('RGBA')
@@ -192,9 +191,11 @@ class SpriteClass:
         print self.future_heading
     #Set variables
     def set_x(self, newx):
-        self.xcor = newx+self.canvas.winfo_width()/2
+        self.xcor = newx
+        self.future_x = self.xcor
     def set_y(self, newy):
-        self.ycor = self.canvas.winfo_height()/2-newy
+        self.ycor = newy
+        self.future_y = self.ycor
     def get_x(self):
         return self.xcor
     def get_y(self):
