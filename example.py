@@ -44,20 +44,23 @@ class App(object):
         # self.stage.set_background_scaleX(.25)
         # self.stage.set_background_scaleY(.25)
         self.sprite = self.Sprite("Alien1")
-        self.sprite.move_right(100)
-        self.sprite.move_down(100)
-        self.sprite.move_left(100)
-        self.sprite.move_up(100)
-        self.sprite.glide_to(230,70)
+        # self.sprite.set_x_speed(-3)
+        self.sprite.set_direction(1,90)
+        # self.sprite.glide_to(100,100)
+        # self.sprite.move_down(100)
+        # self.sprite.move_left(100)
+        # self.sprite.move_up(100)
+        # self.sprite.glide_to(230,70)
+        #
         # def checkCors(event):
-        #     self.clickedX=self.stage.click_x(event)
-        #     self.clickedY=self.stage.click_y(event)
-        #     print "x coord: ", self.clickedX, " y coord: ", self.clickedY
-        #     self.sprite.go_to(self.clickedX, self.clickedY)
+        #      self.clickedX=self.stage.click_x(event)
+        #      self.clickedY=self.stage.click_y(event)
+        #      print "x coord: ", self.clickedX, " y coord: ", self.clickedY
+        #      self.sprite.go_to(self.clickedX, self.clickedY)
         # self.stage.event_click_up(checkCors)
-        # #self.manager.updatePhyiscs()
+        # self.manager.updatePhyiscs()
         # print self.Elements
-        # self.sprite.hide()
+        # #self.sprite.hide()
         # print self.sprite.hidden
         # def spriteCors(event):
         #     self.spriteX=self.sprite.get_x()
