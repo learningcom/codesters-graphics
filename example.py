@@ -54,7 +54,9 @@ class App(object):
         self.sprite.set_x(0)
         self.sprite.set_y(100)
 
-        print self.sprite.future_x
+        #self.sprite.glide_to(0,0)
+        #self.sprite.glide_to(100,200)
+        #self.sprite.glide_to(-50,-20)
 
         def moveToMouse(event):
             self.sprite.glide_to(event.x-250, (event.y-250)*-1)
