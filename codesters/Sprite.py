@@ -65,7 +65,7 @@ class SpriteClass(object):
         elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
-    def update_physiscs(self):
+    def update_physics(self):
         self.xcor += self.xspeed
         self.ycor -= self.yspeed
 
