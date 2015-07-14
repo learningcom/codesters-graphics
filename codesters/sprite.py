@@ -20,6 +20,7 @@ class SpriteClass(object):
         self.color = 'white'
         self.heading = 0
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
+        self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.hidden = False
         self.future_heading = 0
         self.animation_duration = 1000
@@ -134,24 +135,18 @@ class SpriteClass(object):
         self.glide_to(self.future_x,self.future_y+amount)
 
     def move_forward(self, amount):
-        desired_x = amount * math.cos(self.heading * (math.pi/180)) + self.future_x
-        desired_y = amount * math.sin(self.heading * (math.pi/180)) + self.future_y
+        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         self.glide_to(desired_x,desired_y)
 
     def forward(self, amount):
-        desired_x = amount * math.cos(self.heading * (math.pi/180)) + self.future_x
-        desired_y = amount * math.sin(self.heading * (math.pi/180)) + self.future_y
-        self.glide_to(desired_x,desired_y)
+        self.move_forward(amount)
 
     def move_backward(self, amount):
-        desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
-        desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
-        self.glide_to(desired_x,desired_y)
+        self.move_forward(-amount)
 
     def backward(self, amount):
-        desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
-        desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
-        self.glide_to(desired_x,desired_y)
+        self.move_forward(-amount)
 
     def move_back(self, amount):
         desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
@@ -183,20 +178,11 @@ class SpriteClass(object):
 
     # More complex motion
     def go_to(self, newx, newy):
-        self.animation_x_coords.append(newx)
-        self.animation_y_coords.append(newy)
-        self.xcor = newx
-        self.ycor = newy
-        self.future_x = newx
-        self.future_y = newy
+        self.set_x(newx)
+        self.set_y(newy)
 
     def goto(self, newx, newy):
-        self.animation_x_coords.append(newx)
-        self.animation_y_coords.append(newy)
-        self.xcor = newx
-        self.ycor = newy
-        self.future_x = newx
-        self.future_y = newy
+        self.go_to(newx,newy)
 
     def glide_to(self, newx, newy):
         print self.future_x, " ", self.future_y
@@ -344,7 +330,7 @@ class SpriteClass(object):
         self.color = newcolor
 
     def set_heading(self, degrees):
-        self.heading = degrees * math.pi * 2 / 360
+        self.heading = degrees
 
     #Basic motion
     #Step functions to build other functions
