@@ -133,8 +133,6 @@ class SpriteClass(object):
 
     def move_up(self, amount):
         self.glide_to(self.future_x,self.future_y+amount)
-<<<<<<< HEAD
-
     def move_forward(self, amount):
         desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
         desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
