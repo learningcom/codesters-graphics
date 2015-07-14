@@ -133,6 +133,7 @@ class SpriteClass(object):
 
     def move_up(self, amount):
         self.glide_to(self.future_x,self.future_y+amount)
+<<<<<<< HEAD
 
     def move_forward(self, amount):
         desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
@@ -151,13 +152,21 @@ class SpriteClass(object):
     def move_back(self, amount):
         desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
         desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
-        self.glide_to(desired_x,desired_y)
 
-    def back(self, amount):
-        desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
-        desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
+    def move_forward(self,amount):
+        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         self.glide_to(desired_x,desired_y)
-
+    def forward(self,amount):
+        self.move_forward(amount)
+    def move_backward(self,amount):
+        self.move_forward(-1 * amount)
+    def backward(self,amount):
+        self.move_backward(amount)
+    def move_back(self,amount):
+        self.move_backward(amount)
+    def back(self,amount):
+        self.move_backward(amount)
     def movex(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
 
@@ -201,7 +210,7 @@ class SpriteClass(object):
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
-            print self.animation_x_coords, self.animation_y_coords
+            #print self.animation_x_coords, self.animation_y_coords
         print self.future_x, " ", self.future_y
         self.future_x = self.animation_x_coords[-1]
         self.future_y = self.animation_y_coords[-1]
