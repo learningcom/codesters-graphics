@@ -33,8 +33,9 @@ class SpriteClass(object):
         self.future_y = 0
         self.angle = 0
         self.step_size = 0
-        self.wait_time = []
+        self.wait_list = []
         self.total_wait_time = 0
+        self.future_most_recent_wait_time = 0
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -74,13 +75,13 @@ class SpriteClass(object):
         if len(self.modes) > 0:
             print self.modes
             if self.modes[0] == "wait":
-                if len(self.wait_time)> 0:
-                    if self.wait_time[0] == 0:
-                        print self.wait_time.pop(0)
-                        print self.wait_time.pop(0)
+                if len(self.wait_list)> 0:
+                    if self.wait_list[0] == 0:
+                        print self.wait_list.pop(0)
+                        print self.wait_list.pop(0)
                         print self.modes.pop(0)
                     else:
-                        self.wait_time[0] = self.wait_time[0] - 1
+                        self.wait_list[0] = self.wait_list[0] - 1
 
             else:
                 if self.modes[0] == "translate":
@@ -297,10 +298,18 @@ class SpriteClass(object):
     #
     def wait(self, seconds):
         self.modes.append("wait")
-        self.wait_time.append(seconds*10)
-        self.wait_time.append("Finished current animation")
-        print self.wait_time
+        self.wait_list.append(seconds*10)
+        self.wait_list.append("Finished current animation")
+        print self.wait_list
         self.total_wait_time += seconds
+        self.future_most_recent_wait_time = seconds
+
+    def get_wait_time(self):
+        return self.future_most_recent_wait_time
+
+    def get_total_wait_time(self):
+        return self.total_wait_time
+
 
     #Set variables
     def set_x(self, newx):

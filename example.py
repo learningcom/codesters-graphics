@@ -6,8 +6,10 @@ sprite.set_speed(.5)
 sprite.move_up(100)
 sprite.turn_left(90)
 sprite.wait(2)
+print sprite.get_wait_time(), "CHECKER 1"
 sprite.glide_to(0,0)
 sprite.wait(3)
+print sprite.get_total_wait_time(), "checker 2"
 sprite.right(70)
 sprite.forward(100)
 
