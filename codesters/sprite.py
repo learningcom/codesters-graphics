@@ -198,8 +198,9 @@ class SpriteClass(object):
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
-        self.animation_duration = dist/self.speed
-        frames_needed = (self.animation_duration / 22)
+        frames_needed = ((dist/self.speed) / 22)
+        if frames_needed == 0:
+            frames_needed = 1
         x_step_size = xdist/frames_needed
         y_step_size = ydist/frames_needed
         tempx = self.future_x
@@ -245,8 +246,13 @@ class SpriteClass(object):
     def set_direction(self, tox, toy):
         if (tox==0):
             tox=.000001
-        destination = math.atan(float(toy - self.future_y)/float(self.future_x - tox))*(180/math.pi)
+        destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
+        if tox - self.future_x < 0:
+            destination += 180
+        print destination - self.future_heading, "HERE"
         frames_needed = (self.animation_duration / 22)
+        if frames_needed == 0:
+            frames_needed = 1
         degree_rot = destination - self.future_heading
         self.step_size = degree_rot/frames_needed
         for n in range(int(frames_needed)):
