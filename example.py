@@ -70,7 +70,7 @@ class App(object):
         #self.sprite.glide_to(-50,-20)
         self.sprite.wait(3)
         self.sprite.right(45)
-        self.sprite.move_forward(100)
+        self.sprite.back(100)
         def moveToMouse(event):
             self.sprite.glide_to(event.x-250, (event.y-250)*-1)
         self.stage.event_click(moveToMouse)
