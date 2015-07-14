@@ -61,6 +61,7 @@ class ManagerClass:
                                     print e.modes.pop(0)
                                 else:
                                     e.heading = e.animation_rotation_degrees.pop(0)
+                                    print e.heading
                                     im2 = e.base_photo.convert('RGBA')
                                     #e.base_photo.close()
                                     rot = im2.rotate(e.heading, expand=1)
