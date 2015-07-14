@@ -108,9 +108,9 @@ class SpriteClass(object):
                             fff = Image.new("RGBA", rot.size, (0,)*4)
                             self.photo = Image.composite(rot,fff,rot)
                             self.photo.save("check.gif")
-                            rot.close()
-                            fff.close()
-                            im2.close()
+                            #rot.close()
+                            #fff.close()
+                            #im2.close()
 
     # END OF PIVOTAL FUNCTIONS ##
 
