@@ -1,36 +1,46 @@
 from Tkinter import *
 from PIL import Image, ImageTk
+from .manager import Manager
 
-class StageClass:
-    #Placeholders
-    xcor = 0
-    ycor = 0
-    size = 1
-    bg_image_name = None
-    bg_image = None
-    bg_scale_y = 1
-    bg_scale_x = 1
-    scaled_image = None
-    def __init__(self, canvas, Elements, root):
-        #Placeholders
-        self.canvas = canvas
-        self.canvas.create_rectangle((0,0,500,500), fill='white')
-        #self.canvas.bind("<Button-1>", self.click_x)
-        #self.canvas.bind("<Button-1>", self.click_y)
-        #self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
+class StageClass(object):
+
+    def __init__(self):
+        self.root = Manager.canvas
+        self.canvas = Manager.canvas
+        Manager.elements.append(self)
+
+        self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
+
+        # self.canvas.bind("<Button-1>", self.click_x)
+        # self.canvas.bind("<Button-1>", self.click_y)
+        # self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
+
+        self.xcor = 0
+        self.ycor = 0
+        self.size = 1
+        self.bg_image_name = None
+        self.bg_image = None
+        self.bg_scale_y = 1
+        self.bg_scale_x = 1
+        self.scaled_image = None
         self.canvas.focus_set()
-        self.Elements = Elements
+
         self.xcor = self.canvas.winfo_reqwidth()/2
         self.ycor = self.canvas.winfo_reqheight()/2
         self.size = 1
-        self.root=root
+
+    def update_physics(self):
+        pass
+
+    def update_animation(self):
+        pass
 
     def draw(self):
         if self.bg_image != None:
             # background_label = Label(self.root, image=self.bg_image)
             # background_label.place(x=self.xcor, y=self.ycor, relwidth=1, relheight=1)
             # background_label.image=self.bg_image
-            #print self.canvas.winfo_width()
+            # print self.canvas.winfo_width()
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
             self.canvas.create_image(self.xcor, self.ycor, image=self.bg_photoimg)
         else:
@@ -39,7 +49,7 @@ class StageClass:
     def set_background(self, image):
         self.bg_image_name= image
         self.bg_image= Image.open("./codesters/sprites/"+image+".gif")
-        #print self.bg_image.height, "blah"
+        # print self.bg_image.height, "blah"
 
     def set_background_x(self, amount):
         self.xcor=amount+self.canvas.winfo_width()
@@ -48,14 +58,14 @@ class StageClass:
         self.ycor=amount+self.canvas.winfo_height()
 
     def set_background_scaleX(self, amount):
-        amount=1/amount
-        amount=int(amount)
-        self.bg_scale_x=amount
+        amount = 1/amount
+        amount = int(amount)
+        self.bg_scale_x = amount
 
     def set_background_scaleY(self, amount):
-        amount=1/amount
-        amount=int(amount)
-        self.bg_scale_y=amount
+        amount = 1/amount
+        amount = int(amount)
+        self.bg_scale_y = amount
         self.canvas.update()
 
     def click_x(self, event):
@@ -103,5 +113,6 @@ class StageClass:
         self.canvas.bind(bound_key_name, function)
 
 
-
-
+class Environment(StageClass):
+    def __init__(self):
+        super(Environment, self).__init__()

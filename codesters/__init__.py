@@ -1,6 +1,5 @@
-from Tkinter import *
-root= Tk()
-from Environment import *
-from Circle import *
-from Sprite import *
-from Manager import *
+
+from environment import *
+from circle import *
+from sprite import *
+from manager import *
