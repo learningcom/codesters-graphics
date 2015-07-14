@@ -237,7 +237,7 @@ class SpriteClass(object):
     def set_direction(self, tox, toy):
         if (tox==0):
             tox=.000001
-        destination = math.atan(float(toy)/float(tox))*(180/math.pi)
+        destination = math.atan(float(toy - self.future_y)/float(self.future_x - tox))*(180/math.pi)
         frames_needed = (self.animation_duration / 22)
         degree_rot = destination - self.future_heading
         self.step_size = degree_rot/frames_needed
