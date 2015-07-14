@@ -36,6 +36,11 @@ class SpriteClass(object):
         self.wait_list = []
         self.total_wait_time = 0
         self.future_most_recent_wait_time = 0
+        self.say_text = ""
+        self.say_color = ""
+        self.say_size = 0
+        self.say_time = 0
+        self.say_font = ""
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -64,6 +69,9 @@ class SpriteClass(object):
             # im2.close()
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
             self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
+            if self.say_time != 0:
+                self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+                self.say_time = self.say_time-1
         elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
 
@@ -73,7 +81,7 @@ class SpriteClass(object):
 
     def update_animation(self):
         if len(self.modes) > 0:
-            print self.modes
+            #print self.modes
             if self.modes[0] == "wait":
                 if len(self.wait_list)> 0:
                     if self.wait_list[0] == 0:
@@ -254,7 +262,7 @@ class SpriteClass(object):
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
-        self.step_size = degree_rot/frames_needed
+        self.step_size = float(degree_rot)/float(frames_needed)
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
@@ -269,11 +277,12 @@ class SpriteClass(object):
         destination = self.future_heading - degrees
         frames_needed = (self.animation_duration / 22)
         degree_rot = destination - self.future_heading
-        self.step_size = degree_rot/frames_needed
+        self.step_size = float(degree_rot)/float(frames_needed)
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
         self.animation_rotation_degrees.append("Finished current animation")
+        print self.animation_rotation_degrees
         self.modes.append("rotate")
         self.future_heading = destination
 
@@ -287,7 +296,7 @@ class SpriteClass(object):
         destination = self.future_heading + degrees
         frames_needed = (self.animation_duration / 22)
         degree_rot = destination - self.future_heading
-        self.step_size = degree_rot/frames_needed
+        self.step_size = float(degree_rot)/float(frames_needed)
         for n in range(int(frames_needed)):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
@@ -316,6 +325,12 @@ class SpriteClass(object):
     def get_total_wait_time(self):
         return self.total_wait_time
 
+    def say(self, text="Hello!",seconds=-1,color="#000000", size=12, font="Purisa"):
+        self.say_text = text
+        self.say_time = seconds
+        self.say_color = color
+        self.say_size = size
+        self.say_font = font
 
     #Set variables
     def set_x(self, newx):
