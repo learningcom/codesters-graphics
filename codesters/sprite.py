@@ -4,12 +4,14 @@ from .manager import Manager
 
 class SpriteClass(object):
 
-    # PIVOTAL FUNCTIONS ##
+    ## PIVOTAL FUNCTIONS ##
     def __init__(self, image):
         self.canvas = Manager.canvas
         Manager.elements.append(self)
 
         # Default values
+        self.type = Sprite
+
         self.xcor = 0
         self.ycor = 0
         self.xspeed = 0
@@ -58,6 +60,13 @@ class SpriteClass(object):
         self.collision = False
         self.drag = False
 
+        self.opacity = 255
+
+        self.x_flip_plans = []
+        self.y_flip_plans = []
+        self.x_flipped = False
+        self.y_flipped = False
+
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -66,8 +75,12 @@ class SpriteClass(object):
             fff =  Image.new("RGBA", rot.size, (0,)*4)
             self.photo = Image.composite(rot,fff,rot)
 
-        self.width = self.photo.size[0]
-        self.height = self.photo.size[1]
+        self.base_photo_width = self.photo.size[0]
+        self.base_photo_height = self.photo.size[1]
+        self.height = self.base_photo_height
+        self.width = self.base_photo_width
+        self.image_name = image
+        self.name = image
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -135,7 +148,14 @@ class SpriteClass(object):
 
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
+        if self.x_flipped:
+            im2=im2.transpose(Image.FLIP_LEFT_RIGHT)
+        if self.y_flipped:
+            im2=im2.transpose(Image.FLIP_TOP_BOTTOM)
         #self.base_photo.close()
+        if self.opacity < 255:
+            print self.opacity
+            im2.putalpha(self.opacity)
         scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
         rot = scale.rotate(self.heading, expand=1)
         fff = Image.new("RGBA", rot.size, (0,)*4)
@@ -174,16 +194,26 @@ class SpriteClass(object):
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
                             print self.modes.pop(0)
-                            print self.heading
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.update_image()
-
+                elif self.modes[0] == "xflip":
+                    if len(self.x_flip_plans) > 0:
+                        state = self.x_flip_plans.pop(0)
+                        self.x_flipped = state
+                        self.update_image()
+                        self.modes.pop(0)
+                elif self.modes[0] == "yflip":
+                    if len(self.y_flip_plans) > 0:
+                        state = self.y_flip_plans.pop(0)
+                        self.y_flipped = state
+                        self.update_image()
+                        self.modes.pop(0)
                             #rot.close()
                             #fff.close()
                             #im2.close()
 
-    # END OF PIVOTAL FUNCTIONS ##
+    ## END OF PIVOTAL FUNCTIONS ##
 
     def hide(self):
         self.hidden=True
@@ -489,10 +519,14 @@ class SpriteClass(object):
 
     # Setters
     def set_width(self, newsize):
-        self.width = int(self.base_photo.size[0] * newsize)
+        # self.width = int(self.base_photo.size[0] * newsize)
+        # self.update_image()
+        self.width = newsize
         self.update_image()
     def set_height(self, newsize):
-        self.height = int(self.base_photo.size[1] * newsize)
+        # self.height = int(self.base_photo.size[1] * newsize)
+        # self.update_image()
+        self.height = newsize
         self.update_image()
     # Old setters
     def set_velx(self, amount):
@@ -518,22 +552,117 @@ class SpriteClass(object):
         self.animation_rotation_degrees.append("Finished current animation")
     def set_heading(self, rot):
         self.set_rotation(rot)
+    def set_opacity(self, opacity):
+        self.opacity = int(opacity * 255)
+        self.update_image()
+    def set_left(self, amount):
+        self.set_x(self.width/2+amount)
+    def set_right(self, amount):
+        self.set_x(-self.width/2+amount)
+    def set_top(self, amount):
+        self.set_y(-self.height/2+amount)
+    def set_bottom(self, amount):
+        self.set_y(self.height/2+amount)
 
-    def get_x(self):
-        return self.xcor
+    # Old getters
 
-    def get_y(self):
+    def velx(self):
+        return self.xspeed
+    def vely(self):
+        return self.yspeed
+    def y(self):
         return self.ycor
+    def x(self):
+        return self.xcor
+    def rotation(self):
+        return self.heading
+    def direction(self):
+        return self.heading
 
+    # Getters
 
-
-
-
+    def get_x_speed(self):
+        return self.xspeed
+    def get_y_speed(self):
+        return self.yspeed
+    def get_composite_speed(self):
+        return math.sqrt(self.xspeed**2 + self.yspeed**2)
+    def get_y(self):
+        return self.future_y
+    def get_x(self):
+        return self.future_x
+    def get_rotation(self):
+        return self.future_heading
+    def get_direction(self):
+        return self.future_heading
+    def get_width(self):
+        return self.width
+    def get_height(self):
+        return self.height
+    def get_left(self):
+        return self.future_x-self.width/2
+    def get_right(self):
+        return self.future_x+self.width/2
+    def get_top(self):
+        return self.future_y+self.height/2
+    def get_bottom(self):
+        return self.future_y-self.height/2
+    def get_sides(self):
+        return 0
+    def get_x_scale(self):
+        pass
+    def get_size(self):
+        return self.size
+    def get_scale(self):
+        return self.size
+    def get_y_scale(self):
+        pass
+    def get_type(self):
+        print self.type
+    def get_text(self):
+        pass
+    def get_name(self):
+        print self.name
+    def get_image_name(self):
+        print self.image_name
     def set_size(self, newsize):
         self.size = newsize
         self.update_image()
 
-
+    # flippers
+    def flip_horizontal(self):
+        if len(self.x_flip_plans) == 0:
+            self.x_flip_plans.append(not self.x_flipped)
+        else:
+            print len(self.x_flip_plans), self.x_flip_plans, "helpppp"
+            self.x_flip_plans.append(not self.x_flip_plans[-1])
+        self.modes.append("xflip")
+    def flip_right_left(self):
+        self.flip_horizontal()
+    def flip_left_right(self):
+        self.flip_horizontal()
+    def flip_vertical(self):
+        if len(self.y_flip_plans) == 0:
+            self.y_flip_plans.append(not self.y_flipped)
+        else:
+            self.y_flip_plans.append(not self.y_flip_plans[-1])
+        self.modes.append("yflip")
+    def flip_up_down(self):
+        self.flip_vertical()
+    def flip_down_up(self):
+        self.flip_vertical()
+    def face_forward(self):
+        self.x_flip_plans.append(False)
+        self.modes.append("xflip")
+    def face_backward(self):
+        self.x_flip_plans.append(True)
+        self.modes.append("xflip")
+    def face_upside_down(self):
+        self.y_flip_plans.append(True)
+        self.modes.append("yflip")
+    def face_rightside_up(self):
+        self.y_flip_plans.append(False)
+        self.modes.append("yflip")
 
     def set_color(self, newcolor):
         self.color = newcolor
