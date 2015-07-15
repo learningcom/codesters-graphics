@@ -3,7 +3,7 @@ import time
 stage = codesters.Environment()
 stage.set_background("summer")
 
-sprite = codesters.Sprite("Alien1")
+sprite = codesters.Sprite("")
 #sprite2 = codesters.Sprite('')
 
 #sprite.move_up(100)
@@ -21,9 +21,13 @@ sprite.set_size(1)
 sprite.set_size(0.5)
 
 sprite.physics_on()
-sprite.jump(4)
+sprite.jump(10)
 
-stage.enable_floor()
+sprite.set_x_speed(4)
+
+stage.set_bounce(1.2)
+
+stage.enable_all_walls()
 
 sprite.set_drag_on()
 

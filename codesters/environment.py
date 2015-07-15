@@ -126,7 +126,40 @@ class StageClass(object):
         self.wall_bottom_on = True
 
     def disable_floor(self):
-        self.wall_bottom_on = True
+        self.wall_bottom_on = False
+
+    def enable_ceiling(self):
+        self.wall_top_on = True
+
+    def disable_ceiling(self):
+        self.wall_top_on = False
+
+    def enable_right_wall(self):
+        self.wall_right_on = True
+
+    def disable_right_wall(self):
+        self.wall_right_on = False
+
+    def enable_left_wall(self):
+        self.wall_left_on = True
+
+    def disable_left_wall(self):
+        self.wall_left_on = False
+
+    def enable_all_walls(self):
+        self.enable_floor()
+        self.enable_ceiling()
+        self.enable_left_wall()
+        self.enable_right_wall()
+
+    def disable_all_walls(self):
+        self.disable_floor()
+        self.disable_ceiling()
+        self.disable_left_wall()
+        self.disable_right_wall()
+
+    def set_bounce(self, amount):
+        self.bounce = amount
 
 
 class Environment(StageClass):
