@@ -3,7 +3,7 @@ import time
 stage = codesters.Environment()
 stage.set_background("summer")
 
-sprite = codesters.Sprite("Alien1")
+sprite = codesters.Sprite("")
 #sprite2 = codesters.Sprite('')
 
 #sprite.move_up(100)
@@ -18,18 +18,24 @@ sprite = codesters.Sprite("Alien1")
 # print sprite.get_total_wait_time(), "checker 2"
 
 sprite.set_size(1)
+sprite.physics_on()
+sprite.jump(10)
 
-sprite.set_rotation(90)
-sprite.glide_to(0,90)
-sprite.set_rotation(45)
-# sprite.set_size(0.5)
-#
-# sprite.set_size(0.5)
-# sprite.forward(200)
-#
-# sprite.set_direction(0,0)
-# sprite.set_width(0.5)
-# sprite.forward(100)
+sprite.set_x_speed(4)
+
+stage.set_bounce(1.2)
+
+stage.enable_all_walls()
+
+sprite.set_drag_on()
+
+#sprite.set_size(0.5)
+#sprite.forward(200)
+
+#sprite.set_direction(0,0)
+#sprite.set_width(0.5)
+#sprite.forward(100)
+
 # def moveToMouse(event):
 #     global sprite
 #     sprite.glide_to(event.x-250, 250-event.y)

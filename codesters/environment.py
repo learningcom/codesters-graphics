@@ -8,6 +8,7 @@ class StageClass(object):
         self.root = Manager.canvas
         self.canvas = Manager.canvas
         Manager.elements.append(self)
+        Manager.stage = self
 
         self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
 
@@ -30,6 +31,13 @@ class StageClass(object):
         self.size = 1
 
         self.physics_true = False
+
+        self.wall_bottom_on = False
+        self.wall_top_on = False
+        self.wall_left_on = False
+        self.wall_right_on = False
+
+        self.bounce = 1
 
     def update_physics(self):
         pass
@@ -113,6 +121,45 @@ class StageClass(object):
             bound_key_name = "<space>"
         print bound_key_name
         self.canvas.bind(bound_key_name, function)
+
+    def enable_floor(self):
+        self.wall_bottom_on = True
+
+    def disable_floor(self):
+        self.wall_bottom_on = False
+
+    def enable_ceiling(self):
+        self.wall_top_on = True
+
+    def disable_ceiling(self):
+        self.wall_top_on = False
+
+    def enable_right_wall(self):
+        self.wall_right_on = True
+
+    def disable_right_wall(self):
+        self.wall_right_on = False
+
+    def enable_left_wall(self):
+        self.wall_left_on = True
+
+    def disable_left_wall(self):
+        self.wall_left_on = False
+
+    def enable_all_walls(self):
+        self.enable_floor()
+        self.enable_ceiling()
+        self.enable_left_wall()
+        self.enable_right_wall()
+
+    def disable_all_walls(self):
+        self.disable_floor()
+        self.disable_ceiling()
+        self.disable_left_wall()
+        self.disable_right_wall()
+
+    def set_bounce(self, amount):
+        self.bounce = amount
 
 
 class Environment(StageClass):
