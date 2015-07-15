@@ -486,6 +486,7 @@ class SpriteClass(object):
 
     def set_heading(self, degrees):
         self.heading = degrees
+        self.update_image()
 
     #Basic motion
     #Step functions to build other functions
