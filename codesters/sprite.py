@@ -16,12 +16,15 @@ class SpriteClass(object):
         self.yspeed = 0
         self.speed = 1
         self.modes=[]
-        self.size = 50
+        self.size = 1
         self.color = 'white'
         self.heading = 0
+
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
+
         self.hidden = False
+
         self.future_heading = 0
         self.animation_duration = 1000
         self.animation_x_coords = []
@@ -33,14 +36,28 @@ class SpriteClass(object):
         self.future_y = 0
         self.angle = 0
         self.step_size = 0
+
         self.wait_list = []
         self.total_wait_time = 0
         self.future_most_recent_wait_time = 0
+
         self.say_text = ""
         self.say_color = ""
         self.say_size = 0
         self.say_time = 0
         self.say_font = ""
+
+        self.paused = False
+
+        self.gravity = 0.1
+        self.gravity_true = False
+        self.physics_true = False
+
+        self.goal = False
+        self.hazard = False
+        self.collision = False
+        self.drag = False
+
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -48,6 +65,9 @@ class SpriteClass(object):
             rot = im2.rotate(self.heading, expand=1)
             fff =  Image.new("RGBA", rot.size, (0,)*4)
             self.photo = Image.composite(rot,fff,rot)
+
+        self.width = self.photo.size[0]
+        self.height = self.photo.size[1]
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -78,9 +98,11 @@ class SpriteClass(object):
     def update_physics(self):
         self.xcor += self.xspeed
         self.ycor -= self.yspeed
+        if self.gravity_true:
+            self.yspeed += self.gravity
 
     def update_animation(self):
-        if len(self.modes) > 0:
+        if len(self.modes) > 0 and not self.paused:
             #print self.modes
             if self.modes[0] == "wait":
                 if len(self.wait_list)> 0:
@@ -325,12 +347,97 @@ class SpriteClass(object):
     def get_total_wait_time(self):
         return self.total_wait_time
 
-    def say(self, text="Hello!",seconds=-1,color="#000000", size=12, font="Purisa"):
+    def say(self, text,seconds=-1,color="#000000", size=12, font="Purisa"):
         self.say_text = text
         self.say_time = seconds
         self.say_color = color
         self.say_size = size
         self.say_font = font
+
+    def ask(self, text):
+        return raw_input(text)
+
+    def reset_animation(self):
+        self.animation_rotation_degrees = []
+        self.animation_x_coords = []
+        self.animation_y_coords = []
+        self.modes = []
+
+    def pause(self):
+        self.paused = True
+
+    def stop(self):
+        self.reset_animation()
+
+    def reset(self):
+        self.reset_animation()
+
+    def play(self):
+        self.paused = False
+
+    #Physics
+
+    def jump(self, newspeed):
+        self.yspeed = -newspeed
+
+    def gravity_on(self):
+        self.gravity_true = True
+
+    def gravity_off(self):
+        self.gravity_true = False
+
+    def physics_on(self):
+        self.physics_true = True
+        self.gravity_on()
+
+    def physics_off(self):
+        self.physics_true = False
+        self.gravity_off()
+
+    def set_gravity_on(self):
+        self.gravity_on()
+
+    def set_gravity_off(self):
+        self.gravity_off()
+
+    def set_physics_on(self):
+        self.physics_on()
+
+    def set_physics_off(self):
+        self.physics_off()
+
+    def is_goal(self):
+        self.goal = True
+
+    def collision_goal_on(self):
+        self.goal = True
+
+    def collision_goal_off(self):
+        self.goal = False
+
+    def is_hazard(self):
+        self.hazard = True
+
+    def collision_hazard_on(self):
+        self.hazard = True
+
+    def collision_hazard_off(self):
+        self.hazard = False
+
+    def cannot_collide(self):
+        self.collision = False
+
+    def collision_on(self):
+        self.collision = True
+
+    def collision_off(self):
+        self.collision = False
+
+    def set_drag_on(self):
+        self.drag = True
+
+    def set_drag_off(self):
+        self.drag = False
 
     #Set variables
     def set_x(self, newx):
@@ -357,11 +464,16 @@ class SpriteClass(object):
         self.speed = newspeed
         self.animation_duration = 1000/newspeed
 
-    def jump(self, newspeed):
-        self.yspeed = newspeed
-
     def set_size(self, newsize):
-        self.size = 50 * newsize
+        self.size = newsize
+        im2 = self.base_photo.convert('RGBA')
+        #self.base_photo.close()
+        print newsize
+        print self.width, self.height
+        scale = im2.resize((int(newsize*self.width), int(newsize*self.height)), Image.ANTIALIAS)
+        fff = Image.new("RGBA", scale.size, (0,)*4)
+        self.photo = Image.composite(scale,fff,scale)
+        self.photo.save("check.gif")
 
     def set_color(self, newcolor):
         self.color = newcolor

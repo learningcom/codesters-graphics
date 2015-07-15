@@ -29,6 +29,8 @@ class StageClass(object):
         self.ycor = self.canvas.winfo_reqheight()/2
         self.size = 1
 
+        self.physics_true = False
+
     def update_physics(self):
         pass
 

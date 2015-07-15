@@ -17,7 +17,8 @@ class Manager(object):
 
     def update_physics(self):
         for e in self.elements:
-            e.update_physics()
+            if e.physics_true:
+                e.update_physics()
 
     def update_animation(self):
         for e in self.elements:
