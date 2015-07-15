@@ -20,10 +20,8 @@ sprite = codesters.Sprite("Alien1")
 sprite.set_size(1)
 sprite.set_size(0.5)
 
-sprite.left(45)
-sprite.set_size(0.8)
+sprite.set_size(0.5)
 sprite.forward(200)
-sprite.set_size(0.8)
 
 #sprite.gravity_on()
 #

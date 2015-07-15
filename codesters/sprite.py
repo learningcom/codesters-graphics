@@ -101,6 +101,15 @@ class SpriteClass(object):
         if self.gravity_true:
             self.yspeed += self.gravity
 
+    def update_image(self):
+        im2 = self.base_photo.convert('RGBA')
+        #self.base_photo.close()
+        rot = im2.rotate(self.heading, expand=1)
+        scale = rot.resize((int(self.size * self.width), int(self.size*self.width)), Image.ANTIALIAS)
+        fff = Image.new("RGBA", scale.size, (0,)*4)
+        self.photo = Image.composite(scale,fff,scale)
+        self.photo.save("check.gif")
+
     def update_animation(self):
         if len(self.modes) > 0 and not self.paused:
             #print self.modes
@@ -134,12 +143,8 @@ class SpriteClass(object):
                             print self.modes.pop(0)
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
-                            im2 = self.base_photo.convert('RGBA')
-                            #self.base_photo.close()
-                            rot = im2.rotate(self.heading, expand=1)
-                            fff = Image.new("RGBA", rot.size, (0,)*4)
-                            self.photo = Image.composite(rot,fff,rot)
-                            self.photo.save("check.gif")
+                            self.update_image()
+
                             #rot.close()
                             #fff.close()
                             #im2.close()
@@ -466,14 +471,7 @@ class SpriteClass(object):
 
     def set_size(self, newsize):
         self.size = newsize
-        im2 = self.base_photo.convert('RGBA')
-        #self.base_photo.close()
-        print newsize
-        print self.width, self.height
-        scale = im2.resize((int(newsize*self.width), int(newsize*self.height)), Image.ANTIALIAS)
-        fff = Image.new("RGBA", scale.size, (0,)*4)
-        self.photo = Image.composite(scale,fff,scale)
-        self.photo.save("check.gif")
+        self.update_image()
 
     def set_color(self, newcolor):
         self.color = newcolor
