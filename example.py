@@ -3,7 +3,7 @@ import time
 stage = codesters.Environment()
 stage.set_background("summer")
 
-sprite = codesters.Sprite("")
+sprite = codesters.Sprite("Alien1")
 #sprite2 = codesters.Sprite('')
 
 #sprite.move_up(100)
@@ -17,13 +17,13 @@ sprite = codesters.Sprite("")
 # sprite.wait(3)
 # print sprite.get_total_wait_time(), "checker 2"
 
-sprite.set_size(1)
+sprite.set_size(0.2)
 sprite.physics_on()
 sprite.jump(10)
 
 sprite.set_x_speed(4)
 
-stage.set_bounce(1.2)
+stage.set_bounce(0.8)
 
 stage.enable_all_walls()
 

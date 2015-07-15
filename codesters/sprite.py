@@ -113,23 +113,23 @@ class SpriteClass(object):
             self.canvas.bind("<B1-Motion>", drag)
 
         if Manager.stage.wall_bottom_on:
-            if self.ycor - (self.height/4) <= -self.canvas.winfo_reqheight()/2:
-                self.ycor = -self.canvas.winfo_reqheight()/2 + (self.height/4)
+            if self.ycor - (self.size*self.height/2) <= -self.canvas.winfo_reqheight()/2:
+                self.ycor = -self.canvas.winfo_reqheight()/2 + (self.size*self.height/2)
                 self.jump(abs(self.yspeed * Manager.stage.bounce))
 
         if Manager.stage.wall_top_on:
-            if self.ycor + (self.height/4) >= self.canvas.winfo_reqheight()/2:
-                self.ycor = self.canvas.winfo_reqheight()/2 - (self.height/4)
+            if self.ycor + (self.size*self.height/2) >= self.canvas.winfo_reqheight()/2:
+                self.ycor = self.canvas.winfo_reqheight()/2 - (self.size*self.height/2)
                 self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
         if Manager.stage.wall_left_on:
-            if self.xcor - (self.width/4)<= -self.canvas.winfo_reqwidth()/2:
-                self.xcor = -self.canvas.winfo_reqwidth()/2 + (self.width/4)
+            if self.xcor - (self.size*self.width/2)<= -self.canvas.winfo_reqwidth()/2:
+                self.xcor = -self.canvas.winfo_reqwidth()/2 + (self.size*self.width/2)
                 self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
         if Manager.stage.wall_right_on:
-            if self.xcor + self.width/4 >= self.canvas.winfo_reqwidth()/2:
-                self.xcor  = self.canvas.winfo_reqwidth()/2 - (self.width/4)
+            if self.xcor + self.size*self.width/2 >= self.canvas.winfo_reqwidth()/2:
+                self.xcor  = self.canvas.winfo_reqwidth()/2 - (self.size*self.width/2)
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
 
