@@ -111,6 +111,7 @@ class SpriteClass(object):
         self.photo.save("check.gif")
 
     def update_animation(self):
+        #print self.future_x, "yao"
         if len(self.modes) > 0 and not self.paused:
             #print self.modes
             if self.modes[0] == "wait":
@@ -132,15 +133,16 @@ class SpriteClass(object):
                         else:
                             self.set_x(self.animation_x_coords.pop(0))
                             self.set_y(self.animation_y_coords.pop(0))
-                            if len(self.animation_x_coords)>0:
-                                self.future_x = self.animation_x_coords[-1]
-                            if len(self.animation_y_coords)>0:
-                                self.future_y = self.animation_y_coords[-1]
+                            if len(self.animation_x_coords)>1:
+                                self.future_x = self.animation_x_coords[-2]
+                            if len(self.animation_y_coords)>1:
+                                self.future_y = self.animation_y_coords[-2]
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
                             print self.modes.pop(0)
+                            print self.heading
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.update_image()
@@ -229,7 +231,7 @@ class SpriteClass(object):
 
     def glide_to(self, newx, newy):
         print self.future_x, " ", self.future_y
-        print newx, self.future_x
+        print "news", newx, self.future_x, self.animation_x_coords
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
@@ -251,7 +253,6 @@ class SpriteClass(object):
         self.future_y = self.animation_y_coords[-1]
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
-        print self.future_x, "future_x"
         self.modes.append("translate")
         print '###########'
 
@@ -444,14 +445,47 @@ class SpriteClass(object):
     def set_drag_off(self):
         self.drag = False
 
-    #Set variables
-    def set_x(self, newx):
-        self.xcor = newx
-        self.future_x = self.xcor
+    # the speed in the following functions refers to animations, NOT physics
 
+    def set_speed(self, newspeed):
+        self.speed = newspeed
+        self.animation_duration = 1000/newspeed
+    def speed(self, newspeed):
+        self.set_speed(newspeed)
+    def get_speed(self):
+        return self.speed
+
+    # Setters
+    def set_width(self, newsize):
+        self.width = int(self.base_photo.size[0] * newsize)
+        self.update_image()
+    def set_height(self, newsize):
+        self.height = int(self.base_photo.size[1] * newsize)
+        self.update_image()
+    # Old setters
+    def set_velx(self, amount):
+        self.set_x_speed(amount)
+    def set_vely(self, amount):
+        self.set_y_speed(amount)
+    def set_x_speed(self, newspeed):
+        self.xspeed = newspeed
+    def set_y_speed(self, newspeed):
+        self.yspeed = newspeed
     def set_y(self, newy):
         self.ycor = newy
         self.future_y = self.ycor
+    def set_x(self, newx):
+        self.xcor = newx
+        self.future_x = self.xcor
+    def set_position(self, to_x, to_y):
+        self.set_x(to_x)
+        self.set_y(to_y)
+    def set_rotation(self, rot):
+        self.animation_rotation_degrees.append(rot)
+        self.modes.append("rotate")
+        self.animation_rotation_degrees.append("Finished current animation")
+    def set_heading(self, rot):
+        self.set_rotation(rot)
 
     def get_x(self):
         return self.xcor
@@ -459,34 +493,20 @@ class SpriteClass(object):
     def get_y(self):
         return self.ycor
 
-    def set_x_speed(self, newspeed):
-        self.xspeed = newspeed
 
-    def set_y_speed(self, newspeed):
-        self.yspeed = newspeed
 
-    def set_speed(self, newspeed):
-        self.speed = newspeed
-        self.animation_duration = 1000/newspeed
+
 
     def set_size(self, newsize):
         self.size = newsize
         self.update_image()
 
-    def set_width(self, newsize):
-        self.width = int(self.base_photo.size[0] * newsize)
-        self.update_image()
 
-    def set_height(self, newsize):
-        self.height = int(self.base_photo.size[1] * newsize)
-        self.update_image()
 
     def set_color(self, newcolor):
         self.color = newcolor
 
-    def set_heading(self, degrees):
-        self.heading = degrees
-        self.update_image()
+
 
     #Basic motion
     #Step functions to build other functions
