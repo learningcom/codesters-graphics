@@ -17,31 +17,54 @@ sprite = codesters.Sprite("Alien1")
 # sprite.wait(3)
 # print sprite.get_total_wait_time(), "checker 2"
 
-sprite.physics_on()
-stage.enable_all_walls()
+
+# sprite.set_size(1)
+# sprite.physics_on()
+# sprite.jump(10)
+#
+# sprite.set_x_speed(4)
+#
+# stage.set_bounce(1)
+#
+# stage.enable_all_walls()
+#
+# sprite.set_drag_on()
+sprite.left(50)
+sprite.flip_horizontal()
+sprite.wait(5)
+sprite.flip_vertical()
+sprite.wait(5)
+sprite.flip_left_right()
+sprite.wait(5)
+sprite.face_backward()
+sprite.wait(5)
+sprite.face_rightside_up()
 
 
-sprite.set_size(0.2)
-sprite.set_speed(0.2)
-sprite.glide_to(100,100)
-sprite.set_heading(90)
-sprite.forward(100)
-sprite.go_to(0,0)
-sprite.set_direction(10,10)
-sprite.forward(200)
-#sprite.forward(100)
+# sprite.set_height(500)
+# sprite.set_width(100)
+
+#sprite.set_top(200)
+#sprite.set_opacity(.5)
+#sprite.left(50)
+# print sprite.get_rotation()
+# print sprite.get_top()
+# print sprite.get_right()
+# print sprite.get_bottom()
+# print sprite.get_left()
+
 
 #sprite.set_size(0.5)
 #sprite.forward(200)
 
 #sprite.set_direction(0,0)
-#sprite.set_width(0.5)
+#sprite.setwidth(0.5)
 #sprite.forward(100)
 
-# def moveToMouse(event):
-#     global sprite
-#     sprite.glide_to(event.x-250, 250-event.y)
-# stage.event_click(moveToMouse)
+def moveToMouse(event):
+    global sprite
+    print event.x-250, 250-event.y
+stage.event_click(moveToMouse)
 
 #sprite.gravity_on()
 #
