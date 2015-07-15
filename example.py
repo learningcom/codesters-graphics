@@ -23,6 +23,10 @@ sprite.set_size(0.5)
 sprite.set_size(0.5)
 sprite.forward(200)
 
+sprite.set_direction(0,0)
+sprite.set_width(0.5)
+sprite.forward(100)
+
 #sprite.gravity_on()
 #
 # sprite2 = codesters.Sprite("")

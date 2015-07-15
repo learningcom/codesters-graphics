@@ -104,10 +104,10 @@ class SpriteClass(object):
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
         #self.base_photo.close()
-        rot = im2.rotate(self.heading, expand=1)
-        scale = rot.resize((int(self.size * self.width), int(self.size*self.width)), Image.ANTIALIAS)
-        fff = Image.new("RGBA", scale.size, (0,)*4)
-        self.photo = Image.composite(scale,fff,scale)
+        scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
+        rot = scale.rotate(self.heading, expand=1)
+        fff = Image.new("RGBA", rot.size, (0,)*4)
+        self.photo = Image.composite(rot,fff,rot)
         self.photo.save("check.gif")
 
     def update_animation(self):
@@ -471,6 +471,14 @@ class SpriteClass(object):
 
     def set_size(self, newsize):
         self.size = newsize
+        self.update_image()
+
+    def set_width(self, newsize):
+        self.width = int(self.base_photo.size[0] * newsize)
+        self.update_image()
+
+    def set_height(self, newsize):
+        self.height = int(self.base_photo.size[1] * newsize)
         self.update_image()
 
     def set_color(self, newcolor):
