@@ -101,6 +101,23 @@ class SpriteClass(object):
         if self.gravity_true:
             self.yspeed += self.gravity
 
+        if self.drag:
+            def drag(event):
+                ex = event.x - self.canvas.winfo_reqwidth()/2
+                ey = self.canvas.winfo_reqheight()/2 - event.y
+                if ex < self.xcor + self.width/2 and ex > self.xcor - self.width and ey < self.ycor + self.height/2 and ey > self.ycor - self.height/2:
+                    self.set_x(ex)
+                    self.set_y(ey)
+                    self.set_x_speed(0)
+                    self.set_y_speed(0)
+            self.canvas.bind("<B1-Motion>", drag)
+
+        if Manager.stage.wall_bottom_on:
+            if self.ycor <= -self.canvas.winfo_reqheight()/2:
+                self.ycor = -self.canvas.winfo_reqheight()/2
+                self.jump(abs(self.yspeed))
+
+
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
         #self.base_photo.close()
@@ -132,10 +149,10 @@ class SpriteClass(object):
                         else:
                             self.set_x(self.animation_x_coords.pop(0))
                             self.set_y(self.animation_y_coords.pop(0))
-                            if len(self.animation_x_coords)>0:
-                                self.future_x = self.animation_x_coords[-1]
-                            if len(self.animation_y_coords)>0:
-                                self.future_y = self.animation_y_coords[-1]
+                            if len(self.animation_x_coords)>1:
+                                self.future_x = self.animation_x_coords[-2]
+                            if len(self.animation_y_coords)>1:
+                                self.future_y = self.animation_y_coords[-2]
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):

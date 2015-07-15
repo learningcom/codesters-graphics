@@ -4,6 +4,7 @@ class Manager(object):
     root = Tk()
     canvas = Canvas(root, width=500, height=500)
     elements = []
+    stage = None
 
     def run(self):
         self.canvas.delete("all")
