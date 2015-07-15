@@ -17,17 +17,19 @@ sprite = codesters.Sprite("Alien1")
 # sprite.wait(3)
 # print sprite.get_total_wait_time(), "checker 2"
 
-sprite.set_size(0.2)
 sprite.physics_on()
-sprite.jump(10)
-
-sprite.set_x_speed(4)
-
-stage.set_bounce(0.8)
-
 stage.enable_all_walls()
 
-sprite.set_drag_on()
+
+sprite.set_size(0.2)
+sprite.set_speed(0.2)
+sprite.glide_to(100,100)
+sprite.set_heading(90)
+sprite.forward(100)
+sprite.go_to(0,0)
+sprite.set_direction(10,10)
+sprite.forward(200)
+#sprite.forward(100)
 
 #sprite.set_size(0.5)
 #sprite.forward(200)

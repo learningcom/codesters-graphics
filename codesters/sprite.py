@@ -163,8 +163,8 @@ class SpriteClass(object):
                             print self.animation_y_coords.pop(0)
                             print self.modes.pop(0)
                         else:
-                            self.set_x(self.animation_x_coords.pop(0))
-                            self.set_y(self.animation_y_coords.pop(0))
+                            self.xcor = (self.animation_x_coords.pop(0))
+                            self.ycor = (self.animation_y_coords.pop(0))
                             if len(self.animation_x_coords)>1:
                                 self.future_x = self.animation_x_coords[-2]
                             if len(self.animation_y_coords)>1:
@@ -255,8 +255,13 @@ class SpriteClass(object):
 
     # More complex motion
     def go_to(self, newx, newy):
-        self.set_x(newx)
-        self.set_y(newy)
+        self.animation_x_coords.append(newx)
+        self.animation_x_coords.append("Finished current animation")
+        self.animation_y_coords.append(newy)
+        self.animation_y_coords.append("Finished current animation")
+        self.modes.append("translate")
+        self.future_x = newx
+        self.future_y = newy
 
     def goto(self, newx, newy):
         self.go_to(newx,newy)
@@ -504,11 +509,19 @@ class SpriteClass(object):
     def set_y_speed(self, newspeed):
         self.yspeed = newspeed
     def set_y(self, newy):
-        self.ycor = newy
-        self.future_y = self.ycor
+        self.animation_y_coords.append(newy)
+        self.animation_y_coords.append("Finished current animation")
+        self.animation_x_coords.append(self.future_x)
+        self.animation_x_coords.append("Finished current animation")
+        self.modes.append("translate")
+        self.future_y = newy
     def set_x(self, newx):
-        self.xcor = newx
-        self.future_x = self.xcor
+        self.animation_x_coords.append(newx)
+        self.animation_x_coords.append("Finished current animation")
+        self.animation_y_coords.append(self.future_y)
+        self.animation_y_coords.append("Finished current animation")
+        self.modes.append("translate")
+        self.future_x = newx
     def set_position(self, to_x, to_y):
         self.set_x(to_x)
         self.set_y(to_y)
