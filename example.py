@@ -3,7 +3,7 @@ import time
 stage = codesters.Environment()
 stage.set_background("summer")
 
-sprite = codesters.Sprite("Alien1")
+sprite = codesters.Sprite("Alien-2")
 #sprite2 = codesters.Sprite('')
 
 #sprite.move_up(100)
@@ -58,17 +58,18 @@ sprite.move_left(50)
 sprite.wait(4)
 sprite.pen_clear()
 """
+# sprite.left(50)
+sprite.set_opacity(.5)
+# sprite.set_color('green')
+# sprite.set_size(0.5)
+# sprite.pen_size(4)
+# sprite.pen_down()
+# sprite.physics_on()
+# sprite.set_x_speed(10)
+# sprite.jump(8)
 
-sprite.set_color('green')
-sprite.set_size(0.5)
-sprite.pen_size(4)
-sprite.pen_down()
-sprite.physics_on()
-sprite.set_x_speed(10)
-sprite.jump(8)
-
-stage.set_bounce(0.8)
-stage.enable_all_walls()
+# stage.set_bounce(1)
+# stage.enable_all_walls()
 
 
 # sprite.set_height(500)
@@ -90,7 +91,10 @@ stage.enable_all_walls()
 #sprite.set_direction(0,0)
 #sprite.setwidth(0.5)
 #sprite.forward(100)
-
+sprite.print_corners()
+sprite.glide_to(100,100)
+sprite.print_corners()
+sprite.left(200)
 def moveToMouse(event):
     global sprite
     print event.x-250, 250-event.y

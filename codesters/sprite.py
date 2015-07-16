@@ -1,6 +1,7 @@
 import math
 from PIL import Image, ImageTk
 from .manager import Manager
+from .hitbox import Hitbox
 
 class SpriteClass(object):
 
@@ -21,7 +22,6 @@ class SpriteClass(object):
         self.size = 1
         self.color = 'white'
         self.heading = 0
-
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
 
@@ -98,7 +98,16 @@ class SpriteClass(object):
         self.width = self.base_photo_width
         self.image_name = image
         self.name = image
-
+        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
+        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
+        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
+        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
+        self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
+        self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
+        self.bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
     def draw(self):
         if self.photo != None and self.hidden == False:
             # im2 = self.photo.convert('RGBA')
@@ -233,13 +242,19 @@ class SpriteClass(object):
                                 self.future_x = self.animation_x_coords[-2]
                             if len(self.animation_y_coords)>1:
                                 self.future_y = self.animation_y_coords[-2]
+                            self.hitbox.update_corners()
+                            self.debug()
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
                             print self.modes.pop(0)
+                            self.hitbox.draw()
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
+                            self.hitbox.update_corners()
+                            self.debug()
+                            print self.heading, "HEADING"
                             self.update_image()
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
@@ -294,9 +309,28 @@ class SpriteClass(object):
                     if len(self.fill_color_plans) > 0:
                         self.fill_color_var = self.fill_color_plans.pop(0)
                         self.modes.pop(0)
+                elif self.modes[0] == "print_corners":
+                    print self.hitbox.top_left, "top_left"
+                    print self.hitbox.top_right, "top_right"
+                    print self.hitbox.bottom_right, "bottom_right"
+                    print self.hitbox.bottom_left, "bottom_left"
+                    self.modes.pop(0)
 
-
-
+    # def update_corners(self):
+    #     heading_cos = math.cos(self.heading * math.pi/180)
+    #     heading_sin = math.sin(self.heading * math.pi/180)
+    #     print heading_cos, heading_sin
+    #
+    #     self.top_right[0] = heading_cos * self.base_top_right[0] - self.base_top_right[1] * heading_sin
+    #     self.top_right[1] = heading_sin * self.base_top_right[0] + self.base_top_right[1] * heading_cos
+    #     self.top_left[0] = heading_cos * self.base_top_left[0] - self.base_top_left[1] * heading_sin
+    #     self.top_left[1] = heading_sin * self.base_top_left[0] + self.base_top_left[1] * heading_cos
+    #     self.bottom_right[0] = heading_cos * self.base_bottom_right[0] - self.base_bottom_right[1] * heading_sin
+    #     self.bottom_right[1] = heading_sin * self.base_bottom_right[0] + self.base_bottom_right[1] * heading_cos
+    #     self.bottom_left[0] = heading_cos * self.base_bottom_left[0] - self.base_bottom_left[1] * heading_sin
+    #     self.bottom_left[1] = heading_sin * self.base_bottom_left[0] + self.base_bottom_left[1] * heading_cos
+    def print_corners(self):
+        self.hitbox.printCorners()
 
     ## END OF PIVOTAL FUNCTIONS ##
 
@@ -818,7 +852,8 @@ class SpriteClass(object):
         else:
             self.fill_plans.append(not self.fill)
         self.modes.append("fill")
-
+    def debug(self):
+        self.hitbox.draw()
 
     #Basic motion
     #Step functions to build other functions
