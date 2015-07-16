@@ -78,6 +78,10 @@ class SpriteClass(object):
         self.pen_color_plans = []
         self.pen_size_plans = []
 
+        self.fill = False
+        self.fill_plans = []
+        self.polygons = []
+
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -120,6 +124,8 @@ class SpriteClass(object):
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
 
     def update_physics(self):
         self.xcor += self.xspeed
@@ -206,6 +212,9 @@ class SpriteClass(object):
                                 newline.append(self.pen_color_var)
                                 newline.append(self.pen_size_var)
                                 self.lines.append(newline)
+                            if self.fill:
+                                self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
+                                self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
                             if len(self.animation_x_coords)>1:
                                 self.future_x = self.animation_x_coords[-2]
                             if len(self.animation_y_coords)>1:
@@ -254,6 +263,17 @@ class SpriteClass(object):
                 elif self.modes[0] == "pen_clear":
                     self.lines = []
                     self.modes.pop(0)
+                elif self.modes[0] == "fill":
+                    if len(self.fill_plans) > 0:
+                        state = self.fill_plans.pop(0)
+                        self.modes.pop(0)
+                        if state and not self.fill:
+                            color = self.pen_color_var
+#                            if len(self.pen_color_plans) > 0:
+ #                               color = self.pen_color_plans[-1]
+                            self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
+                        self.fill = state
+
 
 
 
@@ -756,6 +776,13 @@ class SpriteClass(object):
 
     def pen_clear(self):
         self.modes.append("pen_clear")
+
+    def fill_on(self):
+        self.fill_plans.append(True)
+        self.modes.append("fill")
+    def fill_off(self):
+        self.fill_plans.append(False)
+        self.modes.append("fill")
 
 
     #Basic motion
