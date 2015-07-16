@@ -69,6 +69,15 @@ class SpriteClass(object):
 
         self.scale_plans = []
 
+        self.pen = False
+        self.pen_color = "green"
+        self.pen_size = 5
+        self.lines = []
+
+        self.pen_plans = []
+        self.pen_color_plans = []
+        self.pen_size_plans = []
+
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -109,6 +118,8 @@ class SpriteClass(object):
                 self.say_time = self.say_time-1
         elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
 
     def update_physics(self):
         self.xcor += self.xspeed
@@ -185,8 +196,16 @@ class SpriteClass(object):
                             print self.animation_y_coords.pop(0)
                             print self.modes.pop(0)
                         else:
+                            prevx = self.xcor
+                            prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
+                            if  self.pen:
+                                newline = []
+                                newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
+                                newline.append(self.pen_color)
+                                newline.append(self.pen_size)
+                                self.lines.append(newline)
                             if len(self.animation_x_coords)>1:
                                 self.future_x = self.animation_x_coords[-2]
                             if len(self.animation_y_coords)>1:
@@ -220,6 +239,22 @@ class SpriteClass(object):
                         else:
                             self.size = self.scale_plans.pop(0)
                             self.update_image()
+                elif self.modes[0] == "pen":
+                    if len(self.pen_plans) > 0:
+                        self.pen = self.pen_plans.pop(0)
+                        self.modes.pop(0)
+                elif self.modes[0] == "pen_color":
+                    if len(self.pen_color_plans) > 0:
+                        self.pen_color = self.pen_color_plans.pop(0)
+                        self.modes.pop(0)
+                elif self.modes[0] == "pen_size":
+                    if len(self.pen_color_plans) > 0:
+                        self.pen_size = self.pen_size_plans.pop(0)
+                        self.modes.pop(0)
+                elif self.modes[0] == "pen_clear":
+                    self.lines = []
+                    self.modes.pop(0)
+
 
 
     ## END OF PIVOTAL FUNCTIONS ##
@@ -696,7 +731,31 @@ class SpriteClass(object):
 
     def set_color(self, newcolor):
         self.color = newcolor
+        self.set_pen_color(newcolor)
 
+    def set_pen_color(self, newcolor):
+        self.pen_color_plans.append(newcolor)
+        self.modes.append("pen_color")
+
+    def pen_down(self):
+        self.pen_plans.append(True)
+        self.modes.append("pen")
+    def pen_up(self):
+        self.pen_plans.append(False)
+        self.modes.append("pen")
+    def pen_toggle(self):
+        if len(self.pen_plans)>=1:
+            self.pen_plans.append(not self.pen_plans[-1])
+        else:
+            self.pen_plans.append(not self.pen)
+        self.modes.append("pen")
+
+    def pen_width(self, newsize):
+        self.pen_size_plans.append(newsize)
+        self.modes.append("pen_size")
+
+    def pen_clear(self):
+        self.modes.append("pen_clear")
 
 
     #Basic motion
