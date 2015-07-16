@@ -67,6 +67,8 @@ class SpriteClass(object):
         self.x_flipped = False
         self.y_flipped = False
 
+        self.scale_plans = []
+
         if image != '':
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
@@ -200,7 +202,8 @@ class SpriteClass(object):
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
                         state = self.x_flip_plans.pop(0)
-                        self.x_flipped = state
+                        self.x_flipped = not self.x_flipped
+                        print self.x_flipped
                         self.update_image()
                         self.modes.pop(0)
                 elif self.modes[0] == "yflip":
@@ -209,9 +212,15 @@ class SpriteClass(object):
                         self.y_flipped = state
                         self.update_image()
                         self.modes.pop(0)
-                            #rot.close()
-                            #fff.close()
-                            #im2.close()
+                elif self.modes[0] == "scale":
+                    if len(self.scale_plans) > 0:
+                        if isinstance(self.scale_plans[0],basestring):
+                            print self.modes.pop(0)
+                            self.scale_plans.pop(0)
+                        else:
+                            self.size = self.scale_plans.pop(0)
+                            self.update_image()
+
 
     ## END OF PIVOTAL FUNCTIONS ##
 
@@ -233,10 +242,10 @@ class SpriteClass(object):
 
     def move_up(self, amount):
         self.glide_to(self.future_x,self.future_y+amount)
-    def move_forward(self, amount):
-        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-        self.glide_to(desired_x,desired_y)
+#    def move_forward(self, amount):
+#        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+#        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+#        self.glide_to(desired_x,desired_y)
 
     def forward(self, amount):
         self.move_forward(amount)
@@ -252,8 +261,15 @@ class SpriteClass(object):
         desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
 
     def move_forward(self,amount):
-        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+        if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
+            desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+            desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+        elif not self.x_flipped and len(self.x_flip_plans) < 1:
+            desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+            desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+        else:
+            desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
+            desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         self.glide_to(desired_x,desired_y)
     def forward(self,amount):
         self.move_forward(amount)
@@ -639,8 +655,9 @@ class SpriteClass(object):
     def get_image_name(self):
         print self.image_name
     def set_size(self, newsize):
-        self.size = newsize
-        self.update_image()
+        self.scale_plans.append(newsize)
+        self.modes.append("scale")
+        self.scale_plans.append("Finished current animatoin")
 
     # flippers
     def flip_horizontal(self):
