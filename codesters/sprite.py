@@ -124,16 +124,28 @@ class SpriteClass(object):
                 self.say_time = self.say_time-1
         elif self.hidden == False:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
-        for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
 
     def update_physics(self):
+        prevx = self.xcor
+        prevy = self.ycor
         self.xcor += self.xspeed
         self.ycor -= self.yspeed
         if self.gravity_true:
             self.yspeed += self.gravity
+
+        if  self.pen:
+            newline = []
+            newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
+            newline.append(self.pen_color_var)
+            newline.append(self.pen_size_var)
+            self.lines.append(newline)
+        if self.fill and self.pen:
+           self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
+           self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
         if self.drag:
             def drag(event):
@@ -214,7 +226,7 @@ class SpriteClass(object):
                                 newline.append(self.pen_color_var)
                                 newline.append(self.pen_size_var)
                                 self.lines.append(newline)
-                            if self.fill:
+                            if self.fill and self.pen:
                                 self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
                                 self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
                             if len(self.animation_x_coords)>1:
@@ -378,7 +390,6 @@ class SpriteClass(object):
 
     def glide_to(self, newx, newy):
         print self.future_x, " ", self.future_y
-        print "news", newx, self.future_x, self.animation_x_coords
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
@@ -432,7 +443,6 @@ class SpriteClass(object):
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
-        print destination - self.future_heading, "HERE"
         frames_needed = (self.animation_duration / 22)
         if frames_needed == 0:
             frames_needed = 1
@@ -457,7 +467,7 @@ class SpriteClass(object):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
         self.animation_rotation_degrees.append("Finished current animation")
-        print self.animation_rotation_degrees
+        #print self.animation_rotation_degrees
         self.modes.append("rotate")
         self.future_heading = destination
 
@@ -718,6 +728,8 @@ class SpriteClass(object):
         print self.name
     def get_image_name(self):
         print self.image_name
+
+
     def set_size(self, newsize):
         self.scale_plans.append(newsize)
         self.modes.append("scale")

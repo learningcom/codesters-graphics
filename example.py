@@ -29,6 +29,8 @@ sprite = codesters.Sprite("Alien1")
 # stage.enable_all_walls()
 #
 # sprite.set_drag_on()
+
+"""
 sprite.pen_down()
 sprite.left(50)
 sprite.forward(100)
@@ -42,18 +44,31 @@ sprite.fill_on()
 sprite.forward(100)
 sprite.right(50)
 sprite.forward(100)
-sprite.pen_size(5)
+sprite.pen_size(6)
 sprite.set_color('blue')
 sprite.fill_off()
 sprite.backward(200)
-sprite.pen_size(2)
+sprite.pen_size(20)
 sprite.set_color('green')
-sprite.fill_color('green')
+sprite.fill_color('magenta')
 sprite.fill_on()
 sprite.forward(300)
 sprite.move_up(50)
 sprite.move_left(50)
+sprite.wait(4)
 sprite.pen_clear()
+"""
+
+sprite.set_color('green')
+sprite.set_size(0.5)
+sprite.pen_size(4)
+sprite.pen_down()
+sprite.physics_on()
+sprite.set_x_speed(10)
+sprite.jump(8)
+
+stage.set_bounce(0.8)
+stage.enable_all_walls()
 
 
 # sprite.set_height(500)
