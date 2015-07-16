@@ -70,7 +70,7 @@ class SpriteClass(object):
         self.scale_plans = []
 
         self.pen = False
-        self.pen_color_var = "black"
+        self.pen_color_var = "green"
         self.pen_size_var = 1
         self.lines = []
 
@@ -79,6 +79,8 @@ class SpriteClass(object):
         self.pen_size_plans = []
 
         self.fill = False
+        self.fill_color_var = self.pen_color_var
+        self.fill_color_plans = []
         self.fill_plans = []
         self.polygons = []
 
@@ -262,17 +264,24 @@ class SpriteClass(object):
                         self.modes.pop(0)
                 elif self.modes[0] == "pen_clear":
                     self.lines = []
+                    self.polygons = []
                     self.modes.pop(0)
                 elif self.modes[0] == "fill":
                     if len(self.fill_plans) > 0:
                         state = self.fill_plans.pop(0)
                         self.modes.pop(0)
                         if state and not self.fill:
-                            color = self.pen_color_var
-#                            if len(self.pen_color_plans) > 0:
- #                               color = self.pen_color_plans[-1]
+                            color = self.fill_color_var
+                            #if len(self.fill_color_plans) > 0:
+                             #   print 'yes', color
+                              #  color = self.fill_color_plans[-1]
+                            print color
                             self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
                         self.fill = state
+                elif self.modes[0] == "fill_color":
+                    if len(self.fill_color_plans) > 0:
+                        self.fill_color_var = self.fill_color_plans.pop(0)
+                        self.modes.pop(0)
 
 
 
@@ -756,6 +765,14 @@ class SpriteClass(object):
     def pen_color(self, newcolor):
         self.pen_color_plans.append(newcolor)
         self.modes.append("pen_color")
+        self.fill_toggle()
+        self.fill_toggle()
+
+    def fill_color(self, newcolor):
+        self.fill_color_plans.append(newcolor)
+        self.modes.append("fill_color")
+        self.fill_toggle()
+        self.fill_toggle()
 
     def pen_down(self):
         self.pen_plans.append(True)
@@ -782,6 +799,12 @@ class SpriteClass(object):
         self.modes.append("fill")
     def fill_off(self):
         self.fill_plans.append(False)
+        self.modes.append("fill")
+    def fill_toggle(self):
+        if len(self.fill_plans)>=1:
+            self.fill_plans.append(not self.fill_plans[-1])
+        else:
+            self.fill_plans.append(not self.fill)
         self.modes.append("fill")
 
 
