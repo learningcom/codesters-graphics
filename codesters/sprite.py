@@ -70,8 +70,8 @@ class SpriteClass(object):
         self.scale_plans = []
 
         self.pen = False
-        self.pen_color = "green"
-        self.pen_size = 5
+        self.pen_color_var = "black"
+        self.pen_size_var = 1
         self.lines = []
 
         self.pen_plans = []
@@ -203,8 +203,8 @@ class SpriteClass(object):
                             if  self.pen:
                                 newline = []
                                 newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
-                                newline.append(self.pen_color)
-                                newline.append(self.pen_size)
+                                newline.append(self.pen_color_var)
+                                newline.append(self.pen_size_var)
                                 self.lines.append(newline)
                             if len(self.animation_x_coords)>1:
                                 self.future_x = self.animation_x_coords[-2]
@@ -245,11 +245,11 @@ class SpriteClass(object):
                         self.modes.pop(0)
                 elif self.modes[0] == "pen_color":
                     if len(self.pen_color_plans) > 0:
-                        self.pen_color = self.pen_color_plans.pop(0)
+                        self.pen_color_var = self.pen_color_plans.pop(0)
                         self.modes.pop(0)
                 elif self.modes[0] == "pen_size":
-                    if len(self.pen_color_plans) > 0:
-                        self.pen_size = self.pen_size_plans.pop(0)
+                    if len(self.pen_size_plans) > 0:
+                        self.pen_size_var = self.pen_size_plans.pop(0)
                         self.modes.pop(0)
                 elif self.modes[0] == "pen_clear":
                     self.lines = []
@@ -731,9 +731,9 @@ class SpriteClass(object):
 
     def set_color(self, newcolor):
         self.color = newcolor
-        self.set_pen_color(newcolor)
+        self.pen_color(newcolor)
 
-    def set_pen_color(self, newcolor):
+    def pen_color(self, newcolor):
         self.pen_color_plans.append(newcolor)
         self.modes.append("pen_color")
 
@@ -750,7 +750,7 @@ class SpriteClass(object):
             self.pen_plans.append(not self.pen)
         self.modes.append("pen")
 
-    def pen_width(self, newsize):
+    def pen_size(self, newsize):
         self.pen_size_plans.append(newsize)
         self.modes.append("pen_size")
 
