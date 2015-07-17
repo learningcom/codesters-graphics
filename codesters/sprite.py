@@ -161,12 +161,16 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
         if self.drag:
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
             def drag(event):
                 ex = event.x - self.canvas.winfo_reqwidth()/2
                 ey = self.canvas.winfo_reqheight()/2 - event.y
-                if ex < self.xcor + self.width/2 and ex > self.xcor - self.width and ey < self.ycor + self.height/2 and ey > self.ycor - self.height/2:
-                    self.set_x(ex)
-                    self.set_y(ey)
+                if ex < right and ex > left and ey < top and ey > bottom:
+                    self.xcor = ex
+                    self.ycor = ey
                     self.set_x_speed(0)
                     self.set_y_speed(0)
             self.canvas.bind("<B1-Motion>", drag)
@@ -284,17 +288,17 @@ class SpriteClass(object):
                             if len(self.animation_y_coords)>1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            self.debug()
+                            #self.debug()
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
                             print self.modes.pop(0)
-                            self.hitbox.draw()
+                            #self.hitbox.draw()
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
-                            self.debug()
+                            #self.debug()
                             print self.heading, "HEADING"
                             self.update_image()
                 elif self.modes[0] == "xflip":
@@ -846,7 +850,6 @@ class SpriteClass(object):
     ##### EVENTS #####
 
     def event_collision(self,function):
-        print "HAHha"
         self.collision_function = function
 
     ##### END OF EVENTS #####

@@ -5,7 +5,6 @@ from .manager import Manager
 class Hitbox(object):
 
     def __init__(self, top_right, top_left, bottom_right, bottom_left, sprite):
-        print "Whazt"
         self.root = Manager.canvas
         self.canvas = Manager.canvas
         self.sprite = sprite
