@@ -84,7 +84,7 @@ sprite.set_opacity(.5)
 # print sprite.get_bottom()
 # print sprite.get_left()
 
-
+sprite.set_speed(.2)
 #sprite.set_size(0.5)
 #sprite.forward(200)
 
