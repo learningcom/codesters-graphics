@@ -95,11 +95,12 @@ def collision():
     sprite.jump(5)
     # add any other actions...
 sprite.event_collision(collision)
-sprite2.goto(0,100)
+sprite2.goto(300,50)
 sprite2.collision_on()
 sprite.collision_on()
-sprite.set_x_speed(-2)
 sprite.physics_on()
+sprite.jump(10)
+sprite.set_x_speed(-4)
 stage.enable_all_walls()
 stage.set_bounce(0.8)
 
