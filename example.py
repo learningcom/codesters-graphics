@@ -84,9 +84,9 @@ sprite.pen_clear()
 # print sprite.get_bottom()
 # print sprite.get_left()
 
-sprite = codesters.Sprite("alien1")
+sprite = codesters.Sprite("Alien1")
 
-sprite2 = codesters.Sprite("alien1")
+sprite2 = codesters.Sprite("Alien1")
 def collision():
     sprite.left(45)
     # add any other actions...
