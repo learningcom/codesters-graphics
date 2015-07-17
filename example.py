@@ -84,18 +84,24 @@ sprite.pen_clear()
 # print sprite.get_bottom()
 # print sprite.get_left()
 
-sprite = codesters.Sprite("alien1")
+sprite = codesters.Sprite("Alien-2")
 
-sprite2 = codesters.Sprite("alien1")
+sprite2 = codesters.Sprite("Alien1")
+
+print codesters.Manager.elements
+
+
 def collision():
-    sprite.left(45)
+    sprite.jump(5)
     # add any other actions...
 sprite.event_collision(collision)
-sprite2.goto(100,100)
+sprite2.goto(0,100)
 sprite2.collision_on()
 sprite.collision_on()
-sprite.set_x_speed(2)
-
+sprite.set_x_speed(-2)
+sprite.physics_on()
+stage.enable_all_walls()
+stage.set_bounce(0.8)
 
 
 

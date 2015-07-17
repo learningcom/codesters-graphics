@@ -191,14 +191,18 @@ class SpriteClass(object):
                 self.xcor  = self.canvas.winfo_reqwidth()/2 - (self.size*self.width/2)
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
+        self.hitbox.update_corners()
+
     def update_collision(self):
         if self.collision:
             for e in Manager.elements:
                 if isinstance(e, SpriteClass):
                     # e.collision_function
                     if e.collision:
+                        #print self.check_two_sprites_for_collision(e)
                         if self.check_two_sprites_for_collision(e):
-                            e.collision_function()
+                            if e.collision_function != None:
+                                e.collision_function()
 
 
 
@@ -212,11 +216,16 @@ class SpriteClass(object):
         sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
         sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
         sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
-        #print this_top, sprite_bottom
-        #print this_bottom, sprite_top
+        #print this_left, sprite_right
+        #print this_right, sprite_left
+        #print self.xcor, sprite.xcor
+        #print self.hitbox.top_left
         if this_top > sprite_bottom and this_bottom < sprite_top:
-            if this_right > sprite_right and this_left < sprite_right:
-                return True
+            if this_right > sprite_left and this_left < sprite_right:
+                #print this_top, this_bottom, this_left, this_right
+                #print sprite_top, sprite_bottom, sprite_left, sprite_right
+                if self != sprite:
+                    return True
         return False
 
 
@@ -473,8 +482,6 @@ class SpriteClass(object):
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
             #print self.animation_x_coords, self.animation_y_coords
         print self.future_x, " ", self.future_y
-        self.future_x = self.animation_x_coords[-1]
-        self.future_y = self.animation_y_coords[-1]
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")

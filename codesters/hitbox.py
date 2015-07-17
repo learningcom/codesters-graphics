@@ -44,7 +44,7 @@ class Hitbox(object):
         self.bottom_left[0] = heading_cos * (-self.base_bottom_left_x) - (-self.base_bottom_left_y) * heading_sin +self.sprite.xcor
         self.bottom_left[1] = heading_sin * (-self.base_bottom_left_x) + (-self.base_bottom_left_y) * heading_cos +self.sprite.ycor
 
-        print self.base_bottom_left_y, "baseee"
+        #print self.base_bottom_left_y, "baseee"
 
     def printCorners(self):
         self.sprite.modes.append("print_corners")
