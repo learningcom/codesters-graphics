@@ -37,12 +37,16 @@ class StageClass(object):
         self.wall_left_on = False
         self.wall_right_on = False
 
+        self.gravity = 0
         self.bounce = 1
 
     def update_physics(self):
         pass
 
     def update_animation(self):
+        pass
+
+    def update_collision(self):
         pass
 
     def draw(self):
@@ -161,6 +165,8 @@ class StageClass(object):
     def set_bounce(self, amount):
         self.bounce = amount
 
+    def set_gravity(self, amount):
+        self.gravity = amount
 
 class Environment(StageClass):
     def __init__(self):

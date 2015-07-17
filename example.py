@@ -3,7 +3,7 @@ import time
 stage = codesters.Environment()
 stage.set_background("summer")
 
-sprite = codesters.Sprite("Alien-2")
+#sprite = codesters.Sprite("Alien-2")
 #sprite2 = codesters.Sprite('')
 
 #sprite.move_up(100)
@@ -59,7 +59,7 @@ sprite.wait(4)
 sprite.pen_clear()
 """
 # sprite.left(50)
-sprite.set_opacity(.5)
+# sprite.set_opacity(.5)
 # sprite.set_color('green')
 # sprite.set_size(0.5)
 # sprite.pen_size(4)
@@ -84,17 +84,34 @@ sprite.set_opacity(.5)
 # print sprite.get_bottom()
 # print sprite.get_left()
 
-sprite.set_speed(.2)
+sprite = codesters.Sprite("alien1")
+
+sprite2 = codesters.Sprite("alien1")
+def collision():
+    sprite.left(45)
+    # add any other actions...
+sprite.event_collision(collision)
+sprite2.goto(100,100)
+sprite2.collision_on()
+sprite.collision_on()
+sprite.set_x_speed(2)
+
+
+
+
+# sprite.set_x_speed(5)
+# sprite.physics_on()
+# sprite.set_gravity_on()
 #sprite.set_size(0.5)
 #sprite.forward(200)
 
 #sprite.set_direction(0,0)
 #sprite.setwidth(0.5)
 #sprite.forward(100)
-sprite.print_corners()
-sprite.glide_to(100,100)
-sprite.print_corners()
-sprite.left(200)
+# sprite.print_corners()
+# sprite.glide_to(100,100)
+# sprite.print_corners()
+# sprite.left(200)
 def moveToMouse(event):
     global sprite
     print event.x-250, 250-event.y

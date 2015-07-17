@@ -98,6 +98,7 @@ class SpriteClass(object):
         self.width = self.base_photo_width
         self.image_name = image
         self.name = image
+
         self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -108,6 +109,9 @@ class SpriteClass(object):
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
         self.bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
+
+        self.collision_function = None
+
     def draw(self):
         if self.photo != None and self.hidden == False:
             # im2 = self.photo.convert('RGBA')
@@ -186,6 +190,34 @@ class SpriteClass(object):
             if self.xcor + self.size*self.width/2 >= self.canvas.winfo_reqwidth()/2:
                 self.xcor  = self.canvas.winfo_reqwidth()/2 - (self.size*self.width/2)
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
+
+    def update_collision(self):
+        if self.collision:
+            for e in Manager.elements:
+                if isinstance(e, SpriteClass):
+                    # e.collision_function
+                    if e.collision:
+                        if self.check_two_sprites_for_collision(e):
+                            e.collision_function()
+
+
+
+
+    def check_two_sprites_for_collision(self, sprite):
+        this_top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+        this_right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+        this_bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+        this_left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+        sprite_top = max(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
+        sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
+        sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
+        sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
+        #print this_top, sprite_bottom
+        #print this_bottom, sprite_top
+        if this_top > sprite_bottom and this_bottom < sprite_top:
+            if this_right > sprite_right and this_left < sprite_right:
+                return True
+        return False
 
 
     def update_image(self):
@@ -803,6 +835,15 @@ class SpriteClass(object):
     def face_rightside_up(self):
         self.y_flip_plans.append(False)
         self.modes.append("yflip")
+
+    ##### EVENTS #####
+
+    def event_collision(self,function):
+        print "HAHha"
+        self.collision_function = function
+
+    ##### END OF EVENTS #####
+
 
     def set_color(self, newcolor):
         self.color = newcolor

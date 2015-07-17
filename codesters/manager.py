@@ -11,6 +11,7 @@ class Manager(object):
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
         self.update_animation()
         self.update_physics()
+        self.update_collision()
         ## THIS IS THE END OF THE UPDATES FOR SPEED AND GRAVITY ##
         for e in self.elements:
             e.draw()
@@ -24,3 +25,7 @@ class Manager(object):
     def update_animation(self):
         for e in self.elements:
             e.update_animation()
+
+    def update_collision(self):
+        for e in self.elements:
+            e.update_collision()
