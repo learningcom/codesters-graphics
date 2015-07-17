@@ -161,6 +161,7 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
         if self.drag:
+            self.get_name
             top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
             right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
             bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
@@ -355,6 +356,7 @@ class SpriteClass(object):
                         self.fill_color_var = self.fill_color_plans.pop(0)
                         self.modes.pop(0)
                 elif self.modes[0] == "print_corners":
+                    self.get_name()
                     print self.hitbox.top_left, "top_left"
                     print self.hitbox.top_right, "top_right"
                     print self.hitbox.bottom_right, "bottom_right"
