@@ -161,7 +161,6 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
         if self.drag:
-            self.get_name
             top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
             right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
             bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
@@ -174,6 +173,7 @@ class SpriteClass(object):
                     self.ycor = ey
                     self.set_x_speed(0)
                     self.set_y_speed(0)
+                    self.get_name()
             self.canvas.bind("<B1-Motion>", drag)
 
         if Manager.stage.wall_bottom_on:

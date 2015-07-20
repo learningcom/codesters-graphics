@@ -5,13 +5,16 @@ stage = codesters.Environment()
 stage.set_background("summer")
 
 
-sprite2 = codesters.Sprite("Alien-1")
-sprite2.move_left(200)
-
-sprite = codesters.Sprite("Alien-2")
-sprite.move_right(200)
+sprite = codesters.Sprite("Alien-1")
+global sprite
+sprite.move_left(200)
 
 sprite3 = codesters.Sprite("")
+global sprite3
+
+sprite2 = codesters.Sprite("Alien-2")
+global sprite2
+sprite2.move_right(200)
 
 
 sprite.physics_on()
@@ -35,21 +38,21 @@ sprite2.print_corners()
 sprite3.print_corners()
 
 def collision():
-    sprite.jump(5)
-    if (sprite.xspeed < 0):
-        sprite.xspeed -= 0.1
-    if (sprite.xspeed > 0):
-        sprite.xspeed += 0.1
+    sprite2.jump(5)
+    if (sprite2.xspeed < 0):
+        sprite2.xspeed -= 0.1
+    if (sprite2.xspeed > 0):
+        sprite2.xspeed += 0.1
         # add any other actions...
 
 
-sprite.event_collision(collision)
+sprite3.event_collision(collision)
 
-sprite3.jump(8)
+#sprite3.jump(16)
 
-#sprite3.collision_on()
-#sprite2.collision_on()
-#sprite.collision_on()
+sprite3.collision_on()
+sprite2.collision_on()
+sprite.collision_on()
 
 
 #sprite.jump(10)
@@ -58,11 +61,13 @@ sprite3.jump(8)
 #sprite2.set_x_speed(2)
 
 stage.enable_all_walls()
-stage.set_bounce(1)
+stage.set_bounce(0.8)
 
 
 def moveToMouse(event):
-    global sprite
+    #global sprite
+    #global sprite2
+    #global sprite3
     print event.x - 250, 250 - event.y
 
 
