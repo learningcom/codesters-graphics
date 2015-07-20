@@ -61,6 +61,7 @@ class SpriteClass(object):
         self.collision = False
         self.drag = False
         self.click = False
+        self.key = None
 
         self.opacity = 255
 
@@ -114,6 +115,7 @@ class SpriteClass(object):
 
         self.collision_function = None
         self.click_function = None
+        self.key_function = None
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -228,6 +230,12 @@ class SpriteClass(object):
             self.canvas.bind("<Button-1>", click, add='+')
             self.click = False
 
+        if self.key != None:
+            print "HelloHelloHello"
+            def key(event):
+                self.key_function()
+            self.canvas.bind(self.key, key, add='+')
+            self.key = None
 
 
 
@@ -876,6 +884,22 @@ class SpriteClass(object):
     def event_click(self, function):
         self.click_function = function
         self.click = True
+
+    def event_key(self, key, function):
+        self.key = key
+        if self.key.upper() == "DOWN":
+            self.key = "<Down>"
+        if self.key.upper() == "UP":
+            self.key = "<Up>"
+        if self.key.upper() == "LEFT":
+            self.key = "<Left>"
+        if self.key.upper() == "RIGHT":
+            self.key = "<Right>"
+        if self.key.upper() == "RETURN":
+            self.key = "<Return>"
+        if self.key.upper() == "ENTER":
+            self.key = "<Return>"
+        self.key_function = function
 
     ##### END OF EVENTS #####
 

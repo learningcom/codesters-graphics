@@ -13,6 +13,7 @@ sprite3 = codesters.Sprite("")
 global sprite3
 
 sprite2 = codesters.Sprite("Alien-2")
+sprite2.set_size(0.8)
 global sprite2
 sprite2.move_right(200)
 
@@ -37,7 +38,7 @@ sprite2.print_corners()
 sprite3.print_corners()
 
 def collision():
-    sprite2.jump(5)
+    sprite2.yspeed = -abs(sprite2.yspeed)
     if (sprite2.xspeed < 0):
         sprite2.xspeed -= 0.1
     if (sprite2.xspeed > 0):
@@ -54,10 +55,13 @@ def click2():
     print "hello2"
 sprite2.event_click(click2)
 
-
 def click3():
     print "hello3"
 sprite2.event_click(click3)
+
+def key():
+    print "key"
+sprite.event_key('enter', key)
 
 #sprite3.jump(16)
 
