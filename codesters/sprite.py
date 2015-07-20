@@ -130,8 +130,10 @@ class SpriteClass(object):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
         self.collision_function = None
+        self.collision_goal_function = None
+        self.collision_hazard_function = None
         self.click_function = None
-        self.key_function = None
+        self.key_function = {}
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -212,7 +214,11 @@ class SpriteClass(object):
                     if e.collision:
                         #print self.check_two_sprites_for_collision(e)
                         if self.check_two_sprites_for_collision(e):
-                            if e.collision_function != None:
+                            if self.goal and e.collision_goal_function != None:
+                                e.collision_goal_function()
+                            elif self.hazard and e.collision_hazard_function != None:
+                                e.collision_hazard_function()
+                            elif e.collision_function != None:
                                 e.collision_function()
 
     def update_events(self):
@@ -246,9 +252,19 @@ class SpriteClass(object):
             self.click = False
 
         if self.key != None:
+            print "'''''''''''''''''''''''''''''''''''''''"
+            print "'''''''''''''''''''''''''''''''''''''''"
+            print "'''''''''''''''''''''''''''''''''''''''"
+            print self.key
+            print "'''''''''''''''''''''''''''''''''''''''"
+            print "'''''''''''''''''''''''''''''''''''''''"
+            print "'''''''''''''''''''''''''''''''''''''''"
             def key(event):
-                self.key_function()
-            self.canvas.bind(self.key, key, add='+')
+                print self.key
+                print self.key_function
+                self.key_function[tempkey]()
+            tempkey = self.key
+            self.canvas.bind(tempkey, key, add='+')
             self.key = None
 
 
@@ -895,25 +911,34 @@ class SpriteClass(object):
     def event_collision(self,function):
         self.collision_function = function
 
+    def event_collision_goal(self, function):
+        self.collision_goal_function = function
+
+    def event_collision_hazard(self, function):
+        self.collision_hazard_function = function
+
     def event_click(self, function):
         self.click_function = function
         self.click = True
 
     def event_key(self, key, function):
-        self.key = key
-        if self.key.upper() == "DOWN":
-            self.key = "<Down>"
-        if self.key.upper() == "UP":
-            self.key = "<Up>"
-        if self.key.upper() == "LEFT":
-            self.key = "<Left>"
-        if self.key.upper() == "RIGHT":
-            self.key = "<Right>"
-        if self.key.upper() == "RETURN":
-            self.key = "<Return>"
-        if self.key.upper() == "ENTER":
-            self.key = "<Return>"
-        self.key_function = function
+        newkey = key
+        if newkey.upper() == "DOWN":
+            newkey = "<Down>"
+        if newkey.upper() == "UP":
+            newkey = "<Up>"
+        if newkey.upper() == "LEFT":
+            newkey = "<Left>"
+        if newkey.upper() == "RIGHT":
+            newkey = "<Right>"
+        if newkey.upper() == "RETURN":
+            newkey = "<Return>"
+        if newkey.upper() == "ENTER":
+            newkey = "<Return>"
+        if newkey.upper() == "SPACE":
+            newkey = "<Space>"
+        self.key_function[newkey] = function
+        self.key = newkey
 
     ##### END OF EVENTS #####
 

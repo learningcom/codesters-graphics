@@ -45,7 +45,9 @@ def collision():
         sprite2.xspeed += 0.1
         # add any other actions...
 
-sprite3.event_collision(collision)
+sprite2.event_collision_goal(collision)
+
+sprite3.is_goal()
 
 def click():
     print "hello"
@@ -59,9 +61,16 @@ def click3():
     print "hello3"
 sprite2.event_click(click3)
 
-def key():
-    print "key"
-sprite.event_key('enter', key)
+def up():
+    sprite.jump(16)
+sprite.event_key('up', up)
+def left():
+    sprite.xspeed -= 1
+sprite.event_key('left', left)
+def right():
+    sprite.xspeed += 1
+sprite.event_key('right', right)
+
 
 #sprite3.jump(16)
 
