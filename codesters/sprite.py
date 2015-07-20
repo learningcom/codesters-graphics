@@ -63,6 +63,22 @@ class SpriteClass(object):
         self.click = False
         self.key = None
 
+        self.have_clicked = False
+
+        def click_on_sprite(event):
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            ex = Manager.mouse_x
+            ey = Manager.mouse_y
+            if ex < right and ex > left and ey < top and ey > bottom:
+                self.have_clicked = True
+        def release_sprite(event):
+            self.have_clicked = False
+        self.canvas.bind("<Button-1>", click_on_sprite, add="+")
+        self.canvas.bind("<ButtonRelease-1>", release_sprite, add="+")
+
         self.opacity = 255
 
         self.x_flip_plans = []
@@ -200,21 +216,20 @@ class SpriteClass(object):
                                 e.collision_function()
 
     def update_events(self):
+
         if self.drag:
-            def drag(event):
+            if Manager.mouse_down and self.have_clicked:
                 top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
                 right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
                 bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
                 left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-                ex = event.x - self.canvas.winfo_reqwidth()/2
-                ey = self.canvas.winfo_reqheight()/2 - event.y
+                ex = Manager.mouse_x
+                ey = Manager.mouse_y
                 if ex < right and ex > left and ey < top and ey > bottom:
                     self.xcor = ex
                     self.ycor = ey
                     self.set_x_speed(0)
                     self.set_y_speed(0)
-            self.canvas.bind("<B1-Motion>", drag, add='+')
-            self.drag = False
 
 
         if self.click:
@@ -231,7 +246,6 @@ class SpriteClass(object):
             self.click = False
 
         if self.key != None:
-            print "HelloHelloHello"
             def key(event):
                 self.key_function()
             self.canvas.bind(self.key, key, add='+')

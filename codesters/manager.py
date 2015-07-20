@@ -6,6 +6,11 @@ class Manager(object):
     elements = []
     stage = None
 
+    mouse_x = 0
+    mouse_y = 0
+
+    mouse_down = False
+
     def run(self):
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
@@ -17,6 +22,18 @@ class Manager(object):
         for e in self.elements:
             e.draw()
         self.canvas.update()
+
+        def global_mouse(event):
+            Manager.mouse_x, Manager.mouse_y = event.x - Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - event.y
+        Manager.canvas.bind('<Motion>', global_mouse)
+
+        def mouse_press(event):
+            Manager.mouse_down = True
+        def mouse_release(event):
+            Manager.mouse_down = False
+        self.canvas.bind("<Button-1>", mouse_press, add="+")
+        self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
+
 
     def update_physics(self):
         for e in self.elements:

@@ -94,7 +94,7 @@ class StageClass(object):
         return (event.y*-1)+250
 
     def event_click(self, function):
-        self.canvas.bind("<Button-1>", function)
+        self.canvas.bind("<Button-1>", function, add="+")
 
     def event_up_key(self, function):
         self.canvas.bind("<Up>", function)
@@ -112,7 +112,7 @@ class StageClass(object):
         self.canvas.bind("<space>", function)
 
     def event_click_up(self, function):
-        self.canvas.bind("<ButtonRelease-1>", function)
+        self.canvas.bind("<ButtonRelease-1>", function, add="+")
 
     def event_key(self, key, function):
         bound_key_name = key

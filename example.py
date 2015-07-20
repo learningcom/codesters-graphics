@@ -38,7 +38,7 @@ sprite2.print_corners()
 sprite3.print_corners()
 
 def collision():
-    sprite2.yspeed = -abs(sprite2.yspeed)
+    sprite2.yspeed = -abs(sprite2.yspeed) - 1
     if (sprite2.xspeed < 0):
         sprite2.xspeed -= 0.1
     if (sprite2.xspeed > 0):
