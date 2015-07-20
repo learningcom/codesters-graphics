@@ -11,6 +11,20 @@ class Manager(object):
 
     mouse_down = False
 
+    def __init__(self):
+        #Keepinng here essentially global variables to get the mouse position and whether it's pressed at any given moment.
+        def global_mouse(event):
+            Manager.mouse_x, Manager.mouse_y = event.x - Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - event.y
+        Manager.canvas.bind('<Motion>', global_mouse, add="+")
+
+        def mouse_press(event):
+            Manager.mouse_down = True
+        def mouse_release(event):
+            Manager.mouse_down = False
+        self.canvas.bind("<Button-1>", mouse_press, add="+")
+        self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
+
+
     def run(self):
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
@@ -23,16 +37,6 @@ class Manager(object):
             e.draw()
         self.canvas.update()
 
-        def global_mouse(event):
-            Manager.mouse_x, Manager.mouse_y = event.x - Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - event.y
-        Manager.canvas.bind('<Motion>', global_mouse)
-
-        def mouse_press(event):
-            Manager.mouse_down = True
-        def mouse_release(event):
-            Manager.mouse_down = False
-        self.canvas.bind("<Button-1>", mouse_press, add="+")
-        self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
 
 
     def update_physics(self):
