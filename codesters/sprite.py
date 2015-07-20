@@ -25,6 +25,7 @@ class SpriteClass(object):
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
 
+
         self.hidden = False
 
         self.future_heading = 0
@@ -59,6 +60,7 @@ class SpriteClass(object):
         self.hazard = False
         self.collision = False
         self.drag = False
+        self.click = False
 
         self.opacity = 255
 
@@ -111,6 +113,7 @@ class SpriteClass(object):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
         self.collision_function = None
+        self.click_function = None
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -160,21 +163,6 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
-        if self.drag:
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            def drag(event):
-                ex = event.x - self.canvas.winfo_reqwidth()/2
-                ey = self.canvas.winfo_reqheight()/2 - event.y
-                if ex < right and ex > left and ey < top and ey > bottom:
-                    self.xcor = ex
-                    self.ycor = ey
-                    self.set_x_speed(0)
-                    self.set_y_speed(0)
-                    self.get_name()
-            self.canvas.bind("<B1-Motion>", drag)
 
         if Manager.stage.wall_bottom_on:
             if self.ycor - (self.size*self.height/2) <= -self.canvas.winfo_reqheight()/2:
@@ -208,6 +196,37 @@ class SpriteClass(object):
                         if self.check_two_sprites_for_collision(e):
                             if e.collision_function != None:
                                 e.collision_function()
+
+    def update_events(self):
+        if self.drag:
+            def drag(event):
+                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+                ex = event.x - self.canvas.winfo_reqwidth()/2
+                ey = self.canvas.winfo_reqheight()/2 - event.y
+                if ex < right and ex > left and ey < top and ey > bottom:
+                    self.xcor = ex
+                    self.ycor = ey
+                    self.set_x_speed(0)
+                    self.set_y_speed(0)
+            self.canvas.bind("<B1-Motion>", drag, add='+')
+            self.drag = False
+
+
+        if self.click:
+            def click(event):
+                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+                ex = event.x - self.canvas.winfo_reqwidth()/2
+                ey = self.canvas.winfo_reqwidth()/2 - event.y
+                if ex < right and ex > left and ey < top and ey > bottom:
+                    self.click_function()
+            self.canvas.bind("<Button-1>", click, add='+')
+            self.click = False
 
 
 
@@ -853,6 +872,10 @@ class SpriteClass(object):
 
     def event_collision(self,function):
         self.collision_function = function
+
+    def event_click(self, function):
+        self.click_function = function
+        self.click = True
 
     ##### END OF EVENTS #####
 

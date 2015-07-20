@@ -49,6 +49,9 @@ class StageClass(object):
     def update_collision(self):
         pass
 
+    def update_events(self):
+        pass
+
     def draw(self):
         if self.bg_image != None:
             # background_label = Label(self.root, image=self.bg_image)

@@ -12,6 +12,7 @@ class Manager(object):
         self.update_animation()
         self.update_physics()
         self.update_collision()
+        self.update_events()
         ## THIS IS THE END OF THE UPDATES FOR SPEED AND GRAVITY ##
         for e in self.elements:
             e.draw()
@@ -29,3 +30,7 @@ class Manager(object):
     def update_collision(self):
         for e in self.elements:
             e.update_collision()
+
+    def update_events(self):
+        for e in self.elements:
+            e.update_events()

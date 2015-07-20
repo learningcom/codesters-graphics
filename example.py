@@ -16,7 +16,6 @@ sprite2 = codesters.Sprite("Alien-2")
 global sprite2
 sprite2.move_right(200)
 
-
 sprite.physics_on()
 #sprite.gravity_off()
 sprite.set_drag_on()
@@ -45,8 +44,20 @@ def collision():
         sprite2.xspeed += 0.1
         # add any other actions...
 
-
 sprite3.event_collision(collision)
+
+def click():
+    print "hello"
+sprite.event_click(click)
+
+def click2():
+    print "hello2"
+sprite2.event_click(click2)
+
+
+def click3():
+    print "hello3"
+sprite2.event_click(click3)
 
 #sprite3.jump(16)
 
