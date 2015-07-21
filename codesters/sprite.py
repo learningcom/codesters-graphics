@@ -188,25 +188,32 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
+        top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+        right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+        bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+        left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+
+        tempheight = top-bottom
+        tempwidth = right-left
 
         if Manager.stage.wall_bottom_on:
-            if self.ycor - (self.size*self.height/2) <= -self.canvas.winfo_reqheight()/2:
-                self.ycor = -self.canvas.winfo_reqheight()/2 + (self.size*self.height/2)
+            if bottom < -self.canvas.winfo_reqheight()/2:
+                self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
                 self.jump(abs(self.yspeed * Manager.stage.bounce))
 
         if Manager.stage.wall_top_on:
-            if self.ycor + (self.size*self.height/2) >= self.canvas.winfo_reqheight()/2:
-                self.ycor = self.canvas.winfo_reqheight()/2 - (self.size*self.height/2)
+            if top > self.canvas.winfo_reqheight()/2:
+                self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
                 self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
         if Manager.stage.wall_left_on:
-            if self.xcor - (self.size*self.width/2)<= -self.canvas.winfo_reqwidth()/2:
-                self.xcor = -self.canvas.winfo_reqwidth()/2 + (self.size*self.width/2)
+            if left < -self.canvas.winfo_reqwidth()/2:
+                self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
                 self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
         if Manager.stage.wall_right_on:
-            if self.xcor + self.size*self.width/2 >= self.canvas.winfo_reqwidth()/2:
-                self.xcor  = self.canvas.winfo_reqwidth()/2 - (self.size*self.width/2)
+            if right > self.canvas.winfo_reqwidth()/2:
+                self.xcor  = self.canvas.winfo_reqwidth()/2 - tempwidth/2
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
@@ -423,11 +430,6 @@ class SpriteClass(object):
 
     def move_up(self, amount):
         self.glide_to(self.future_x,self.future_y+amount)
-#    def move_forward(self, amount):
-#        desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-#        desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-#        self.glide_to(desired_x,desired_y)
-
     def forward(self, amount):
         self.move_forward(amount)
 
@@ -436,10 +438,6 @@ class SpriteClass(object):
 
     def backward(self, amount):
         self.move_forward(-amount)
-
-    def move_back(self, amount):
-        desired_x = (-1*(amount * math.cos(self.heading * (math.pi/180)))) +self.future_x
-        desired_y = (-1*(amount * math.sin(self.heading * (math.pi/180)))) + self.future_y
 
     def move_forward(self,amount):
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
@@ -452,15 +450,15 @@ class SpriteClass(object):
             desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         self.glide_to(desired_x,desired_y)
-    def forward(self,amount):
+    def forward(self, amount):
         self.move_forward(amount)
-    def move_backward(self,amount):
+    def move_backward(self, amount):
         self.move_forward(-1 * amount)
-    def backward(self,amount):
+    def backward(self, amount):
         self.move_backward(amount)
-    def move_back(self,amount):
+    def move_back(self, amount):
         self.move_backward(amount)
-    def back(self,amount):
+    def back(self, amount):
         self.move_backward(amount)
     def movex(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
@@ -491,7 +489,7 @@ class SpriteClass(object):
         self.future_y = newy
 
     def goto(self, newx, newy):
-        self.go_to(newx,newy)
+        self.go_to(newx, newy)
 
     def glide_to(self, newx, newy):
         print self.future_x, " ", self.future_y
