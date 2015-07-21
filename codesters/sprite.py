@@ -60,7 +60,6 @@ class SpriteClass(object):
         self.hazard = False
         self.collision = False
         self.drag = False
-#        self.click = False
         self.key = False
 
         self.keys = []
@@ -298,7 +297,9 @@ class SpriteClass(object):
 
     def update_animation(self):
         if isinstance(self.future_x, basestring):
-            self.future_x = self.x_cor
+            self.future_x = self.xcor
+        if isinstance(self.future_y, basestring):
+            self.future_y = self.ycor
         #print self.future_x, "yao"
         if len(self.modes) > 0 and not self.paused:
             #print self.modes
@@ -467,13 +468,13 @@ class SpriteClass(object):
         self.glide_to(self.future_x+amount, self.future_y)
 
     def movey(self, amount):
-        self.glide_to(self.future_x,self.future_y+amount)
+        self.glide_to(self.future_x, self.future_y+amount)
 
     def move_y(self, amount):
-        self.glide_to(self.future_x,self.future_y+amount)
+        self.glide_to(self.future_x, self.future_y+amount)
 
     def translate_y(self, amount):
-        self.glide_to(self.future_x,self.future_y+amount)
+        self.glide_to(self.future_x, self.future_y+amount)
 
     def translate_x(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
@@ -508,7 +509,7 @@ class SpriteClass(object):
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
-            #print self.animation_x_coords, self.animation_y_coords
+            # print self.animation_x_coords, self.animation_y_coords
         print self.future_x, " ", self.future_y
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
@@ -516,8 +517,8 @@ class SpriteClass(object):
         print '###########'
 
     def set_direction(self, tox, toy):
-        if (tox==0):
-            tox=.000001
+        if tox == 0:
+            tox = .000001
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
@@ -545,7 +546,7 @@ class SpriteClass(object):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
         self.animation_rotation_degrees.append("Finished current animation")
-        #print self.animation_rotation_degrees
+        # print self.animation_rotation_degrees
         self.modes.append("rotate")
         self.future_heading = destination
 
@@ -555,7 +556,7 @@ class SpriteClass(object):
     def right(self, degrees):
         self.turn_clockwise(degrees)
 
-    def turn_counterclockwise(self,degrees):
+    def turn_counterclockwise(self, degrees):
         destination = self.future_heading + degrees
         frames_needed = (self.animation_duration / 22)
         degree_rot = destination - self.future_heading
@@ -567,10 +568,10 @@ class SpriteClass(object):
         self.modes.append("rotate")
         self.future_heading = destination
 
-    def turn_left(self,degrees):
+    def turn_left(self, degrees):
         self.turn_counterclockwise(degrees)
 
-    def left(self,degrees):
+    def left(self, degrees):
         self.turn_counterclockwise(degrees)
 
     #
@@ -616,7 +617,7 @@ class SpriteClass(object):
     def play(self):
         self.paused = False
 
-    #Physics
+    # Physics
 
     def jump(self, newspeed):
         self.yspeed = -newspeed

@@ -79,11 +79,9 @@ sprite.collision_on()
 
 sprite.left(-45)
 sprite.set_width(40)
-sprite.move_up(100)
 
 stage.enable_all_walls()
 stage.set_bounce(0.6)
-
 
 def moveToMouse(event):
     sprite2.glide_to(event.x-250, 250 - event.y)
