@@ -78,6 +78,9 @@ sprite3.collision_on()
 sprite2.collision_on()
 sprite.collision_on()
 
+sprite.left(-45)
+sprite.set_size(0.8)
+sprite.move_up(100)
 #sprite.jump(10)
 #sprite.set_x_speed(-4)
 
@@ -90,6 +93,7 @@ def moveToMouse(event):
     #global sprite
     #global sprite2
     #global sprite3
+    sprite2.glide_to(event.x-250, 250 - event.y)
     print event.x - 250, 250 - event.y
 
 

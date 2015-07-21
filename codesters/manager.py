@@ -8,12 +8,15 @@ class Manager(object):
 
     mouse_x = 0
     mouse_y = 0
+    prev_x = 0
+    prev_y = 0
 
     mouse_down = False
 
     def __init__(self):
         #Keepinng here essentially global variables to get the mouse position and whether it's pressed at any given moment.
         def global_mouse(event):
+            Manager.prev_x, Manager.prev_y = Manager.mouse_x, Manager.mouse_y
             Manager.mouse_x, Manager.mouse_y = event.x - Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - event.y
         Manager.canvas.bind('<Motion>', global_mouse, add="+")
 

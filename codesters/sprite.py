@@ -170,6 +170,11 @@ class SpriteClass(object):
         prevy = self.ycor
         self.xcor += self.xspeed
         self.ycor -= self.yspeed
+        for i in range(len(self.animation_x_coords)):
+            if not isinstance(self.animation_x_coords[i],basestring):
+                self.animation_x_coords[i] += self.xspeed
+            if not isinstance(self.animation_y_coords[i],basestring):
+                self.animation_y_coords[i] -= self.yspeed
         if self.gravity_true:
             self.yspeed += self.gravity
 
@@ -232,10 +237,19 @@ class SpriteClass(object):
                 ex = Manager.mouse_x
                 ey = Manager.mouse_y
                 if ex < right and ex > left and ey < top and ey > bottom:
+                    changex = ex - self.xcor
+                    changey = ey - self.ycor
                     self.xcor = ex
                     self.ycor = ey
+                    self.future_x = ex
+                    self.future_y = ey
                     self.set_x_speed(0)
                     self.set_y_speed(0)
+                    for i in range(len(self.animation_x_coords)):
+                        if not isinstance(self.animation_x_coords[i],basestring):
+                            self.animation_x_coords[i] += changex
+                        if not isinstance(self.animation_y_coords[i],basestring):
+                            self.animation_y_coords[i] += changey
 
 
     def check_two_sprites_for_collision(self, sprite):
@@ -277,6 +291,8 @@ class SpriteClass(object):
         #self.photo.save("check.gif")
 
     def update_animation(self):
+        if isinstance(self.future_x, basestring):
+            self.future_x = self.x_cor
         #print self.future_x, "yao"
         if len(self.modes) > 0 and not self.paused:
             #print self.modes
