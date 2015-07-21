@@ -9,8 +9,6 @@ class Manager(object):
     mouse_x = 0
     mouse_y = 0
 
-    key = None
-
     mouse_down = False
 
     def __init__(self):
