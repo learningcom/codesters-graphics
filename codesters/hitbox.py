@@ -2,6 +2,7 @@ import math
 from Tkinter import *
 from .manager import Manager
 
+
 class Hitbox(object):
 
     def __init__(self, top_right, top_left, bottom_right, bottom_left, sprite):
@@ -21,19 +22,9 @@ class Hitbox(object):
         self.bottom_right = bottom_right
         self.bottom_left = bottom_left
 
-
-
     def update_corners(self):
         heading_cos = math.cos(self.sprite.heading * math.pi/180)
         heading_sin = math.sin(self.sprite.heading * math.pi/180)
-        # self.top_right[0] = heading_cos * (-self.base_top_right_x+self.sprite.xcor) - (-self.base_top_right_y + self.sprite.ycor) * heading_sin #+ self.sprite.xcor
-        # self.top_right[1] = heading_sin * (-self.base_top_right_x+self.sprite.xcor) + (-self.base_top_right_y+self.sprite.ycor) * heading_cos #+self.sprite.ycor
-        # self.top_left[0] = heading_cos * (-self.base_top_left_x+self.sprite.xcor) - (-self.base_top_left_y+self.sprite.ycor) * heading_sin #+self.sprite.xcor
-        # self.top_left[1] = heading_sin * (-self.base_top_left_x+self.sprite.xcor) + (-self.base_top_left_y+self.sprite.ycor) * heading_cos #+self.sprite.ycor
-        # self.bottom_right[0] = heading_cos * (-self.base_bottom_right_x+self.sprite.xcor) - (-self.base_bottom_right_y+self.sprite.ycor) * heading_sin #+self.sprite.xcor
-        # self.bottom_right[1] = heading_sin * (-self.base_bottom_right_x+self.sprite.xcor) + (-self.base_bottom_right_y+self.sprite.ycor) * heading_cos #+self.sprite.ycor
-        # self.bottom_left[0] = heading_cos * (-self.base_bottom_left_x+self.sprite.xcor) - (-self.base_bottom_left_y+self.sprite.ycor) * heading_sin #+self.sprite.xcor
-        # self.bottom_left[1] = heading_sin * (-self.base_bottom_left_x+self.sprite.xcor) + (-self.base_bottom_left_y+self.sprite.ycor) * heading_cos #+self.sprite.ycor
         self.top_right[0] = heading_cos * (-self.base_top_right_x) - (-self.base_top_right_y) * heading_sin + self.sprite.xcor
         self.top_right[1] = heading_sin * (-self.base_top_right_x) + (-self.base_top_right_y) * heading_cos +self.sprite.ycor
         self.top_left[0] = heading_cos * (-self.base_top_left_x) - (-self.base_top_left_y) * heading_sin +self.sprite.xcor

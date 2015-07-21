@@ -29,13 +29,12 @@ sprite3.physics_on()
 #sprite3.gravity_off()
 sprite3.set_drag_on()
 
-
 print codesters.Manager.elements
 
-# IF YOU SWAP SPRITE AND SPRITE2 HERE, WHAT IS PRINTED DOES NOT CHANGE. AT ALL.
 sprite.print_corners()
 sprite2.print_corners()
 sprite3.print_corners()
+
 
 def collision():
     sprite2.yspeed = -abs(sprite2.yspeed) - 1
@@ -48,6 +47,7 @@ def collision():
 sprite2.event_collision_goal(collision)
 
 sprite3.is_goal()
+
 
 def click():
     print "hello"
@@ -64,37 +64,29 @@ sprite2.event_click(click3)
 def up():
     sprite.jump(16)
 sprite.event_key('up', up)
+
 def left():
     sprite.xspeed -= 1
 sprite.event_key('left', left)
+
 def right():
     sprite.xspeed += 1
 sprite.event_key('right', right)
-
-
-#sprite3.jump(16)
 
 sprite3.collision_on()
 sprite2.collision_on()
 sprite.collision_on()
 
 sprite.left(-45)
-sprite.set_size(0.8)
+sprite.set_width(40)
 sprite.move_up(100)
-#sprite.jump(10)
-#sprite.set_x_speed(-4)
-
-#sprite2.set_x_speed(2)
 
 stage.enable_all_walls()
 stage.set_bounce(0.6)
 
+
 def moveToMouse(event):
-    #global sprite
-    #global sprite2
-    #global sprite3
     sprite2.glide_to(event.x-250, 250 - event.y)
     print event.x - 250, 250 - event.y
-
 
 stage.event_click(moveToMouse)

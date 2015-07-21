@@ -1,5 +1,6 @@
 from Tkinter import *
 
+
 class Manager(object):
     root = Tk()
     canvas = Canvas(root, width=500, height=500)
@@ -27,8 +28,6 @@ class Manager(object):
         self.canvas.bind("<Button-1>", mouse_press, add="+")
         self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
 
-
-
     def run(self):
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
@@ -40,8 +39,6 @@ class Manager(object):
         for e in self.elements:
             e.draw()
         self.canvas.update()
-
-
 
     def update_physics(self):
         for e in self.elements:

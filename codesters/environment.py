@@ -2,6 +2,7 @@ from Tkinter import *
 from PIL import Image, ImageTk
 from .manager import Manager
 
+
 class StageClass(object):
 
     def __init__(self):
@@ -11,10 +12,6 @@ class StageClass(object):
         Manager.stage = self
 
         self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
-
-        # self.canvas.bind("<Button-1>", self.click_x)
-        # self.canvas.bind("<Button-1>", self.click_y)
-        # self.canvas.bind("<1>", lambda event: self.canvas.focus_set())
 
         self.xcor = 0
         self.ycor = 0
@@ -54,10 +51,6 @@ class StageClass(object):
 
     def draw(self):
         if self.bg_image != None:
-            # background_label = Label(self.root, image=self.bg_image)
-            # background_label.place(x=self.xcor, y=self.ycor, relwidth=1, relheight=1)
-            # background_label.image=self.bg_image
-            # print self.canvas.winfo_width()
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
             self.canvas.create_image(self.xcor, self.ycor, image=self.bg_photoimg)
         else:
@@ -170,6 +163,7 @@ class StageClass(object):
 
     def set_gravity(self, amount):
         self.gravity = amount
+
 
 class Environment(StageClass):
     def __init__(self):

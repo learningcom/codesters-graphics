@@ -68,10 +68,10 @@ class SpriteClass(object):
         self.have_clicked = False
 
         def click_on_sprite(event):
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
             ex = Manager.mouse_x
             ey = Manager.mouse_y
             if ex < right and ex > left and ey < top and ey > bottom:
@@ -157,8 +157,8 @@ class SpriteClass(object):
             self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
             if self.say_time != 0:
                 self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
-                self.say_time = self.say_time-1
-        elif self.hidden == False:
+                self.say_time -= 1
+        elif not self.hidden:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -251,7 +251,6 @@ class SpriteClass(object):
                         if not isinstance(self.animation_y_coords[i],basestring):
                             self.animation_y_coords[i] += changey
 
-
     def check_two_sprites_for_collision(self, sprite):
         this_top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
         this_right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
@@ -337,7 +336,6 @@ class SpriteClass(object):
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
                             print self.modes.pop(0)
-                            #self.hitbox.draw()
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
@@ -387,9 +385,6 @@ class SpriteClass(object):
                         self.modes.pop(0)
                         if state and not self.fill:
                             color = self.fill_color_var
-                            #if len(self.fill_color_plans) > 0:
-                             #   print 'yes', color
-                              #  color = self.fill_color_plans[-1]
                             print color
                             self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
                         self.fill = state
@@ -405,19 +400,6 @@ class SpriteClass(object):
                     print self.hitbox.bottom_left, "bottom_left"
                     self.modes.pop(0)
 
-    # def update_corners(self):
-    #     heading_cos = math.cos(self.heading * math.pi/180)
-    #     heading_sin = math.sin(self.heading * math.pi/180)
-    #     print heading_cos, heading_sin
-    #
-    #     self.top_right[0] = heading_cos * self.base_top_right[0] - self.base_top_right[1] * heading_sin
-    #     self.top_right[1] = heading_sin * self.base_top_right[0] + self.base_top_right[1] * heading_cos
-    #     self.top_left[0] = heading_cos * self.base_top_left[0] - self.base_top_left[1] * heading_sin
-    #     self.top_left[1] = heading_sin * self.base_top_left[0] + self.base_top_left[1] * heading_cos
-    #     self.bottom_right[0] = heading_cos * self.base_bottom_right[0] - self.base_bottom_right[1] * heading_sin
-    #     self.bottom_right[1] = heading_sin * self.base_bottom_right[0] + self.base_bottom_right[1] * heading_cos
-    #     self.bottom_left[0] = heading_cos * self.base_bottom_left[0] - self.base_bottom_left[1] * heading_sin
-    #     self.bottom_left[1] = heading_sin * self.base_bottom_left[0] + self.base_bottom_left[1] * heading_cos
     def print_corners(self):
         self.hitbox.printCorners()
 
@@ -535,29 +517,6 @@ class SpriteClass(object):
         self.modes.append("translate")
         print '###########'
 
-
-        # tempheading = self.heading
-        # self.heading = math.atan(ydist/xdist)
-        # #Trig stuff
-        # while dist > self.speed:
-        #     if xdist > 0:
-        #         self.set_x(self.xcor + self.speed*math.cos(self.heading))
-        #     else:
-        #         self.set_x(self.xcor - self.speed*math.cos(self.heading))
-        #     if ydist > 0:
-        #         self.set_y(self.future_y + self.speed*math.sin(self.heading))
-        #     else:
-        #         self.set_y(self.ycor - self.speed*math.sin(self.heading))
-        #     xdist = newx - self.xcor
-        #     ydist = newy - self.ycor
-        #     dist = math.sqrt(xdist**2 + ydist**2)
-        # #Just to make sure it does end up in the right spot
-        # self.set_x(newx)
-        # self.set_y(newy)
-        # self.heading = tempheading
-        # self.canvas.delete("all")
-
-    #
     def set_direction(self, tox, toy):
         if (tox==0):
             tox=.000001
@@ -735,13 +694,9 @@ class SpriteClass(object):
 
     # Setters
     def set_width(self, newsize):
-        # self.width = int(self.base_photo.size[0] * newsize)
-        # self.update_image()
         self.width = newsize
         self.update_image()
     def set_height(self, newsize):
-        # self.height = int(self.base_photo.size[1] * newsize)
-        # self.update_image()
         self.height = newsize
         self.update_image()
     # Old setters
@@ -938,7 +893,6 @@ class SpriteClass(object):
 
     ##### END OF EVENTS #####
 
-
     def set_color(self, newcolor):
         self.color = newcolor
         self.pen_color(newcolor)
@@ -989,27 +943,6 @@ class SpriteClass(object):
         self.modes.append("fill")
     def debug(self):
         self.hitbox.draw()
-
-    #Basic motion
-    #Step functions to build other functions
-    # def step_forward(self):
-    #     self.set_x(self.xcor + self.speed*math.cos(self.heading))
-    #     self.set_y(self.ycor + self.speed*math.sin(self.heading))
-    # def step_backward(self):
-    #     self.set_x(self.xcor - self.speed*math.cos(self.heading))
-    #     self.set_y(self.ycor - self.speed*math.sin(self.heading))
-    # def move_forward(self, amount):
-    #     dist = amount
-    #     while dist > 0:
-    #         self.step_forward()
-    #         dist -= self.speed
-    #         time.sleep(0.01)
-    # def move_backward(self, amount):
-    #     dist = amount
-    #     while dist > 0:
-    #         self.step_backward()
-    #         dist -= self.speed
-    #         time.sleep(0.01)
 
 
 class Sprite(SpriteClass):
