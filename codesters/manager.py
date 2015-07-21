@@ -9,6 +9,8 @@ class Manager(object):
     mouse_x = 0
     mouse_y = 0
 
+    key = None
+
     mouse_down = False
 
     def __init__(self):
@@ -23,6 +25,7 @@ class Manager(object):
             Manager.mouse_down = False
         self.canvas.bind("<Button-1>", mouse_press, add="+")
         self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
+
 
 
     def run(self):

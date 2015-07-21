@@ -60,8 +60,10 @@ class SpriteClass(object):
         self.hazard = False
         self.collision = False
         self.drag = False
-        self.click = False
-        self.key = None
+#        self.click = False
+        self.key = False
+
+        self.keys = []
 
         self.have_clicked = False
 
@@ -132,8 +134,6 @@ class SpriteClass(object):
         self.collision_function = None
         self.collision_goal_function = None
         self.collision_hazard_function = None
-        self.click_function = None
-        self.key_function = {}
 
     def draw(self):
         if self.photo != None and self.hidden == False:
@@ -236,37 +236,6 @@ class SpriteClass(object):
                     self.ycor = ey
                     self.set_x_speed(0)
                     self.set_y_speed(0)
-
-
-        if self.click:
-            def click(event):
-                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-                ex = event.x - self.canvas.winfo_reqwidth()/2
-                ey = self.canvas.winfo_reqwidth()/2 - event.y
-                if ex < right and ex > left and ey < top and ey > bottom:
-                    self.click_function()
-            self.canvas.bind("<Button-1>", click, add='+')
-            self.click = False
-
-        if self.key != None:
-            print "'''''''''''''''''''''''''''''''''''''''"
-            print "'''''''''''''''''''''''''''''''''''''''"
-            print "'''''''''''''''''''''''''''''''''''''''"
-            print self.key
-            print "'''''''''''''''''''''''''''''''''''''''"
-            print "'''''''''''''''''''''''''''''''''''''''"
-            print "'''''''''''''''''''''''''''''''''''''''"
-            def key(event):
-                print self.key
-                print self.key_function
-                self.key_function[tempkey]()
-            tempkey = self.key
-            self.canvas.bind(tempkey, key, add='+')
-            self.key = None
-
 
 
     def check_two_sprites_for_collision(self, sprite):
@@ -918,8 +887,16 @@ class SpriteClass(object):
         self.collision_hazard_function = function
 
     def event_click(self, function):
-        self.click_function = function
-        self.click = True
+        def click(event):
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            ex = event.x - self.canvas.winfo_reqwidth()/2
+            ey = self.canvas.winfo_reqwidth()/2 - event.y
+            if ex < right and ex > left and ey < top and ey > bottom:
+                function()
+        self.canvas.bind("<Button-1>", click, add='+')
 
     def event_key(self, key, function):
         newkey = key
@@ -937,8 +914,11 @@ class SpriteClass(object):
             newkey = "<Return>"
         if newkey.upper() == "SPACE":
             newkey = "<Space>"
-        self.key_function[newkey] = function
-        self.key = newkey
+        self.keys.append(newkey)
+        def f(event):
+            function()
+        self.canvas.bind(newkey, f, add = "+")
+        self.key = True
 
     ##### END OF EVENTS #####
 

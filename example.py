@@ -78,14 +78,13 @@ sprite3.collision_on()
 sprite2.collision_on()
 sprite.collision_on()
 
-
 #sprite.jump(10)
 #sprite.set_x_speed(-4)
 
 #sprite2.set_x_speed(2)
 
 stage.enable_all_walls()
-stage.set_bounce(0.8)
+stage.set_bounce(0.6)
 
 def moveToMouse(event):
     #global sprite
