@@ -95,15 +95,40 @@ class Triangle(sprite.SpriteClass):
             cx = offsetx + self.xcor
             cy = offsety - self.ycor
 
-            x1 = math.cos((90 + self.heading) * math.pi / 180) * self.side/math.sqrt(3) + cx
-            y1 = math.sin((90 + self.heading) * math.pi / 180) * -self.side/math.sqrt(3) + cy
-            x2 = math.cos((210 + self.heading) * math.pi / 180) * self.side/math.sqrt(3) + cx
-            y2 = math.sin((210 + self.heading) * math.pi / 180) * -self.side/math.sqrt(3) + cy
-            x3 = math.cos((330 + self.heading) * math.pi / 180) * self.side/math.sqrt(3) + cx
-            y3 = math.sin((330 + self.heading) * math.pi / 180) * -self.side/math.sqrt(3) + cy
+            x1 = cx
+            y1 = -self.side/math.sqrt(3) + cy
+            x2 = math.cos(210 * math.pi / 180) * self.side/math.sqrt(3) + cx
+            y2 = math.sin(210 * math.pi / 180) * -self.side/math.sqrt(3) + cy
+            x3 = math.cos(330 * math.pi / 180) * self.side/math.sqrt(3) + cx
+            y3 = math.sin(330 * math.pi / 180) * -self.side/math.sqrt(3) + cy
 
             points = [x1,y1,x2,y2,x3,y3]
-            self.canvas.create_polygon(tuple(points), fill = self.color)
+            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+
+class Ellipse(sprite.SpriteClass):
+    def __init__(self, x, y, width, height, color):
+        super(Ellipse, self).__init__('', shape='circle')
+        self.width = width
+        self.height = height
+        self.xcor = x
+        self.ycor = y
+        self.color = color
+
+    def draw(self):
+        if not self.hidden:
+            offsetx = self.canvas.winfo_reqwidth()/2
+            offsety = self.canvas.winfo_reqheight()/2
+            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - self.width/2,
+                                                                 offsety - self.ycor - self.height/2,
+                                                                 offsetx + self.xcor + self.width/2,
+                                                                 offsety - self.ycor +self.height/2,
+                                                                 rotation=self.heading),
+                                        fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:

@@ -17,9 +17,11 @@ sprite3.left(45)
 sprite3.left(45)
 sprite3.right(90)
 
-sprite2 = codesters.Circle(0,0,50,'blue')
+sprite2 = codesters.Ellipse(0,0,50, 100,'blue')
 global sprite2
 sprite2.move_right(200)
+sprite2.right(60)
+sprite2.left(420)
 
 #sprite.physics_on()
 #sprite.gravity_off()
