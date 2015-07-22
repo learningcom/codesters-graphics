@@ -1,17 +1,23 @@
 import codesters
-import time
-
 #Making a stage
-stage = codesters.Stage()
+stage = codesters.Environment()
 
-#Making a circle
-circle = codesters.Sprite()
-circle.set_x(100)
-circle.set_y(100)
-circle.go_to(0,0)
-circle.set_speed(1)
 
-circle.glide_to(100,100)
+sprite = codesters.Sprite("alien1")
 
-#Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
-codesters.root.mainloop()
+
+def forever():
+    print "blahblahblah"
+stage.set_background("summer")
+    # add any other actions...
+stage.set_background_x(-100)
+stage.set_background_y(-100)
+stage.move_right(300)
+stage.move_up(350)
+stage.move_left(400)
+stage.move_down(60)
+def moveToMouse(event):
+    #sprite2.glide_to(event.x-250, 250 - event.y)
+    print event.x - 250, 250 - event.y
+
+stage.event_click(moveToMouse)

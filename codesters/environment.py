@@ -37,6 +37,10 @@ class StageClass(object):
         self.gravity = 0
         self.bounce = 1
 
+        self.forever_function = None
+
+    #### IMPORTANT FUNCTIONS ####
+
     def update_physics(self):
         pass
 
@@ -50,22 +54,114 @@ class StageClass(object):
         pass
 
     def draw(self):
+        if self.forever_function is not None:
+            self.forever_function()
+        self.canvas.create_rectangle((0,0,500,500), fill='white')
         if self.bg_image != None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
-            self.canvas.create_image(self.xcor, self.ycor, image=self.bg_photoimg)
-        else:
-            self.canvas.create_rectangle((0,0,500,500), fill='white')
+            self.canvas.create_image(self.xcor + Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - self.ycor, image=self.bg_photoimg)
+        # else:
+
+
+    #### END OF IMPORTANT FUNCTIONS ####
+
+
+    def add_sprite(self, sprite):
+        if sprite not in Manager.elements:
+            Manager.elements.append(sprite)
+
+    def add_shape(self, shape):
+        if shape not in Manager.elements:
+            Manager.elements.append(shape)
+
+    def add_text(self, text): #BROKEN ON CODESTERS.COM
+        pass
+
+    def remove_sprite(self,sprite):
+        if sprite in Manager.elements:
+            Manager.elements.remove(sprite)
+
+    def remove_shape(self, shape):
+        if shape in Manager.elements:
+            Manager.elements.remove(shape)
+
+    def remove_text(self,text): #BROKEN ON codesters.com
+        if text in Manager.elements:
+            Manager.elements.remove(text)
+
+
+    def event_left_key(self, function):
+        self.canvas.bind("<Left>", function,add="+")
+
+    def event_right_key(self, function):
+        self.canvas.bind("<Right>", function,add="+")
+
+    def event_up_key(self, function):
+        self.canvas.bind("<Up>", function,add="+")
+
+    def event_down_key(self, function):
+        self.canvas.bind("<Down>", function,add="+")
+
+    def event_space_key(self, function):
+        self.canvas.bind("<space>", function, add="+")
+
+    def event_key(self, key, function):
+        bound_key_name = key
+        if key == "left":
+            bound_key_name = "<Left>"
+        if key == "right":
+            bound_key_name = "<Right>"
+        if key == "up":
+            bound_key_name = "<Up>"
+        if key == "down":
+            bound_key_name = "<Down>"
+        if key == "space":
+            bound_key_name = "<space>"
+        print bound_key_name
+        self.canvas.bind(bound_key_name, function, add = "+")
+
+    def event_click(self, function):
+        self.canvas.bind("<Button-1>", function, add="+")
+
+    def event_click_down(self, function):
+        self.event_click(function,add="+")
+
+    def event_click_up(self, function):
+        self.canvas.bind("<ButtonRelease-1>", function, add="+")
+
+    def event_mouse_move(self,function):
+        self.canvas.bind("<Motion>", function, add="+")
+
+    def event_forever(self,function):
+        self.forever_function = function
+
+    def event_interval(self, function, seconds):
+        pass
+
+    def event_delay(self, function, seconds):
+        pass
 
     def set_background(self, image):
         self.bg_image_name= image
         self.bg_image= Image.open("./codesters/sprites/"+image+".gif")
-        # print self.bg_image.height, "blah"
 
     def set_background_x(self, amount):
-        self.xcor=amount+self.canvas.winfo_width()
+        self.xcor=amount + self.canvas.winfo_reqwidth()/2
 
     def set_background_y(self, amount):
-        self.ycor=amount+self.canvas.winfo_height()
+        self.ycor= amount - self.canvas.winfo_reqheight()/2
+
+    def move_right(self, amount):
+        self.xcor +=amount
+
+    def move_left(self, amount):
+        self.xcor = self.xcor - amount
+
+    def move_up(self,amount):
+        self.ycor += amount
+
+    def move_down(self, amount):
+        self.ycor = self.ycor - amount
 
     def set_background_scaleX(self, amount):
         amount = 1/amount
@@ -86,41 +182,9 @@ class StageClass(object):
         #print "y coord", event.y
         return (event.y*-1)+250
 
-    def event_click(self, function):
-        self.canvas.bind("<Button-1>", function, add="+")
 
-    def event_up_key(self, function):
-        self.canvas.bind("<Up>", function)
 
-    def event_down_key(self, function):
-        self.canvas.bind("<Down>", function)
 
-    def event_left_key(self, function):
-        self.canvas.bind("<Left>", function)
-
-    def event_right_key(self, function):
-        self.canvas.bind("<Right>", function)
-
-    def event_space_key(self, function):
-        self.canvas.bind("<space>", function)
-
-    def event_click_up(self, function):
-        self.canvas.bind("<ButtonRelease-1>", function, add="+")
-
-    def event_key(self, key, function):
-        bound_key_name = key
-        if key == "left":
-            bound_key_name = "<Left>"
-        if key == "right":
-            bound_key_name = "<Right>"
-        if key == "up":
-            bound_key_name = "<Up>"
-        if key == "down":
-            bound_key_name = "<Down>"
-        if key == "space":
-            bound_key_name = "<space>"
-        print bound_key_name
-        self.canvas.bind(bound_key_name, function)
 
     def enable_floor(self):
         self.wall_bottom_on = True

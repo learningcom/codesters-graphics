@@ -40,7 +40,7 @@ class Hitbox(object):
         self.sprite.modes.append("print_corners")
 
     def draw(self):
-        print "DRAWING"
+        #print "DRAWING"
         self.sprite.lines.append([(self.canvas.winfo_reqwidth()/2 +self.top_right[0],self.canvas.winfo_reqheight()/2 - self.top_right[1],self.canvas.winfo_reqwidth()/2 +self.top_left[0],self.canvas.winfo_reqheight()/2 - self.top_left[1]), "black", 1.0])
         self.sprite.lines.append([(self.canvas.winfo_reqwidth()/2 +self.top_right[0],self.canvas.winfo_reqheight()/2 - self.top_right[1],self.canvas.winfo_reqwidth()/2 +self.bottom_right[0],self.canvas.winfo_reqheight()/2 - self.bottom_right[1]), "black", 1.0])
         self.sprite.lines.append([(self.canvas.winfo_reqwidth()/2 +self.top_left[0],self.canvas.winfo_reqheight()/2 - self.top_left[1],self.canvas.winfo_reqwidth()/2 +self.bottom_left[0],self.canvas.winfo_reqheight()/2 - self.bottom_left[1]),"black",1.0])

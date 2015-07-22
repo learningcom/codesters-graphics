@@ -25,6 +25,7 @@ class SpriteClass(object):
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
 
+        self.forever_function = None
 
         self.hidden = False
 
@@ -142,7 +143,10 @@ class SpriteClass(object):
         self.collision_hazard_function = None
 
     def draw(self):
-        if self.photo != None and self.hidden == False:
+        #self.debug()
+        if self.forever_function is not None:
+            self.forever_function()
+        if self.photo is not None and self.hidden == False:
             # im2 = self.photo.convert('RGBA')
             # self.photo.close()
             # rot = im2.rotate(self.heading, expand=1)
@@ -232,11 +236,11 @@ class SpriteClass(object):
                     if e.collision:
                         #print self.check_two_sprites_for_collision(e)
                         if self.check_two_sprites_for_collision(e):
-                            if self.goal and e.collision_goal_function != None:
+                            if self.goal and e.collision_goal_function is not None:
                                 e.collision_goal_function()
-                            elif self.hazard and e.collision_hazard_function != None:
+                            elif self.hazard and e.collision_hazard_function is not None:
                                 e.collision_hazard_function()
-                            elif e.collision_function != None:
+                            elif e.collision_function is not None:
                                 e.collision_function()
 
     def update_events(self):
@@ -278,10 +282,16 @@ class SpriteClass(object):
         #print self.xcor, sprite.xcor
         #print self.hitbox.top_left
         if this_top > sprite_bottom and this_bottom < sprite_top:
+
             if this_right > sprite_left and this_left < sprite_right:
                 #print this_top, this_bottom, this_left, this_right
                 #print sprite_top, sprite_bottom, sprite_left, sprite_right
                 if self != sprite:
+                    print this_top, sprite_bottom
+                    print this_bottom, sprite_top
+                    print this_right, sprite_left
+                    print this_left , sprite_right
+                    print "$$ COLLIDING $$"
                     return True
         return False
 
@@ -294,7 +304,7 @@ class SpriteClass(object):
             im2=im2.transpose(Image.FLIP_TOP_BOTTOM)
         #self.base_photo.close()
         if self.opacity < 255:
-            print self.opacity
+            # print self.opacity
             im2.putalpha(self.opacity)
         scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
         rot = scale.rotate(self.heading, expand=1)
@@ -314,18 +324,17 @@ class SpriteClass(object):
                 if len(self.wait_list)> 0:
                     if self.wait_list[0] == 0:
                         print self.wait_list.pop(0)
-                        print self.wait_list.pop(0)
-                        print self.modes.pop(0)
+                        # print self.wait_list.pop(0)
+                        # print self.modes.pop(0)
                     else:
                         self.wait_list[0] = self.wait_list[0] - 1
-
             else:
                 if self.modes[0] == "translate":
                     if len(self.animation_y_coords)>0 and len(self.animation_x_coords)>0:
                         if isinstance(self.animation_x_coords[0],basestring) and isinstance(self.animation_y_coords[0],basestring):
                             print self.animation_x_coords.pop(0)
-                            print self.animation_y_coords.pop(0)
-                            print self.modes.pop(0)
+                            # print self.animation_y_coords.pop(0)
+                            # print self.modes.pop(0)
                         else:
                             prevx = self.xcor
                             prevy = self.ycor
@@ -350,18 +359,18 @@ class SpriteClass(object):
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
                             print self.animation_rotation_degrees.pop(0)
-                            print self.modes.pop(0)
+                            # print self.modes.pop(0)
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
                             #self.debug()
-                            print self.heading, "HEADING"
+                            # print self.heading, "HEADING"
                             self.update_image()
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
                         state = self.x_flip_plans.pop(0)
                         self.x_flipped = not self.x_flipped
-                        print self.x_flipped
+                        # print self.x_flipped
                         self.update_image()
                         self.modes.pop(0)
                 elif self.modes[0] == "yflip":
@@ -373,7 +382,7 @@ class SpriteClass(object):
                 elif self.modes[0] == "scale":
                     if len(self.scale_plans) > 0:
                         if isinstance(self.scale_plans[0],basestring):
-                            print self.modes.pop(0)
+                            # print self.modes.pop(0)
                             self.scale_plans.pop(0)
                         else:
                             self.size = self.scale_plans.pop(0)
@@ -400,7 +409,7 @@ class SpriteClass(object):
                         self.modes.pop(0)
                         if state and not self.fill:
                             color = self.fill_color_var
-                            print color
+                            # print color
                             self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
                         self.fill = state
                 elif self.modes[0] == "fill_color":
@@ -438,14 +447,6 @@ class SpriteClass(object):
 
     def move_up(self, amount):
         self.glide_to(self.future_x,self.future_y+amount)
-    def forward(self, amount):
-        self.move_forward(amount)
-
-    def move_backward(self, amount):
-        self.move_forward(-amount)
-
-    def backward(self, amount):
-        self.move_forward(-amount)
 
     def move_forward(self,amount):
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
@@ -458,8 +459,16 @@ class SpriteClass(object):
             desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         self.glide_to(desired_x,desired_y)
+
     def forward(self, amount):
         self.move_forward(amount)
+
+    def move_backward(self, amount):
+        self.move_forward(-amount)
+
+    def backward(self, amount):
+        self.move_forward(-amount)
+
     def move_backward(self, amount):
         self.move_forward(-1 * amount)
     def backward(self, amount):
@@ -500,7 +509,7 @@ class SpriteClass(object):
         self.go_to(newx, newy)
 
     def glide_to(self, newx, newy):
-        print self.future_x, " ", self.future_y
+        # print self.future_x, " ", self.future_y
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
@@ -517,11 +526,11 @@ class SpriteClass(object):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
             # print self.animation_x_coords, self.animation_y_coords
-        print self.future_x, " ", self.future_y
+        # print self.future_x, " ", self.future_y
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")
-        print '###########'
+        # print '###########'
 
     def set_direction(self, tox, toy):
         if tox == 0:
@@ -586,7 +595,7 @@ class SpriteClass(object):
         self.modes.append("wait")
         self.wait_list.append(seconds*10)
         self.wait_list.append("Finished current animation")
-        print self.wait_list
+        #print self.wait_list
         self.total_wait_time += seconds
         self.future_most_recent_wait_time = seconds
 
@@ -804,12 +813,15 @@ class SpriteClass(object):
         pass
     def get_type(self):
         print self.type
+        return self.type
     def get_text(self):
         pass
     def get_name(self):
         print self.name
+        return self.name
     def get_image_name(self):
         print self.image_name
+        return self.image_name
 
 
     def set_size(self, newsize):
@@ -822,7 +834,7 @@ class SpriteClass(object):
         if len(self.x_flip_plans) == 0:
             self.x_flip_plans.append(not self.x_flipped)
         else:
-            print len(self.x_flip_plans), self.x_flip_plans, "helpppp"
+            #print len(self.x_flip_plans), self.x_flip_plans, "helpppp"
             self.x_flip_plans.append(not self.x_flip_plans[-1])
         self.modes.append("xflip")
     def flip_right_left(self):
@@ -854,26 +866,20 @@ class SpriteClass(object):
 
     ##### EVENTS #####
 
-    def event_collision(self,function):
-        self.collision_function = function
+    def event_left_key(self, function):
+        self.canvas.bind("<Left>", function)
 
-    def event_collision_goal(self, function):
-        self.collision_goal_function = function
+    def event_right_key(self, function):
+        self.canvas.bind("<Right>", function)
 
-    def event_collision_hazard(self, function):
-        self.collision_hazard_function = function
+    def event_up_key(self, function):
+        self.canvas.bind("<Up>", function)
 
-    def event_click(self, function):
-        def click(event):
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            ex = event.x - self.canvas.winfo_reqwidth()/2
-            ey = self.canvas.winfo_reqwidth()/2 - event.y
-            if ex < right and ex > left and ey < top and ey > bottom:
-                function()
-        self.canvas.bind("<Button-1>", click, add='+')
+    def event_down_key(self, function):
+        self.canvas.bind("<Down>", function)
+
+    def event_space_key(self, function):
+        self.canvas.bind("<space>", function)
 
     def event_key(self, key, function):
         newkey = key
@@ -897,23 +903,32 @@ class SpriteClass(object):
         self.canvas.bind(newkey, f, add = "+")
         self.key = True
 
+    def event_click(self, function):
+        def click(event):
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            ex = event.x - self.canvas.winfo_reqwidth()/2
+            ey = self.canvas.winfo_reqwidth()/2 - event.y
+            if ex < right and ex > left and ey < top and ey > bottom:
+                function()
+        self.canvas.bind("<Button-1>", click, add='+')
+
+    def event_forever(self, function):
+        self.forever_function = function
+
+    def event_collision(self,function):
+        self.collision_function = function
+
+    def event_collision_goal(self, function):
+        self.collision_goal_function = function
+
+    def event_collision_hazard(self, function):
+        self.collision_hazard_function = function
+
+
     ##### END OF EVENTS #####
-
-    def set_color(self, newcolor):
-        self.color = newcolor
-        self.pen_color(newcolor)
-
-    def pen_color(self, newcolor):
-        self.pen_color_plans.append(newcolor)
-        self.modes.append("pen_color")
-        self.fill_toggle()
-        self.fill_toggle()
-
-    def fill_color(self, newcolor):
-        self.fill_color_plans.append(newcolor)
-        self.modes.append("fill_color")
-        self.fill_toggle()
-        self.fill_toggle()
 
     def pen_down(self):
         self.pen_plans.append(True)
@@ -928,12 +943,8 @@ class SpriteClass(object):
             self.pen_plans.append(not self.pen)
         self.modes.append("pen")
 
-    def pen_size(self, newsize):
-        self.pen_size_plans.append(newsize)
-        self.modes.append("pen_size")
-
-    def pen_clear(self):
-        self.modes.append("pen_clear")
+    def draw_hitbox(self):
+        self.debug()
 
     def fill_on(self):
         self.fill_plans.append(True)
@@ -947,13 +958,44 @@ class SpriteClass(object):
         else:
             self.fill_plans.append(not self.fill)
         self.modes.append("fill")
+
+    def pen_clear(self):
+        self.modes.append("pen_clear")
+
+    def pen_width(self, newwidth):
+        self.pen_size(newwidth)
+
+    def pen_size(self, newsize):
+        self.pen_size_plans.append(newsize)
+        self.modes.append("pen_size")
+
+    def set_color(self, newcolor):
+        self.color = newcolor
+        self.pen_color(newcolor)
+
+    def pen_color(self, newcolor):
+        self.pen_color_plans.append(newcolor)
+        self.modes.append("pen_color")
+        self.fill_toggle()
+        self.fill_toggle()
+
+    def set_fill_color(self, newcolor):
+        self.fill_color_plans.append(newcolor)
+        self.modes.append("fill_color")
+        self.fill_toggle()
+        self.fill_toggle()
+
+
+
+
+
     def debug(self):
         self.hitbox.draw()
 
 
 class Sprite(SpriteClass):
 
-    def __init__(self, image, **kwargs):
+    def __init__(self, image="", **kwargs):
         if 'shape' in kwargs:
             super(Sprite, self).__init__(image, shape = kwargs['shape'])
         else:
