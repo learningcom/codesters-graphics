@@ -46,20 +46,6 @@ def poly_rect(x,y, width, height, rotation):
 
     point_list = [x1,y1,x2,y2,x3,y3,x4,y4]
     return poly_poly(x,y, point_list, rotation)
-"""
-    x1 = math.cos(theta) * (x1-x) - math.sin(theta) * (y1-y) + x
-    y1 = math.sin(theta) * (x1-x) + math.cos(theta) * (y1-y) + y
-    x2 = math.cos(theta) * (x2-x) - math.sin(theta) * (y2-y) + x
-    y2 = math.sin(theta) * (x2-x) + math.cos(theta) * (y2-y) + y
-    x3 = math.cos(theta) * (x3-x) - math.sin(theta) * (y3-y) + x
-    y3 = math.sin(theta) * (x3-x) + math.cos(theta) * (y3-y) + y
-    x4 = math.cos(theta) * (x4-x) - math.sin(theta) * (y4-y) + x
-    y4 = math.sin(theta) * (x4-x) + math.cos(theta) * (y4-y) + y
-
-    point_list = [x1,y1,x2,y2,x3,y3,x4,y4]
-
-    return tuple(point_list)
-"""
 
 
 def poly_poly(cx, cy, points, rotation):
@@ -76,10 +62,7 @@ def poly_poly(cx, cy, points, rotation):
         x1 += cx
         y1 += cy
 
-        print x1,y1
-
         point_list.append(x1)
         point_list.append(y1)
-    print '######'
 
     return tuple(point_list)
