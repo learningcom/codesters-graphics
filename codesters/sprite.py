@@ -2,7 +2,6 @@ import math
 from PIL import Image, ImageTk
 from .manager import Manager
 from .hitbox import Hitbox
-import transformations
 
 class SpriteClass(object):
 
@@ -21,7 +20,7 @@ class SpriteClass(object):
         self.speed = 1
         self.modes=[]
         self.size = 1
-        self.color = 'white'
+        self.color = 'black'
         self.heading = 0
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")

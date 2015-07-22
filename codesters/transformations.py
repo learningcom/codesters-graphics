@@ -30,7 +30,7 @@ def poly_oval(x0,y0, x1,y1, steps=50, rotation=0):
         point_list.append(round(x + xc))
         point_list.append(round(y + yc))
 
-    return point_list
+    return tuple(point_list)
 
 def poly_rect(x,y, width, height, rotation):
     theta = -rotation*math.pi / 180
@@ -44,8 +44,9 @@ def poly_rect(x,y, width, height, rotation):
     x4 = x-width/2
     y4 = y+height/2
 
-    print [x1,y1,x2,y2,x3,y3,x4,y4]
-
+    point_list = [x1,y1,x2,y2,x3,y3,x4,y4]
+    return poly_poly(x,y, point_list, rotation)
+"""
     x1 = math.cos(theta) * (x1-x) - math.sin(theta) * (y1-y) + x
     y1 = math.sin(theta) * (x1-x) + math.cos(theta) * (y1-y) + y
     x2 = math.cos(theta) * (x2-x) - math.sin(theta) * (y2-y) + x
@@ -56,6 +57,29 @@ def poly_rect(x,y, width, height, rotation):
     y4 = math.sin(theta) * (x4-x) + math.cos(theta) * (y4-y) + y
 
     point_list = [x1,y1,x2,y2,x3,y3,x4,y4]
-    print point_list
-    print '"""""""""""""""""""""""""""""""""""""""""""""""""'
-    return point_list
+
+    return tuple(point_list)
+"""
+
+
+def poly_poly(cx, cy, points, rotation):
+    theta = -rotation*math.pi / 180
+
+    point_list = []
+
+    for i in range(len(points)/2):
+        x = points[i*2] - cx
+        y = points[i*2 + 1] - cy
+
+        x1 = math.cos(theta) * x - math.sin(theta) * y
+        y1 = math.sin(theta) * x + math.cos(theta) * y
+        x1 += cx
+        y1 += cy
+
+        print x1,y1
+
+        point_list.append(x1)
+        point_list.append(y1)
+    print '######'
+
+    return tuple(point_list)

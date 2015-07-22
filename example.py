@@ -5,31 +5,31 @@ stage = codesters.Environment()
 stage.set_background("summer")
 
 
-sprite = codesters.Rectangle(200,100)
+sprite = codesters.Rectangle(0,0,40,100, "green")
 global sprite
-sprite.set_color('green')
-sprite.move_left(200)
-sprite.left(-45)
-sprite.set_width(40)
+#sprite.move_left(200)
+sprite.left(-90)
+sprite.left(90)
 
-sprite3 = codesters.Sprite("")
+sprite3 = codesters.Triangle(-200,0,100,'red')
 global sprite3
+sprite3.left(45)
+sprite3.left(45)
+sprite3.right(90)
 
-sprite2 = codesters.Circle()
-sprite2.set_color('blue')
-sprite2.set_size(80)
+sprite2 = codesters.Circle(0,0,50,'blue')
 global sprite2
 sprite2.move_right(200)
 
-sprite.physics_on()
+#sprite.physics_on()
 #sprite.gravity_off()
 sprite.set_drag_on()
 
-sprite2.physics_on()
+#sprite2.physics_on()
 #sprite2.gravity_off()
 sprite2.set_drag_on()
 
-sprite3.physics_on()
+#sprite3.physics_on()
 #sprite3.gravity_off()
 sprite3.set_drag_on()
 
