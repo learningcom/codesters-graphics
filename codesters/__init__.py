@@ -1,5 +1,5 @@
 
 from environment import *
-from circle import *
+from shapes import *
 from sprite import *
 from manager import *

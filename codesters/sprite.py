@@ -2,11 +2,12 @@ import math
 from PIL import Image, ImageTk
 from .manager import Manager
 from .hitbox import Hitbox
+import transformations
 
 class SpriteClass(object):
 
     ## PIVOTAL FUNCTIONS ##
-    def __init__(self, image):
+    def __init__(self, image, **kwargs):
         self.canvas = Manager.canvas
         Manager.elements.append(self)
 
@@ -118,6 +119,13 @@ class SpriteClass(object):
         self.width = self.base_photo_width
         self.image_name = image
         self.name = image
+
+        self.shape = ''
+        if kwargs.get('shape') != None:
+            self.shape = kwargs.get('shape')
+            self.height = self.size * 50
+            self.width =  self.size * 50
+            self.name = self.shape
 
         self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -946,5 +954,8 @@ class SpriteClass(object):
 
 class Sprite(SpriteClass):
 
-    def __init__(self, image):
-        super(Sprite, self).__init__(image)
+    def __init__(self, image, **kwargs):
+        if 'shape' in kwargs:
+            super(Sprite, self).__init__(image, shape = kwargs['shape'])
+        else:
+            super(Sprite, self).__init__(image)

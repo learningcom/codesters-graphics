@@ -5,15 +5,19 @@ stage = codesters.Environment()
 stage.set_background("summer")
 
 
-sprite = codesters.Sprite("Alien-1")
+sprite = codesters.Rectangle(200,100)
 global sprite
+sprite.set_color('green')
 sprite.move_left(200)
+sprite.left(-45)
+sprite.set_width(40)
 
 sprite3 = codesters.Sprite("")
 global sprite3
 
-sprite2 = codesters.Sprite("Alien-2")
-sprite2.set_size(0.8)
+sprite2 = codesters.Circle()
+sprite2.set_color('blue')
+sprite2.set_size(80)
 global sprite2
 sprite2.move_right(200)
 
@@ -76,9 +80,6 @@ sprite.event_key('right', right)
 sprite3.collision_on()
 sprite2.collision_on()
 sprite.collision_on()
-
-sprite.left(-45)
-sprite.set_width(40)
 
 stage.enable_all_walls()
 stage.set_bounce(0.6)
