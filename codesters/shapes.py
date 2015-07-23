@@ -2,6 +2,7 @@ from Tkinter import *
 import sprite
 import transformations
 import math
+import bezier
 
 
 class Point(sprite.SpriteClass):
@@ -423,3 +424,22 @@ class Arc(sprite.SpriteClass):
 class Curve(sprite.SpriteClass):
     def __init__(self, x1, y1, cx1, cy1, cx2, cy2, x2, y2, fill, color):
         super(Curve, self).__init__('', shape='curve')
+        offsetx = self.canvas.winfo_reqwidth()/2
+        offsety = self.canvas.winfo_reqheight()/2
+        self.xcor = 0
+        self.ycor = 0
+        cx = offsetx + self.xcor
+        cy = offsety - self.ycor
+        self.P0 = [cx + x1, cy - y1]
+        self.P1 = [cx + cx1, cy - cy1]
+        self.P2 = [cx + cx2, cy - cy2]
+        self.P3 = [cx + x2, cy - y2]
+        self.color = color
+
+    def draw(self):
+
+        b = bezier.Bezier()
+        points = b.draw_cubic_bez(self.P0,self.P1,self.P2,self.P3)
+        for i in range(len(points) - 1):
+            pointuple = tuple([points[i][0],points[i][1],points[i+1][0],points[i+1][1]])
+            self.canvas.create_line(pointuple, fill = self.color)
