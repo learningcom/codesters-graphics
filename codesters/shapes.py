@@ -430,6 +430,8 @@ class Curve(sprite.SpriteClass):
         self.ycor = 0
         cx = offsetx + self.xcor
         cy = offsety - self.ycor
+        self.x1,self.cx1,self.cx2,self.x2 = x1,cx1,cx2,x2
+        self.y1,self.cy1,self.cy2,self.y2 = y1,cy1,cy2,y2
         self.P0 = [cx + x1, cy - y1]
         self.P1 = [cx + cx1, cy - cy1]
         self.P2 = [cx + cx2, cy - cy2]
@@ -437,6 +439,29 @@ class Curve(sprite.SpriteClass):
         self.color = color
 
     def draw(self):
+        offsetx = self.canvas.winfo_reqwidth()/2
+        offsety = self.canvas.winfo_reqheight()/2
+        cx = offsetx + self.xcor
+        cy = offsety - self.ycor
+
+        x1,cx1,cx2,x2 = cx+self.x1, cx+self.cx1, cx+self.cx2, cx+self.x2
+        y1,cy1,cy2,y2 = cy-self.y1, cy-self.cy1, cy-self.cy2, cy-self.y2
+
+        theta = -self.heading * math.pi/180
+
+        newx1 = math.cos(theta) * (x1-cx) - math.sin(theta) * (y1-cy) + cx
+        newy1 = math.sin(theta) * (x1-cx) + math.cos(theta) * (y1-cy) + cy
+        newcx1 = math.cos(theta) * (cx1-cx) - math.sin(theta) * (cy1-cy) + cx
+        newcy1 = math.sin(theta) * (cx1-cx) + math.cos(theta) * (cy1-cy) + cy
+        newcx2 = math.cos(theta) * (cx2-cx) - math.sin(theta) * (cy2-cy) + cx
+        newcy2 = math.sin(theta) * (cx2-cx) + math.cos(theta) * (cy2-cy) + cy
+        newx2 = math.cos(theta) * (x2-cx) - math.sin(theta) * (y2-cy) + cx
+        newy2 = math.sin(theta) * (x2-cx) + math.cos(theta) * (y2-cy) + cy
+
+        self.P0 = [newx1,newy1]
+        self.P1 = [newcx1,newcy1]
+        self.P2 = [newcx2,newcy2]
+        self.P3 = [newx2,newy2]
 
         b = bezier.Bezier()
         points = b.draw_cubic_bez(self.P0,self.P1,self.P2,self.P3)
