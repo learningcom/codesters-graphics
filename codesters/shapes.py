@@ -419,3 +419,7 @@ class Arc(sprite.SpriteClass):
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+class Curve(sprite.SpriteClass):
+    def __init__(self, x1, y1, cx1, cy1, cx2, cy2, x2, y2, fill, color):
+        super(Curve, self).__init__('', shape='curve')
