@@ -59,7 +59,7 @@ class StageClass(object):
         self.canvas.create_rectangle((0,0,500,500), fill='white')
         if self.bg_image != None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
-            self.canvas.create_image(self.xcor + Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - self.ycor, image=self.bg_photoimg)
+            self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
         # else:
 
 
@@ -146,10 +146,10 @@ class StageClass(object):
         self.bg_image= Image.open("./codesters/sprites/"+image+".gif")
 
     def set_background_x(self, amount):
-        self.xcor=amount + self.canvas.winfo_reqwidth()/2
+        self.xcor=amount + self.canvas.winfo_reqwidth()
 
     def set_background_y(self, amount):
-        self.ycor= amount - self.canvas.winfo_reqheight()/2
+        self.ycor= amount
 
     def move_right(self, amount):
         self.xcor +=amount

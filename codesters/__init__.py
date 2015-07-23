@@ -1,4 +1,3 @@
-
 from environment import *
 from shapes import *
 from sprite import *

@@ -87,7 +87,7 @@ class SpriteClass(object):
         self.y_flip_plans = []
         self.x_flipped = False
         self.y_flipped = False
-
+        self.dilate_plans = []
         self.scale_plans = []
 
         self.pen = False
@@ -425,6 +425,12 @@ class SpriteClass(object):
                     print self.hitbox.bottom_right, "bottom_right"
                     print self.hitbox.bottom_left, "bottom_left"
                     self.modes.pop(0)
+                elif self.modes[0] == "dilate":
+                    if len(self.dilate_plans) > 0:
+                        self.set_size(self.dilate_plans[0])
+                        self.xcor=self.future_x*self.dilate_plans[0]
+                        self.dilate_plans.pop(0)
+                        self.modes.pop(0)
 
     def print_corners(self):
         self.hitbox.printCorners()
@@ -993,6 +999,12 @@ class SpriteClass(object):
 
     def debug(self):
         self.hitbox.draw()
+
+    def dilate(self,amount):
+        self.dilate_plans.append(amount)
+        self.modes.append("dilate")
+        self.goto(amount * self.future_x, amount * self.future_y)
+
 
 
 class Sprite(SpriteClass):
