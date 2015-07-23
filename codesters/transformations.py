@@ -1,6 +1,19 @@
 import math
 
-def poly_oval(x0,y0, x1,y1, steps=50, rotation=0):
+def poly_circle(x,y,r):
+    step = math.pi/10
+    point_list = []
+
+    for i in range(20):
+        newx = math.cos(step * i) * r + x
+        newy = math.sin(step * i) * r + y
+        point_list.append(newx)
+        point_list.append(newy)
+
+    return tuple(point_list)
+
+
+def poly_oval(x0,y0, x1,y1, steps=20, rotation=0):
     rotation = rotation * math.pi / 180.0
 
     # major and minor axes

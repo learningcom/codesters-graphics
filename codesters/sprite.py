@@ -323,23 +323,25 @@ class SpriteClass(object):
             if self.modes[0] == "wait":
                 if len(self.wait_list)> 0:
                     if self.wait_list[0] == 0:
-                        print self.wait_list.pop(0)
-                        # print self.wait_list.pop(0)
-                        # print self.modes.pop(0)
+                        self.wait_list.pop(0)
+                        self.modes.pop(0)
                     else:
                         self.wait_list[0] = self.wait_list[0] - 1
             else:
                 if self.modes[0] == "translate":
                     if len(self.animation_y_coords)>0 and len(self.animation_x_coords)>0:
                         if isinstance(self.animation_x_coords[0],basestring) and isinstance(self.animation_y_coords[0],basestring):
-                            print self.animation_x_coords.pop(0)
-                            # print self.animation_y_coords.pop(0)
-                            # print self.modes.pop(0)
+                            self.animation_x_coords.pop(0)
+                            self.animation_y_coords.pop(0)
+                            self.modes.pop(0)
                         else:
                             prevx = self.xcor
                             prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
+                            if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
+                                self.xcor = prevx
+                                self.ycor = prevy
                             if  self.pen:
                                 newline = []
                                 newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
@@ -358,8 +360,8 @@ class SpriteClass(object):
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
-                            print self.animation_rotation_degrees.pop(0)
-                            # print self.modes.pop(0)
+                            self.animation_rotation_degrees.pop(0)
+                            self.modes.pop(0)
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
@@ -382,7 +384,7 @@ class SpriteClass(object):
                 elif self.modes[0] == "scale":
                     if len(self.scale_plans) > 0:
                         if isinstance(self.scale_plans[0],basestring):
-                            # print self.modes.pop(0)
+                            print self.modes.pop(0)
                             self.scale_plans.pop(0)
                         else:
                             self.size = self.scale_plans.pop(0)

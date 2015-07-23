@@ -7,15 +7,20 @@ import math
 class Point(sprite.SpriteClass):
     def __init__(self,x,y):
         super(Point, self).__init__('', shape = 'point')
-        self.size = 5
         self.width = 5
         self.height = 5
+        self.xcor = x
+        self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
 
     def draw(self):
         if not self.hidden:
             offsetx = self.canvas.winfo_reqwidth()/2
             offsety = self.canvas.winfo_reqheight()/2
-            self.canvas.create_oval(offsetx + self.xcor - 5, offsety - self.ycor - 5, offsetx + self.xcor + 5, offsety - self.ycor + 5, fill = self.color)
+            xc = offsetx + self.xcor
+            yc = offsety - self.ycor
+            self.canvas.create_oval(xc - 5, yc - 5, xc + 5, yc + 5, fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -23,24 +28,24 @@ class Point(sprite.SpriteClass):
 
 
 class Circle(sprite.SpriteClass):
-    def __init__(self, x, y, size, color):
+    def __init__(self, x, y, diam, color):
         super(Circle, self).__init__('', shape='circle')
-        self.size = size
-        self.width = size
-        self.height = size
+        self.diam = diam
+        self.width = diam
+        self.height = diam
         self.xcor = x
         self.ycor = y
         self.color = color
+        self.future_x = self.xcor
+        self.future_y = self.ycor
 
     def draw(self):
         if not self.hidden:
             offsetx = self.canvas.winfo_reqwidth()/2
             offsety = self.canvas.winfo_reqheight()/2
-            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - self.width/2,
-                                                                 offsety - self.ycor - self.height/2,
-                                                                 offsetx + self.xcor + self.width/2,
-                                                                 offsety - self.ycor +self.height/2,
-                                                                 rotation=self.heading),
+            xc = offsetx + self.xcor
+            yc = offsety - self.ycor
+            self.canvas.create_polygon(transformations.poly_circle(xc, yc, self.diam/2),
                                         fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -55,6 +60,8 @@ class Rectangle(sprite.SpriteClass):
         self.height = height
         self.xcor = x
         self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
         self.color = color
 
     def draw(self):
@@ -63,16 +70,32 @@ class Rectangle(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            x1 = xc - self.width/2
-            y1 = yc - self.height/2
-            x2 = xc + self.width/2
-            y2 = yc - self.height/2
-            x3 = xc + self.width/2
-            y3 = yc + self.height/2
-            x4 = xc - self.width/2
-            y4 = yc + self.height/2
-            points = [x1,y1,x2,y2,x3,y3,x4,y4]
-            self.canvas.create_polygon(transformations.poly_poly(xc, yc, points, self.heading),
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc, self.width, self.height, self.heading),
+                                       fill = self.color)
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+
+class Square(sprite.SpriteClass):
+    def __init__(self, x, y, side, color):
+        super(Square, self).__init__('', shape='square')
+        self.width = side
+        self.height = side
+        self.xcor = x
+        self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
+        self.color = color
+
+    def draw(self):
+        if not self.hidden:
+            offsetx = self.canvas.winfo_reqwidth()/2
+            offsety = self.canvas.winfo_reqheight()/2
+            xc = offsetx + self.xcor
+            yc = offsety - self.ycor
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc, self.width, self.height, self.heading),
                                        fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -85,6 +108,8 @@ class Triangle(sprite.SpriteClass):
         super(Triangle, self).__init__('', shape='triangle')
         self.xcor = x
         self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
         self.side = side
         self.color = color
 
@@ -117,6 +142,8 @@ class Ellipse(sprite.SpriteClass):
         self.height = height
         self.xcor = x
         self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
         self.color = color
 
     def draw(self):

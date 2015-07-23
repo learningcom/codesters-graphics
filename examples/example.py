@@ -3,7 +3,7 @@ import codesters
 stage = codesters.Environment()
 
 
-sprite = codesters.Sprite("alien1")
+sprite = codesters.Sprite("Alien1")
 
 
 def forever():
