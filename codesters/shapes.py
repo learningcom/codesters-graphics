@@ -137,7 +137,7 @@ class Triangle(sprite.SpriteClass):
 
 class Ellipse(sprite.SpriteClass):
     def __init__(self, x, y, width, height, color):
-        super(Ellipse, self).__init__('', shape='circle')
+        super(Ellipse, self).__init__('', shape='ellipse')
         self.width = width
         self.height = height
         self.xcor = x
@@ -160,3 +160,50 @@ class Ellipse(sprite.SpriteClass):
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+class Line(sprite.SpriteClass):
+    def __init__(self, x1, y1, x2, y2, color):
+        super(Line, self).__init__('', shape='line')
+        self.xcor = (x2 - x1)/2 + x1
+        self.ycor = (y2 - y1)/2 + y1
+        self.width = x2 - x1
+        self.height = y2 - y1
+        self.future_x = self.xcor
+        self.future_y = self.ycor
+        self.color = color
+
+    def draw(self):
+        if not self.hidden:
+            offsetx = self.canvas.winfo_reqwidth()/2
+            offsety = self.canvas.winfo_reqheight()/2
+            xc = offsetx + self.xcor
+            yc = offsety - self.ycor
+            points = transformations.poly_line(xc, yc, self.width, self.height,self.heading)
+            #print points
+            self.canvas.create_line(points[0],points[1],points[2],points[3],
+                                       fill = self.color)
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+class Star(sprite.SpriteClass):
+    def __init__(self, x, y, num_points, diam, color):
+        super(Star, self).__init__('', shape='star')
+        self.xcor = x
+        self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
+        self.num_points = num_points
+        self.width = diam
+        self.height = diam
+        self.color = color
+
+    def draw(self):
+        if not self.hidden:
+            offsetx = self.canvas.winfo_reqwidth()/2
+            offsety = self.canvas.winfo_reqheight()/2
+            xc = offsetx + self.xcor
+            yc = offsety - self.ycor
+            self.canvas.create_polygon(transformations.poly_star(xc, yc, self.width, self.height, self.num_points, self.heading),
+                                       fill=self.color)
