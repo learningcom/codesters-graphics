@@ -426,8 +426,8 @@ class Curve(sprite.SpriteClass):
         super(Curve, self).__init__('', shape='curve')
         offsetx = self.canvas.winfo_reqwidth()/2
         offsety = self.canvas.winfo_reqheight()/2
-        self.xcor = 0
-        self.ycor = 0
+        self.xcor = (x1+x2)/2
+        self.ycor = (y1+y2)/2
         cx = offsetx + self.xcor
         cy = offsety - self.ycor
         self.x1,self.cx1,self.cx2,self.x2 = x1,cx1,cx2,x2
