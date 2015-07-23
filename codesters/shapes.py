@@ -161,6 +161,7 @@ class Ellipse(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
 
+
 class Line(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, color):
         super(Line, self).__init__('', shape='line')
@@ -314,6 +315,7 @@ class Triangle3Pts(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
 
+
 class Quad(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color):
         super(Quad, self).__init__('', shape='quad')
@@ -353,11 +355,11 @@ class Quad(sprite.SpriteClass):
             points[5] = offsety - point_tuple[5]
             points[6] = offsetx + point_tuple[6]
             points[7] = offsety - point_tuple[7]
-            self.canvas.create_polygon(tuple(points), fill = self.color)
+            self.canvas.create_polygon(tuple(points), fill=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
 
 
 class Polygon(sprite.SpriteClass):
@@ -383,6 +385,36 @@ class Polygon(sprite.SpriteClass):
                                                                  steps = self.num_points,
                                                                  rotation = self.heading),
                                        fill=self.color)
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+
+
+class Arc(sprite.SpriteClass):
+    def __init__(self, x, y, diam, start, end, color):
+        super(Arc, self).__init__('', shape='arc')
+        self.width = diam
+        self.height = diam
+        self.xcor = x
+        self.ycor = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
+        self.color = color
+        self.start_angle = start
+        self.end_angle = end
+
+    def draw(self):
+        if not self.hidden:
+            offsetx = self.canvas.winfo_reqwidth()/2
+            offsety = self.canvas.winfo_reqheight()/2
+            self.canvas.create_polygon(transformations.poly_arc(offsetx + self.xcor - self.width/2,
+                                                                 offsety - self.ycor - self.height/2,
+                                                                 offsetx + self.xcor + self.width/2,
+                                                                 offsety - self.ycor +self.height/2,
+                                                                 self.start_angle, self.end_angle,
+                                                                 rotation=self.heading),
+                                        fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
