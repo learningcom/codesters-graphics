@@ -71,7 +71,13 @@ class Rectangle(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            self.canvas.create_polygon(transformations.poly_rect(xc, yc, self.width*self.size, self.height*self.size, self.heading),
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.width*self.size, yf*self.height*self.size, self.heading),
                                        fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -96,7 +102,13 @@ class Square(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            self.canvas.create_polygon(transformations.poly_rect(xc, yc, self.size*self.width, self.size*self.height, self.heading),
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.heading),
                                        fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -120,13 +132,19 @@ class Triangle(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             cx = offsetx + self.xcor
             cy = offsety - self.ycor
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
 
             x1 = cx
-            y1 = -self.side*self.size/math.sqrt(3) + cy
-            x2 = math.cos(210 * math.pi / 180) * self.side*self.size/math.sqrt(3) + cx
-            y2 = math.sin(210 * math.pi / 180) * -self.side*self.size/math.sqrt(3) + cy
-            x3 = math.cos(330 * math.pi / 180) * self.side*self.size/math.sqrt(3) + cx
-            y3 = math.sin(330 * math.pi / 180) * -self.side*self.size/math.sqrt(3) + cy
+            y1 = -yf*self.side*self.size/math.sqrt(3) + cy
+            x2 = math.cos(210 * math.pi / 180) * xf*self.side*self.size/math.sqrt(3) + cx
+            y2 = math.sin(210 * math.pi / 180) * -yf*self.side*self.size/math.sqrt(3) + cy
+            x3 = math.cos(330 * math.pi / 180) * xf*self.side*self.size/math.sqrt(3) + cx
+            y3 = math.sin(330 * math.pi / 180) * -yf*self.side*self.size/math.sqrt(3) + cy
 
             points = [x1,y1,x2,y2,x3,y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
@@ -151,10 +169,16 @@ class Ellipse(sprite.SpriteClass):
         if not self.hidden:
             offsetx = self.canvas.winfo_reqwidth()/2
             offsety = self.canvas.winfo_reqheight()/2
-            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - self.width*self.size/2,
-                                                                 offsety - self.ycor - self.height*self.size/2,
-                                                                 offsetx + self.xcor + self.width*self.size/2,
-                                                                 offsety - self.ycor +self.height*self.size/2,
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - xf*self.width*self.size/2,
+                                                                 offsety - self.ycor - yf*self.height*self.size/2,
+                                                                 offsetx + self.xcor + xf*self.width*self.size/2,
+                                                                 offsety - self.ycor +yf*self.height*self.size/2,
                                                                  rotation=self.heading),
                                         fill = self.color)
         for p in self.polygons:
@@ -180,7 +204,13 @@ class Line(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            points = transformations.poly_line(xc, yc, self.width*self.size, self.height*self.size,self.heading)
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            points = transformations.poly_line(xc, yc, xf*self.width*self.size, yf*self.height*self.size,self.heading)
             #print points
             self.canvas.create_line(points[0],points[1],points[2],points[3],
                                        fill = self.color)
@@ -207,7 +237,13 @@ class Star(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            self.canvas.create_polygon(transformations.poly_star(xc, yc, self.size*self.width, self.size*self.height, self.num_points, self.heading),
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            self.canvas.create_polygon(transformations.poly_star(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.num_points, self.heading),
                                        fill=self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
@@ -231,13 +267,19 @@ class TriangleIso(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             cx = offsetx + self.xcor
             cy = offsety - self.ycor
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
 
             x1 = cx
-            y1 = cy - self.size*self.height/2
-            x2 = cx - self.size*self.width/2
-            y2 = cy + self.size*self.height/2
-            x3 = cx + self.size*self.width/2
-            y3 = cy + self.size*self.height/2
+            y1 = cy - yf*self.size*self.height/2
+            x2 = cx - xf*self.size*self.width/2
+            y2 = cy + yf*self.size*self.height/2
+            x3 = cx + xf*self.size*self.width/2
+            y3 = cy + yf*self.size*self.height/2
 
             points = [x1,y1,x2,y2,x3,y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
@@ -263,13 +305,19 @@ class TriangleRight(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             cx = offsetx + self.xcor
             cy = offsety - self.ycor
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
 
-            x1 = cx - self.size*self.width/2
-            y1 = cy + self.size*self.height/2
-            x2 = cx + self.size*self.width/2
-            y2 = cy + self.size*self.height/2
-            x3 = cx - self.size*self.width/2
-            y3 = cy - self.size*self.height/2
+            x1 = cx - xf*self.size*self.width/2
+            y1 = cy + yf*self.size*self.height/2
+            x2 = cx + xf*self.size*self.width/2
+            y2 = cy + yf*self.size*self.height/2
+            x3 = cx - xf*self.size*self.width/2
+            y3 = cy - yf*self.size*self.height/2
 
             points = [x1,y1,x2,y2,x3,y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
@@ -301,8 +349,16 @@ class Triangle3Pts(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             cx = self.xcor
             cy = self.ycor
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
 
-            points = [self.xcor-self.x1,self.ycor-self.y1,self.xcor-self.x2,self.ycor-self.y2,self.xcor-self.x3,self.ycor-self.y3]
+            points = [self.xcor-xf*self.x1,self.ycor-yf*self.y1,
+                      self.xcor-xf*self.x2,self.ycor-yf*self.y2,
+                      self.xcor-xf*self.x3,self.ycor-yf*self.y3]
             point_tuple = transformations.poly_poly(cx,cy,points,-self.heading)
             points[0] = offsetx + self.size*point_tuple[0]
             points[1] = offsety - self.size*point_tuple[1]
@@ -342,11 +398,17 @@ class Quad(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             cx = self.xcor
             cy = self.ycor
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
 
-            points = [self.xcor-self.x1,self.ycor-self.y1,
-                      self.xcor-self.x2,self.ycor-self.y2,
-                      self.xcor-self.x3,self.ycor-self.y3,
-                      self.xcor-self.x4,self.ycor-self.y4]
+            points = [self.xcor-xf*self.x1,self.ycor-yf*self.y1,
+                      self.xcor-xf*self.x2,self.ycor-yf*self.y2,
+                      self.xcor-xf*self.x3,self.ycor-yf*self.y3,
+                      self.xcor-xf*self.x4,self.ycor-yf*self.y4]
             point_tuple = transformations.poly_poly(cx,cy,points,-self.heading)
             points[0] = offsetx + self.size*point_tuple[0]
             points[1] = offsety - self.size*point_tuple[1]
@@ -381,7 +443,13 @@ class Polygon(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            points = [xc - self.width*self.size/2, yc-self.height*self.size/2, xc + self.width*self.size/2, yc + self.size*self.height/2]
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            points = [xc - xf*self.width*self.size/2, yc-yf*self.height*self.size/2, xc + xf*self.width*self.size/2, yc + yf*self.size*self.height/2]
             self.canvas.create_polygon(transformations.poly_oval(points[0],points[1],points[2],points[3],
                                                                  steps = self.num_points,
                                                                  rotation = self.heading),
@@ -409,10 +477,16 @@ class Arc(sprite.SpriteClass):
         if not self.hidden:
             offsetx = self.canvas.winfo_reqwidth()/2
             offsety = self.canvas.winfo_reqheight()/2
-            self.canvas.create_polygon(transformations.poly_arc(offsetx + self.xcor - self.width*self.size/2,
-                                                                 offsety - self.ycor - self.height*self.size/2,
-                                                                 offsetx + self.xcor + self.width*self.size/2,
-                                                                 offsety - self.ycor +self.height*self.size/2,
+            xf = 1
+            yf = 1
+            if self.x_flipped:
+                xf = -1
+            if self.y_flipped:
+                yf = -1
+            self.canvas.create_polygon(transformations.poly_arc(offsetx + self.xcor - xf*self.width*self.size/2,
+                                                                 offsety - self.ycor - yf*self.height*self.size/2,
+                                                                 offsetx + self.xcor + xf*self.width*self.size/2,
+                                                                 offsety - self.ycor + yf*self.height*self.size/2,
                                                                  self.start_angle, self.end_angle,
                                                                  rotation=self.heading),
                                         fill = self.color)
@@ -443,20 +517,26 @@ class Curve(sprite.SpriteClass):
         offsety = self.canvas.winfo_reqheight()/2
         cx = offsetx + self.xcor
         cy = offsety - self.ycor
+        xf = 1
+        yf = 1
+        if self.x_flipped:
+            xf = -1
+        if self.y_flipped:
+            yf = -1
 
         x1,cx1,cx2,x2 = cx+self.x1, cx+self.cx1, cx+self.cx2, cx+self.x2
         y1,cy1,cy2,y2 = cy-self.y1, cy-self.cy1, cy-self.cy2, cy-self.y2
 
         theta = -self.heading * math.pi/180
 
-        newx1 = (math.cos(theta) * (x1-cx) - math.sin(theta) * (y1-cy))*self.size + cx
-        newy1 = (math.sin(theta) * (x1-cx) + math.cos(theta) * (y1-cy))*self.size + cy
-        newcx1 = (math.cos(theta) * (cx1-cx) - math.sin(theta) * (cy1-cy))*self.size + cx
-        newcy1 = (math.sin(theta) * (cx1-cx) + math.cos(theta) * (cy1-cy))*self.size + cy
-        newcx2 = (math.cos(theta) * (cx2-cx) - math.sin(theta) * (cy2-cy))*self.size + cx
-        newcy2 = (math.sin(theta) * (cx2-cx) + math.cos(theta) * (cy2-cy))*self.size + cy
-        newx2 = (math.cos(theta) * (x2-cx) - math.sin(theta) * (y2-cy))*self.size + cx
-        newy2 = (math.sin(theta) * (x2-cx) + math.cos(theta) * (y2-cy))*self.size + cy
+        newx1 = (math.cos(theta) * (x1-cx) - math.sin(theta) * (y1-cy))*self.size*xf + cx
+        newy1 = (math.sin(theta) * (x1-cx) + math.cos(theta) * (y1-cy))*self.size*yf + cy
+        newcx1 = (math.cos(theta) * (cx1-cx) - math.sin(theta) * (cy1-cy))*self.size*xf + cx
+        newcy1 = (math.sin(theta) * (cx1-cx) + math.cos(theta) * (cy1-cy))*self.size*yf + cy
+        newcx2 = (math.cos(theta) * (cx2-cx) - math.sin(theta) * (cy2-cy))*self.size*xf + cx
+        newcy2 = (math.sin(theta) * (cx2-cx) + math.cos(theta) * (cy2-cy))*self.size*yf + cy
+        newx2 = (math.cos(theta) * (x2-cx) - math.sin(theta) * (y2-cy))*self.size*xf + cx
+        newy2 = (math.sin(theta) * (x2-cx) + math.cos(theta) * (y2-cy))*self.size*yf + cy
 
         self.P0 = [newx1,newy1]
         self.P1 = [newcx1,newcy1]

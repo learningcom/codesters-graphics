@@ -87,6 +87,8 @@ class SpriteClass(object):
         self.y_flip_plans = []
         self.x_flipped = False
         self.y_flipped = False
+        self.future_x_flipped = False
+        self.future_y_flipped = False
         self.dilate_plans = []
         self.scale_plans = []
 
@@ -464,7 +466,7 @@ class SpriteClass(object):
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
             desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-        elif not self.x_flipped and len(self.x_flip_plans) < 1:
+        elif not self.future_x_flipped and len(self.x_flip_plans) < 1:
             desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         else:
@@ -843,6 +845,7 @@ class SpriteClass(object):
 
     # flippers
     def flip_horizontal(self):
+        self.future_x_flipped = not self.future_x_flipped
         if len(self.x_flip_plans) == 0:
             self.x_flip_plans.append(not self.x_flipped)
         else:
@@ -854,6 +857,7 @@ class SpriteClass(object):
     def flip_left_right(self):
         self.flip_horizontal()
     def flip_vertical(self):
+        self.future_y_flipped = not self.future_y_flipped
         if len(self.y_flip_plans) == 0:
             self.y_flip_plans.append(not self.y_flipped)
         else:
@@ -1013,12 +1017,28 @@ class SpriteClass(object):
         theta = degrees*math.pi/180
         x1 = math.cos(theta) * (self.xcor-x) - math.sin(theta) * (self.ycor-y) + x
         y1 = math.sin(theta) * (self.xcor-x) + math.cos(theta) * (self.ycor-y) + y
-        self.set_heading(self.heading+degrees)
+        self.set_heading(self.future_heading+degrees)
         self.go_to(x1,y1)
 
     def rotate_origin(self,degrees):
         self.rotate_about(degrees,0,0)
 
+    def reflect_x(self, x):
+        self.go_to(x - (self.future_x-x), self.future_y)
+        self.flip_left_right()
+
+    def reflect_y(self, y):
+        self.go_to(self.future_x, y - (self.future_y-y))
+        self.flip_up_down()
+
+    def reflect_x_axis(self):
+        self.reflect_y(0)
+
+    def reflect_y_axis(self):
+        self.reflect_x(0)
+
+    def get_flip(self):
+        return self.future_x_flipped != self.future_y_flipped
 
 class Sprite(SpriteClass):
 
