@@ -322,9 +322,11 @@ class SpriteClass(object):
             #print self.modes
             if self.modes[0] == "wait":
                 if len(self.wait_list)> 0:
-                    if self.wait_list[0] == 0:
+                    if isinstance(self.wait_list[0], basestring):
                         self.wait_list.pop(0)
                         self.modes.pop(0)
+                    elif self.wait_list[0] == 0:
+                        self.wait_list.pop(0)
                     else:
                         self.wait_list[0] = self.wait_list[0] - 1
             else:
@@ -389,6 +391,8 @@ class SpriteClass(object):
                         else:
                             self.size = self.scale_plans.pop(0)
                             self.update_image()
+
+
                 elif self.modes[0] == "pen":
                     if len(self.pen_plans) > 0:
                         self.pen = self.pen_plans.pop(0)
