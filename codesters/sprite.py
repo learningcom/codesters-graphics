@@ -1009,6 +1009,15 @@ class SpriteClass(object):
         self.modes.append("dilate")
         self.goto(amount * self.future_x, amount * self.future_y)
 
+    def rotate_about(self,degrees,x,y):
+        theta = degrees*math.pi/180
+        x1 = math.cos(theta) * (self.xcor-x) - math.sin(theta) * (self.ycor-y) + x
+        y1 = math.sin(theta) * (self.xcor-x) + math.cos(theta) * (self.ycor-y) + y
+        self.set_heading(self.heading+degrees)
+        self.go_to(x1,y1)
+
+    def rotate_origin(self,degrees):
+        self.rotate_about(degrees,0,0)
 
 
 class Sprite(SpriteClass):
