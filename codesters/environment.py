@@ -29,10 +29,10 @@ class StageClass(object):
 
         self.physics_true = False
 
-        self.wall_bottom_on = False
-        self.wall_top_on = False
-        self.wall_left_on = False
-        self.wall_right_on = False
+        self.wall_bottom_on = True
+        self.wall_top_on = True
+        self.wall_left_on = True
+        self.wall_right_on = True
 
         self.gravity = 0
         self.bounce = 1
@@ -62,7 +62,7 @@ class StageClass(object):
             print Manager.frame_number, self.interval_length
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
-                    print "we are hrere"
+                    #print "we are hrere"
                     self.interval_function()
         self.canvas.create_rectangle((0,0,500,500), fill='white')
         if self.bg_image != None:

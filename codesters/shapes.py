@@ -556,7 +556,7 @@ class Curve(sprite.SpriteClass):
             self.canvas.create_line(pointuple, fill = self.color)
 
 class Text(sprite.SpriteClass):
-    def __init__(self, text, x, y, color):
+    def __init__(self, text, x, y, color="black"):
         super(Text, self).__init__('', shape='text')
         self.say_text = text
         self.say_time = 10000000
