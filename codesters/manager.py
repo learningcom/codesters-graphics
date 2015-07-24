@@ -1,4 +1,4 @@
-from Tkinter import *
+from Tkinter import Tk, Canvas
 
 
 class Manager(object):

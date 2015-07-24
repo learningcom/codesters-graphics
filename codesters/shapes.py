@@ -1,4 +1,4 @@
-from Tkinter import *
+from Tkinter import Tk, Canvas
 import sprite
 import transformations
 import math
@@ -548,3 +548,16 @@ class Curve(sprite.SpriteClass):
         for i in range(len(points) - 1):
             pointuple = tuple([points[i][0],points[i][1],points[i+1][0],points[i+1][1]])
             self.canvas.create_line(pointuple, fill = self.color)
+
+class Text(sprite.SpriteClass):
+    def __init__(self, text, x, y, color):
+        super(Text, self).__init__('', shape='text')
+        self.say_text = text
+        self.say_time = 10000000
+        self.say_color = color
+        self.say_size = 12
+        self.say_font = "Purisa"
+        self.xcor = x
+        self.ycor = y
+        self.hidden = True
+

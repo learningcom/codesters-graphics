@@ -167,15 +167,17 @@ class SpriteClass(object):
             # im2.close()
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
             self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
-            if self.say_time != 0:
-                self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
-                self.say_time -= 1
         elif not self.hidden:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
+        if self.say_time != 0:
+            print 'hi'
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            if self.shape != 'text':
+                self.say_time -= 1
 
     def update_physics(self):
         prevx = self.xcor

@@ -1,4 +1,4 @@
-from Tkinter import *
+from Tkinter import Canvas
 from PIL import Image, ImageTk
 from .manager import Manager
 

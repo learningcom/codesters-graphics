@@ -1,5 +1,5 @@
 import math
-from Tkinter import *
+from Tkinter import Tk, Canvas
 from .manager import Manager
 
 
