@@ -38,6 +38,8 @@ class StageClass(object):
         self.bounce = 1
 
         self.forever_function = None
+        self.interval_function = None
+        self.interval_length = 0
 
     #### IMPORTANT FUNCTIONS ####
 
@@ -56,6 +58,12 @@ class StageClass(object):
     def draw(self):
         if self.forever_function is not None:
             self.forever_function()
+        if self.interval_length >=1:
+            print Manager.frame_number, self.interval_length
+            if Manager.frame_number % self.interval_length == 0:
+                if self.interval_function is not None:
+                    print "we are hrere"
+                    self.interval_function()
         self.canvas.create_rectangle((0,0,500,500), fill='white')
         if self.bg_image != None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
@@ -136,7 +144,8 @@ class StageClass(object):
         self.forever_function = function
 
     def event_interval(self, function, seconds):
-        pass
+        self.interval_length = seconds * 100
+        self.interval_function = function
 
     def event_delay(self, function, seconds):
         pass

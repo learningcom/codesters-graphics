@@ -3,6 +3,7 @@ import sprite
 import transformations
 import math
 import bezier
+import hitbox
 
 
 class Point(sprite.SpriteClass):
@@ -64,8 +65,13 @@ class Rectangle(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
-
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
+        self.hitbox = hitbox.Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
     def draw(self):
+        self.hitbox.update_corners()
         if not self.hidden:
             offsetx = self.canvas.winfo_reqwidth()/2
             offsety = self.canvas.winfo_reqheight()/2
@@ -558,6 +564,10 @@ class Text(sprite.SpriteClass):
         self.say_size = 12
         self.say_font = "Purisa"
         self.xcor = x
-        self.ycor = y
+        self.ycor = 0
         self.hidden = True
+        self.gravity_off()
+
+    def set_text(self, text):
+        self.say_text = text
 

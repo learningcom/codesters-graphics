@@ -54,8 +54,8 @@ class SpriteClass(object):
         self.paused = False
 
         self.gravity = 1
-        self.gravity_true = False
-        self.physics_true = False
+        self.gravity_true = True
+        self.physics_true = True
 
         self.goal = False
         self.hazard = False
@@ -143,6 +143,7 @@ class SpriteClass(object):
         self.collision_function = None
         self.collision_goal_function = None
         self.collision_hazard_function = None
+        #self.collision_on()
 
     def draw(self):
         #self.debug()
@@ -174,7 +175,7 @@ class SpriteClass(object):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            print 'hi'
+            #print 'hi'
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1

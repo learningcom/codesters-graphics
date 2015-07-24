@@ -2,7 +2,7 @@
 import sys
 import codesters
 from codesters import Manager
-
+import random
 
 if len(sys.argv) != 2:
     print 'You must supply a filename to run with the codesters library e.g. "python run.py example1.py"'

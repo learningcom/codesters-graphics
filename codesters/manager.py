@@ -11,7 +11,7 @@ class Manager(object):
     mouse_y = 0
     prev_x = 0
     prev_y = 0
-
+    frame_number = 1
     mouse_down = False
 
     def __init__(self):
@@ -32,6 +32,7 @@ class Manager(object):
     ## THE FRAME MANAGER, THE MOST IMPORTANT FUNCTION. ##
 
     def run(self):
+        Manager.frame_number += 1
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
         self.update_animation()
@@ -39,9 +40,11 @@ class Manager(object):
         self.update_collision()
         self.update_events()
         ## THIS IS THE END OF THE UPDATES FOR SPEED AND GRAVITY ##
+
         for e in self.elements:
             e.draw()
         self.canvas.update()
+
 
     ## ^ THE ABOVE FUNCTION RUNS EVERYTHING ^ ##
 
@@ -61,3 +64,4 @@ class Manager(object):
     def update_events(self):
         for e in self.elements:
             e.update_events()
+
