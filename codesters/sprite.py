@@ -1040,6 +1040,16 @@ class SpriteClass(object):
     def get_flip(self):
         return self.future_x_flipped != self.future_y_flipped
 
+    def get_fill_on(self):
+        return self.fill
+    def get_fill_off(self):
+        return not self.fill
+
+    def get_pen_up(self):
+        return not self.pen
+    def get_pen_down(self):
+        return self.pen
+
 class Sprite(SpriteClass):
 
     def __init__(self, image="", **kwargs):
