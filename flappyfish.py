@@ -14,7 +14,7 @@ gravity = 10
 flappiness = 5
 
 stage.set_background("underwater")
-sprite = codesters.Sprite("Fish_1")# FILE NAMES ARE DIFF ON THE SITE (SITE VS. LOCAL ISSUE)
+sprite = codesters.Sprite("Fish_1") # FILE NAMES ARE DIFF ON THE SITE (SITE VS. LOCAL ISSUE)
 sprite.set_size(1)
 sprite.go_to(-200, 0)
 

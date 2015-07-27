@@ -14,6 +14,8 @@ class Manager(object):
     frame_number = 1
     mouse_down = False
 
+    default_gravity = False
+
     def __init__(self):
         #Keeping here essentially global variables to get the mouse position and whether it's pressed at any given moment.
         def global_mouse(event):

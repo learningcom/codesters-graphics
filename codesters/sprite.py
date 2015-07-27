@@ -55,7 +55,8 @@ class SpriteClass(object):
         self.paused = False
 
         self.gravity = 1
-        self.gravity_true = False
+        self.gravity_override = False
+        self.gravity_true = Manager.default_gravity
         self.physics_true = True
 
         self.goal = False
@@ -651,9 +652,11 @@ class SpriteClass(object):
         self.yspeed = -newspeed
 
     def gravity_on(self):
+        self.gravity_override = True
         self.gravity_true = True
 
     def gravity_off(self):
+        self.gravity_override = True
         self.gravity_true = False
 
     def physics_on(self):

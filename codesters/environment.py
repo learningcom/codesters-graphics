@@ -36,6 +36,8 @@ class StageClass(object):
 
         self.gravity = 0
         self.bounce = 1
+        self.gravity_true = Manager.default_gravity
+        self.gravity_override = True
 
         self.forever_function = None
         self.interval_function = None
@@ -236,6 +238,11 @@ class StageClass(object):
 
     def set_gravity(self, amount):
         self.gravity = amount
+        for e in Manager.elements:
+            if not e.gravity_override:
+                e.gravity_true = True
+                e.gravity = amount/10.0
+        Manager.default_gravity = True
 
 
 class Environment(StageClass):
