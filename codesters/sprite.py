@@ -169,14 +169,14 @@ class SpriteClass(object):
         prevx = self.xcor
         prevy = self.ycor
         self.xcor += self.xspeed
-        self.ycor -= self.yspeed
+        self.ycor += self.yspeed
         for i in range(len(self.animation_x_coords)):
             if not isinstance(self.animation_x_coords[i],basestring):
                 self.animation_x_coords[i] += self.xspeed
             if not isinstance(self.animation_y_coords[i],basestring):
-                self.animation_y_coords[i] -= self.yspeed
+                self.animation_y_coords[i] += self.yspeed
         if self.gravity_true:
-            self.yspeed += self.gravity
+            self.yspeed -= self.gravity
 
         if  self.pen:
             newline = []
@@ -637,7 +637,7 @@ class SpriteClass(object):
     # Physics
 
     def jump(self, newspeed):
-        self.yspeed = -newspeed
+        self.yspeed = newspeed
 
     def gravity_on(self):
         self.gravity_override = True

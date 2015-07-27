@@ -186,12 +186,12 @@ class StageClass(object):
         self.canvas.update()
 
     def click_x(self, event):
-        #print "x coord", event.x
-        return event.x-250
+        # print "x coord", event.x
+        return event.x - (self.canvas.winfo_reqwidth()/2)
 
     def click_y(self, event):
-        #print "y coord", event.y
-        return (event.y*-1)+250
+        # print "y coord", event.y
+        return (self.canvas.winfo_reqheight()/2) - event.y
 
 
 

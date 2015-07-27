@@ -48,7 +48,8 @@ def click_up(self): # ADDED SELF (PYTHON VS. JS ISSUE)
     ball.set_gravity_on()
     new_velx = ball.get_x() - stage.click_x(self)# ADDED SELF (PYTHON VS. JS ISSUE)
     #BIG PROBLEM, SOMETHING INTRINSICALLY WRONG WITH OUR COORDINATE SYSTEM.
-    new_vely = -ball.get_y()+ stage.click_y(self)# ADDED SELF (PYTHON VS. JS ISSUE)
+    new_vely = ball.get_y() - stage.click_y(self)
+    print ball.get_y(), stage.click_y(self), new_vely
 
     ball.set_x_speed(new_velx/5)
     ball.set_y_speed(new_vely/5)
