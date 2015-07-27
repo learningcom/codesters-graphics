@@ -294,7 +294,6 @@ class SpriteClass(object):
                     return True
         return False
 
-
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
         if self.x_flipped:
@@ -989,11 +988,8 @@ class SpriteClass(object):
         self.fill_toggle()
         self.fill_toggle()
 
-
     def get_color(self):
         return self.color
-
-
 
     def debug(self):
         self.hitbox.draw()
