@@ -4,7 +4,9 @@ from .manager import Manager
 
 
 class StageClass(object):
+    image_dictionary = {
 
+    }
     def __init__(self):
         self.root = Manager.canvas
         self.canvas = Manager.canvas
