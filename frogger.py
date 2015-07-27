@@ -97,7 +97,7 @@ result = codesters.Text(" ", 0, 0, "red")
 global result  # GLOBALS
 
 # detecting what was collided with by color / shape seems like the easiest way
-def collision(sprite, hit_sprite):
+def collision(sprite, hit_sprite): # COLLISIONS MARK REALLY WEIRDLY IN THIS PROJECT. TRYING TO FIGURE THAT OUT.
     # if frogger hits a lilypad
     if hit_sprite.get_name() == "circle":
         print frogger.xcor, ', ', sprite.xcor, ',', hit_sprite.xcor  # FOR BUG TESTING

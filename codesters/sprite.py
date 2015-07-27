@@ -19,7 +19,7 @@ class SpriteClass(object):
         self.xspeed = 0
         self.yspeed = 0
         self.speed = 1
-        self.modes=[]
+        self.modes = []
         self.size = 1
         self.color = 'black'
         self.heading = 0
@@ -36,7 +36,7 @@ class SpriteClass(object):
         self.animation_y_coords = []
         self.animation_rotation_degrees = []
         self.animation_index = 0
-        self.rotation_direction=1
+        self.rotation_direction = 1
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.angle = 0
@@ -145,29 +145,13 @@ class SpriteClass(object):
         self.collision_function = None
         self.collision_goal_function = None
         self.collision_hazard_function = None
-        #self.collision_on()
+        # self.collision_on()
 
     def draw(self):
-        #self.debug()
+        # self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and self.hidden == False:
-            # im2 = self.photo.convert('RGBA')
-            # self.photo.close()
-            # rot = im2.rotate(self.heading, expand=1)
-            # fff =  Image.new("RGBA", rot.size, (0,)*4)
-            # self.photo = Image.composite(rot,fff,rot)
-            # rot.close()
-            # fff.close()
-            # im2.close()
-            #  im2 = self.photo.convert('RGBA')
-            # self.photo.close()
-            # rot = im2.rotate(self.heading, expand=1)
-            # fff =  Image.new("RGBA", rot.size, (0,)*4)
-            # self.photo = Image.composite(rot,fff,rot)
-            # rot.close()
-            # fff.close()
-            # im2.close()
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
             self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
         elif not self.hidden:
@@ -229,7 +213,7 @@ class SpriteClass(object):
 
         if Manager.stage.wall_right_on:
             if right > self.canvas.winfo_reqwidth()/2:
-                self.xcor  = self.canvas.winfo_reqwidth()/2 - tempwidth/2
+                self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
@@ -252,6 +236,10 @@ class SpriteClass(object):
                                 else:
                                     self.collision_hazard_function()
                             elif self.collision_function is not None:
+                                print ",,,,,,,,,,,"
+                                e.get_name()
+                                self.get_name()
+                                print "```````````"
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
                                 else:
@@ -310,17 +298,17 @@ class SpriteClass(object):
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
         if self.x_flipped:
-            im2=im2.transpose(Image.FLIP_LEFT_RIGHT)
+            im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
         if self.y_flipped:
-            im2=im2.transpose(Image.FLIP_TOP_BOTTOM)
-        #self.base_photo.close()
+            im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
+        # self.base_photo.close()
         if self.opacity < 255:
             im2.putalpha(self.opacity)
         scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
         rot = scale.rotate(self.heading, expand=1)
         fff = Image.new("RGBA", rot.size, (0,)*4)
-        self.photo = Image.composite(rot,fff,rot)
-        #self.photo.save("check.gif")
+        self.photo = Image.composite(rot, fff, rot)
+        # self.photo.save("check.gif")
 
     def update_animation(self):
         if isinstance(self.future_x, basestring):
@@ -549,7 +537,7 @@ class SpriteClass(object):
 
     def set_direction(self, tox, toy):
         if tox - self.future_x == 0:
-            tox = tox + 0.000001
+            tox += 0.000001
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
@@ -1063,10 +1051,3 @@ class Sprite(SpriteClass):
             super(Sprite, self).__init__(image, x, y, shape = kwargs['shape'])
         else:
             super(Sprite, self).__init__(image, x, y)
-'''
-    def __init__(self, image="", x=0, y=0, **kwargs):
-        if 'shape' in kwargs:
-            super(Sprite, self).__init__(image, x = kwargs['x'], y = kwargs['y'], shape = kwargs['shape'])
-        else:
-            super(Sprite, self).__init__(image)
-'''
