@@ -94,6 +94,7 @@ stage.event_key("right", right_key)
 
 stage.disable_all_walls()
 
+
 result = codesters.Text(" ", 0, 0, "red")
 global result #GLOBALS
 

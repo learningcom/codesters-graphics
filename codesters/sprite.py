@@ -2,6 +2,7 @@ import math
 from PIL import Image, ImageTk
 from .manager import Manager
 from .hitbox import Hitbox
+import inspect
 
 class SpriteClass(object):
 
@@ -54,7 +55,7 @@ class SpriteClass(object):
         self.paused = False
 
         self.gravity = 1
-        self.gravity_true = False
+        self.gravity_true = True
         self.physics_true = True
 
         self.goal = False
@@ -175,7 +176,6 @@ class SpriteClass(object):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            #print 'hi'
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
@@ -239,14 +239,22 @@ class SpriteClass(object):
                 if isinstance(e, SpriteClass):
                     # e.collision_function
                     if e.collision:
-                        #print self.check_two_sprites_for_collision(e)
                         if self.check_two_sprites_for_collision(e):
                             if e.goal and self.collision_goal_function is not None:
-                                self.collision_goal_function(self,e)
+                                if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
+                                    self.collision_goal_function(self, e)
+                                else:
+                                    self.collision_goal_function()
                             elif e.hazard and self.collision_hazard_function is not None:
-                                self.collision_hazard_function(self,e)
+                                if len(inspect.getargspec(self.collision_hazard_function)[0]) == 2:
+                                    self.collision_hazard_function(self, e)
+                                else:
+                                    self.collision_hazard_function()
                             elif self.collision_function is not None:
-                                self.collision_function(self,e)
+                                if len(inspect.getargspec(self.collision_function)[0]) == 2:
+                                    self.collision_function(self, e)
+                                else:
+                                    self.collision_function()
 
     def update_events(self):
 
@@ -282,15 +290,9 @@ class SpriteClass(object):
         sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
         sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
         sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
-        #print this_left, sprite_right
-        #print this_right, sprite_left
-        #print self.xcor, sprite.xcor
-        #print self.hitbox.top_left
         if this_top > sprite_bottom and this_bottom < sprite_top:
 
             if this_right > sprite_left and this_left < sprite_right:
-                #print this_top, this_bottom, this_left, this_right
-                #print sprite_top, sprite_bottom, sprite_left, sprite_right
                 if self != sprite:
                     print this_top, sprite_bottom
                     print this_bottom, sprite_top
@@ -309,7 +311,6 @@ class SpriteClass(object):
             im2=im2.transpose(Image.FLIP_TOP_BOTTOM)
         #self.base_photo.close()
         if self.opacity < 255:
-            # print self.opacity
             im2.putalpha(self.opacity)
         scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
         rot = scale.rotate(self.heading, expand=1)
@@ -322,9 +323,7 @@ class SpriteClass(object):
             self.future_x = self.xcor
         if isinstance(self.future_y, basestring):
             self.future_y = self.ycor
-        #print self.future_x, "yao"
         if len(self.modes) > 0 and not self.paused:
-            #print self.modes
             if self.modes[0] == "wait":
                 if len(self.wait_list)> 0:
                     if isinstance(self.wait_list[0], basestring):
@@ -373,13 +372,11 @@ class SpriteClass(object):
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
                             #self.debug()
-                            # print self.heading, "HEADING"
                             self.update_image()
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
                         state = self.x_flip_plans.pop(0)
                         self.x_flipped = not self.x_flipped
-                        # print self.x_flipped
                         self.update_image()
                         self.modes.pop(0)
                 elif self.modes[0] == "yflip":
@@ -420,7 +417,6 @@ class SpriteClass(object):
                         self.modes.pop(0)
                         if state and not self.fill:
                             color = self.fill_color_var
-                            # print color
                             self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
                         self.fill = state
                 elif self.modes[0] == "fill_color":
@@ -445,6 +441,7 @@ class SpriteClass(object):
         self.hitbox.printCorners()
 
     ## END OF PIVOTAL FUNCTIONS ##
+        ## I thought rotate_about() wasn't until later? ##
 
     def hide(self):
         self.hidden=True
@@ -526,7 +523,6 @@ class SpriteClass(object):
         self.go_to(newx, newy)
 
     def glide_to(self, newx, newy):
-        # print self.future_x, " ", self.future_y
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
@@ -542,12 +538,9 @@ class SpriteClass(object):
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
-            # print self.animation_x_coords, self.animation_y_coords
-        # print self.future_x, " ", self.future_y
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")
-        # print '###########'
 
     def set_direction(self, tox, toy):
         if tox == 0:
@@ -579,7 +572,6 @@ class SpriteClass(object):
             self.animation_rotation_degrees.append(self.step_size+(self.step_size*n)+self.future_heading)
         self.animation_rotation_degrees[-1] = destination
         self.animation_rotation_degrees.append("Finished current animation")
-        # print self.animation_rotation_degrees
         self.modes.append("rotate")
         self.future_heading = destination
 
@@ -612,7 +604,6 @@ class SpriteClass(object):
         self.modes.append("wait")
         self.wait_list.append(seconds*10)
         self.wait_list.append("Finished current animation")
-        #print self.wait_list
         self.total_wait_time += seconds
         self.future_most_recent_wait_time = seconds
 
@@ -852,7 +843,6 @@ class SpriteClass(object):
         if len(self.x_flip_plans) == 0:
             self.x_flip_plans.append(not self.x_flipped)
         else:
-            #print len(self.x_flip_plans), self.x_flip_plans, "helpppp"
             self.x_flip_plans.append(not self.x_flip_plans[-1])
         self.modes.append("xflip")
     def flip_right_left(self):

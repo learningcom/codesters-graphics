@@ -562,12 +562,30 @@ class Text(sprite.SpriteClass):
         self.say_time = 10000000
         self.say_color = color
         self.say_size = 12
-        self.say_font = "Purisa"
+        self.say_font = "Helvetica"
         self.xcor = x
-        self.ycor = 0
+        self.ycor = y
         self.hidden = True
         self.gravity_off()
+        self.collision_off()
 
     def set_text(self, text):
         self.say_text = text
 
+    def draw(self):
+        if self.forever_function is not None:
+            self.forever_function()
+        if self.photo is not None and self.hidden == False:
+            self.bg_photoimg = ImageTk.PhotoImage(self.photo)
+            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
+        elif not self.hidden:
+            self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
+        for p in self.polygons:
+            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+        for l in self.lines:
+            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+        if self.say_time != 0:
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor,
+                                    text=self.say_text, font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
