@@ -5,6 +5,9 @@ from .hitbox import Hitbox
 import inspect
 
 class SpriteClass(object):
+    image_dictionary = {
+
+    }
 
     ## PIVOTAL FUNCTIONS ##
     def __init__(self, image,x,y, **kwargs):
@@ -110,6 +113,7 @@ class SpriteClass(object):
         self.polygons = []
 
         if image != '':
+
             self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
             self.photo = Image.open("./codesters/sprites/"+image+".gif")
             im2 = self.photo.convert('RGBA')
