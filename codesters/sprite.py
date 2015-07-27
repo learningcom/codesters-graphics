@@ -37,8 +37,8 @@ class SpriteClass(object):
         self.animation_rotation_degrees = []
         self.animation_index = 0
         self.rotation_direction=1
-        self.future_x = x
-        self.future_y = y
+        self.future_x = self.xcor
+        self.future_y = self.ycor
         self.angle = 0
         self.step_size = 0
 
@@ -55,7 +55,7 @@ class SpriteClass(object):
         self.paused = False
 
         self.gravity = 1
-        self.gravity_true = True
+        self.gravity_true = False
         self.physics_true = True
 
         self.goal = False
@@ -294,11 +294,14 @@ class SpriteClass(object):
 
             if this_right > sprite_left and this_left < sprite_right:
                 if self != sprite:
+                    '''
+                    print self, sprite
                     print this_top, sprite_bottom
                     print this_bottom, sprite_top
                     print this_right, sprite_left
                     print this_left , sprite_right
                     print "$$ COLLIDING $$"
+                    '''
                     return True
         return False
 
@@ -417,7 +420,8 @@ class SpriteClass(object):
                         self.modes.pop(0)
                         if state and not self.fill:
                             color = self.fill_color_var
-                            self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor, self.canvas.winfo_reqheight()/2 - self.ycor], color])
+                            self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor,
+                                                   self.canvas.winfo_reqheight()/2 - self.ycor], color])
                         self.fill = state
                 elif self.modes[0] == "fill_color":
                     if len(self.fill_color_plans) > 0:
@@ -433,7 +437,7 @@ class SpriteClass(object):
                 elif self.modes[0] == "dilate":
                     if len(self.dilate_plans) > 0:
                         self.set_size(self.dilate_plans[0])
-                        self.xcor=self.future_x*self.dilate_plans[0]
+                        self.xcor = self.future_x * self.dilate_plans[0]
                         self.dilate_plans.pop(0)
                         self.modes.pop(0)
 
@@ -543,8 +547,8 @@ class SpriteClass(object):
         self.modes.append("translate")
 
     def set_direction(self, tox, toy):
-        if tox == 0:
-            tox = .000001
+        if tox - self.future_x == 0:
+            tox = tox + 0.000001
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
@@ -613,7 +617,7 @@ class SpriteClass(object):
     def get_total_wait_time(self):
         return self.total_wait_time
 
-    def say(self, text,seconds=-1,color="#000000", size=12, font="Purisa"):
+    def say(self, text, seconds=-1, color="#000000", size=12, font="Purisa"):
         self.say_text = text
         self.say_time = seconds
         self.say_color = color

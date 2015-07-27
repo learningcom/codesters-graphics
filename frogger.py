@@ -10,9 +10,7 @@ mid_ground = codesters.Rectangle(0, 0, 500, 25, "darkgreen")
 
 end_ground = codesters.Rectangle(0, 240, 500, 25, "darkgreen")
 
-
-
-global frogger #GLOBALS
+global frogger  # GLOBALS
 frogger = codesters.Sprite("turtle", 0, -250)
 frogger.set_size(.4)
 
@@ -22,11 +20,11 @@ frogger.set_size(.4)
 
 for counter in range(-200, 0, 50):
     road = codesters.Rectangle(0, counter, 500, 20, "gray")
-    road.set_opacity(.2) #IS OPACITY STILL NOT WORKING?
+    road.set_opacity(.2)  # IS OPACITY STILL NOT WORKING?
 
 for counter in range(50, 250, 50):
     pond = codesters.Rectangle(0, counter, 500, 20, "blue")
-    pond.set_opacity(.2) #IS OPACITY STILL NOT WORKING?
+    pond.set_opacity(.2)  # IS OPACITY STILL NOT WORKING?
 
 global make_lilypad
 def make_lilypad():
@@ -72,22 +70,22 @@ def interval():
         make_lilypad()
 stage.event_interval(interval, 1)
 
-def up_key(event): #EVENT
+def up_key(event):  # EVENT
     frogger.set_y(frogger.get_y() + 50)
     # add other actions...
 stage.event_key("up", up_key)
 
-def down_key(event): #EVENT
+def down_key(event):  # EVENT
     frogger.set_y(frogger.get_y() - 50)
     # add other actions...
 stage.event_key("down", down_key)
 
-def left_key(event): #EVENT
+def left_key(event):  # EVENT
     frogger.set_x(frogger.get_x() - 50)
     # add other actions...
 stage.event_key("left", left_key)
 
-def right_key(event): #EVENT
+def right_key(event):  # EVENT
     frogger.set_x(frogger.get_x() + 50)
     # add other actions...
 stage.event_key("right", right_key)
@@ -96,12 +94,16 @@ stage.disable_all_walls()
 
 
 result = codesters.Text(" ", 0, 0, "red")
-global result #GLOBALS
+global result  # GLOBALS
 
 # detecting what was collided with by color / shape seems like the easiest way
 def collision(sprite, hit_sprite):
     # if frogger hits a lilypad
     if hit_sprite.get_name() == "circle":
+        print frogger.xcor, ', ', sprite.xcor, ',', hit_sprite.xcor  # FOR BUG TESTING
+        print frogger.ycor, ', ', sprite.ycor, ',', hit_sprite.ycor  # FOR BUG TESTING
+        print frogger.future_x, ', ', sprite.future_x, ',', hit_sprite.future_x  # FOR BUG TESTING
+        print frogger.future_y, ', ', sprite.future_y, ',', hit_sprite.future_y  # FOR BUG TESTING
         frogger.glide_to(hit_sprite.get_x(), hit_sprite.get_y())
         frogger.set_x_speed(hit_sprite.get_x_speed())
     # if frogger hits a car
@@ -121,4 +123,3 @@ def collision(sprite, hit_sprite):
         result.set_text("GAME OVER!")
         frogger.reset_animation()
 frogger.event_collision(collision)
-

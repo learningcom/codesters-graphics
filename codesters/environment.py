@@ -59,7 +59,7 @@ class StageClass(object):
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >=1:
-            print Manager.frame_number, self.interval_length
+            #print Manager.frame_number, self.interval_length
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
                     #print "we are hrere"
