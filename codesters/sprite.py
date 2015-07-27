@@ -6,15 +6,15 @@ from .hitbox import Hitbox
 class SpriteClass(object):
 
     ## PIVOTAL FUNCTIONS ##
-    def __init__(self, image, **kwargs):
+    def __init__(self, image,x,y, **kwargs):
         self.canvas = Manager.canvas
         Manager.elements.append(self)
 
         # Default values
         self.type = Sprite
 
-        self.xcor = 0
-        self.ycor = 0
+        self.xcor = x
+        self.ycor = y
         self.xspeed = 0
         self.yspeed = 0
         self.speed = 1
@@ -36,8 +36,8 @@ class SpriteClass(object):
         self.animation_rotation_degrees = []
         self.animation_index = 0
         self.rotation_direction=1
-        self.future_x = 0
-        self.future_y = 0
+        self.future_x = x
+        self.future_y = y
         self.angle = 0
         self.step_size = 0
 
@@ -54,12 +54,12 @@ class SpriteClass(object):
         self.paused = False
 
         self.gravity = 1
-        self.gravity_true = True
+        self.gravity_true = False
         self.physics_true = True
 
         self.goal = False
         self.hazard = False
-        self.collision = False
+        self.collision = True
         self.drag = False
         self.key = False
 
@@ -241,12 +241,12 @@ class SpriteClass(object):
                     if e.collision:
                         #print self.check_two_sprites_for_collision(e)
                         if self.check_two_sprites_for_collision(e):
-                            if self.goal and e.collision_goal_function is not None:
-                                e.collision_goal_function()
-                            elif self.hazard and e.collision_hazard_function is not None:
-                                e.collision_hazard_function()
-                            elif e.collision_function is not None:
-                                e.collision_function()
+                            if e.goal and self.collision_goal_function is not None:
+                                self.collision_goal_function(self,e)
+                            elif e.hazard and self.collision_hazard_function is not None:
+                                self.collision_hazard_function(self,e)
+                            elif self.collision_function is not None:
+                                self.collision_function(self,e)
 
     def update_events(self):
 
@@ -1005,6 +1005,8 @@ class SpriteClass(object):
         self.fill_toggle()
 
 
+    def get_color(self):
+        return self.color
 
 
 
@@ -1055,8 +1057,19 @@ class SpriteClass(object):
 
 class Sprite(SpriteClass):
 
-    def __init__(self, image="", **kwargs):
+    def __init__(self, image="", x=0, y=0, **kwargs):
+        if not isinstance(image, basestring):
+            y = x
+            x = image
+            image = ''
         if 'shape' in kwargs:
-            super(Sprite, self).__init__(image, shape = kwargs['shape'])
+            super(Sprite, self).__init__(image, x, y, shape = kwargs['shape'])
+        else:
+            super(Sprite, self).__init__(image, x, y)
+'''
+    def __init__(self, image="", x=0, y=0, **kwargs):
+        if 'shape' in kwargs:
+            super(Sprite, self).__init__(image, x = kwargs['x'], y = kwargs['y'], shape = kwargs['shape'])
         else:
             super(Sprite, self).__init__(image)
+'''
