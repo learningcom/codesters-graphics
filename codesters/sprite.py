@@ -28,6 +28,30 @@ class SpriteClass(object):
         "athlete2":"athlete2",
         "astronaut1":"astronaut",
         "astronaut2":"astronaut2",
+        "snowman":"Snowman",
+        "ufo":"UFO",
+        "spaceship":"Shuttle",
+        "rocket":"Rocket",
+        "knight1":"female-knight",
+        "knight2":"knight",
+        "wizard":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "dragon":"dragon",
+        "treasurechest":"treasurechest",
+        "cow":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "toucan":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "parrot":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "monkey":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "panther":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "snake":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "pig":"",#CANNOT FIND THIS IMAGE IN SPRITES
+        "fox":"Fox",
+        "dog":"dog",
+        "cat":"Cat",
+        "kitten":"kitten",
+        "penguin":"penguin",
+        "hedgehog":"Hedgehog",
+        "butterfly":"Butterfly",
+        "dinosaur":"Dinosaur",
         "fish1":"Fish_1",
     }
 
