@@ -19,7 +19,15 @@ class SpriteClass(object):
         "person10":"", #CANNOT FIND THIS IMAGE IN SPRITES
         "person11":"", #CANNOT FIND THIS IMAGE IN SPRITES
         "person12":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        
+        "princess":"Princess",
+        "princess2":"Princess2",
+        "prince":"Prince",
+        "superhero1":"superhero1",
+        "superhero2":"superhero2",
+        "athlete1":"athlete1",
+        "athlete2":"athlete2",
+        "astronaut1":"astronaut",
+        "astronaut2":"astronaut2",
         "fish1":"Fish_1",
     }
 
