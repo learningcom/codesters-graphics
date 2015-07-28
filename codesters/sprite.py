@@ -286,7 +286,6 @@ class SpriteClass(object):
         sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
         sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
         if this_top > sprite_bottom and this_bottom < sprite_top:
-
             if this_right > sprite_left and this_left < sprite_right:
                 if self != sprite:
                     '''
@@ -516,6 +515,7 @@ class SpriteClass(object):
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
+        print "hello"
 
     def goto(self, newx, newy):
         self.go_to(newx, newy)
