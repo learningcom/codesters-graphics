@@ -6,12 +6,19 @@ import inspect
 
 class SpriteClass(object):
     image_dictionary = {
-
+        "":"codestersLogo",
         "person1":"Character2",
         "person2":"Character1",
         "person3":"", #CANNOT FIND THIS IMAGE IN SPRITES
         "person4":"Character4",
         "person5":"Character6",
+        "person6":"teenager",
+        "person7":"teenager2",
+        "person8":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "person9":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "person10":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "person11":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "person12":"", #CANNOT FIND THIS IMAGE IN SPRITES
         
         "fish1":"Fish_1",
     }
