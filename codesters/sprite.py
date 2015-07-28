@@ -52,6 +52,18 @@ class SpriteClass(object):
         "hedgehog":"Hedgehog",
         "butterfly":"Butterfly",
         "dinosaur":"Dinosaur",
+        "bubbles":"Bubbles",
+        "flowers":"Flowers",
+        "flower2":"Flower2",
+        "flower3":"flower3",
+        "flower4":"Flower4",
+        "pinetree1":"PineTree1",
+        "pinetree2":"PineTree2",
+        "pinetree3":"PineTree3",
+        "pinetree4":"PineTree4",
+        "pinetree5":"PineTree5",
+        "pinetree6":"PineTree6",
+        "pinetree7":"PineTree7",
         "fish1":"Fish_1",
     }
 
