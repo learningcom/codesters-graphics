@@ -174,6 +174,8 @@ class SpriteClass(object):
         prevy = self.ycor
         self.xcor += self.xspeed
         self.ycor += self.yspeed
+        self.future_x += self.xspeed
+        self.future_y += self.yspeed
         for i in range(len(self.animation_x_coords)):
             if not isinstance(self.animation_x_coords[i],basestring):
                 self.animation_x_coords[i] += self.xspeed
@@ -529,14 +531,14 @@ class SpriteClass(object):
         y_step_size = ydist/frames_needed
         tempx = self.future_x
         tempy = self.future_y
-        self.future_x = newx
-        self.future_y = newy
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")
+        self.future_x = newx
+        self.future_y = newy
 
     def set_direction(self, tox, toy):
         if tox - self.future_x == 0:

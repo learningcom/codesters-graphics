@@ -72,21 +72,29 @@ stage.event_interval(interval, 1)
 
 def up_key(event):  # EVENT
     frogger.set_y(frogger.get_y() + 50)
+    print frogger.ycor, frogger.future_y, frogger.get_y()
+    print frogger.animation_y_coords
     # add other actions...
 stage.event_key("up", up_key)
 
 def down_key(event):  # EVENT
     frogger.set_y(frogger.get_y() - 50)
+    print frogger.ycor, frogger.future_y, frogger.get_y()
+    print frogger.animation_y_coords
     # add other actions...
 stage.event_key("down", down_key)
 
 def left_key(event):  # EVENT
     frogger.set_x(frogger.get_x() - 50)
+    print frogger.xcor, frogger.future_x, frogger.get_x()
+    print frogger.animation_x_coords
     # add other actions...
 stage.event_key("left", left_key)
 
 def right_key(event):  # EVENT
     frogger.set_x(frogger.get_x() + 50)
+    print frogger.xcor, frogger.future_x, frogger.get_x()
+    print frogger.animation_x_coords
     # add other actions...
 stage.event_key("right", right_key)
 
