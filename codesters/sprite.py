@@ -7,6 +7,13 @@ import inspect
 class SpriteClass(object):
     image_dictionary = {
 
+        "person1":"Character2",
+        "person2":"Character1",
+        "person3":"", #CANNOT FIND THIS IMAGE IN SPRITES
+        "person4":"Character4",
+        "person5":"Character6",
+        
+        "fish1":"Fish_1",
     }
 
     ## PIVOTAL FUNCTIONS ##
@@ -113,9 +120,9 @@ class SpriteClass(object):
         self.polygons = []
 
         if image != '':
-
-            self.base_photo = Image.open("./codesters/sprites/"+image+".gif")
-            self.photo = Image.open("./codesters/sprites/"+image+".gif")
+            self.filename = self.image_dictionary[image]
+            self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+            self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
             im2 = self.photo.convert('RGBA')
             rot = im2.rotate(self.heading, expand=1)
             fff =  Image.new("RGBA", rot.size, (0,)*4)
