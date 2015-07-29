@@ -152,7 +152,7 @@ class StageClass(object):
 
     def event_click(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
@@ -164,7 +164,7 @@ class StageClass(object):
 
     def event_click_up(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
@@ -217,13 +217,13 @@ class StageClass(object):
         self.bg_scale_y = amount
         self.canvas.update()
 
-    def click_x(self, event):
+    def click_x(self):
         # print "x coord", event.x
-        return event.x - (self.canvas.winfo_reqwidth()/2)
+        return self.event.x - (self.canvas.winfo_reqwidth()/2)
 
-    def click_y(self, event):
+    def click_y(self):
         # print "y coord", event.y
-        return (self.canvas.winfo_reqheight()/2) - event.y
+        return (self.canvas.winfo_reqheight()/2) - self.event.y
 
 
 
