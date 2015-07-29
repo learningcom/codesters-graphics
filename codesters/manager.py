@@ -47,7 +47,6 @@ class Manager(object):
             e.draw()
         self.canvas.update()
 
-
     ## ^ THE ABOVE FUNCTION RUNS EVERYTHING ^ ##
 
     def update_physics(self):
