@@ -64,7 +64,14 @@ class SpriteClass(object):
         "pinetree5":"PineTree5",
         "pinetree6":"PineTree6",
         "pinetree7":"PineTree7",
+        "shark":"shark",
+        "shark2":"shark2",
+        "turtle":"swimmingturtleSingle",
+        "turtle2":"turtle2",
         "fish1":"Fish_1",
+        "fish2":"fish2",
+        "fish3":"Fish_3",
+        
     }
 
     ## PIVOTAL FUNCTIONS ##
