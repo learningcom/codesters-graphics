@@ -196,14 +196,12 @@ class SpriteClass(object):
         self.shape = ''
         if kwargs.get('shape') != None:
             self.shape = kwargs.get('shape')
-            self.height = self.size * 50
-            self.width =  self.size * 50
             self.name = self.shape
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -217,7 +215,6 @@ class SpriteClass(object):
         # self.collision_on()
 
     def draw(self):
-        # self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and self.hidden == False:
@@ -307,10 +304,12 @@ class SpriteClass(object):
                                 else:
                                     self.collision_hazard_function()
                             elif self.collision_function is not None:
+
                                 print ",,,,,,,,,,,"
                                 e.get_name()
                                 self.get_name()
                                 print "```````````"
+
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
                                 else:
@@ -465,6 +464,7 @@ class SpriteClass(object):
                         self.pen_color_var = self.pen_color_plans.pop(0)
                         self.modes.pop(0)
                 elif self.modes[0] == "pen_size":
+                    print "pen size"
                     if len(self.pen_size_plans) > 0:
                         self.pen_size_var = self.pen_size_plans.pop(0)
                         self.modes.pop(0)
@@ -580,7 +580,6 @@ class SpriteClass(object):
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
-        print "hello"
 
     def goto(self, newx, newy):
         self.go_to(newx, newy)

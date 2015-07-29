@@ -11,8 +11,9 @@ mid_ground = codesters.Rectangle(0, 0, 500, 25, "darkgreen")
 end_ground = codesters.Rectangle(0, 240, 500, 25, "darkgreen")
 
 global frogger  # GLOBALS
-frogger = codesters.Sprite("turtle", 0, -250)
-frogger.set_size(.4)
+frogger = codesters.Sprite("", 0, -250)
+frogger.set_size(0.5)
+print frogger.modes
 
 
 # barrier = codesters.Line(-220, 248, -220, -248, "black")
@@ -72,29 +73,33 @@ stage.event_interval(interval, 1)
 
 def up_key(event):  # EVENT
     frogger.set_y(frogger.get_y() + 50)
-    print frogger.ycor, frogger.future_y, frogger.get_y()
-    print frogger.animation_y_coords
+    print frogger.xcor, frogger.future_x
+    print frogger.ycor, frogger.future_y
+    frogger.print_corners()
     # add other actions...
 stage.event_key("up", up_key)
 
 def down_key(event):  # EVENT
     frogger.set_y(frogger.get_y() - 50)
-    print frogger.ycor, frogger.future_y, frogger.get_y()
-    print frogger.animation_y_coords
+    print frogger.xcor, frogger.future_x
+    print frogger.ycor, frogger.future_y
+    frogger.print_corners()
     # add other actions...
 stage.event_key("down", down_key)
 
 def left_key(event):  # EVENT
     frogger.set_x(frogger.get_x() - 50)
-    print frogger.xcor, frogger.future_x, frogger.get_x()
-    print frogger.animation_x_coords
+    print frogger.xcor, frogger.future_x
+    print frogger.ycor, frogger.future_y
+    frogger.print_corners()
     # add other actions...
 stage.event_key("left", left_key)
 
 def right_key(event):  # EVENT
     frogger.set_x(frogger.get_x() + 50)
-    print frogger.xcor, frogger.future_x, frogger.get_x()
-    print frogger.animation_x_coords
+    print frogger.xcor, frogger.future_x
+    print frogger.ycor, frogger.future_y
+    frogger.print_corners()
     # add other actions...
 stage.event_key("right", right_key)
 
@@ -106,17 +111,19 @@ global result  # GLOBALS
 
 # detecting what was collided with by color / shape seems like the easiest way
 def collision(sprite, hit_sprite): # COLLISIONS MARK REALLY WEIRDLY IN THIS PROJECT. TRYING TO FIGURE THAT OUT.
-    print '############'
-    hit_sprite.get_name()
-    print '############'
+    # print '############'
+    # hit_sprite.get_name()
+    # print '############'
     # if frogger hits a lilypad
     if hit_sprite.get_name() == "circle":
         sprite.debug()
         hit_sprite.debug()
+        '''
         print frogger.xcor, ', ', sprite.xcor, ',', hit_sprite.xcor  # FOR BUG TESTING
         print frogger.ycor, ', ', sprite.ycor, ',', hit_sprite.ycor  # FOR BUG TESTING
         print frogger.future_x, ', ', sprite.future_x, ',', hit_sprite.future_x  # FOR BUG TESTING
         print frogger.future_y, ', ', sprite.future_y, ',', hit_sprite.future_y  # FOR BUG TESTING
+        '''
         frogger.glide_to(hit_sprite.get_x(), hit_sprite.get_y())
         frogger.set_x_speed(hit_sprite.get_x_speed())
     # if frogger hits a car
