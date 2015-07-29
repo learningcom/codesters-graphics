@@ -104,37 +104,37 @@ class StageClass(object):
 
     def event_left_key(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Left>", newfunction,add="+")
 
     def event_right_key(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Right>", newfunction,add="+")
 
     def event_up_key(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Up>", newfunction,add="+")
 
     def event_down_key(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Down>", newfunction,add="+")
 
     def event_space_key(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<space>", newfunction, add="+")
 
     def event_key(self, key, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         bound_key_name = key
         if key == "left":
@@ -158,7 +158,7 @@ class StageClass(object):
 
     def event_click_down(self, function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.event_click(newfunction,add="+")
 
@@ -170,7 +170,7 @@ class StageClass(object):
 
     def event_mouse_move(self,function):
         def newfunction(event):
-            print event
+            self.event = event
             function()
         self.canvas.bind("<Motion>", newfunction, add="+")
 

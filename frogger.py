@@ -71,7 +71,7 @@ def interval():
         make_lilypad()
 stage.event_interval(interval, 1)
 
-def up_key(event):  # EVENT
+def up_key():
     frogger.set_y(frogger.get_y() + 50)
     print frogger.xcor, frogger.future_x
     print frogger.ycor, frogger.future_y
@@ -79,7 +79,7 @@ def up_key(event):  # EVENT
     # add other actions...
 stage.event_key("up", up_key)
 
-def down_key(event):  # EVENT
+def down_key():  # EVENT
     frogger.set_y(frogger.get_y() - 50)
     print frogger.xcor, frogger.future_x
     print frogger.ycor, frogger.future_y
@@ -87,7 +87,7 @@ def down_key(event):  # EVENT
     # add other actions...
 stage.event_key("down", down_key)
 
-def left_key(event):  # EVENT
+def left_key():  # EVENT
     frogger.set_x(frogger.get_x() - 50)
     print frogger.xcor, frogger.future_x
     print frogger.ycor, frogger.future_y
@@ -95,7 +95,7 @@ def left_key(event):  # EVENT
     # add other actions...
 stage.event_key("left", left_key)
 
-def right_key(event):  # EVENT
+def right_key():  # EVENT
     frogger.set_x(frogger.get_x() + 50)
     print frogger.xcor, frogger.future_x
     print frogger.ycor, frogger.future_y
