@@ -15,7 +15,7 @@ flappiness = 5
 
 stage.set_background("Underwater-BG")
 sprite = codesters.Sprite("pinetree7") # FILE NAMES ARE DIFF ON THE SITE (SITE VS. LOCAL ISSUE)
-sprite.set_size(1)
+sprite.set_size(0.5)
 sprite.go_to(-200, 0)
 
 stage.set_gravity(gravity)
@@ -37,6 +37,8 @@ sprite.collision_on() # NEED TO CHANGE DEFAULT COLLISION TO ON, CAUSING PROBLEMS
 floor = codesters.Rectangle(0, -240, 500, 20, "black")
 floor.set_gravity_off()
 floor.collision_on() # NEED TO CHANGE DEFAULT COLLISION TO ON
+
+
 
 pipe_list = []
 def interval():

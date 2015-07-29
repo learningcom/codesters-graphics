@@ -70,7 +70,6 @@ class Circle(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         self.pen_clear()
         self.debug()
         if self.forever_function is not None:
@@ -102,11 +101,6 @@ class Rectangle(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
-        self.base_top_left = [-self.width/2, self.height/2]
-        self.base_top_right = [self.width/2, self.height/2]
-        self.base_bottom_right = [self.width/2, -self.height/2]
-        self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
 
         self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -120,7 +114,6 @@ class Rectangle(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -169,7 +162,6 @@ class Square(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -217,7 +209,6 @@ class Triangle(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -274,7 +265,6 @@ class Ellipse(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -325,7 +315,6 @@ class Line(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -376,7 +365,6 @@ class Star(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -424,7 +412,6 @@ class TriangleIso(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -480,7 +467,6 @@ class TriangleRight(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -515,6 +501,8 @@ class TriangleRight(sprite.SpriteClass):
 
 class Triangle3Pts(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, x3, y3, color):
+        x = (x1 + x2 + x3)/3
+        y = (y1 + y2 + y3)/3
         super(Triangle3Pts, self).__init__('',x,y, shape='triangle3pts')
         self.xcor = (x1 + x2 + x3)/3
         self.ycor = (y1 + y2 + y3)/3
@@ -542,7 +530,6 @@ class Triangle3Pts(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -580,6 +567,8 @@ class Triangle3Pts(sprite.SpriteClass):
 
 class Quad(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color):
+        x = (x1 + x2 + x3 + x4)/4
+        y = (y1 + y2 + y3 + x4)/4
         super(Quad, self).__init__('',x,y, shape='quad')
         self.xcor = (x1 + x2 + x3 + x4)/4
         self.ycor = (y1 + y2 + y3 + x4)/4
@@ -609,7 +598,6 @@ class Quad(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -672,7 +660,6 @@ class Polygon(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -726,7 +713,6 @@ class Arc(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.hitbox.update_corners()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
