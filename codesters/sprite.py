@@ -210,7 +210,8 @@ class SpriteClass(object):
         # self.collision_on()
 
     def draw(self):
-        # self.debug()
+        self.pen_clear()
+        self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and self.hidden == False:
@@ -300,10 +301,12 @@ class SpriteClass(object):
                                 else:
                                     self.collision_hazard_function()
                             elif self.collision_function is not None:
+                                '''
                                 print ",,,,,,,,,,,"
                                 e.get_name()
                                 self.get_name()
                                 print "```````````"
+                                '''
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
                                 else:
