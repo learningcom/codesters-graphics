@@ -12,7 +12,7 @@ end_ground = codesters.Rectangle(0, 240, 500, 25, "darkgreen")
 
 global frogger  # GLOBALS
 frogger = codesters.Sprite("", 0, -250)
-frogger.set_size(0.8)
+frogger.set_size(0.5)
 print frogger.modes
 
 
