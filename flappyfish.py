@@ -15,7 +15,7 @@ flappiness = 5
 
 stage.set_background("Underwater-BG")
 sprite = codesters.Sprite("pinetree7") # FILE NAMES ARE DIFF ON THE SITE (SITE VS. LOCAL ISSUE)
-sprite.set_size(0.5)
+sprite.set_size(0.2)
 sprite.go_to(-200, 0)
 
 stage.set_gravity(gravity)

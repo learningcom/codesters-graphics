@@ -16,10 +16,10 @@ class Point(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -58,10 +58,10 @@ class Circle(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -102,10 +102,10 @@ class Rectangle(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -150,10 +150,10 @@ class Square(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -197,10 +197,10 @@ class Triangle(sprite.SpriteClass):
         self.side = side
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -253,10 +253,10 @@ class Ellipse(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -303,10 +303,10 @@ class Line(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -353,10 +353,10 @@ class Star(sprite.SpriteClass):
         self.height = diam
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -400,10 +400,10 @@ class TriangleIso(sprite.SpriteClass):
         self.height = height
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -455,10 +455,10 @@ class TriangleRight(sprite.SpriteClass):
         self.height = height
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -518,10 +518,10 @@ class Triangle3Pts(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -586,10 +586,10 @@ class Quad(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -648,10 +648,10 @@ class Polygon(sprite.SpriteClass):
         self.height = diam
         self.color = color
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
@@ -701,10 +701,10 @@ class Arc(sprite.SpriteClass):
         self.start_angle = start
         self.end_angle = end
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]

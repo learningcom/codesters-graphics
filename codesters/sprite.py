@@ -191,10 +191,10 @@ class SpriteClass(object):
             self.shape = kwargs.get('shape')
             self.name = self.shape
 
-        self.base_top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
-        self.base_top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
-        self.base_bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
-        self.base_bottom_left = [self.xcor-self.width/2, self.ycor-self.height/2]
+        self.base_top_left = [-self.width/2, self.height/2]
+        self.base_top_right = [self.width/2, self.height/2]
+        self.base_bottom_right = [self.width/2, -self.height/2]
+        self.base_bottom_left = [-self.width/2, -self.height/2]
         self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
