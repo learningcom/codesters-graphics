@@ -26,12 +26,12 @@ game_over = False
 
 score_display = codesters.Text("Flappy Points: ", 0, 200, "yellow")
 
-def space(self): # ADDED SELF (JS VS PYTHON ISSUE)
+def a(): # ADDED SELF (JS VS PYTHON ISSUE)
     global sprite # ADDED GLOBALS
     global flappiness # ADDED GLOBALS
     sprite.jump(flappiness)
     # add other actions...
-stage.event_space_key(space)
+stage.event_click_up(a)
 sprite.collision_on() # NEED TO CHANGE DEFAULT COLLISION TO ON, CAUSING PROBLEMS THOUGH
 
 floor = codesters.Rectangle(0, -240, 500, 20, "black")

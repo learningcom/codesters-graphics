@@ -103,21 +103,39 @@ class StageClass(object):
 
 
     def event_left_key(self, function):
-        self.canvas.bind("<Left>", function,add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Left>", newfunction,add="+")
 
     def event_right_key(self, function):
-        self.canvas.bind("<Right>", function,add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Right>", newfunction,add="+")
 
     def event_up_key(self, function):
-        self.canvas.bind("<Up>", function,add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Up>", newfunction,add="+")
 
     def event_down_key(self, function):
-        self.canvas.bind("<Down>", function,add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Down>", newfunction,add="+")
 
     def event_space_key(self, function):
-        self.canvas.bind("<space>", function, add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<space>", newfunction, add="+")
 
     def event_key(self, key, function):
+        def newfunction(event):
+            print event
+            function()
         bound_key_name = key
         if key == "left":
             bound_key_name = "<Left>"
@@ -130,19 +148,31 @@ class StageClass(object):
         if key == "space":
             bound_key_name = "<space>"
         print bound_key_name
-        self.canvas.bind(bound_key_name, function, add = "+")
+        self.canvas.bind(bound_key_name, newfunction, add = "+")
 
     def event_click(self, function):
-        self.canvas.bind("<Button-1>", function, add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_down(self, function):
-        self.event_click(function,add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.event_click(newfunction,add="+")
 
     def event_click_up(self, function):
-        self.canvas.bind("<ButtonRelease-1>", function, add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
     def event_mouse_move(self,function):
-        self.canvas.bind("<Motion>", function, add="+")
+        def newfunction(event):
+            print event
+            function()
+        self.canvas.bind("<Motion>", newfunction, add="+")
 
     def event_forever(self,function):
         self.forever_function = function
