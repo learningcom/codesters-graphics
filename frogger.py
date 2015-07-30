@@ -116,8 +116,6 @@ def collision(sprite, hit_sprite): # COLLISIONS MARK REALLY WEIRDLY IN THIS PROJ
     # print '############'
     # if frogger hits a lilypad
     if hit_sprite.get_name() == "circle":
-        sprite.debug()
-        hit_sprite.debug()
         '''
         print frogger.xcor, ', ', sprite.xcor, ',', hit_sprite.xcor  # FOR BUG TESTING
         print frogger.ycor, ', ', sprite.ycor, ',', hit_sprite.ycor  # FOR BUG TESTING

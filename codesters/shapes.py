@@ -70,8 +70,8 @@ class Circle(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        self.pen_clear()
-        self.debug()
+        # self.pen_clear()
+        # self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
