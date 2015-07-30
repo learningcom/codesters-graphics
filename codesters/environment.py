@@ -230,10 +230,6 @@ class StageClass(object):
     def mouse_y(self):
         return Manager.mouse_y
 
-
-
-
-
     def enable_floor(self):
         self.wall_bottom_on = True
 

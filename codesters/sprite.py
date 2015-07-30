@@ -314,10 +314,12 @@ class SpriteClass(object):
                                 else:
                                     self.collision_hazard_function()
                             elif self.collision_function is not None:
+                                '''
                                 print ",,,,,,,,,,,"
                                 e.get_name()
                                 self.get_name()
                                 print "```````````"
+                                '''
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
                                 else:

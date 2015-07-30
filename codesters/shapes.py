@@ -827,10 +827,7 @@ class Text(sprite.SpriteClass):
     def draw(self):
         if self.forever_function is not None:
             self.forever_function()
-        if self.photo is not None and self.hidden == False:
-            self.bg_photoimg = ImageTk.PhotoImage(self.photo)
-            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
-        elif not self.hidden:
+        if not self.hidden:
             self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
