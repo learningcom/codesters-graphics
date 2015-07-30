@@ -818,8 +818,7 @@ class SpriteClass(object):
         self.modes.append("translate")
         self.future_x = newx
     def set_position(self, to_x, to_y):
-        self.set_x(to_x)
-        self.set_y(to_y)
+        self.go_to(to_x, to_y)
     def set_rotation(self, rot):
         self.animation_rotation_degrees.append(rot)
         self.modes.append("rotate")

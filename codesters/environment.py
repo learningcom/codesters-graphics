@@ -225,6 +225,11 @@ class StageClass(object):
         # print "y coord", event.y
         return (self.canvas.winfo_reqheight()/2) - self.event.y
 
+    def mouse_x(self):
+        return Manager.mouse_x
+    def mouse_y(self):
+        return Manager.mouse_y
+
 
 
 
