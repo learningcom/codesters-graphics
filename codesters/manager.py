@@ -12,7 +12,6 @@ class Manager(object):
 
     default_gravity = False
 
-    wait_time = 0
 
     def __init__(self):
         #Keeping here essentially global variables to get the mouse position and whether it's pressed at any given moment.
@@ -29,13 +28,10 @@ class Manager(object):
         Manager.frame_number += 1
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
-        if Manager.wait_time <= 0:
-            self.update_animation()
-            self.update_physics()
-            self.update_collision()
-            self.update_events()
-        else:
-            Manager.wait_time -= 1
+        self.update_animation()
+        self.update_physics()
+        self.update_collision()
+        self.update_events()
         ## THIS IS THE END OF THE UPDATES FOR SPEED AND GRAVITY ##
 
         for e in self.elements:

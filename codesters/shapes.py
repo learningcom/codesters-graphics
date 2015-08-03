@@ -22,6 +22,9 @@ class Point(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -69,6 +72,9 @@ class Circle(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -118,6 +124,9 @@ class Rectangle(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -172,6 +181,9 @@ class Square(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -223,6 +235,9 @@ class Triangle(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -286,6 +301,9 @@ class Ellipse(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -335,6 +353,9 @@ class Line(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -391,6 +412,9 @@ class Star(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -442,6 +466,9 @@ class TriangleIso(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -503,6 +530,9 @@ class TriangleRight(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -572,6 +602,9 @@ class Triangle3Pts(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -646,6 +679,9 @@ class Quad(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -713,6 +749,9 @@ class Polygon(sprite.SpriteClass):
         if self.outline == None:
             self.outline = color
 
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -768,6 +807,10 @@ class Arc(sprite.SpriteClass):
             self.color = ''
         if self.outline == None:
             self.outline = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
+
         self.start_angle = start
         self.end_angle = end
 
@@ -826,6 +869,9 @@ class Curve(sprite.SpriteClass):
         self.P2 = [cx + cx2, cy - cy2]
         self.P3 = [cx + x2, cy - y2]
         self.color = color
+
+        self.pen_color_var = self.color
+        self.fill_color_var = self.pen_color_var
 
     def draw(self):
         offsetx = self.canvas.winfo_reqwidth()/2

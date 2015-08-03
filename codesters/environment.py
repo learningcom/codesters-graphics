@@ -13,6 +13,8 @@ class StageClass(object):
         Manager.elements.append(self)
         Manager.stage = self
 
+        self.type = Environment
+
         self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
 
         self.xcor = 0
@@ -279,7 +281,9 @@ class StageClass(object):
 
 
     def wait(self, seconds):
-        Manager.wait_time = seconds*10
+        for e in Manager.elements:
+            if e.type != Environment:
+                e.wait(seconds)
 
 
 class Environment(StageClass):

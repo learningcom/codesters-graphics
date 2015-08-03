@@ -1,7 +1,8 @@
 import codesters
+global stage
 stage = codesters.Environment()
 
-global stage, sprite, colors, block_width
+global sprite, colors, block_width, announcer, words, word
 
 
 words = ["boat", "tiger", "flower", "bee", "tshirt", "smiley face", "horse", "cat", "dog", "fish", "book", "nose", "mouth", "eyes"]

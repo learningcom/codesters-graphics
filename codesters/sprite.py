@@ -172,7 +172,7 @@ class SpriteClass(object):
         self.scale_plans = []
 
         self.pen = False
-        self.pen_color_var = "green"
+        self.pen_color_var = self.color
         self.pen_size_var = 1
         self.lines = []
 
@@ -688,7 +688,7 @@ class SpriteClass(object):
     def get_total_wait_time(self):
         return self.total_wait_time
 
-    def say(self, text, seconds=-1, color="#000000", size=12, font="Purisa"):
+    def say(self, text, seconds=-1, color="#000000", size=12, font="Helvetica"):
         self.say_text = text
         self.say_time = seconds
         self.say_color = color
@@ -1056,7 +1056,7 @@ class SpriteClass(object):
 
     def set_color(self, newcolor):
         self.color = newcolor
-        self.pen_color(newcolor)
+        self.pen_color_var = newcolor
 
     def pen_color(self, newcolor):
         self.pen_color_plans.append(newcolor)
