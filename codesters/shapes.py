@@ -7,7 +7,7 @@ from .hitbox import Hitbox
 
 
 class Point(sprite.SpriteClass):
-    def __init__(self,x,y, size = 5, color = 'black'):
+    def __init__(self,x,y, size = 5, color = 'black', outline = None):
         super(Point, self).__init__('',x,y, shape = 'point')
         self.width = size
         self.height = size
@@ -16,6 +16,11 @@ class Point(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -36,7 +41,8 @@ class Point(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            self.canvas.create_oval(xc - self.width/2, yc - self.height/2, xc + self.width/2, yc + self.height/2, fill = self.color)
+            self.canvas.create_oval(xc - self.width/2, yc - self.height/2, xc + self.width/2, yc + self.height/2,
+                                    fill = self.color, outline = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -48,16 +54,21 @@ class Point(sprite.SpriteClass):
 
 
 class Circle(sprite.SpriteClass):
-    def __init__(self, x, y, diam, color):
+    def __init__(self, x, y, diam, color, outline = None):
         super(Circle, self).__init__('',x,y, shape='circle')
         self.diam = diam
         self.width = diam
         self.height = diam
         self.xcor = x
         self.ycor = y
-        self.color = color
         self.future_x = self.xcor
         self.future_y = self.ycor
+        self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -81,7 +92,7 @@ class Circle(sprite.SpriteClass):
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
             self.canvas.create_polygon(transformations.poly_circle(xc, yc, self.size*self.diam/2),
-                                        fill = self.color)
+                                        fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -93,7 +104,7 @@ class Circle(sprite.SpriteClass):
 
 
 class Rectangle(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color = 'black', outline = None):
         super(Rectangle, self).__init__('',x,y, shape='rectangle')
         self.width = width
         self.height = height
@@ -102,6 +113,11 @@ class Rectangle(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -129,7 +145,7 @@ class Rectangle(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
             self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.width*self.size, yf*self.height*self.size, self.heading),
-                                       fill = self.color)
+                                       fill = self.color, outline=self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -141,7 +157,7 @@ class Rectangle(sprite.SpriteClass):
 
 
 class Square(sprite.SpriteClass):
-    def __init__(self, x, y, side, color):
+    def __init__(self, x, y, side, color, outline = None):
         super(Square, self).__init__('',x,y, shape='square')
         self.width = side
         self.height = side
@@ -150,6 +166,11 @@ class Square(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -177,7 +198,7 @@ class Square(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
             self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.heading),
-                                       fill = self.color)
+                                       fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -189,7 +210,7 @@ class Square(sprite.SpriteClass):
 
 
 class Triangle(sprite.SpriteClass):
-    def __init__(self, x, y, side, color):
+    def __init__(self, x, y, side, color, outline = None):
         super(Triangle, self).__init__('',x,y, shape='triangle')
         self.xcor = x
         self.ycor = y
@@ -197,6 +218,11 @@ class Triangle(sprite.SpriteClass):
         self.future_y = self.ycor
         self.side = side
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -232,7 +258,8 @@ class Triangle(sprite.SpriteClass):
             y3 = math.sin(330 * math.pi / 180) * -yf*self.side*self.size/math.sqrt(3) + cy
 
             points = [x1,y1,x2,y2,x3,y3]
-            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
+            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
+                                       fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -244,7 +271,7 @@ class Triangle(sprite.SpriteClass):
 
 
 class Ellipse(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color, outline = None):
         super(Ellipse, self).__init__('',x,y, shape='ellipse')
         self.width = width
         self.height = height
@@ -253,6 +280,11 @@ class Ellipse(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -282,7 +314,7 @@ class Ellipse(sprite.SpriteClass):
                                                                  offsetx + self.xcor + xf*self.width*self.size/2,
                                                                  offsety - self.ycor +yf*self.height*self.size/2,
                                                                  rotation=self.heading),
-                                        fill = self.color)
+                                        fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -343,7 +375,7 @@ class Line(sprite.SpriteClass):
                 self.say_time -= 1
 
 class Star(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color):
+    def __init__(self, x, y, num_points, diam, color, outline = None):
         super(Star, self).__init__('',x,y, shape='star')
         self.xcor = x
         self.ycor = y
@@ -353,6 +385,11 @@ class Star(sprite.SpriteClass):
         self.width = diam
         self.height = diam
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -380,7 +417,7 @@ class Star(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
             self.canvas.create_polygon(transformations.poly_star(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.num_points, self.heading),
-                                       fill=self.color)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -391,7 +428,7 @@ class Star(sprite.SpriteClass):
                 self.say_time -= 1
 
 class TriangleIso(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color, outline = None):
         super(TriangleIso, self).__init__('',x,y, shape='triangleiso')
         self.xcor = x
         self.ycor = y
@@ -400,6 +437,11 @@ class TriangleIso(sprite.SpriteClass):
         self.width = width
         self.height = height
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -435,7 +477,8 @@ class TriangleIso(sprite.SpriteClass):
             y3 = cy + yf*self.size*self.height/2
 
             points = [x1,y1,x2,y2,x3,y3]
-            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
+            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
+                                       fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -446,7 +489,7 @@ class TriangleIso(sprite.SpriteClass):
                 self.say_time -= 1
 
 class TriangleRight(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color, outline = None):
         super(TriangleRight, self).__init__('',x,y, shape='triangleright')
         self.xcor = x
         self.ycor = y
@@ -455,6 +498,11 @@ class TriangleRight(sprite.SpriteClass):
         self.width = width
         self.height = height
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -490,7 +538,8 @@ class TriangleRight(sprite.SpriteClass):
             y3 = cy - yf*self.size*self.height/2
 
             points = [x1,y1,x2,y2,x3,y3]
-            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading), fill = self.color)
+            self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
+                                       fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -501,7 +550,7 @@ class TriangleRight(sprite.SpriteClass):
                 self.say_time -= 1
 
 class Triangle3Pts(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, color):
+    def __init__(self, x1, y1, x2, y2, x3, y3, color, outline = None):
         x = (x1 + x2 + x3)/3
         y = (y1 + y2 + y3)/3
         super(Triangle3Pts, self).__init__('',x,y, shape='triangle3pts')
@@ -518,6 +567,11 @@ class Triangle3Pts(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -555,7 +609,7 @@ class Triangle3Pts(sprite.SpriteClass):
             points[3] = offsety - self.size*point_tuple[3]
             points[4] = offsetx + self.size*point_tuple[4]
             points[5] = offsety - self.size*point_tuple[5]
-            self.canvas.create_polygon(tuple(points), fill = self.color)
+            self.canvas.create_polygon(tuple(points), fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -567,7 +621,7 @@ class Triangle3Pts(sprite.SpriteClass):
 
 
 class Quad(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color):
+    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color, outline = None):
         x = (x1 + x2 + x3 + x4)/4
         y = (y1 + y2 + y3 + x4)/4
         super(Quad, self).__init__('',x,y, shape='quad')
@@ -586,6 +640,11 @@ class Quad(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -626,7 +685,7 @@ class Quad(sprite.SpriteClass):
             points[5] = offsety - self.size*point_tuple[5]
             points[6] = offsetx + self.size*point_tuple[6]
             points[7] = offsety - self.size*point_tuple[7]
-            self.canvas.create_polygon(tuple(points), fill=self.color)
+            self.canvas.create_polygon(tuple(points), fill=self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
@@ -638,7 +697,7 @@ class Quad(sprite.SpriteClass):
 
 
 class Polygon(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color):
+    def __init__(self, x, y, num_points, diam, color, outline = None):
         super(Polygon, self).__init__('',x,y, shape='polygon')
         self.xcor = x
         self.ycor = y
@@ -648,6 +707,11 @@ class Polygon(sprite.SpriteClass):
         self.width = diam
         self.height = diam
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -678,7 +742,7 @@ class Polygon(sprite.SpriteClass):
             self.canvas.create_polygon(transformations.poly_oval(points[0],points[1],points[2],points[3],
                                                                  steps = self.num_points,
                                                                  rotation = self.heading),
-                                       fill=self.color)
+                                       fill=self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
@@ -690,7 +754,7 @@ class Polygon(sprite.SpriteClass):
 
 
 class Arc(sprite.SpriteClass):
-    def __init__(self, x, y, diam, start, end, color):
+    def __init__(self, x, y, diam, start, end, color, outline = None):
         super(Arc, self).__init__('',x,y, shape='arc')
         self.width = diam
         self.height = diam
@@ -699,6 +763,11 @@ class Arc(sprite.SpriteClass):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.color = color
+        self.outline = outline
+        if self.color == None:
+            self.color = ''
+        if self.outline == None:
+            self.outline = color
         self.start_angle = start
         self.end_angle = end
 
@@ -731,7 +800,7 @@ class Arc(sprite.SpriteClass):
                                                                  offsety - self.ycor + yf*self.height*self.size/2,
                                                                  self.start_angle, self.end_angle,
                                                                  rotation=self.heading),
-                                        fill = self.color)
+                                        fill = self.color, outline = self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
