@@ -226,9 +226,9 @@ class StageClass(object):
         return (self.canvas.winfo_reqheight()/2) - self.event.y
 
     def mouse_x(self):
-        return Manager.mouse_x
+        return (self.canvas.winfo_pointerx() - self.canvas.winfo_rootx()) - self.canvas.winfo_reqwidth()/2
     def mouse_y(self):
-        return Manager.mouse_y
+        return self.canvas.winfo_reqheight()/2 - (self.canvas.winfo_pointery() - self.canvas.winfo_rooty())
 
     def enable_floor(self):
         self.wall_bottom_on = True

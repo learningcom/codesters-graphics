@@ -151,8 +151,8 @@ class SpriteClass(object):
             right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
             bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
             left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-            ex = Manager.mouse_x
-            ey = Manager.mouse_y
+            ex = self.canvas.winfo_pointerx()
+            ey = self.canvas.winfo_pointery()
             if ex < right and ex > left and ey < top and ey > bottom:
                 self.have_clicked = True
         def release_sprite(event):
@@ -333,8 +333,8 @@ class SpriteClass(object):
                 right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
                 bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
                 left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-                ex = Manager.mouse_x
-                ey = Manager.mouse_y
+                ex = self.canvas.winfo_pointerx()
+                ey = self.canvas.winfo_pointery()
                 if ex < right and ex > left and ey < top and ey > bottom:
                     changex = ex - self.xcor
                     changey = ey - self.ycor
@@ -582,14 +582,17 @@ class SpriteClass(object):
 
     # More complex motion
     def go_to(self, newx, newy):
-        self.animation_x_coords.append(newx)
-        self.animation_x_coords.append("Finished current animation")
-        self.animation_y_coords.append(newy)
-        self.animation_y_coords.append("Finished current animation")
+        if len(self.animation_x_coords) > 1:
+            self.animation_x_coords[-2] = newx
+            self.animation_y_coords[-2] = newy
+        else:
+            self.animation_x_coords.append(newx)
+            self.animation_y_coords.append(newy)
+            self.animation_x_coords.append("Finished current animation")
+            self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
-        print "hello"
 
     def goto(self, newx, newy):
         self.go_to(newx, newy)
