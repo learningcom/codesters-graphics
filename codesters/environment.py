@@ -278,6 +278,10 @@ class StageClass(object):
         Manager.default_gravity = True
 
 
+    def wait(self, seconds):
+        Manager.wait_time = seconds*10
+
+
 class Environment(StageClass):
     def __init__(self):
         super(Environment, self).__init__()

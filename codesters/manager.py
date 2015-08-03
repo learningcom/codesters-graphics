@@ -7,25 +7,15 @@ class Manager(object):
     elements = []
     stage = None
 
-    mouse_x = 0
-    mouse_y = 0
-    prev_x = 0
-    prev_y = 0
     frame_number = 1
     mouse_down = False
 
     default_gravity = False
 
+    wait_time = 0
+
     def __init__(self):
         #Keeping here essentially global variables to get the mouse position and whether it's pressed at any given moment.
-        '''
-        def global_mouse(event):
-            Manager.prev_x, Manager.prev_y = Manager.mouse_x, Manager.mouse_y
-            Manager.mouse_x, Manager.mouse_y = event.x - Manager.canvas.winfo_reqwidth()/2, Manager.canvas.winfo_reqheight()/2 - event.y
-            #print " MOUSE LOCS", Manager.mouse_x, Manager.mouse_y
-        Manager.canvas.bind('<Motion>', global_mouse, add="+")
-        '''
-
         def mouse_press(event):
             Manager.mouse_down = True
         def mouse_release(event):
@@ -39,10 +29,13 @@ class Manager(object):
         Manager.frame_number += 1
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
-        self.update_animation()
-        self.update_physics()
-        self.update_collision()
-        self.update_events()
+        if Manager.wait_time <= 0:
+            self.update_animation()
+            self.update_physics()
+            self.update_collision()
+            self.update_events()
+        else:
+            Manager.wait_time -= 1
         ## THIS IS THE END OF THE UPDATES FOR SPEED AND GRAVITY ##
 
         for e in self.elements:

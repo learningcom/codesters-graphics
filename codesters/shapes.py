@@ -7,14 +7,15 @@ from .hitbox import Hitbox
 
 
 class Point(sprite.SpriteClass):
-    def __init__(self,x,y):
+    def __init__(self,x,y, size = 5, color = 'black'):
         super(Point, self).__init__('',x,y, shape = 'point')
-        self.width = 5
-        self.height = 5
+        self.width = size
+        self.height = size
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
         self.future_y = self.ycor
+        self.color = color
 
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
@@ -35,7 +36,7 @@ class Point(sprite.SpriteClass):
             offsety = self.canvas.winfo_reqheight()/2
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
-            self.canvas.create_oval(xc - 5, yc - 5, xc + 5, yc + 5, fill = self.color)
+            self.canvas.create_oval(xc - self.width/2, yc - self.height/2, xc + self.width/2, yc + self.height/2, fill = self.color)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill = p[1])
         for l in self.lines:
