@@ -237,6 +237,7 @@ class SpriteClass(object):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
+            print self.say_text
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
             self.say_time -= 1
 
@@ -388,9 +389,6 @@ class SpriteClass(object):
         # self.photo.save("check.gif")
 
     def update_animation(self):
-        print '##############################'
-        print self.modes
-        print '##############################'
         if isinstance(self.future_x, basestring):
             self.future_x = self.xcor
         if isinstance(self.future_y, basestring):
@@ -698,6 +696,7 @@ class SpriteClass(object):
         self.say_color = color
         self.say_size = size
         self.say_font = font
+        print self.say_text, self.say_time
 
     def ask(self, text):
         return raw_input(text)
