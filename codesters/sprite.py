@@ -238,8 +238,7 @@ class SpriteClass(object):
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
     def update_physics(self):
         prevx = self.xcor
@@ -389,6 +388,9 @@ class SpriteClass(object):
         # self.photo.save("check.gif")
 
     def update_animation(self):
+        print '##############################'
+        print self.modes
+        print '##############################'
         if isinstance(self.future_x, basestring):
             self.future_x = self.xcor
         if isinstance(self.future_y, basestring):
@@ -433,6 +435,8 @@ class SpriteClass(object):
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
                             #self.debug()
+                    else:
+                        self.modes.pop(0)
                 elif self.modes[0] == "rotate":
                     if len(self.animation_rotation_degrees)>0 :
                         if isinstance(self.animation_rotation_degrees[0],basestring):
@@ -590,7 +594,7 @@ class SpriteClass(object):
             self.animation_y_coords.append(newy)
             self.animation_x_coords.append("Finished current animation")
             self.animation_y_coords.append("Finished current animation")
-        self.modes.append("translate")
+            self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
 
