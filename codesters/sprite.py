@@ -127,7 +127,10 @@ class SpriteClass(object):
         "coat":"jacket",
         "fleecehat":"hat",
         "bike":"bike",
-        
+        "bench":"bench",
+        "slide":"slide",
+        "sink":"sink",
+        "shower":"shower"
         
     }
 
