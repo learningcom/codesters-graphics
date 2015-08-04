@@ -91,6 +91,27 @@ class SpriteClass(object):
         "present6":"present_6",
         "present7":"present_7",
         "present8":"present_8",
+        "paper":"Paper",
+        "codesters":"codestersLogo",
+        "purpleguy":"purpleGuy",
+        "robot":"robot",
+        "enemy":"enemy",
+        "microphone":"microphone",
+        "dice1":"Dice5",
+        "dice2":"dice2",
+        "dice3":"dice1",
+        "dice4":"dice3",
+        "dice5":"dice4",
+        "dice6":"dice7",
+        "heads":"codesterscoinheads",
+        "tails":"codesterscointails",
+        "coin":"codesterscoinsmall",
+        "scissors":"scissors",
+        "rock":"rock",
+        "earth":"earth",
+        "recyclingbin":"recyclingbin",
+        "trashcan":"trashbin",
+        
         
     }
 
