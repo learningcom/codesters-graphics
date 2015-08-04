@@ -80,6 +80,17 @@ class SpriteClass(object):
         "basketball":"basketball",
         "net":"hoop",
         "backboard":"backboard",
+        "snowflake1":"snowflake1",
+        "snowflake2":"snowflake2",
+        "snowflake3":"snowflake3",
+        "present1":"present1",
+        "present2":"present2",
+        "present3":"present3",
+        "present4":"present4",
+        "present5":"present_5",
+        "present6":"present_6",
+        "present7":"present_7",
+        "present8":"present_8",
         
     }
 
