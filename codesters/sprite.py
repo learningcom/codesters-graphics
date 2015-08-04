@@ -111,6 +111,22 @@ class SpriteClass(object):
         "earth":"earth",
         "recyclingbin":"recyclingbin",
         "trashcan":"trashbin",
+        "garbage":"garbage",
+        "pollution":"pollution",
+        "applecore":"applecore",
+        "fishbones":"fishskeleton",
+        "sodacan":"sodacan",
+        "steelcan":"can",
+        "waterbottle":"waterbottle",
+        "milkjug":"milkjug",
+        "plasticbag":"plasticbag",
+        "toothbrush":"toothbrush",
+        "jeans":"jeans",
+        "tshirt":"tshirt2",
+        "sweater":"sweater",
+        "coat":"jacket",
+        "fleecehat":"hat",
+        "bike":"bike",
         
         
     }
