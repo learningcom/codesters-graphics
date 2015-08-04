@@ -128,6 +128,7 @@ class SpriteClass(object):
         self.say_size = 0
         self.say_time = 0
         self.say_font = ""
+        self.say_plans = []
 
         self.paused = False
 
@@ -237,7 +238,6 @@ class SpriteClass(object):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            print self.say_text
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
             self.say_time -= 1
 
@@ -314,12 +314,6 @@ class SpriteClass(object):
                                 else:
                                     self.collision_hazard_function()
                             elif self.collision_function is not None:
-                                '''
-                                print ",,,,,,,,,,,"
-                                e.get_name()
-                                self.get_name()
-                                print "```````````"
-                                '''
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
                                 else:
@@ -460,7 +454,7 @@ class SpriteClass(object):
                 elif self.modes[0] == "scale":
                     if len(self.scale_plans) > 0:
                         if isinstance(self.scale_plans[0],basestring):
-                            print self.modes.pop(0)
+                            self.modes.pop(0)
                             self.scale_plans.pop(0)
                         else:
                             self.size = self.scale_plans.pop(0)
@@ -508,7 +502,17 @@ class SpriteClass(object):
                         self.set_size(self.dilate_plans[0])
                         self.xcor = self.future_x * self.dilate_plans[0]
                         self.dilate_plans.pop(0)
-                        self.modes.pop(0)
+                    self.modes.pop(0)
+
+                elif self.modes[0] == "say":
+                    if len(self.say_plans) > 0:
+                        self.say_text = self.say_plans[0][0]
+                        self.say_time = self.say_plans[0][1]
+                        self.say_color = self.say_plans[0][2]
+                        self.say_size = self.say_plans[0][3]
+                        self.say_font = self.say_plans[0][4]
+                        self.say_plans.pop(0)
+                    self.modes.pop(0)
 
     def print_corners(self):
         self.hitbox.printCorners()
@@ -691,12 +695,13 @@ class SpriteClass(object):
         return self.total_wait_time
 
     def say(self, text, seconds=-1, color="#000000", size=12, font="Helvetica"):
-        self.say_text = text
-        self.say_time = seconds
-        self.say_color = color
-        self.say_size = size
-        self.say_font = font
-        print self.say_text, self.say_time
+        #self.say_text = text
+        #self.say_time = seconds
+        #self.say_color = color
+        #self.say_size = size
+        #self.say_font = font
+        self.modes.append('say')
+        self.say_plans.append([text,seconds,color,size,font])
 
     def ask(self, text):
         return raw_input(text)
