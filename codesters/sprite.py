@@ -952,19 +952,29 @@ class SpriteClass(object):
     ##### EVENTS #####
 
     def event_left_key(self, function):
-        self.canvas.bind("<Left>", function)
+        def f(event):
+            function()
+        self.canvas.bind("<Left>", f)
 
     def event_right_key(self, function):
-        self.canvas.bind("<Right>", function)
+        def f(event):
+            function()
+        self.canvas.bind("<Right>", f)
 
     def event_up_key(self, function):
-        self.canvas.bind("<Up>", function)
+        def f(event):
+            function()
+        self.canvas.bind("<Up>", f)
 
     def event_down_key(self, function):
-        self.canvas.bind("<Down>", function)
+        def f(event):
+            function()
+        self.canvas.bind("<Down>", f)
 
     def event_space_key(self, function):
-        self.canvas.bind("<space>", function)
+        def f(event):
+            function()
+        self.canvas.bind("<space>", f)
 
     def event_key(self, key, function):
         newkey = key
