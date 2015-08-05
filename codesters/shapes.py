@@ -4,6 +4,8 @@ import transformations
 import math
 import bezier
 from .hitbox import Hitbox
+import inspect
+import re
 
 
 class Point(sprite.SpriteClass):
@@ -954,3 +956,49 @@ class Text(sprite.SpriteClass):
                                     self.canvas.winfo_reqheight()/2 - self.ycor,
                                     text=self.say_text, font=(self.say_font,self.say_size),
                                     fill=self.say_color)
+
+class Display(sprite.SpriteClass):
+    def __init__(self, var, x=-200, y=200):
+        super(Display, self).__init__('',x,y, shape="display")
+
+        frame = inspect.currentframe()
+        try:
+            context = inspect.getframeinfo(frame.f_back).code_context
+            caller_lines = ''.join([line.strip() for line in context])
+            m = re.search(r'echo\s*\((.+?)\)$', caller_lines)
+            if m:
+                caller_lines = m.group(1)
+            self.s = caller_lines, var
+        finally:
+            del frame
+
+        self.s_split1 = self.s[0].split('(')
+        self.s_split2 = self.s_split1[1].split(')')
+        self.var_text = self.s_split2[0]
+        self.display_var = self.s[1]
+
+        self.physics_off()
+
+    def update_var(self):
+        frame = inspect.currentframe()
+        try:
+            context = inspect.getframeinfo(frame.f_back).code_context
+            caller_lines = ''.join([line.strip() for line in context])
+            m = re.search(r'echo\s*\((.+?)\)$', caller_lines)
+            if m:
+                caller_lines = m.group(1)
+            self.s = caller_lines, self.var_text
+        finally:
+            del frame
+
+        self.display_var = self.s[1]
+
+
+    def draw(self):
+        self.update_var
+        offX = self.xcor + self.canvas.winfo_reqwidth()/2
+        offY = self.canvas.winfo_reqheight()/2 - self.ycor
+        self.canvas.create_rectangle(offX-25, offY-25, offX+25, offY+25,
+                                fill='#000066', outline='#FFFFFF')
+        self.canvas.create_text(offX, offY - 10, text = self.var_text, fill = '#FF8800')
+        self.canvas.create_text(offX, offY + 10, text = self.display_var, fill = '#6688FF')

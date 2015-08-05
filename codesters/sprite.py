@@ -668,6 +668,8 @@ class SpriteClass(object):
         for n in range(int(frames_needed)):
             self.animation_x_coords.append(tempx+(x_step_size+(x_step_size * n)))
             self.animation_y_coords.append(tempy+(y_step_size+(y_step_size * n)))
+        self.animation_x_coords.append(newx)
+        self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
         self.modes.append("translate")
