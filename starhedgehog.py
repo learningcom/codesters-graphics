@@ -1,9 +1,10 @@
 import codesters
+global hedgey, stage
 stage = codesters.Environment()
 
 stage.set_background("gridfine")
 
-global hedgey, stage
+
 
 hedgey = codesters.Sprite("hedgehog")
 hedgey.go_to(0, -210)
@@ -26,7 +27,7 @@ def right():
 stage.event_right_key(right)
 
 def up():
-    hedgey.move_forward(575)
+    hedgey.glide_to(100,575)
     stage.wait(1)
     hedgey.go_to(0, -210)
 stage.event_up_key(up)
