@@ -367,6 +367,8 @@ class SpriteClass(object):
                             elif self.collision_function is not None:
                                 if len(inspect.getargspec(self.collision_function)[0]) == 2:
                                     self.collision_function(self, e)
+                                elif len(inspect.getargspec(self.collision_function)[0]) == 1:
+                                    self.collision_function(Manager.elements.index(e))
                                 else:
                                     self.collision_function()
 

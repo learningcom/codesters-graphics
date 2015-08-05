@@ -1,12 +1,13 @@
 import codesters
+global stage
 stage = codesters.Environment()
 
-global score, sprite
+global score, sprite, score_board
 
 stage.set_background("Underwater-BG")
 sprite = codesters.Sprite("fish1", 0, -220)
 
-stage.set_gravity(4)
+stage.set_gravity(2)
 stage.disable_floor()
 
 sprite.gravity_off()

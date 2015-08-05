@@ -285,6 +285,8 @@ class StageClass(object):
             if e.type != Environment:
                 e.wait(seconds)
 
+    def get_sprite_by_index(self, index):
+        return Manager.elements[index]
 
 class Environment(StageClass):
     def __init__(self):
