@@ -467,6 +467,7 @@ class SpriteClass(object):
                             prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
+                            print self.ycor
                             if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
                                 self.xcor = prevx
                                 self.ycor = prevy
@@ -484,7 +485,7 @@ class SpriteClass(object):
                             if len(self.animation_y_coords)>1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            #self.debug()
+                            self.debug()
                     else:
                         self.modes.pop(0)
                 elif self.modes[0] == "rotate":
@@ -598,12 +599,10 @@ class SpriteClass(object):
         self.glide_to(self.future_x,self.future_y+amount)
 
     def move_forward(self,amount):
-        print len(self.x_flip_plans), self.future_x_flipped
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
             desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         elif not self.future_x_flipped and len(self.x_flip_plans) < 1:
-            print "hir"
             desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
         else:
@@ -682,6 +681,7 @@ class SpriteClass(object):
         self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
+        print self.animation_y_coords
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
@@ -1155,6 +1155,7 @@ class SpriteClass(object):
         return self.color
 
     def debug(self):
+        print "d"
         self.hitbox.draw()
 
     def dilate(self,amount):

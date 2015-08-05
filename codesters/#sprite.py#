@@ -467,6 +467,7 @@ class SpriteClass(object):
                             prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
+                            print self.ycor
                             if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
                                 self.xcor = prevx
                                 self.ycor = prevy
@@ -484,7 +485,7 @@ class SpriteClass(object):
                             if len(self.animation_y_coords)>1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            #self.debug()
+                            self.debug()
                     else:
                         self.modes.pop(0)
                 elif self.modes[0] == "rotate":
@@ -680,6 +681,7 @@ class SpriteClass(object):
         self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
+        print self.animation_y_coords
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
