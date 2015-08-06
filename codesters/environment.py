@@ -8,6 +8,11 @@ class StageClass(object):
         "underwater":"Underwater_BG-01",
         "summer":"beach",
         "space":"space2",
+        "moon":"Space-Background",
+        "stage":"Stage",
+        "winter":"Winterscape",
+        "grid":"gridfine",
+        "park":"Playground"
     }
     def __init__(self):
         self.root = Manager.canvas
@@ -182,7 +187,7 @@ class StageClass(object):
         self.forever_function = function
 
     def event_interval(self, function, seconds):
-        self.interval_length = seconds * 100
+        self.interval_length = seconds * 50
         self.interval_function = function
 
     def event_delay(self, function, seconds):

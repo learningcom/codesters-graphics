@@ -750,7 +750,7 @@ class SpriteClass(object):
     #
     def wait(self, seconds):
         self.modes.append("wait")
-        self.wait_list.append(seconds*10)
+        self.wait_list.append(seconds*50)
         self.wait_list.append("Finished current animation")
         self.total_wait_time += seconds
         self.future_most_recent_wait_time = seconds
@@ -768,7 +768,7 @@ class SpriteClass(object):
         #self.say_size = size
         #self.say_font = font
         self.modes.append('say')
-        self.say_plans.append([text,seconds,color,size,font])
+        self.say_plans.append([text,seconds*50,color,size,font])
 
     def ask(self, text):
         return raw_input(text)
