@@ -377,6 +377,7 @@ class SpriteClass(object):
                                 else:
                                     self.collision_function()
 
+
     def update_events(self):
 
         if self.drag:

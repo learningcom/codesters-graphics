@@ -5,7 +5,9 @@ from .manager import Manager
 
 class StageClass(object):
     image_dictionary = {
-
+        "underwater":"Underwater_BG-01",
+        "summer":"beach",
+        "space":"space2",
     }
     def __init__(self):
         self.root = Manager.canvas
