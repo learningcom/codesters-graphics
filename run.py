@@ -22,6 +22,8 @@ class App(object):
         self.animate = None
 
     def do(self):
+        global stage
+        stage = codesters.Environment()
         execfile(filename)
 
     def move_one(self):

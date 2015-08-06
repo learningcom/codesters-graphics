@@ -1,5 +1,5 @@
 import codesters
-stage = codesters.Environment()
+#stage = codesters.Environment()
 global sprite, pipe_list, flappiness, game_over, pipe_speed, pipe_gap, pipe_interval, score_display
 
 pipe_speed = 6

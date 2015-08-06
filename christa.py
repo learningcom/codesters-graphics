@@ -2,8 +2,8 @@
 ## LOCATED HERE: https://www.codesters.com/preview/e96c32d78a583d31b8e05529fe1d85fc02fddbb6/
 
 import codesters
-global stage
-stage = codesters.Environment()
+#global stage
+#stage = codesters.Environment()
 
 
 global ball, sprite1

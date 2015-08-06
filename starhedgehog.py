@@ -1,10 +1,9 @@
 import codesters
-global hedgey, stage, text
-stage = codesters.Environment()
+#global hedgey, stage, text
+global hedgey, text
+#stage = codesters.Environment()
 
-stage.set_background("gridfine")
-
-
+stage.set_background("Space-Background")
 
 hedgey = codesters.Sprite("hedgehog")
 hedgey.go_to(0, -210)
@@ -39,5 +38,6 @@ def index_collision(index):
     points = points + 1
     text.set_text(str(points))
 hedgey.event_collision(index_collision)
+
 
 

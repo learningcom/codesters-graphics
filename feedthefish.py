@@ -1,6 +1,6 @@
 import codesters
-global stage
-stage = codesters.Environment()
+#global stage
+#stage = codesters.Environment()
 
 global score, sprite, score_board
 

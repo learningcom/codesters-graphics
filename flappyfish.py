@@ -4,7 +4,7 @@
 import codesters
 import random # I DONT KNOW WHERE TO IMPORT THIS FOR IT TO WORK OUTSIDE OF THIS FILE
 #Making a stage
-stage = codesters.Environment()
+#stage = codesters.Environment()
 
 
 pipe_speed = 6

@@ -608,7 +608,7 @@ class SpriteClass(object):
         else:
             desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-        print desired_x, desired_y
+        #print desired_x, desired_y
         self.glide_to(desired_x,desired_y)
 
     def forward(self, amount):
