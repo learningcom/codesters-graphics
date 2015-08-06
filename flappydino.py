@@ -2,13 +2,15 @@ import codesters
 #stage = codesters.Environment()
 global sprite, pipe_list, flappiness, game_over, pipe_speed, pipe_gap, pipe_interval, score_display
 
+number = 10
+
 pipe_speed = 6
 pipe_gap = 140
 pipe_interval = 1.5
 gravity = 10
 flappiness = 5
 
-stage.set_background("gridfine")
+stage.set_background("Space-Background")
 sprite = codesters.Sprite("dinosaur")
 sprite.set_size(0.4)
 sprite.go_to(-200, 0)
@@ -22,6 +24,8 @@ game_over = False
 score_display = codesters.Text("Flappy Points: ", 0, 200, "yellow")
 
 def space():
+    #global number
+    print number
     sprite.jump(flappiness)
     # add other actions...
 stage.event_space_key(space)

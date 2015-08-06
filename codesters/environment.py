@@ -139,6 +139,7 @@ class StageClass(object):
         def newfunction(event):
             self.event = event
             function()
+
         self.canvas.bind("<space>", newfunction, add="+")
 
     def event_key(self, key, function):
