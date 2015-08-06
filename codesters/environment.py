@@ -272,9 +272,11 @@ class StageClass(object):
 
     def set_bounce(self, amount):
         self.bounce = amount
+        self.enable_all_walls()
 
     def set_gravity(self, amount):
         self.gravity = amount
+        self.enable_floor()
         for e in Manager.elements:
             if not e.gravity_override:
                 e.gravity_true = True
@@ -293,3 +295,4 @@ class StageClass(object):
 class Environment(StageClass):
     def __init__(self):
         super(Environment, self).__init__()
+        self.disable_all_walls()

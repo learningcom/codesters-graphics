@@ -150,7 +150,7 @@ class SpriteClass(object):
         self.modes = []
         self.size = 1
         self.color = 'black'
-        self.heading = 110
+        self.heading = 0
         self.future_heading = self.heading
         self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
         self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
@@ -277,7 +277,7 @@ class SpriteClass(object):
         # self.collision_on()
 
     def draw(self):
-        # self.debug()
+        #self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and self.hidden == False:
@@ -467,7 +467,7 @@ class SpriteClass(object):
                             prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
-                            print self.ycor
+                            #print self.ycor
                             if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
                                 self.xcor = prevx
                                 self.ycor = prevy
@@ -485,7 +485,7 @@ class SpriteClass(object):
                             if len(self.animation_y_coords)>1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            self.debug()
+                            #self.debug()
                     else:
                         self.modes.pop(0)
                 elif self.modes[0] == "rotate":
@@ -681,7 +681,7 @@ class SpriteClass(object):
         self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
-        print self.animation_y_coords
+        #print self.animation_y_coords
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
@@ -692,7 +692,7 @@ class SpriteClass(object):
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
-        frames_needed = (self.animation_duration / 22)
+        frames_needed = (abs(destination-self.future_heading/self.speed) / 22)
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -709,7 +709,9 @@ class SpriteClass(object):
 
     def turn_clockwise(self, degrees):
         destination = self.future_heading - degrees
-        frames_needed = (self.animation_duration / 22)
+        frames_needed = (abs(destination/self.speed) / 22)
+        if frames_needed == 0:
+            frames_needed = 1
         degree_rot = destination - self.future_heading
         self.step_size = float(degree_rot)/float(frames_needed)
         for n in range(int(frames_needed)):
@@ -727,7 +729,9 @@ class SpriteClass(object):
 
     def turn_counterclockwise(self, degrees):
         destination = self.future_heading + degrees
-        frames_needed = (self.animation_duration / 22)
+        frames_needed = ((destination/self.speed) / 22)
+        if frames_needed == 0:
+            frames_needed = 1
         degree_rot = destination - self.future_heading
         self.step_size = float(degree_rot)/float(frames_needed)
         for n in range(int(frames_needed)):
@@ -897,6 +901,7 @@ class SpriteClass(object):
         self.go_to(to_x, to_y)
     def set_rotation(self, rot):
         self.animation_rotation_degrees.append(rot)
+        self.future_heading = rot
         self.modes.append("rotate")
         self.animation_rotation_degrees.append("Finished current animation")
     def set_heading(self, rot):
@@ -1155,7 +1160,7 @@ class SpriteClass(object):
         return self.color
 
     def debug(self):
-        print "d"
+        #print "d"
         self.hitbox.draw()
 
     def dilate(self,amount):
