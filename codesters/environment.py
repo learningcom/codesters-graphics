@@ -71,11 +71,11 @@ class StageClass(object):
     def draw(self):
         if self.forever_function is not None:
             self.forever_function()
-        if self.interval_length >=1:
-            #print Manager.frame_number, self.interval_length
+        if self.interval_length >= 1:
+            # print Manager.frame_number, self.interval_length
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
-                    #print "we are hrere"
+                    # print "we are hrere"
                     self.interval_function()
         self.canvas.create_rectangle((0,0,500,500), fill='white')
         if self.bg_image != None:
@@ -115,25 +115,25 @@ class StageClass(object):
         def newfunction(event):
             self.event = event
             function()
-        self.canvas.bind("<Left>", newfunction,add="+")
+        self.canvas.bind("<Left>", newfunction, add="+")
 
     def event_right_key(self, function):
         def newfunction(event):
             self.event = event
             function()
-        self.canvas.bind("<Right>", newfunction,add="+")
+        self.canvas.bind("<Right>", newfunction, add="+")
 
     def event_up_key(self, function):
         def newfunction(event):
             self.event = event
             function()
-        self.canvas.bind("<Up>", newfunction,add="+")
+        self.canvas.bind("<Up>", newfunction, add="+")
 
     def event_down_key(self, function):
         def newfunction(event):
             self.event = event
             function()
-        self.canvas.bind("<Down>", newfunction,add="+")
+        self.canvas.bind("<Down>", newfunction, add="+")
 
     def event_space_key(self, function):
         def newfunction(event):
@@ -158,7 +158,7 @@ class StageClass(object):
         if key == "space":
             bound_key_name = "<space>"
         print bound_key_name
-        self.canvas.bind(bound_key_name, newfunction, add = "+")
+        self.canvas.bind(bound_key_name, newfunction, add="+")
 
     def event_click(self, function):
         def newfunction(event):
@@ -170,7 +170,7 @@ class StageClass(object):
         def newfunction(event):
             self.event = event
             function()
-        self.event_click(newfunction,add="+")
+        self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_up(self, function):
         def newfunction(event):
@@ -178,13 +178,13 @@ class StageClass(object):
             function()
         self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
-    def event_mouse_move(self,function):
+    def event_mouse_move(self, function):
         def newfunction(event):
             self.event = event
             function()
         self.canvas.bind("<Motion>", newfunction, add="+")
 
-    def event_forever(self,function):
+    def event_forever(self, function):
         self.forever_function = function
 
     def event_interval(self, function, seconds):
@@ -195,22 +195,22 @@ class StageClass(object):
         pass
 
     def set_background(self, image):
-        self.bg_image_name= image
-        self.bg_image= Image.open("./codesters/sprites/"+image+".gif")
+        self.bg_image_name = image
+        self.bg_image = Image.open("./codesters/sprites/"+image+".gif")
 
     def set_background_x(self, amount):
-        self.xcor=amount + self.canvas.winfo_reqwidth()
+        self.xcor = amount + self.canvas.winfo_reqwidth()
 
     def set_background_y(self, amount):
-        self.ycor= amount
+        self.ycor = amount
 
     def move_right(self, amount):
-        self.xcor +=amount
+        self.xcor += amount
 
     def move_left(self, amount):
         self.xcor = self.xcor - amount
 
-    def move_up(self,amount):
+    def move_up(self, amount):
         self.ycor += amount
 
     def move_down(self, amount):

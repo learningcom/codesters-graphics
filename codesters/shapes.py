@@ -53,7 +53,11 @@ class Point(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -106,7 +110,11 @@ class Circle(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -162,7 +170,11 @@ class Rectangle(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -218,7 +230,11 @@ class Square(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -282,7 +298,11 @@ class Triangle(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -340,14 +360,18 @@ class Ellipse(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
 
 class Line(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, color):
-        super(Line, self).__init__('',x1,y1, shape='line')
+        super(Line, self).__init__('', x1, y1, shape='line')
         self.xcor = (x2 - x1)/2 + x1
         self.ycor = (y2 - y1)/2 + y1
         self.width = x2 - x1
@@ -393,7 +417,11 @@ class Line(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -449,13 +477,17 @@ class Star(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
 class TriangleIso(sprite.SpriteClass):
     def __init__(self, x, y, width, height, color, outline = None):
-        super(TriangleIso, self).__init__('',x,y, shape='triangleiso')
+        super(TriangleIso, self).__init__('', x, y, shape='triangleiso')
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
@@ -513,7 +545,11 @@ class TriangleIso(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -577,7 +613,11 @@ class TriangleRight(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -650,7 +690,11 @@ class Triangle3Pts(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -710,10 +754,10 @@ class Quad(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
 
-            points = [self.xcor-xf*self.x1,self.ycor-yf*self.y1,
-                      self.xcor-xf*self.x2,self.ycor-yf*self.y2,
-                      self.xcor-xf*self.x3,self.ycor-yf*self.y3,
-                      self.xcor-xf*self.x4,self.ycor-yf*self.y4]
+            points = [self.xcor-xf*self.x1, self.ycor-yf*self.y1,
+                      self.xcor-xf*self.x2, self.ycor-yf*self.y2,
+                      self.xcor-xf*self.x3, self.ycor-yf*self.y3,
+                      self.xcor-xf*self.x4, self.ycor-yf*self.y4]
             point_tuple = transformations.poly_poly(cx,cy,points,-self.heading)
             points[0] = offsetx + self.size*point_tuple[0]
             points[1] = offsety - self.size*point_tuple[1]
@@ -729,7 +773,11 @@ class Quad(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -789,7 +837,11 @@ class Polygon(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -851,7 +903,11 @@ class Arc(sprite.SpriteClass):
         for l in self.lines:
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font,self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
@@ -864,8 +920,8 @@ class Curve(sprite.SpriteClass):
         self.ycor = (y1+y2)/2
         cx = offsetx + self.xcor
         cy = offsety - self.ycor
-        self.x1,self.cx1,self.cx2,self.x2 = x1,cx1,cx2,x2
-        self.y1,self.cy1,self.cy2,self.y2 = y1,cy1,cy2,y2
+        self.x1, self.cx1, self.cx2, self.x2 = x1, cx1, cx2, x2
+        self.y1, self.cy1, self.cy2, self.y2 = y1, cy1, cy2, y2
         self.P0 = [cx + x1, cy - y1]
         self.P1 = [cx + cx1, cy - cy1]
         self.P2 = [cx + cx2, cy - cy2]
@@ -887,8 +943,8 @@ class Curve(sprite.SpriteClass):
         if self.y_flipped:
             yf = -1
 
-        x1,cx1,cx2,x2 = cx+self.x1, cx+self.cx1, cx+self.cx2, cx+self.x2
-        y1,cy1,cy2,y2 = cy-self.y1, cy-self.cy1, cy-self.cy2, cy-self.y2
+        x1, cx1, cx2, x2 = cx+self.x1, cx+self.cx1, cx+self.cx2, cx+self.x2
+        y1, cy1, cy2, y2 = cy-self.y1, cy-self.cy1, cy-self.cy2, cy-self.y2
 
         theta = -self.heading * math.pi/180
 
@@ -921,13 +977,17 @@ class Curve(sprite.SpriteClass):
             self.canvas.create_line(l[0], fill = l[1], width = l[2])
 
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text,
+                                    font=(self.say_font, self.say_size),
+                                    fill=self.say_color)
             if self.shape != 'text':
                 self.say_time -= 1
 
 class Text(sprite.SpriteClass):
     def __init__(self, text, x, y, color="black"):
-        super(Text, self).__init__('',x,y, shape='text')
+        super(Text, self).__init__('', x, y, shape='text')
         self.say_text = text
         self.say_time = 10000000
         self.say_color = color

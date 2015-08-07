@@ -900,13 +900,13 @@ class SpriteClass(object):
         self.opacity = int(opacity * 255)
         self.update_image()
     def set_left(self, amount):
-        self.set_x(self.width/2+amount)
+        self.set_x(self.width/2 + amount)
     def set_right(self, amount):
-        self.set_x(-self.width/2+amount)
+        self.set_x(-self.width/2 + amount)
     def set_top(self, amount):
-        self.set_y(-self.height/2+amount)
+        self.set_y(-self.height/2 + amount)
     def set_bottom(self, amount):
-        self.set_y(self.height/2+amount)
+        self.set_y(self.height/2 + amount)
 
     # Old getters
 
