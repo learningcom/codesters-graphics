@@ -9,8 +9,8 @@ import re
 
 
 class Point(sprite.SpriteClass):
-    def __init__(self,x,y, size = 5, color = 'black', outline = None):
-        super(Point, self).__init__('',x,y, shape = 'point')
+    def __init__(self, x, y, size=5, color='black', outline=None):
+        super(Point, self).__init__('', x, y, shape='point')
         self.width = size
         self.height = size
         self.xcor = x
@@ -19,9 +19,9 @@ class Point(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -56,10 +56,9 @@ class Point(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Circle(sprite.SpriteClass):
@@ -74,9 +73,9 @@ class Circle(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -94,8 +93,6 @@ class Circle(sprite.SpriteClass):
         self.corners = [self.top_right, self.top_left, self.bottom_left, self.bottom_right]
 
     def draw(self):
-        # self.pen_clear()
-        # self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
@@ -113,10 +110,9 @@ class Circle(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Rectangle(sprite.SpriteClass):
@@ -130,9 +126,9 @@ class Rectangle(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -173,10 +169,9 @@ class Rectangle(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Square(sprite.SpriteClass):
@@ -190,9 +185,9 @@ class Square(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -233,10 +228,9 @@ class Square(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Triangle(sprite.SpriteClass):
@@ -249,9 +243,9 @@ class Triangle(sprite.SpriteClass):
         self.side = side
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -301,10 +295,9 @@ class Triangle(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Ellipse(sprite.SpriteClass):
@@ -318,9 +311,9 @@ class Ellipse(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -363,10 +356,9 @@ class Ellipse(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Line(sprite.SpriteClass):
@@ -409,7 +401,6 @@ class Line(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
             points = transformations.poly_line(xc, yc, xf*self.width*self.size, yf*self.height*self.size,self.heading)
-            #print points
             self.canvas.create_line(points[0],points[1],points[2],points[3],
                                        fill = self.color)
         for p in self.polygons:
@@ -420,10 +411,9 @@ class Line(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class Star(sprite.SpriteClass):
     def __init__(self, x, y, num_points, diam, color, outline = None):
@@ -437,9 +427,9 @@ class Star(sprite.SpriteClass):
         self.height = diam
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -480,10 +470,9 @@ class Star(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class TriangleIso(sprite.SpriteClass):
     def __init__(self, x, y, width, height, color, outline = None):
@@ -496,9 +485,9 @@ class TriangleIso(sprite.SpriteClass):
         self.height = height
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -548,10 +537,9 @@ class TriangleIso(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class TriangleRight(sprite.SpriteClass):
     def __init__(self, x, y, width, height, color, outline = None):
@@ -564,9 +552,9 @@ class TriangleRight(sprite.SpriteClass):
         self.height = height
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -616,10 +604,9 @@ class TriangleRight(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class Triangle3Pts(sprite.SpriteClass):
     def __init__(self, x1, y1, x2, y2, x3, y3, color, outline = None):
@@ -640,9 +627,9 @@ class Triangle3Pts(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -693,10 +680,9 @@ class Triangle3Pts(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Quad(sprite.SpriteClass):
@@ -720,9 +706,9 @@ class Quad(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -776,10 +762,9 @@ class Quad(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Polygon(sprite.SpriteClass):
@@ -794,9 +779,9 @@ class Polygon(sprite.SpriteClass):
         self.height = diam
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -840,10 +825,9 @@ class Polygon(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 
 class Arc(sprite.SpriteClass):
@@ -857,9 +841,9 @@ class Arc(sprite.SpriteClass):
         self.future_y = self.ycor
         self.color = color
         self.outline = outline
-        if self.color == None:
+        if self.color is None:
             self.color = ''
-        if self.outline == None:
+        if self.outline is None:
             self.outline = color
 
         self.pen_color_var = self.color
@@ -906,10 +890,9 @@ class Arc(sprite.SpriteClass):
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
                                     text=self.say_text,
-                                    font=(self.say_font,self.say_size),
+                                    font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class Curve(sprite.SpriteClass):
     def __init__(self, x1, y1, cx1, cy1, cx2, cy2, x2, y2, fill, color):
@@ -982,8 +965,7 @@ class Curve(sprite.SpriteClass):
                                     text=self.say_text,
                                     font=(self.say_font, self.say_size),
                                     fill=self.say_color)
-            if self.shape != 'text':
-                self.say_time -= 1
+            self.say_time -= 1
 
 class Text(sprite.SpriteClass):
     def __init__(self, text, x, y, color="black"):
@@ -1014,7 +996,7 @@ class Text(sprite.SpriteClass):
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor,
-                                    text=self.say_text, font=(self.say_font,self.say_size),
+                                    text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
 
 class Display(sprite.SpriteClass):

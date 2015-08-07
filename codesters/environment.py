@@ -72,20 +72,15 @@ class StageClass(object):
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >= 1:
-            # print Manager.frame_number, self.interval_length
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
-                    # print "we are hrere"
                     self.interval_function()
-        self.canvas.create_rectangle((0,0,500,500), fill='white')
-        if self.bg_image != None:
+        self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
+        if self.bg_image is not None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
             self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
-        # else:
-
 
     #### END OF IMPORTANT FUNCTIONS ####
-
 
     def add_sprite(self, sprite):
         if sprite not in Manager.elements:
@@ -95,10 +90,10 @@ class StageClass(object):
         if shape not in Manager.elements:
             Manager.elements.append(shape)
 
-    def add_text(self, text): #BROKEN ON CODESTERS.COM
+    def add_text(self, text): # BROKEN ON CODESTERS.COM
         pass
 
-    def remove_sprite(self,sprite):
+    def remove_sprite(self, sprite):
         if sprite in Manager.elements:
             Manager.elements.remove(sprite)
 
@@ -106,10 +101,9 @@ class StageClass(object):
         if shape in Manager.elements:
             Manager.elements.remove(shape)
 
-    def remove_text(self,text): #BROKEN ON codesters.com
+    def remove_text(self, text):  # BROKEN ON codesters.com
         if text in Manager.elements:
             Manager.elements.remove(text)
-
 
     def event_left_key(self, function):
         def newfunction(event):
@@ -228,15 +222,14 @@ class StageClass(object):
         self.canvas.update()
 
     def click_x(self):
-        # print "x coord", event.x
         return self.event.x - (self.canvas.winfo_reqwidth()/2)
 
     def click_y(self):
-        # print "y coord", event.y
         return (self.canvas.winfo_reqheight()/2) - self.event.y
 
     def mouse_x(self):
         return (self.canvas.winfo_pointerx() - self.canvas.winfo_rootx()) - self.canvas.winfo_reqwidth()/2
+
     def mouse_y(self):
         return self.canvas.winfo_reqheight()/2 - (self.canvas.winfo_pointery() - self.canvas.winfo_rooty())
 

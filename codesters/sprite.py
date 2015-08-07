@@ -6,137 +6,137 @@ import inspect
 
 class SpriteClass(object):
     image_dictionary = {
-        "":"codestersLogo",
-        "person1":"Character2",
-        "person2":"Character1",
-        "person3":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "person4":"Character4",
-        "person5":"Character6",
-        "person6":"teenager",
-        "person7":"teenager2",
-        "person8":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "person9":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "person10":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "person11":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "person12":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "princess":"Princess",
-        "princess2":"Princess2",
-        "prince":"Prince",
-        "superhero1":"superhero1",
-        "superhero2":"superhero2",
-        "athlete1":"athlete1",
-        "athlete2":"athlete2",
-        "astronaut1":"astronaut",
-        "astronaut2":"astronaut2",
-        "alien1":"Alien-1",
-        "snowman":"Snowman",
-        "ufo":"UFO",
-        "spaceship":"Shuttle",
-        "rocket":"Rocket",
-        "knight1":"female-knight",
-        "knight2":"knight",
-        "wizard":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "dragon":"dragon",
-        "treasurechest":"treasurechest",
-        "cow":"", #CANNOT FIND THIS IMAGE IN SPRITES
-        "toucan":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "parrot":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "monkey":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "panther":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "snake":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "pig":"",#CANNOT FIND THIS IMAGE IN SPRITES
-        "fox":"Fox",
-        "dog":"dog",
-        "cat":"Cat",
-        "kitten":"kitten",
-        "penguin":"penguin",
-        "hedgehog":"Hedgehog",
-        "butterfly":"Butterfly",
-        "dinosaur":"Dinosaur",
-        "bubbles":"Bubbles",
-        "flowers":"Flowers",
-        "flower2":"Flower2",
-        "flower3":"flower3",
-        "flower4":"Flower4",
-        "pinetree1":"PineTree1",
-        "pinetree2":"PineTree2",
-        "pinetree3":"PineTree3",
-        "pinetree4":"PineTree4",
-        "pinetree5":"PineTree5",
-        "pinetree6":"PineTree6",
-        "pinetree7":"PineTree7",
-        "shark":"shark",
-        "shark2":"shark2",
-        "turtle":"swimmingturtleSingle",
-        "turtle2":"turtle2",
-        "fish1":"Fish_1",
-        "fish2":"fish2",
-        "fish3":"Fish_3",
-        "fish4":"fish_4",
-        "football":"football",
-        "soccerball":"soccerball",
-        "soccernet":"soccer-net-side",
-        "baseball":"baseball",
-        "baseballbat":"bat",
-        "basketball":"basketball",
-        "net":"hoop",
-        "backboard":"backboard",
-        "snowflake1":"snowflake1",
-        "snowflake2":"snowflake2",
-        "snowflake3":"snowflake3",
-        "present1":"present1",
-        "present2":"present2",
-        "present3":"present3",
-        "present4":"present4",
-        "present5":"present_5",
-        "present6":"present_6",
-        "present7":"present_7",
-        "present8":"present_8",
-        "paper":"Paper",
-        "codesters":"codestersLogo",
-        "purpleguy":"purpleGuy",
-        "robot":"robot",
-        "enemy":"enemy",
-        "microphone":"microphone",
-        "dice1":"Dice5",
-        "dice2":"dice2",
-        "dice3":"dice1",
-        "dice4":"dice3",
-        "dice5":"dice4",
-        "dice6":"dice7",
-        "heads":"codesterscoinheads",
-        "tails":"codesterscointails",
-        "coin":"codesterscoinsmall",
-        "scissors":"scissors",
-        "rock":"rock",
-        "earth":"earth",
-        "recyclingbin":"recyclingbin",
-        "trashcan":"trashbin",
-        "garbage":"garbage",
-        "pollution":"pollution",
-        "applecore":"applecore",
-        "fishbones":"fishskeleton",
-        "sodacan":"sodacan",
-        "steelcan":"can",
-        "waterbottle":"waterbottle",
-        "milkjug":"milkjug",
-        "plasticbag":"plasticbag",
-        "toothbrush":"toothbrush",
-        "jeans":"jeans",
-        "tshirt":"tshirt2",
-        "sweater":"sweater",
-        "coat":"jacket",
-        "fleecehat":"hat",
-        "bike":"bike",
-        "bench":"bench",
-        "slide":"slide",
-        "sink":"sink",
-        "shower":"shower"
+        "": "codestersLogo",
+        "person1": "Character2",
+        "person2": "Character1",
+        "person3": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "person4": "Character4",
+        "person5": "Character6",
+        "person6": "teenager",
+        "person7": "teenager2",
+        "person8": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "person9": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "person10": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "person11": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "person12": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "princess": "Princess",
+        "princess2": "Princess2",
+        "prince": "Prince",
+        "superhero1": "superhero1",
+        "superhero2": "superhero2",
+        "athlete1": "athlete1",
+        "athlete2": "athlete2",
+        "astronaut1": "astronaut",
+        "astronaut2": "astronaut2",
+        "alien1": "Alien-1",
+        "snowman": "Snowman",
+        "ufo": "UFO",
+        "spaceship": "Shuttle",
+        "rocket": "Rocket",
+        "knight1": "female-knight",
+        "knight2": "knight",
+        "wizard": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "dragon": "dragon",
+        "treasurechest": "treasurechest",
+        "cow": "",   # CANNOT FIND THIS IMAGE IN SPRITES
+        "toucan": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "parrot": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "monkey": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "panther": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "snake": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "pig": "",  # CANNOT FIND THIS IMAGE IN SPRITES
+        "fox": "Fox",
+        "dog": "dog",
+        "cat": "Cat",
+        "kitten": "kitten",
+        "penguin": "penguin",
+        "hedgehog": "Hedgehog",
+        "butterfly": "Butterfly",
+        "dinosaur": "Dinosaur",
+        "bubbles": "Bubbles",
+        "flowers": "Flowers",
+        "flower2": "Flower2",
+        "flower3": "flower3",
+        "flower4": "Flower4",
+        "pinetree1": "PineTree1",
+        "pinetree2": "PineTree2",
+        "pinetree3": "PineTree3",
+        "pinetree4": "PineTree4",
+        "pinetree5": "PineTree5",
+        "pinetree6": "PineTree6",
+        "pinetree7": "PineTree7",
+        "shark": "shark",
+        "shark2": "shark2",
+        "turtle": "swimmingturtleSingle",
+        "turtle2": "turtle2",
+        "fish1": "Fish_1",
+        "fish2": "fish2",
+        "fish3": "Fish_3",
+        "fish4": "fish_4",
+        "football": "football",
+        "soccerball": "soccerball",
+        "soccernet": "soccer-net-side",
+        "baseball": "baseball",
+        "baseballbat": "bat",
+        "basketball": "basketball",
+        "net": "hoop",
+        "backboard": "backboard",
+        "snowflake1": "snowflake1",
+        "snowflake2": "snowflake2",
+        "snowflake3": "snowflake3",
+        "present1": "present1",
+        "present2": "present2",
+        "present3": "present3",
+        "present4": "present4",
+        "present5": "present_5",
+        "present6": "present_6",
+        "present7": "present_7",
+        "present8": "present_8",
+        "paper": "Paper",
+        "codesters": "codestersLogo",
+        "purpleguy": "purpleGuy",
+        "robot": "robot",
+        "enemy": "enemy",
+        "microphone": "microphone",
+        "dice1": "Dice5",
+        "dice2": "dice2",
+        "dice3": "dice1",
+        "dice4": "dice3",
+        "dice5": "dice4",
+        "dice6": "dice7",
+        "heads": "codesterscoinheads",
+        "tails": "codesterscointails",
+        "coin": "codesterscoinsmall",
+        "scissors": "scissors",
+        "rock": "rock",
+        "earth": "earth",
+        "recyclingbin": "recyclingbin",
+        "trashcan": "trashbin",
+        "garbage": "garbage",
+        "pollution": "pollution",
+        "applecore": "applecore",
+        "fishbones": "fishskeleton",
+        "sodacan": "sodacan",
+        "steelcan": "can",
+        "waterbottle": "waterbottle",
+        "milkjug": "milkjug",
+        "plasticbag": "plasticbag",
+        "toothbrush": "toothbrush",
+        "jeans": "jeans",
+        "tshirt": "tshirt2",
+        "sweater": "sweater",
+        "coat": "jacket",
+        "fleecehat": "hat",
+        "bike": "bike",
+        "bench": "bench",
+        "slide": "slide",
+        "sink": "sink",
+        "shower": "shower"
         
     }
 
     ## PIVOTAL FUNCTIONS ##
-    def __init__(self, image,x,y, **kwargs):
+    def __init__(self, image, x, y, **kwargs):
         self.canvas = Manager.canvas
         Manager.elements.append(self)
 
@@ -245,8 +245,8 @@ class SpriteClass(object):
             self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
             im2 = self.photo.convert('RGBA')
             rot = im2.rotate(self.heading, expand=1)
-            fff =  Image.new("RGBA", rot.size, (0,)*4)
-            self.photo = Image.composite(rot,fff,rot)
+            fff = Image.new("RGBA", rot.size, (0,)*4)
+            self.photo = Image.composite(rot, fff, rot)
 
         self.base_photo_width = self.photo.size[0]
         self.base_photo_height = self.photo.size[1]
@@ -256,7 +256,7 @@ class SpriteClass(object):
         self.name = image
 
         self.shape = ''
-        if kwargs.get('shape') != None:
+        if kwargs.get('shape') is not None:
             self.shape = kwargs.get('shape')
             self.name = self.shape
 
@@ -274,23 +274,30 @@ class SpriteClass(object):
         self.collision_function = None
         self.collision_goal_function = None
         self.collision_hazard_function = None
-        # self.collision_on()
 
     def draw(self):
-        #self.debug()
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and not self.hidden:
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
-            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
+            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2,
+                                      self.canvas.winfo_reqheight()/2 - self.ycor),
+                                     image=self.bg_photoimg)
         elif not self.hidden:
-            self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
+            self.canvas.create_oval((self.xcor-(self.size/2),
+                                     self.ycor-(self.size/2),
+                                     self.xcor+(self.size/2),
+                                     self.ycor+(self.size/2)),
+                                    fill=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,self.canvas.winfo_reqheight()/2 - self.ycor - 100,text=self.say_text, font=(self.say_font,self.say_size),fill=self.say_color)
+            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
+                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+                                    text=self.say_text, font=(self.say_font, self.say_size),
+                                    fill=self.say_color)
             self.say_time -= 1
 
     def update_physics(self):
@@ -301,9 +308,9 @@ class SpriteClass(object):
         self.future_x += self.xspeed
         self.future_y += self.yspeed
         for i in range(len(self.animation_x_coords)):
-            if not isinstance(self.animation_x_coords[i],basestring):
+            if not isinstance(self.animation_x_coords[i], basestring):
                 self.animation_x_coords[i] += self.xspeed
-            if not isinstance(self.animation_y_coords[i],basestring):
+            if not isinstance(self.animation_y_coords[i], basestring):
                 self.animation_y_coords[i] += self.yspeed
         if self.gravity_true:
             self.yspeed -= self.gravity
@@ -352,7 +359,6 @@ class SpriteClass(object):
         if self.collision:
             for e in Manager.elements:
                 if isinstance(e, SpriteClass):
-                    # e.collision_function
                     if e.collision:
                         if self.check_two_sprites_for_collision(e):
                             if e.goal and self.collision_goal_function is not None:
@@ -414,14 +420,6 @@ class SpriteClass(object):
         if this_top > sprite_bottom and this_bottom < sprite_top:
             if this_right > sprite_left and this_left < sprite_right:
                 if self != sprite:
-                    '''
-                    print self, sprite
-                    print this_top, sprite_bottom
-                    print this_bottom, sprite_top
-                    print this_right, sprite_left
-                    print this_left , sprite_right
-                    print "$$ COLLIDING $$"
-                    '''
                     return True
         return False
 
@@ -431,14 +429,12 @@ class SpriteClass(object):
             im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
         if self.y_flipped:
             im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
-        # self.base_photo.close()
         if self.opacity < 255:
             im2.putalpha(self.opacity)
         scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
         rot = scale.rotate(self.heading, expand=1)
         fff = Image.new("RGBA", rot.size, (0,)*4)
         self.photo = Image.composite(rot, fff, rot)
-        # self.photo.save("check.gif")
 
     def update_animation(self):
         if isinstance(self.future_x, basestring):
@@ -458,7 +454,8 @@ class SpriteClass(object):
             else:
                 if self.modes[0] == "translate":
                     if len(self.animation_y_coords) > 0 and len(self.animation_x_coords) > 0:
-                        if isinstance(self.animation_x_coords[0],basestring) and isinstance(self.animation_y_coords[0],basestring):
+                        if isinstance(self.animation_x_coords[0], basestring) \
+                                and isinstance(self.animation_y_coords[0], basestring):
                             self.animation_x_coords.pop(0)
                             self.animation_y_coords.pop(0)
                             self.modes.pop(0)
@@ -467,13 +464,15 @@ class SpriteClass(object):
                             prevy = self.ycor
                             self.xcor = (self.animation_x_coords.pop(0))
                             self.ycor = (self.animation_y_coords.pop(0))
-                            #print self.ycor
                             if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
                                 self.xcor = prevx
                                 self.ycor = prevy
-                            if  self.pen:
+                            if self.pen:
                                 newline = []
-                                newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
+                                newline.append((self.canvas.winfo_reqwidth()/2 + prevx,
+                                                self.canvas.winfo_reqheight()/2 - prevy,
+                                                self.canvas.winfo_reqwidth()/2 + self.xcor,
+                                                self.canvas.winfo_reqheight()/2 - self.ycor))
                                 newline.append(self.pen_color_var)
                                 newline.append(self.pen_size_var)
                                 self.lines.append(newline)
@@ -485,7 +484,6 @@ class SpriteClass(object):
                             if len(self.animation_y_coords) > 1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            # self.debug()
                     else:
                         self.modes.pop(0)
                 elif self.modes[0] == "rotate":
@@ -496,7 +494,6 @@ class SpriteClass(object):
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
-                            # self.debug()
                             self.update_image()
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
@@ -605,7 +602,6 @@ class SpriteClass(object):
         else:
             desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-        # print desired_x, desired_y
         self.glide_to(desired_x, desired_y)
 
     def forward(self, amount):
@@ -676,7 +672,6 @@ class SpriteClass(object):
         self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
-        # print self.animation_y_coords
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
@@ -742,7 +737,6 @@ class SpriteClass(object):
     def left(self, degrees):
         self.turn_counterclockwise(degrees)
 
-    #
     def wait(self, seconds):
         self.modes.append("wait")
         self.wait_list.append(seconds*50)
@@ -852,8 +846,10 @@ class SpriteClass(object):
     def set_speed(self, newspeed):
         self.speed = newspeed
         self.animation_duration = 1000/newspeed
+
     def speed(self, newspeed):
         self.set_speed(newspeed)
+
     def get_speed(self):
         return self.speed
 
@@ -1079,7 +1075,7 @@ class SpriteClass(object):
     def event_forever(self, function):
         self.forever_function = function
 
-    def event_collision(self,function):
+    def event_collision(self, function):
         self.collision_function = function
 
     def event_collision_goal(self, function):
@@ -1150,23 +1146,22 @@ class SpriteClass(object):
         return self.color
 
     def debug(self):
-        #print "d"
         self.hitbox.draw()
 
-    def dilate(self,amount):
+    def dilate(self, amount):
         self.dilate_plans.append(amount)
         self.modes.append("dilate")
         self.goto(amount * self.future_x, amount * self.future_y)
 
-    def rotate_about(self,degrees,x,y):
+    def rotate_about(self, degrees, x, y):
         theta = degrees*math.pi/180
         x1 = math.cos(theta) * (self.xcor-x) - math.sin(theta) * (self.ycor-y) + x
         y1 = math.sin(theta) * (self.xcor-x) + math.cos(theta) * (self.ycor-y) + y
         self.set_heading(self.future_heading+degrees)
-        self.go_to(x1,y1)
+        self.go_to(x1, y1)
 
-    def rotate_origin(self,degrees):
-        self.rotate_about(degrees,0,0)
+    def rotate_origin(self, degrees):
+        self.rotate_about(degrees, 0, 0)
 
     def reflect_x(self, x):
         self.go_to(x - (self.future_x-x), self.future_y)

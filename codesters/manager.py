@@ -12,13 +12,14 @@ class Manager(object):
 
     default_gravity = False
 
-
     def __init__(self):
-        #Keeping here essentially global variables to get the mouse position and whether it's pressed at any given moment.
+        # Keeping here essentially global variables to get whether the mouse is pressed at any given moment.
         def mouse_press(event):
             Manager.mouse_down = True
+
         def mouse_release(event):
             Manager.mouse_down = False
+
         self.canvas.bind("<Button-1>", mouse_press, add="+")
         self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
 
