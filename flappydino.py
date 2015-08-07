@@ -24,8 +24,6 @@ game_over = False
 score_display = codesters.Text("Flappy Points: ", 0, 200, "yellow")
 
 def space():
-    #global number
-    print number
     sprite.jump(flappiness)
     # add other actions...
 stage.event_space_key(space)

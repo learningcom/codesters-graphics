@@ -160,7 +160,6 @@ class SpriteClass(object):
 
         self.hidden = False
 
-
         self.animation_duration = 1000
         self.animation_x_coords = []
         self.animation_y_coords = []
@@ -281,7 +280,7 @@ class SpriteClass(object):
         #self.debug()
         if self.forever_function is not None:
             self.forever_function()
-        if self.photo is not None and self.hidden == False:
+        if self.photo is not None and not self.hidden:
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
             self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2, self.canvas.winfo_reqheight()/2 - self.ycor), image = self.bg_photoimg)
         elif not self.hidden:
@@ -448,7 +447,7 @@ class SpriteClass(object):
             self.future_y = self.ycor
         if len(self.modes) > 0 and not self.paused:
             if self.modes[0] == "wait":
-                if len(self.wait_list)> 0:
+                if len(self.wait_list) > 0:
                     if isinstance(self.wait_list[0], basestring):
                         self.wait_list.pop(0)
                         self.modes.pop(0)
@@ -458,7 +457,7 @@ class SpriteClass(object):
                         self.wait_list[0] = self.wait_list[0] - 1
             else:
                 if self.modes[0] == "translate":
-                    if len(self.animation_y_coords)>0 and len(self.animation_x_coords)>0:
+                    if len(self.animation_y_coords) > 0 and len(self.animation_x_coords) > 0:
                         if isinstance(self.animation_x_coords[0],basestring) and isinstance(self.animation_y_coords[0],basestring):
                             self.animation_x_coords.pop(0)
                             self.animation_y_coords.pop(0)
@@ -481,28 +480,28 @@ class SpriteClass(object):
                             if self.fill and self.pen:
                                 self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
                                 self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
-                            if len(self.animation_x_coords)>1:
+                            if len(self.animation_x_coords) > 1:
                                 self.future_x = self.animation_x_coords[-2]
-                            if len(self.animation_y_coords)>1:
+                            if len(self.animation_y_coords) > 1:
                                 self.future_y = self.animation_y_coords[-2]
                             self.hitbox.update_corners()
-                            #self.debug()
+                            # self.debug()
                     else:
                         self.modes.pop(0)
                 elif self.modes[0] == "rotate":
-                    if len(self.animation_rotation_degrees)>0 :
-                        if isinstance(self.animation_rotation_degrees[0],basestring):
+                    if len(self.animation_rotation_degrees) > 0:
+                        if isinstance(self.animation_rotation_degrees[0], basestring):
                             self.animation_rotation_degrees.pop(0)
                             self.modes.pop(0)
                         else:
                             self.heading = self.animation_rotation_degrees.pop(0)
                             self.hitbox.update_corners()
-                            #self.debug()
+                            # self.debug()
                             self.update_image()
                 elif self.modes[0] == "xflip":
                     if len(self.x_flip_plans) > 0:
                         state = self.x_flip_plans.pop(0)
-                        self.x_flipped = not self.x_flipped
+                        self.x_flipped = state
                         self.update_image()
                         self.modes.pop(0)
                 elif self.modes[0] == "yflip":
@@ -513,14 +512,12 @@ class SpriteClass(object):
                         self.modes.pop(0)
                 elif self.modes[0] == "scale":
                     if len(self.scale_plans) > 0:
-                        if isinstance(self.scale_plans[0],basestring):
+                        if isinstance(self.scale_plans[0], basestring):
                             self.modes.pop(0)
                             self.scale_plans.pop(0)
                         else:
                             self.size = self.scale_plans.pop(0)
                             self.update_image()
-
-
                 elif self.modes[0] == "pen":
                     if len(self.pen_plans) > 0:
                         self.pen = self.pen_plans.pop(0)
@@ -578,28 +575,27 @@ class SpriteClass(object):
         self.hitbox.printCorners()
 
     ## END OF PIVOTAL FUNCTIONS ##
-        ## I thought rotate_about() wasn't until later? ##
 
     def hide(self):
-        self.hidden=True
+        self.hidden = True
 
     def show(self):
-        self.hidden=False
+        self.hidden = False
 
     # Basic motion
     def move_right(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
 
     def move_left(self, amount):
-        self.glide_to(self.future_x-amount,self.future_y)
+        self.glide_to(self.future_x-amount, self.future_y)
 
     def move_down(self, amount):
-        self.glide_to(self.future_x,self.future_y-amount)
+        self.glide_to(self.future_x, self.future_y-amount)
 
     def move_up(self, amount):
-        self.glide_to(self.future_x,self.future_y+amount)
+        self.glide_to(self.future_x, self.future_y+amount)
 
-    def move_forward(self,amount):
+    def move_forward(self, amount):
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
             desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
@@ -609,26 +605,24 @@ class SpriteClass(object):
         else:
             desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
             desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
-        #print desired_x, desired_y
-        self.glide_to(desired_x,desired_y)
+        # print desired_x, desired_y
+        self.glide_to(desired_x, desired_y)
 
     def forward(self, amount):
         self.move_forward(amount)
 
     def move_backward(self, amount):
-        self.move_forward(-amount)
-
-    def backward(self, amount):
-        self.move_forward(-amount)
-
-    def move_backward(self, amount):
         self.move_forward(-1 * amount)
+
     def backward(self, amount):
         self.move_backward(amount)
+
     def move_back(self, amount):
         self.move_backward(amount)
+
     def back(self, amount):
         self.move_backward(amount)
+
     def movex(self, amount):
         self.glide_to(self.future_x+amount, self.future_y)
 
@@ -682,7 +676,7 @@ class SpriteClass(object):
         self.animation_y_coords.append(newy)
         self.animation_x_coords.append("Finished current animation")
         self.animation_y_coords.append("Finished current animation")
-        #print self.animation_y_coords
+        # print self.animation_y_coords
         self.modes.append("translate")
         self.future_x = newx
         self.future_y = newy
@@ -751,7 +745,7 @@ class SpriteClass(object):
     #
     def wait(self, seconds):
         self.modes.append("wait")
-        self.wait_list.append(seconds*25)
+        self.wait_list.append(seconds*50)
         self.wait_list.append("Finished current animation")
         self.total_wait_time += seconds
         self.future_most_recent_wait_time = seconds
@@ -763,13 +757,8 @@ class SpriteClass(object):
         return self.total_wait_time
 
     def say(self, text, seconds=-1, color="#000000", size=12, font="Helvetica"):
-        #self.say_text = text
-        #self.say_time = seconds
-        #self.say_color = color
-        #self.say_size = size
-        #self.say_font = font
         self.modes.append('say')
-        self.say_plans.append([text,seconds*25,color,size,font])
+        self.say_plans.append([text, seconds*50, color, size, font])
 
     def ask(self, text):
         return raw_input(text)
