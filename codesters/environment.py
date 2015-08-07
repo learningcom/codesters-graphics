@@ -188,7 +188,7 @@ class StageClass(object):
         self.forever_function = function
 
     def event_interval(self, function, seconds):
-        self.interval_length = seconds * 50
+        self.interval_length = seconds * 25
         self.interval_function = function
 
     def event_delay(self, function, seconds):

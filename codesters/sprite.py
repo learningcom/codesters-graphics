@@ -28,6 +28,7 @@ class SpriteClass(object):
         "athlete2":"athlete2",
         "astronaut1":"astronaut",
         "astronaut2":"astronaut2",
+        "alien1":"Alien-1",
         "snowman":"Snowman",
         "ufo":"UFO",
         "spaceship":"Shuttle",
@@ -709,7 +710,7 @@ class SpriteClass(object):
 
     def turn_clockwise(self, degrees):
         destination = self.future_heading - degrees
-        frames_needed = (abs(destination/self.speed) / 22)
+        frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -729,7 +730,7 @@ class SpriteClass(object):
 
     def turn_counterclockwise(self, degrees):
         destination = self.future_heading + degrees
-        frames_needed = ((destination/self.speed) / 22)
+        frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -750,7 +751,7 @@ class SpriteClass(object):
     #
     def wait(self, seconds):
         self.modes.append("wait")
-        self.wait_list.append(seconds*50)
+        self.wait_list.append(seconds*25)
         self.wait_list.append("Finished current animation")
         self.total_wait_time += seconds
         self.future_most_recent_wait_time = seconds
@@ -768,7 +769,7 @@ class SpriteClass(object):
         #self.say_size = size
         #self.say_font = font
         self.modes.append('say')
-        self.say_plans.append([text,seconds*50,color,size,font])
+        self.say_plans.append([text,seconds*25,color,size,font])
 
     def ask(self, text):
         return raw_input(text)
