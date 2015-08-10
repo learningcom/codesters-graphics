@@ -131,8 +131,9 @@ class SpriteClass(object):
         "bench": "bench",
         "slide": "slide",
         "sink": "sink",
-        "shower": "shower"
-        
+        "shower": "shower",
+        "hoop": "hoop"
+
     }
 
     ## PIVOTAL FUNCTIONS ##
@@ -359,29 +360,28 @@ class SpriteClass(object):
         if self.collision:
             for e in Manager.elements:
                 if isinstance(e, SpriteClass):
-                    if e.collision:
-                        if self.check_two_sprites_for_collision(e):
-                            if e.goal and self.collision_goal_function is not None:
-                                if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
-                                    self.collision_goal_function(self, e)
-                                elif len(inspect.getargspec(self.collision_function)[0]) == 1:
-                                    self.collision_goal_function(Manager.elements.index(e))
-                                else:
-                                    self.collision_goal_function()
-                            elif e.hazard and self.collision_hazard_function is not None:
-                                if len(inspect.getargspec(self.collision_hazard_function)[0]) == 2:
-                                    self.collision_hazard_function(self, e)
-                                elif len(inspect.getargspec(self.collision_function)[0]) == 1:
-                                    self.collision_hazard_function(Manager.elements.index(e))
-                                else:
-                                    self.collision_hazard_function()
-                            elif self.collision_function is not None:
-                                if len(inspect.getargspec(self.collision_function)[0]) == 2:
-                                    self.collision_function(self, e)
-                                elif len(inspect.getargspec(self.collision_function)[0]) == 1:
-                                    self.collision_function(Manager.elements.index(e))
-                                else:
-                                    self.collision_function()
+                    if self.check_two_sprites_for_collision(e):
+                        if e.goal and self.collision_goal_function is not None:
+                            if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
+                                self.collision_goal_function(self, e)
+                            elif len(inspect.getargspec(self.collision_goal_function)[0]) == 1:
+                                self.collision_goal_function(Manager.elements.index(e))
+                            else:
+                                self.collision_goal_function()
+                        elif e.hazard and self.collision_hazard_function is not None:
+                            if len(inspect.getargspec(self.collision_hazard_function)[0]) == 2:
+                                self.collision_hazard_function(self, e)
+                            elif len(inspect.getargspec(self.collision_hazard_function)[0]) == 1:
+                                self.collision_hazard_function(Manager.elements.index(e))
+                            else:
+                                self.collision_hazard_function()
+                        elif self.collision_function is not None and e.collision:
+                            if len(inspect.getargspec(self.collision_function)[0]) == 2:
+                                self.collision_function(self, e)
+                            elif len(inspect.getargspec(self.collision_function)[0]) == 1:
+                                self.collision_function(Manager.elements.index(e))
+                            else:
+                                self.collision_function()
 
     def update_events(self):
 
@@ -545,7 +545,7 @@ class SpriteClass(object):
                         self.fill_color_var = self.fill_color_plans.pop(0)
                         self.modes.pop(0)
                 elif self.modes[0] == "print_corners":
-                    self.get_name()
+                    print self.get_name()
                     print self.hitbox.top_left, "top_left"
                     print self.hitbox.top_right, "top_right"
                     print self.hitbox.bottom_right, "bottom_right"
@@ -958,15 +958,15 @@ class SpriteClass(object):
     def get_y_scale(self):
         pass
     def get_type(self):
-        print self.type
+        # print self.type
         return self.type
     def get_text(self):
         pass
     def get_name(self):
-        print self.name
+        # print self.name
         return self.name
     def get_image_name(self):
-        print self.image_name
+        # print self.image_name
         return self.image_name
 
 

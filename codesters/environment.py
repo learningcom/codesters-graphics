@@ -5,15 +5,17 @@ from .manager import Manager
 
 class StageClass(object):
     image_dictionary = {
-        "underwater":"Underwater_BG-01",
-        "summer":"beach",
-        "space":"space2",
-        "moon":"Space-Background",
-        "stage":"Stage",
-        "winter":"Winterscape",
-        "grid":"gridfine",
-        "park":"Playground"
+        "underwater": "Underwater_BG-01",
+        "summer": "beach",
+        "space": "space2",
+        "moon": "Space-Background",
+        "stage": "Stage",
+        "winter": "Winterscape",
+        "grid": "gridfine",
+        "park": "Playground",
+        "stadium": "BasketballStadium"
     }
+
     def __init__(self):
         self.root = Manager.canvas
         self.canvas = Manager.canvas
@@ -46,7 +48,7 @@ class StageClass(object):
         self.wall_right_on = True
 
         self.gravity = 0
-        self.bounce = 1
+        self.bounce = 0.9
         self.gravity_true = Manager.default_gravity
         self.gravity_override = True
 
@@ -151,7 +153,7 @@ class StageClass(object):
             bound_key_name = "<Down>"
         if key == "space":
             bound_key_name = "<space>"
-        print bound_key_name
+        #print bound_key_name
         self.canvas.bind(bound_key_name, newfunction, add="+")
 
     def event_click(self, function):
@@ -222,10 +224,10 @@ class StageClass(object):
         self.canvas.update()
 
     def click_x(self):
-        return self.event.x - (self.canvas.winfo_reqwidth()/2)
+        return self.mouse_x()
 
     def click_y(self):
-        return (self.canvas.winfo_reqheight()/2) - self.event.y
+        return self.mouse_y()
 
     def mouse_x(self):
         return (self.canvas.winfo_pointerx() - self.canvas.winfo_rootx()) - self.canvas.winfo_reqwidth()/2
