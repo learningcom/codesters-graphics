@@ -31,7 +31,10 @@ class Point(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -47,11 +50,11 @@ class Point(sprite.SpriteClass):
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
             self.canvas.create_oval(xc - self.width/2, yc - self.height/2, xc + self.width/2, yc + self.height/2,
-                                    fill = self.color, outline = self.color)
+                                    fill=self.color, outline=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -62,8 +65,8 @@ class Point(sprite.SpriteClass):
 
 
 class Circle(sprite.SpriteClass):
-    def __init__(self, x, y, diam, color, outline = None):
-        super(Circle, self).__init__('',x,y, shape='circle')
+    def __init__(self, x, y, diam, color, outline=None):
+        super(Circle, self).__init__('', x, y,  shape='circle')
         self.diam = diam
         self.width = diam
         self.height = diam
@@ -85,7 +88,10 @@ class Circle(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -101,11 +107,11 @@ class Circle(sprite.SpriteClass):
             xc = offsetx + self.xcor
             yc = offsety - self.ycor
             self.canvas.create_polygon(transformations.poly_circle(xc, yc, self.size*self.diam/2),
-                                        fill = self.color, outline = self.outline)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -116,8 +122,8 @@ class Circle(sprite.SpriteClass):
 
 
 class Rectangle(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color = 'black', outline = None):
-        super(Rectangle, self).__init__('',x,y, shape='rectangle')
+    def __init__(self, x, y, width, height, color='black', outline=None):
+        super(Rectangle, self).__init__('', x, y, shape='rectangle')
         self.width = width
         self.height = height
         self.xcor = x
@@ -138,7 +144,10 @@ class Rectangle(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -159,12 +168,15 @@ class Rectangle(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.width*self.size, yf*self.height*self.size, self.heading),
-                                       fill = self.color, outline=self.outline)
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc,
+                                                                 xf*self.width*self.size,
+                                                                 yf*self.height*self.size,
+                                                                 self.heading),
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -175,8 +187,8 @@ class Rectangle(sprite.SpriteClass):
 
 
 class Square(sprite.SpriteClass):
-    def __init__(self, x, y, side, color, outline = None):
-        super(Square, self).__init__('',x,y, shape='square')
+    def __init__(self, x, y, side, color, outline=None):
+        super(Square, self).__init__('', x, y, shape='square')
         self.width = side
         self.height = side
         self.xcor = x
@@ -197,7 +209,10 @@ class Square(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -218,12 +233,15 @@ class Square(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            self.canvas.create_polygon(transformations.poly_rect(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.heading),
-                                       fill = self.color, outline = self.outline)
+            self.canvas.create_polygon(transformations.poly_rect(xc, yc,
+                                                                 xf*self.size*self.width,
+                                                                 yf*self.size*self.height,
+                                                                 self.heading),
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -234,8 +252,8 @@ class Square(sprite.SpriteClass):
 
 
 class Triangle(sprite.SpriteClass):
-    def __init__(self, x, y, side, color, outline = None):
-        super(Triangle, self).__init__('',x,y, shape='triangle')
+    def __init__(self, x, y, side, color, outline=None):
+        super(Triangle, self).__init__('', x, y, shape='triangle')
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
@@ -255,7 +273,10 @@ class Triangle(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -284,13 +305,13 @@ class Triangle(sprite.SpriteClass):
             x3 = math.cos(330 * math.pi / 180) * xf*self.side*self.size/math.sqrt(3) + cx
             y3 = math.sin(330 * math.pi / 180) * -yf*self.side*self.size/math.sqrt(3) + cy
 
-            points = [x1,y1,x2,y2,x3,y3]
+            points = [x1, y1, x2, y2, x3, y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
-                                       fill = self.color, outline = self.outline)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -301,8 +322,8 @@ class Triangle(sprite.SpriteClass):
 
 
 class Ellipse(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline = None):
-        super(Ellipse, self).__init__('',x,y, shape='ellipse')
+    def __init__(self, x, y, width, height, color, outline=None):
+        super(Ellipse, self).__init__('', x, y, shape='ellipse')
         self.width = width
         self.height = height
         self.xcor = x
@@ -323,7 +344,10 @@ class Ellipse(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -342,16 +366,16 @@ class Ellipse(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - xf*self.width*self.size/2,
-                                                                 offsety - self.ycor - yf*self.height*self.size/2,
-                                                                 offsetx + self.xcor + xf*self.width*self.size/2,
-                                                                 offsety - self.ycor +yf*self.height*self.size/2,
+            self.canvas.create_polygon(transformations.poly_oval(offsetx + self.xcor - xf * self.width * self.size / 2,
+                                                                 offsety - self.ycor - yf * self.height * self.size / 2,
+                                                                 offsetx + self.xcor + xf * self.width * self.size / 2,
+                                                                 offsety - self.ycor + yf * self.height * self.size / 2,
                                                                  rotation=self.heading),
-                                        fill = self.color, outline = self.outline)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -379,7 +403,10 @@ class Line(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -400,13 +427,13 @@ class Line(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            points = transformations.poly_line(xc, yc, xf*self.width*self.size, yf*self.height*self.size,self.heading)
-            self.canvas.create_line(points[0],points[1],points[2],points[3],
-                                       fill = self.color)
+            points = transformations.poly_line(xc, yc, xf*self.width*self.size, yf*self.height*self.size, self.heading)
+            self.canvas.create_line(points[0], points[1], points[2], points[3],
+                                    fill=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -415,9 +442,10 @@ class Line(sprite.SpriteClass):
                                     fill=self.say_color)
             self.say_time -= 1
 
+
 class Star(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color, outline = None):
-        super(Star, self).__init__('',x,y, shape='star')
+    def __init__(self, x, y, num_points, diam, color, outline=None):
+        super(Star, self).__init__('', x, y, shape='star')
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
@@ -439,7 +467,10 @@ class Star(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -460,12 +491,16 @@ class Star(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            self.canvas.create_polygon(transformations.poly_star(xc, yc, xf*self.size*self.width, yf*self.size*self.height, self.num_points, self.heading),
+            self.canvas.create_polygon(transformations.poly_star(xc, yc,
+                                                                 xf*self.size*self.width,
+                                                                 yf*self.size*self.height,
+                                                                 self.num_points,
+                                                                 self.heading),
                                        fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -474,8 +509,9 @@ class Star(sprite.SpriteClass):
                                     fill=self.say_color)
             self.say_time -= 1
 
+
 class TriangleIso(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline = None):
+    def __init__(self, x, y, width, height, color, outline=None):
         super(TriangleIso, self).__init__('', x, y, shape='triangleiso')
         self.xcor = x
         self.ycor = y
@@ -497,7 +533,10 @@ class TriangleIso(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -526,13 +565,13 @@ class TriangleIso(sprite.SpriteClass):
             x3 = cx + xf*self.size*self.width/2
             y3 = cy + yf*self.size*self.height/2
 
-            points = [x1,y1,x2,y2,x3,y3]
+            points = [x1, y1, x2, y2, x3, y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
-                                       fill = self.color, outline = self.outline)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -541,9 +580,10 @@ class TriangleIso(sprite.SpriteClass):
                                     fill=self.say_color)
             self.say_time -= 1
 
+
 class TriangleRight(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline = None):
-        super(TriangleRight, self).__init__('',x,y, shape='triangleright')
+    def __init__(self, x, y, width, height, color, outline=None):
+        super(TriangleRight, self).__init__('', x, y, shape='triangleright')
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
@@ -564,7 +604,10 @@ class TriangleRight(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -593,13 +636,13 @@ class TriangleRight(sprite.SpriteClass):
             x3 = cx - xf*self.size*self.width/2
             y3 = cy - yf*self.size*self.height/2
 
-            points = [x1,y1,x2,y2,x3,y3]
+            points = [x1, y1, x2, y2, x3, y3]
             self.canvas.create_polygon(transformations.poly_poly(cx, cy, points, self.heading),
-                                       fill = self.color, outline = self.outline)
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -608,11 +651,12 @@ class TriangleRight(sprite.SpriteClass):
                                     fill=self.say_color)
             self.say_time -= 1
 
+
 class Triangle3Pts(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, color, outline = None):
+    def __init__(self, x1, y1, x2, y2, x3, y3, color, outline=None):
         x = (x1 + x2 + x3)/3
         y = (y1 + y2 + y3)/3
-        super(Triangle3Pts, self).__init__('',x,y, shape='triangle3pts')
+        super(Triangle3Pts, self).__init__('', x, y, shape='triangle3pts')
         self.xcor = (x1 + x2 + x3)/3
         self.ycor = (y1 + y2 + y3)/3
 
@@ -639,7 +683,10 @@ class Triangle3Pts(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -661,21 +708,21 @@ class Triangle3Pts(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
 
-            points = [self.xcor-xf*self.x1,self.ycor-yf*self.y1,
-                      self.xcor-xf*self.x2,self.ycor-yf*self.y2,
-                      self.xcor-xf*self.x3,self.ycor-yf*self.y3]
-            point_tuple = transformations.poly_poly(cx,cy,points,-self.heading)
+            points = [self.xcor-xf*self.x1, self.ycor-yf*self.y1,
+                      self.xcor-xf*self.x2, self.ycor-yf*self.y2,
+                      self.xcor-xf*self.x3, self.ycor-yf*self.y3]
+            point_tuple = transformations.poly_poly(cx, cy, points, -self.heading)
             points[0] = offsetx + self.size*point_tuple[0]
             points[1] = offsety - self.size*point_tuple[1]
             points[2] = offsetx + self.size*point_tuple[2]
             points[3] = offsety - self.size*point_tuple[3]
             points[4] = offsetx + self.size*point_tuple[4]
             points[5] = offsety - self.size*point_tuple[5]
-            self.canvas.create_polygon(tuple(points), fill = self.color, outline = self.outline)
+            self.canvas.create_polygon(tuple(points), fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -686,10 +733,10 @@ class Triangle3Pts(sprite.SpriteClass):
 
 
 class Quad(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color, outline = None):
+    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color, outline=None):
         x = (x1 + x2 + x3 + x4)/4
         y = (y1 + y2 + y3 + x4)/4
-        super(Quad, self).__init__('',x,y, shape='quad')
+        super(Quad, self).__init__('', x, y, shape='quad')
         self.xcor = (x1 + x2 + x3 + x4)/4
         self.ycor = (y1 + y2 + y3 + x4)/4
 
@@ -718,7 +765,10 @@ class Quad(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -744,7 +794,7 @@ class Quad(sprite.SpriteClass):
                       self.xcor-xf*self.x2, self.ycor-yf*self.y2,
                       self.xcor-xf*self.x3, self.ycor-yf*self.y3,
                       self.xcor-xf*self.x4, self.ycor-yf*self.y4]
-            point_tuple = transformations.poly_poly(cx,cy,points,-self.heading)
+            point_tuple = transformations.poly_poly(cx, cy, points, -self.heading)
             points[0] = offsetx + self.size*point_tuple[0]
             points[1] = offsety - self.size*point_tuple[1]
             points[2] = offsetx + self.size*point_tuple[2]
@@ -753,7 +803,7 @@ class Quad(sprite.SpriteClass):
             points[5] = offsety - self.size*point_tuple[5]
             points[6] = offsetx + self.size*point_tuple[6]
             points[7] = offsety - self.size*point_tuple[7]
-            self.canvas.create_polygon(tuple(points), fill=self.color, outline = self.outline)
+            self.canvas.create_polygon(tuple(points), fill=self.color, outline=self.outline)
         for p in self.polygons:
             self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
@@ -768,8 +818,8 @@ class Quad(sprite.SpriteClass):
 
 
 class Polygon(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color, outline = None):
-        super(Polygon, self).__init__('',x,y, shape='polygon')
+    def __init__(self, x, y, num_points, diam, color, outline=None):
+        super(Polygon, self).__init__('', x, y, shape='polygon')
         self.xcor = x
         self.ycor = y
         self.future_x = self.xcor
@@ -791,7 +841,10 @@ class Polygon(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -812,15 +865,18 @@ class Polygon(sprite.SpriteClass):
                 xf = -1
             if self.y_flipped:
                 yf = -1
-            points = [xc - xf*self.width*self.size/2, yc-yf*self.height*self.size/2, xc + xf*self.width*self.size/2, yc + yf*self.size*self.height/2]
-            self.canvas.create_polygon(transformations.poly_oval(points[0],points[1],points[2],points[3],
-                                                                 steps = self.num_points,
-                                                                 rotation = self.heading),
-                                       fill=self.color, outline = self.outline)
+            points = [xc - xf*self.width*self.size/2,
+                      yc-yf*self.height*self.size/2,
+                      xc + xf*self.width*self.size/2,
+                      yc + yf*self.size*self.height/2]
+            self.canvas.create_polygon(transformations.poly_oval(points[0], points[1], points[2], points[3],
+                                                                 steps=self.num_points,
+                                                                 rotation=self.heading),
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -831,8 +887,8 @@ class Polygon(sprite.SpriteClass):
 
 
 class Arc(sprite.SpriteClass):
-    def __init__(self, x, y, diam, start, end, color, outline = None):
-        super(Arc, self).__init__('',x,y, shape='arc')
+    def __init__(self, x, y, diam, start, end, color, outline=None):
+        super(Arc, self).__init__('', x, y, shape='arc')
         self.width = diam
         self.height = diam
         self.xcor = x
@@ -856,7 +912,10 @@ class Arc(sprite.SpriteClass):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -876,16 +935,16 @@ class Arc(sprite.SpriteClass):
             if self.y_flipped:
                 yf = -1
             self.canvas.create_polygon(transformations.poly_arc(offsetx + self.xcor - xf*self.width*self.size/2,
-                                                                 offsety - self.ycor - yf*self.height*self.size/2,
-                                                                 offsetx + self.xcor + xf*self.width*self.size/2,
-                                                                 offsety - self.ycor + yf*self.height*self.size/2,
-                                                                 self.start_angle, self.end_angle,
-                                                                 rotation=self.heading),
-                                        fill = self.color, outline = self.outline)
+                                                                offsety - self.ycor - yf*self.height*self.size/2,
+                                                                offsetx + self.xcor + xf*self.width*self.size/2,
+                                                                offsety - self.ycor + yf*self.height*self.size/2,
+                                                                self.start_angle, self.end_angle,
+                                                                rotation=self.heading),
+                                       fill=self.color, outline=self.outline)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor - 100,
@@ -894,9 +953,10 @@ class Arc(sprite.SpriteClass):
                                     fill=self.say_color)
             self.say_time -= 1
 
+
 class Curve(sprite.SpriteClass):
     def __init__(self, x1, y1, cx1, cy1, cx2, cy2, x2, y2, fill, color):
-        super(Curve, self).__init__('',x1,y1, shape='curve')
+        super(Curve, self).__init__('', x1, y1, shape='curve')
         offsetx = self.canvas.winfo_reqwidth()/2
         offsety = self.canvas.winfo_reqheight()/2
         self.xcor = (x1+x2)/2
@@ -940,24 +1000,24 @@ class Curve(sprite.SpriteClass):
         newx2 = (math.cos(theta) * (x2-cx) - math.sin(theta) * (y2-cy))*self.size*xf + cx
         newy2 = (math.sin(theta) * (x2-cx) + math.cos(theta) * (y2-cy))*self.size*yf + cy
 
-        self.P0 = [newx1,newy1]
-        self.P1 = [newcx1,newcy1]
-        self.P2 = [newcx2,newcy2]
-        self.P3 = [newx2,newy2]
+        self.P0 = [newx1, newy1]
+        self.P1 = [newcx1, newcy1]
+        self.P2 = [newcx2, newcy2]
+        self.P3 = [newx2, newy2]
 
         b = bezier.Bezier()
-        points = b.draw_cubic_bez(self.P0,self.P1,self.P2,self.P3)
+        points = b.draw_cubic_bez(self.P0, self.P1, self.P2, self.P3)
         for i in range(len(points) - 1):
-            pointuple = tuple([points[i][0],points[i][1],points[i+1][0],points[i+1][1]])
-            self.canvas.create_line(pointuple, fill = self.color)
+            pointuple = tuple([points[i][0], points[i][1], points[i+1][0], points[i+1][1]])
+            self.canvas.create_line(pointuple, fill=self.color)
 
         if self.forever_function is not None:
             self.forever_function()
 
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
 
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
@@ -966,6 +1026,7 @@ class Curve(sprite.SpriteClass):
                                     font=(self.say_font, self.say_size),
                                     fill=self.say_color)
             self.say_time -= 1
+
 
 class Text(sprite.SpriteClass):
     def __init__(self, text, x, y, color="black"):
@@ -988,20 +1049,25 @@ class Text(sprite.SpriteClass):
         if self.forever_function is not None:
             self.forever_function()
         if not self.hidden:
-            self.canvas.create_oval((self.xcor-(self.size/2),self.ycor-(self.size/2),self.xcor+(self.size/2),self.ycor+(self.size/2)), fill=self.color)
+            self.canvas.create_oval((self.xcor-(self.size/2),
+                                     self.ycor-(self.size/2),
+                                     self.xcor+(self.size/2),
+                                     self.ycor+(self.size/2)),
+                                    fill=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill = p[1])
+            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill = l[1], width = l[2])
+            self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
             self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
                                     self.canvas.winfo_reqheight()/2 - self.ycor,
                                     text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
 
+
 class Display(sprite.SpriteClass):
     def __init__(self, var, x=-200, y=200):
-        super(Display, self).__init__('',x,y, shape="display")
+        super(Display, self).__init__('', x, y, shape="display")
 
         frame = inspect.currentframe()
         try:
@@ -1038,11 +1104,10 @@ class Display(sprite.SpriteClass):
         self.var_text = self.s_split2[0]
         self.display_var = self.s[1]
 
-
     def draw(self):
         offX = self.xcor + self.canvas.winfo_reqwidth()/2
         offY = self.canvas.winfo_reqheight()/2 - self.ycor
         self.canvas.create_rectangle(offX-25, offY-25, offX+25, offY+25,
-                                fill='#000066', outline='#FFFFFF')
-        self.canvas.create_text(offX, offY - 10, text = self.var_text, fill = '#FF8800')
-        self.canvas.create_text(offX, offY + 10, text = self.display_var, fill = '#6688FF')
+                                     fill='#000066', outline='#FFFFFF')
+        self.canvas.create_text(offX, offY - 10, text=self.var_text, fill='#FF8800')
+        self.canvas.create_text(offX, offY + 10, text=self.display_var, fill='#6688FF')
