@@ -84,10 +84,10 @@ class SpriteClass(object):
         "snowflake1": "snowflake1",
         "snowflake2": "snowflake2",
         "snowflake3": "snowflake3",
-        "present1": "present1",
-        "present2": "present2",
-        "present3": "present3",
-        "present4": "present4",
+        "present1": "Present1",
+        "present2": "Present2",
+        "present3": "Present3",
+        "present4": "Present4",
         "present5": "present_5",
         "present6": "present_6",
         "present7": "present_7",
@@ -316,15 +316,15 @@ class SpriteClass(object):
         if self.gravity_true:
             self.yspeed -= self.gravity
 
-        if  self.pen:
+        if self.pen:
             newline = []
             newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
             newline.append(self.pen_color_var)
             newline.append(self.pen_size_var)
             self.lines.append(newline)
         if self.fill and self.pen:
-           self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
-           self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
+            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
+            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
         self.hitbox.update_corners()
 
@@ -336,27 +336,50 @@ class SpriteClass(object):
         tempheight = top-bottom
         tempwidth = right-left
 
-        if Manager.stage.wall_bottom_on:
+        if Manager.stage.wall_bottom_on and self.gravity and not self.gravity_override:
             if bottom < -self.canvas.winfo_reqheight()/2:
                 self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
                 self.jump(abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_top_on:
+        if Manager.stage.wall_top_on and self.gravity and not self.gravity_override:
             if top > self.canvas.winfo_reqheight()/2:
                 self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
                 self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_left_on:
+        if Manager.stage.wall_left_on and self.gravity and not self.gravity_override:
             if left < -self.canvas.winfo_reqwidth()/2:
                 self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
                 self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
-        if Manager.stage.wall_right_on:
+        if Manager.stage.wall_right_on and self.gravity and not self.gravity_override:
             if right > self.canvas.winfo_reqwidth()/2:
                 self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
+
+    def clear_queue(self):
+        self.update_animation()
+        self.future_x = self.xcor
+        self.future_y = self.ycor
+        self.future_heading = self.heading
+        self.future_y_flipped = self.y_flipped
+        self.future_x_flipped = self.x_flipped
+        self.animation_x_coords = []
+        self.animation_y_coords = []
+        self.animation_rotation_degrees = []
+        self.wait_list = []
+        self.say_plans = []
+        self.pen_size_plans = []
+        self.pen_plans = []
+        self.pen_color_plans = []
+        self.dilate_plans = []
+        self.fill_color_plans = []
+        self.fill_plans = []
+        self.scale_plans = []
+        self.x_flip_plans = []
+        self.y_flip_plans = []
+        self.modes = []
 
     def update_collision(self):
         if self.collision:
@@ -364,56 +387,9 @@ class SpriteClass(object):
                 if isinstance(e, SpriteClass):
                     if self.check_two_sprites_for_collision(e):
                         if e.goal or e.hazard or e.collision:
-                            self.future_x = self.xcor
-                            self.future_y = self.ycor
-                            self.future_heading = self.heading
-                            self.animation_x_coords = []
-                            self.animation_y_coords = []
-                            self.animation_rotation_degrees = []
-                            self.wait_list = []
-                            self.say_plans = []
-                            self.pen_size_plans = []
-                            self.pen_plans = []
-                            self.pen_color_plans = []
-                            self.dilate_plans = []
-                            self.fill_color_plans = []
-                            self.fill_plans = []
-                            self.scale_plans = []
-                            self.x_flip_plans = []
-                            self.y_flip_plans = []
-                            self.modes = []
+                            self.clear_queue()
+                            e.clear_queue()
 
-                            e.future_x = e.xcor
-                            e.future_y = e.ycor
-                            e.future_heading = e.heading
-                            e.animation_x_coords = []
-                            e.animation_y_coords = []
-                            e.animation_rotation_degrees = []
-                            e.wait_list = []
-                            e.say_plans = []
-                            e.pen_size_plans = []
-                            e.pen_plans = []
-                            e.pen_color_plans = []
-                            e.dilate_plans = []
-                            e.fill_color_plans = []
-                            e.fill_plans = []
-                            e.scale_plans = []
-                            e.x_flip_plans = []
-                            e.y_flip_plans = []
-                            e.modes = []
-
-                            '''
-                            if len(self.modes) > 0 and self.modes[0] == "translate":
-                                while not isinstance(self.animation_x_coords[0], basestring):
-                                    self.animation_x_coords.pop(0)
-                                    self.animation_y_coords.pop(0)
-                                self.modes.pop(0)
-                            if len(e.modes) > 0 and e.modes[0] == "translate":
-                                while not isinstance(e.animation_x_coords[0], basestring):
-                                    e.animation_x_coords.pop(0)
-                                    e.animation_y_coords.pop(0)
-                                e.modes.pop(0)
-                                '''
                         if e.goal and self.collision_goal_function is not None:
                             if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
                                 self.collision_goal_function(self, e)
@@ -1071,26 +1047,31 @@ class SpriteClass(object):
 
     def event_left_key(self, function):
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind("<Left>", f)
 
     def event_right_key(self, function):
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind("<Right>", f)
 
     def event_up_key(self, function):
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind("<Up>", f)
 
     def event_down_key(self, function):
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind("<Down>", f)
 
     def event_space_key(self, function):
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind("<space>", f)
 
@@ -1112,6 +1093,7 @@ class SpriteClass(object):
             newkey = "<Space>"
         self.keys.append(newkey)
         def f(event):
+            self.clear_queue()
             function()
         self.canvas.bind(newkey, f, add = "+")
         self.key = True
@@ -1125,6 +1107,7 @@ class SpriteClass(object):
             ex = event.x - self.canvas.winfo_reqwidth()/2
             ey = self.canvas.winfo_reqwidth()/2 - event.y
             if ex < right and ex > left and ey < top and ey > bottom:
+                self.clear_queue()
                 function()
         self.canvas.bind("<Button-1>", click, add='+')
 

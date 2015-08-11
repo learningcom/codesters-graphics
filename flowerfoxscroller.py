@@ -20,7 +20,6 @@ stage.set_bounce(0.3)
 
 
 
-
 # Let's make the fox jump if you push the space bar
 def space_key():
     fox.jump(10)
@@ -42,7 +41,7 @@ presents = []
 
 for i in range(10): # making 10 presents
 
-    present = codesters.Sprite('turtle', 200 * i, -100)
+    present = codesters.Sprite('present1', 200 * i, -100)
 
     # Turn gravity off so it doesn't fall
     present.set_gravity_off()

@@ -122,32 +122,45 @@ class StageClass(object):
         if text in Manager.elements:
             Manager.elements.remove(text)
 
+    def clear_queue(self):
+        pass
+
     def event_left_key(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Left>", newfunction, add="+")
 
     def event_right_key(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Right>", newfunction, add="+")
 
     def event_up_key(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Up>", newfunction, add="+")
 
     def event_down_key(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Down>", newfunction, add="+")
 
     def event_space_key(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
 
@@ -155,6 +168,8 @@ class StageClass(object):
 
     def event_key(self, key, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         bound_key_name = key
@@ -173,24 +188,32 @@ class StageClass(object):
 
     def event_click(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_down(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_up(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
     def event_mouse_move(self, function):
         def newfunction(event):
+            for e in Manager.elements:
+                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Motion>", newfunction, add="+")
