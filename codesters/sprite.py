@@ -326,6 +326,8 @@ class SpriteClass(object):
            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
+        self.hitbox.update_corners()
+
         top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
         right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
         bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
