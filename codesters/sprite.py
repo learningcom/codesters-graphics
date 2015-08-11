@@ -363,6 +363,57 @@ class SpriteClass(object):
             for e in Manager.elements:
                 if isinstance(e, SpriteClass):
                     if self.check_two_sprites_for_collision(e):
+                        if e.goal or e.hazard or e.collision:
+                            self.future_x = self.xcor
+                            self.future_y = self.ycor
+                            self.future_heading = self.heading
+                            self.animation_x_coords = []
+                            self.animation_y_coords = []
+                            self.animation_rotation_degrees = []
+                            self.wait_list = []
+                            self.say_plans = []
+                            self.pen_size_plans = []
+                            self.pen_plans = []
+                            self.pen_color_plans = []
+                            self.dilate_plans = []
+                            self.fill_color_plans = []
+                            self.fill_plans = []
+                            self.scale_plans = []
+                            self.x_flip_plans = []
+                            self.y_flip_plans = []
+                            self.modes = []
+
+                            e.future_x = e.xcor
+                            e.future_y = e.ycor
+                            e.future_heading = e.heading
+                            e.animation_x_coords = []
+                            e.animation_y_coords = []
+                            e.animation_rotation_degrees = []
+                            e.wait_list = []
+                            e.say_plans = []
+                            e.pen_size_plans = []
+                            e.pen_plans = []
+                            e.pen_color_plans = []
+                            e.dilate_plans = []
+                            e.fill_color_plans = []
+                            e.fill_plans = []
+                            e.scale_plans = []
+                            e.x_flip_plans = []
+                            e.y_flip_plans = []
+                            e.modes = []
+
+                            '''
+                            if len(self.modes) > 0 and self.modes[0] == "translate":
+                                while not isinstance(self.animation_x_coords[0], basestring):
+                                    self.animation_x_coords.pop(0)
+                                    self.animation_y_coords.pop(0)
+                                self.modes.pop(0)
+                            if len(e.modes) > 0 and e.modes[0] == "translate":
+                                while not isinstance(e.animation_x_coords[0], basestring):
+                                    e.animation_x_coords.pop(0)
+                                    e.animation_y_coords.pop(0)
+                                e.modes.pop(0)
+                                '''
                         if e.goal and self.collision_goal_function is not None:
                             if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
                                 self.collision_goal_function(self, e)
@@ -384,6 +435,9 @@ class SpriteClass(object):
                                 self.collision_function(Manager.elements.index(e))
                             else:
                                 self.collision_function()
+
+                        self.update_animation()
+                        e.update_animation()
 
     def update_events(self):
 
