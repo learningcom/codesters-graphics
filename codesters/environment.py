@@ -107,7 +107,7 @@ class StageClass(object):
         if shape not in Manager.elements:
             Manager.elements.append(shape)
 
-    def add_text(self, text): # BROKEN ON CODESTERS.COM
+    def add_text(self, text):  # BROKEN ON CODESTERS.COM
         pass
 
     def remove_sprite(self, sprite):
@@ -183,7 +183,7 @@ class StageClass(object):
             bound_key_name = "<Down>"
         if key == "space":
             bound_key_name = "<space>"
-        #print bound_key_name
+        # print bound_key_name
         self.canvas.bind(bound_key_name, newfunction, add="+")
 
     def event_click(self, function):
@@ -325,7 +325,6 @@ class StageClass(object):
                 e.gravity = amount/10.0
         Manager.default_gravity = True
 
-
     def wait(self, seconds):
         for e in Manager.elements:
             if e.type != Environment:
@@ -333,6 +332,7 @@ class StageClass(object):
 
     def get_sprite_by_index(self, index):
         return Manager.elements[index]
+
 
 class Environment(StageClass):
     def __init__(self):

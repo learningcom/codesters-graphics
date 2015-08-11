@@ -336,22 +336,22 @@ class SpriteClass(object):
         tempheight = top-bottom
         tempwidth = right-left
 
-        if Manager.stage.wall_bottom_on and self.gravity and not self.gravity_override:
+        if Manager.stage.wall_bottom_on and self.gravity:
             if bottom < -self.canvas.winfo_reqheight()/2:
                 self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
                 self.jump(abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_top_on and self.gravity and not self.gravity_override:
+        if Manager.stage.wall_top_on and self.gravity:
             if top > self.canvas.winfo_reqheight()/2:
                 self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
                 self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_left_on and self.gravity and not self.gravity_override:
+        if Manager.stage.wall_left_on and self.gravity:
             if left < -self.canvas.winfo_reqwidth()/2:
                 self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
                 self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
-        if Manager.stage.wall_right_on and self.gravity and not self.gravity_override:
+        if Manager.stage.wall_right_on and self.gravity:
             if right > self.canvas.winfo_reqwidth()/2:
                 self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
@@ -359,7 +359,13 @@ class SpriteClass(object):
         self.hitbox.update_corners()
 
     def clear_queue(self):
-        self.update_animation()
+        while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
+                (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
+                (len(self.scale_plans) > 1 and isinstance(self.scale_plans[1], basestring)) or\
+                (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)):
+            self.update_animation()
+            self.update_animation()
+            self.update_animation()
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.future_heading = self.heading
@@ -1000,7 +1006,6 @@ class SpriteClass(object):
     def get_image_name(self):
         # print self.image_name
         return self.image_name
-
 
     def set_size(self, newsize):
         self.scale_plans.append(newsize)
