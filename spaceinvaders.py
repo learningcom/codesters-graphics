@@ -15,7 +15,7 @@ for row in range(3):
     x = -200
 
 stage.set_bounce(1)
-stage.set_background("Space-Background")
+stage.set_background("space")
 ship = codesters.Sprite("rocket", 0, -215)
 ship.set_size(.5)
 x = -200
@@ -30,7 +30,7 @@ for row in range(3):
     x = -200
 
 stage.set_bounce(1)
-stage.set_background("Space-Background")
+stage.set_background("space")
 ship = codesters.Sprite("rocket", 0, -215)
 ship.set_size(.5)
 

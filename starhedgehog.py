@@ -3,7 +3,7 @@ import codesters
 global hedgey, text
 #stage = codesters.Environment()
 
-stage.set_background("Space-Background")
+stage.set_background("moon")
 
 hedgey = codesters.Sprite("hedgehog")
 hedgey.go_to(0, -210)

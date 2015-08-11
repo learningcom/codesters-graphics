@@ -11,9 +11,24 @@ class StageClass(object):
         "moon": "Space-Background",
         "stage": "Stage",
         "winter": "Winterscape",
-        "grid": "gridfine",
+        "grid2": "gridfine",
         "park": "Playground",
-        "stadium": "BasketballStadium"
+        "stadium": "BasketballStadium",
+        "flower_field": "Long-flower-field",
+        "spring": '',   # CANNOT FIND THIS IMAGE IN SPRITES
+        "fall": '',   # CANNOT FIND THIS IMAGE IN SPRITES
+        "tilewall": "bathroom-01",
+        "concert": "concertstage",
+        "theater": "Stage",
+        "city": "CityBackground",
+        "baseballfield": "baseballdiamond",
+        "grid": "Modified-graph",
+        "houseinterior": '',   # CANNOT FIND THIS IMAGE IN SPRITES
+        "soccerfield": "soccer-field",
+        "subway": '',   # CANNOT FIND THIS IMAGE IN SPRITES
+        "flowers": "flowerfield",
+        "footballfield": "footballfield",
+        "jungle": '',   # CANNOT FIND THIS IMAGE IN SPRITES
     }
 
     def __init__(self):
@@ -191,8 +206,11 @@ class StageClass(object):
         pass
 
     def set_background(self, image):
-        self.bg_image_name = image
-        self.bg_image = Image.open("./codesters/sprites/"+image+".gif")
+        if image != '':
+            self.bg_image_name = self.image_dictionary[image]
+            self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+    #    self.bg_image_name = image
+    #    self.bg_image = Image.open("./codesters/sprites/"+image+".gif")
 
     def set_background_x(self, amount):
         self.xcor = amount + self.canvas.winfo_reqwidth()

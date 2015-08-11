@@ -13,7 +13,7 @@ pipe_interval = 1.5
 gravity = 10
 flappiness = 5
 
-stage.set_background("Underwater-BG")
+stage.set_background("underwater")
 sprite = codesters.Sprite("shower") # FILE NAMES ARE DIFF ON THE SITE (SITE VS. LOCAL ISSUE)
 sprite.set_size(0.2)
 sprite.go_to(-200, 0)

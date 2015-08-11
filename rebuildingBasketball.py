@@ -5,7 +5,7 @@
 import codesters
 
 stage = codesters.Environment()
-stage.set_background('BasketballStadium')
+stage.set_background('stadium')
 stage.set_background_x(-650)
 stage.set_bounce(0.5)
 
