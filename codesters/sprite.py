@@ -302,6 +302,7 @@ class SpriteClass(object):
                                     fill=self.say_color)
             self.say_time -= 1
         if self.say_time <= 0 and len(self.say_queue) > 0:
+
             self.say_text = self.say_queue[0][0]
             self.say_time = self.say_queue[0][1]
             self.say_color = self.say_queue[0][2]
@@ -615,7 +616,7 @@ class SpriteClass(object):
                 elif self.modes[0] == "say":
                     if len(self.say_plans) > 0:
                         self.say_queue.append(self.say_plans[0])
-                        '''
+                        ''''
                         self.say_text = self.say_plans[0][0]
                         self.say_time = self.say_plans[0][1]
                         self.say_color = self.say_plans[0][2]
