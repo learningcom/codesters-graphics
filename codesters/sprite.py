@@ -1074,31 +1074,31 @@ class SpriteClass(object):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Left>", f)
+        self.canvas.bind("<Left>", f, add = "+")
 
     def event_right_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Right>", f)
+        self.canvas.bind("<Right>", f, add = "+")
 
     def event_up_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Up>", f)
+        self.canvas.bind("<Up>", f, add = "+")
 
     def event_down_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Down>", f)
+        self.canvas.bind("<Down>", f, add = "+")
 
-    def event_space_key(self, function):
+    def event_space_key(self, function, add = "+"):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<space>", f)
+        self.canvas.bind("<space>", f, add = "+")
 
     def event_key(self, key, function):
         newkey = key
