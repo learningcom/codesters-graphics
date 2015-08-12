@@ -182,6 +182,7 @@ class SpriteClass(object):
         self.say_time = 0
         self.say_font = ""
         self.say_plans = []
+        self.say_queue = []
 
         self.paused = False
 
@@ -300,6 +301,13 @@ class SpriteClass(object):
                                     text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
             self.say_time -= 1
+        if self.say_time <= 0 and len(self.say_queue) > 0:
+            self.say_text = self.say_queue[0][0]
+            self.say_time = self.say_queue[0][1]
+            self.say_color = self.say_queue[0][2]
+            self.say_size = self.say_queue[0][3]
+            self.say_font = self.say_queue[0][4]
+            print self.say_queue.pop(0)
 
     def update_physics(self):
         prevx = self.xcor
@@ -362,7 +370,9 @@ class SpriteClass(object):
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
                 (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
                 (len(self.scale_plans) > 1 and isinstance(self.scale_plans[1], basestring)) or\
-                (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)):
+                (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)) or\
+                (len(self.modes) > 0 and self.modes[0] == 'say') or\
+                (len(self.modes) > 0 and self.modes[0] == 'wait'):
             self.update_animation()
             self.update_animation()
             self.update_animation()
@@ -374,8 +384,8 @@ class SpriteClass(object):
         self.animation_x_coords = []
         self.animation_y_coords = []
         self.animation_rotation_degrees = []
-        self.wait_list = []
-        self.say_plans = []
+        # self.wait_list = []
+        # self.say_plans = []
         self.pen_size_plans = []
         self.pen_plans = []
         self.pen_color_plans = []
@@ -385,7 +395,13 @@ class SpriteClass(object):
         self.scale_plans = []
         self.x_flip_plans = []
         self.y_flip_plans = []
-        self.modes = []
+        # self.modes = []
+        # print self.modes
+        for i in self.modes:
+            if not (i == 'say' or i == 'wait'):
+                self.modes.remove(i)
+        # print self.modes
+
 
     def update_collision(self):
         if self.collision:
@@ -598,11 +614,14 @@ class SpriteClass(object):
 
                 elif self.modes[0] == "say":
                     if len(self.say_plans) > 0:
+                        self.say_queue.append(self.say_plans[0])
+                        '''
                         self.say_text = self.say_plans[0][0]
                         self.say_time = self.say_plans[0][1]
                         self.say_color = self.say_plans[0][2]
                         self.say_size = self.say_plans[0][3]
                         self.say_font = self.say_plans[0][4]
+                        '''
                         self.say_plans.pop(0)
                     self.modes.pop(0)
 
@@ -789,6 +808,7 @@ class SpriteClass(object):
         return self.total_wait_time
 
     def say(self, text, seconds=-1, color="#000000", size=12, font="Helvetica"):
+        print text
         self.modes.append('say')
         self.say_plans.append([text, seconds*50, color, size, font])
 
