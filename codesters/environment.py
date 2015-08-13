@@ -222,7 +222,14 @@ class StageClass(object):
 
     def set_background(self, image):
         if image != '':
-            self.bg_image_name = self.image_dictionary[image]
+            try:
+                self.bg_image_name = self.image_dictionary[image]
+                self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+            except KeyError:
+                self.bg_image_name = self.image_dictionary['grid']
+                self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+        else:
+            self.bg_image_name = self.image_dictionary['grid']
             self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
     #    self.bg_image_name = image
     #    self.bg_image = Image.open("./codesters/sprites/"+image+".gif")

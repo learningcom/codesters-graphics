@@ -243,9 +243,13 @@ class SpriteClass(object):
         self.polygons = []
 
         if image != '':
-            self.filename = self.image_dictionary[image]
-            self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
-            self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+            try:
+                self.filename = self.image_dictionary[image]
+                self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+                self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+            except KeyError:
+                self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
+                self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
             im2 = self.photo.convert('RGBA')
             rot = im2.rotate(self.heading, expand=1)
             fff = Image.new("RGBA", rot.size, (0,)*4)
@@ -302,7 +306,8 @@ class SpriteClass(object):
                                     text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
             self.say_time -= 1
-        if self.say_time <= 0 and len(self.say_queue) > 0:
+        if self.say_time <= 0 < len(self.say_queue):
+            # This is a really weird expression to chain like this, but it works, and pycharm keeps bugging me about it.
 
             self.say_text = self.say_queue[0][0]
             self.say_time = self.say_queue[0][1]
@@ -616,13 +621,6 @@ class SpriteClass(object):
                     if len(self.say_plans) > 0:
                         # print'saying'
                         self.say_queue.append(self.say_plans[0])
-                        ''''
-                        self.say_text = self.say_plans[0][0]
-                        self.say_time = self.say_plans[0][1]
-                        self.say_color = self.say_plans[0][2]
-                        self.say_size = self.say_plans[0][3]
-                        self.say_font = self.say_plans[0][4]
-                        '''
                         self.say_plans.pop(0)
                     self.modes.pop(0)
 
