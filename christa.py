@@ -8,7 +8,7 @@ import codesters
 
 global ball, sprite1
 
-stage.set_background("grid")
+stage.set_background("tilewall")
 sprite1 = codesters.Sprite("penguin")
 ball = codesters.Sprite("soccerball")
 bounce = random.random()

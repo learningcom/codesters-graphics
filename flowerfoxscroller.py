@@ -4,20 +4,13 @@ import codesters
 # we need a really long background like this field of flowers
 stage.set_background('flower_field')
 
-
-
 # Make a character, we'll use a fox
 global fox
 fox = codesters.Sprite('fox', -200, 0)
 
-
-
-
 # Add some gravity so our fox doesn't float away
 stage.set_gravity(10)
 stage.set_bounce(0.3)
-
-
 
 
 # Let's make the fox jump if you push the space bar
@@ -25,21 +18,12 @@ def space_key():
     fox.jump(10)
 stage.event_key('space', space_key)
 
-
-
-
-
 # Let's make something for the fox to find
 # How about some presents, maybe it's the fox's birthday
-
-
-
 # Here's an empty list that will hold the presents
 presents = []
 
-
-
-for i in range(10): # making 10 presents
+for i in range(10):  # making 10 presents
 
     present = codesters.Sprite('present1', 200 * i, -100)
 
@@ -51,11 +35,6 @@ for i in range(10): # making 10 presents
 
     # add it to our list of presents
     presents.append(present)
-
-
-
-
-
 
 
 # In a side scroller game, the background moves
@@ -79,7 +58,6 @@ def stage_move_right():
 stage.event_key('left', stage_move_right)  # The left key makes the stage move right
 
 
-
 # Do the same thing for the other direction
 def stage_move_left():
     global stage
@@ -90,14 +68,9 @@ def stage_move_left():
 stage.event_key('right', stage_move_left)
 
 
-
-
-
 # We can give the fox points when the fox gets a present
 points = 0
 points_text = codesters.Text(str(points), -220, 200)
-
-
 
 
 # Make a function for when the fox finds a present

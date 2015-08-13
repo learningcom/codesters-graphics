@@ -716,7 +716,7 @@ class SpriteClass(object):
         xdist = float(newx - self.future_x)
         ydist = float(newy - self.future_y)
         dist = math.sqrt(xdist**2 + ydist**2)
-        frames_needed = ((dist/self.speed) / 22)
+        frames_needed = ((dist/self.speed) / 12)
         if frames_needed == 0:
             frames_needed = 1
         x_step_size = xdist/frames_needed
@@ -740,7 +740,8 @@ class SpriteClass(object):
         destination = math.atan(float(toy - self.future_y)/float(tox - self.future_x))*(180/math.pi)
         if tox - self.future_x < 0:
             destination += 180
-        frames_needed = (abs(destination-self.future_heading/self.speed) / 22)
+        frames_needed = 12 / self.speed
+        # frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -757,7 +758,8 @@ class SpriteClass(object):
 
     def turn_clockwise(self, degrees):
         destination = self.future_heading - degrees
-        frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
+        frames_needed = 12 / self.speed
+        # frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -777,7 +779,8 @@ class SpriteClass(object):
 
     def turn_counterclockwise(self, degrees):
         destination = self.future_heading + degrees
-        frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
+        frames_needed = 12 * self.speed
+        # frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
