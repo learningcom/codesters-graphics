@@ -347,28 +347,27 @@ class SpriteClass(object):
         tempheight = top-bottom
         tempwidth = right-left
 
-        if Manager.stage.wall_bottom_on and self.gravity:
+        if Manager.stage.wall_bottom_on and self.gravity_true:
             if bottom < -self.canvas.winfo_reqheight()/2:
                 self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
                 self.jump(abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_top_on and self.gravity:
+        if Manager.stage.wall_top_on and self.gravity_true:
             if top > self.canvas.winfo_reqheight()/2:
                 self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
                 self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_left_on and self.gravity:
+        if Manager.stage.wall_left_on and self.gravity_true:
             if left < -self.canvas.winfo_reqwidth()/2:
                 self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
                 self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
-        if Manager.stage.wall_right_on and self.gravity:
+        if Manager.stage.wall_right_on and self.gravity_true:
             if right > self.canvas.winfo_reqwidth()/2:
                 self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
                 self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
-
 
     def clear_queue(self):
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
@@ -398,12 +397,10 @@ class SpriteClass(object):
         self.scale_plans = []
         self.x_flip_plans = []
         self.y_flip_plans = []
-        # self.modes = []
-        # print self.modes
+
         for i in self.modes:
             if not (i == 'say' or i == 'wait'):
                 self.modes.remove(i)
-        # print self.modes
 
     def update_collision(self):
         if self.collision:
@@ -449,7 +446,7 @@ class SpriteClass(object):
                 left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
                 ex = self.canvas.winfo_pointerx()
                 ey = self.canvas.winfo_pointery()
-                if ex < right and ex > left and ey < top and ey > bottom:
+                if left < ex < right and bottom < ey < top:
                     changex = ex - self.xcor
                     changey = ey - self.ycor
                     self.xcor = ex
@@ -1078,31 +1075,31 @@ class SpriteClass(object):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Left>", f, add = "+")
+        self.canvas.bind("<Left>", f, add="+")
 
     def event_right_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Right>", f, add = "+")
+        self.canvas.bind("<Right>", f, add="+")
 
     def event_up_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Up>", f, add = "+")
+        self.canvas.bind("<Up>", f, add="+")
 
     def event_down_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Down>", f, add = "+")
+        self.canvas.bind("<Down>", f, add="+")
 
     def event_space_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<space>", f, add = "+")
+        self.canvas.bind("<space>", f, add="+")
 
     def event_key(self, key, function):
         newkey = key
@@ -1121,10 +1118,11 @@ class SpriteClass(object):
         if newkey.upper() == "SPACE":
             newkey = "<Space>"
         self.keys.append(newkey)
+
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind(newkey, f, add = "+")
+        self.canvas.bind(newkey, f, add="+")
         self.key = True
 
     def event_click(self, function):
@@ -1135,7 +1133,7 @@ class SpriteClass(object):
             left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
             ex = event.x - self.canvas.winfo_reqwidth()/2
             ey = self.canvas.winfo_reqwidth()/2 - event.y
-            if ex < right and ex > left and ey < top and ey > bottom:
+            if left < ex < right and bottom < ey < top:
                 self.clear_queue()
                 function()
         self.canvas.bind("<Button-1>", click, add='+')
@@ -1152,17 +1150,18 @@ class SpriteClass(object):
     def event_collision_hazard(self, function):
         self.collision_hazard_function = function
 
-
     ##### END OF EVENTS #####
 
     def pen_down(self):
         self.pen_plans.append(True)
         self.modes.append("pen")
+
     def pen_up(self):
         self.pen_plans.append(False)
         self.modes.append("pen")
+
     def pen_toggle(self):
-        if len(self.pen_plans)>=1:
+        if len(self.pen_plans) >= 1:
             self.pen_plans.append(not self.pen_plans[-1])
         else:
             self.pen_plans.append(not self.pen)
@@ -1174,11 +1173,13 @@ class SpriteClass(object):
     def fill_on(self):
         self.fill_plans.append(True)
         self.modes.append("fill")
+
     def fill_off(self):
         self.fill_plans.append(False)
         self.modes.append("fill")
+
     def fill_toggle(self):
-        if len(self.fill_plans)>=1:
+        if len(self.fill_plans) >= 1:
             self.fill_plans.append(not self.fill_plans[-1])
         else:
             self.fill_plans.append(not self.fill)
@@ -1266,6 +1267,6 @@ class Sprite(SpriteClass):
             x = image
             image = ''
         if 'shape' in kwargs:
-            super(Sprite, self).__init__(image, x, y, shape = kwargs['shape'])
+            super(Sprite, self).__init__(image, x, y, shape=kwargs['shape'])
         else:
             super(Sprite, self).__init__(image, x, y)
