@@ -4,6 +4,7 @@ from .manager import Manager
 from .hitbox import Hitbox
 import inspect
 
+
 class SpriteClass(object):
     image_dictionary = {
         "": "codestersLogo",
@@ -208,7 +209,7 @@ class SpriteClass(object):
             left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
             ex = self.canvas.winfo_pointerx()
             ey = self.canvas.winfo_pointery()
-            if ex < right and ex > left and ey < top and ey > bottom:
+            if left < ex < right and bottom < ey < top:
                 self.have_clicked = True
         def release_sprite(event):
             self.have_clicked = False
@@ -308,7 +309,8 @@ class SpriteClass(object):
             self.say_color = self.say_queue[0][2]
             self.say_size = self.say_queue[0][3]
             self.say_font = self.say_queue[0][4]
-            print self.say_queue.pop(0)
+            self.say_queue.pop(0)
+            # print self.say_text, self.say_time
 
     def update_physics(self):
         prevx = self.xcor
@@ -367,6 +369,7 @@ class SpriteClass(object):
 
         self.hitbox.update_corners()
 
+
     def clear_queue(self):
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
                 (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
@@ -374,7 +377,6 @@ class SpriteClass(object):
                 (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)) or\
                 (len(self.modes) > 0 and self.modes[0] == 'say') or\
                 (len(self.modes) > 0 and self.modes[0] == 'wait'):
-            self.update_animation()
             self.update_animation()
             self.update_animation()
         self.future_x = self.xcor
@@ -402,7 +404,6 @@ class SpriteClass(object):
             if not (i == 'say' or i == 'wait'):
                 self.modes.remove(i)
         # print self.modes
-
 
     def update_collision(self):
         if self.collision:
@@ -458,9 +459,9 @@ class SpriteClass(object):
                     self.set_x_speed(0)
                     self.set_y_speed(0)
                     for i in range(len(self.animation_x_coords)):
-                        if not isinstance(self.animation_x_coords[i],basestring):
+                        if not isinstance(self.animation_x_coords[i], basestring):
                             self.animation_x_coords[i] += changex
-                        if not isinstance(self.animation_y_coords[i],basestring):
+                        if not isinstance(self.animation_y_coords[i], basestring):
                             self.animation_y_coords[i] += changey
 
     def check_two_sprites_for_collision(self, sprite):
@@ -498,6 +499,7 @@ class SpriteClass(object):
             self.future_y = self.ycor
         if len(self.modes) > 0 and not self.paused:
             if self.modes[0] == "wait":
+                # print 'waiting'
                 if len(self.wait_list) > 0:
                     if isinstance(self.wait_list[0], basestring):
                         self.wait_list.pop(0)
@@ -615,6 +617,7 @@ class SpriteClass(object):
 
                 elif self.modes[0] == "say":
                     if len(self.say_plans) > 0:
+                        # print'saying'
                         self.say_queue.append(self.say_plans[0])
                         ''''
                         self.say_text = self.say_plans[0][0]
@@ -814,7 +817,7 @@ class SpriteClass(object):
         self.say_plans.append([text, seconds*50, color, size, font])
 
     def ask(self, text):
-        return raw_input(text)
+        return raw_input(text+'\n')
 
     def reset_animation(self):
         self.animation_rotation_degrees = []
@@ -1095,7 +1098,7 @@ class SpriteClass(object):
             function()
         self.canvas.bind("<Down>", f, add = "+")
 
-    def event_space_key(self, function, add = "+"):
+    def event_space_key(self, function):
         def f(event):
             self.clear_queue()
             function()

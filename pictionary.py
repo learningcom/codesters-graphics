@@ -27,7 +27,6 @@ stage.wait(2)
 announcer.say("Player 1, the word is " + word)
 stage.wait(2)
 announcer.say(" ")
-print announcer.modes
 
 sprite = codesters.Point(0, 0, 8, "black")
 

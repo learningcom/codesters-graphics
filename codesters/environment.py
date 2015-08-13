@@ -188,32 +188,24 @@ class StageClass(object):
 
     def event_click(self, function):
         def newfunction(event):
-            for e in Manager.elements:
-                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_down(self, function):
         def newfunction(event):
-            for e in Manager.elements:
-                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_up(self, function):
         def newfunction(event):
-            for e in Manager.elements:
-                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
     def event_mouse_move(self, function):
         def newfunction(event):
-            for e in Manager.elements:
-                e.clear_queue()
             self.event = event
             function()
         self.canvas.bind("<Motion>", newfunction, add="+")
