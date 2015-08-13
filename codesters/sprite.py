@@ -757,7 +757,6 @@ class SpriteClass(object):
     def turn_clockwise(self, degrees):
         destination = self.future_heading - degrees
         frames_needed = 12 / self.speed
-        # frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
@@ -778,7 +777,6 @@ class SpriteClass(object):
     def turn_counterclockwise(self, degrees):
         destination = self.future_heading + degrees
         frames_needed = 12 * self.speed
-        # frames_needed = (abs(self.future_heading - destination) / (self.speed*22))
         if frames_needed == 0:
             frames_needed = 1
         degree_rot = destination - self.future_heading
