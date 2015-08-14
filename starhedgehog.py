@@ -26,6 +26,7 @@ def right():
 stage.event_right_key(right)
 
 def up():
+    # print 'test'
     hedgey.move_forward(575)
     stage.wait(1)
     hedgey.go_to(0, -210)

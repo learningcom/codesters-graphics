@@ -87,10 +87,12 @@ class StageClass(object):
     def update_events(self):
         for key in Manager.keys_pressed:
             if key in self.key_functions.keys():
+                # print key
                 for i in self.key_functions[key]:
                     i()
 
     def draw(self):
+        # print self.key_functions
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >= 1:
