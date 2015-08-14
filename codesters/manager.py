@@ -12,6 +12,8 @@ class Manager(object):
 
     default_gravity = False
 
+    keys_pressed = []
+
     def __init__(self):
         # Keeping here essentially global variables to get whether the mouse is pressed at any given moment.
         def mouse_press(event):
@@ -23,10 +25,32 @@ class Manager(object):
         self.canvas.bind("<Button-1>", mouse_press, add="+")
         self.canvas.bind("<ButtonRelease-1>", mouse_release, add="+")
 
+        def key_press(event):
+            Manager.keys_pressed.append(event.keysym)
+
+        def key_release(event):
+            Manager.keys_pressed.remove(event.keysym)
+
+        self.canvas.bind("<KeyPress>", key_press, add="+")
+        self.canvas.bind("<KeyRelease>", key_release, add="+")
+
+        def up_press(event):
+            Manager.keys_pressed.append('Up')
+        def left_press(event):
+            Manager.keys_pressed.append('Left')
+        def right_press(event):
+            Manager.keys_pressed.append('Right')
+
+        self.canvas.bind('<Up>', up_press, add="+")
+        self.canvas.bind('<Left>', left_press, add="+")
+        self.canvas.bind('<Right>', right_press, add="+")
+
+
     ## THE FRAME MANAGER, THE MOST IMPORTANT FUNCTION. ##
 
     def run(self):
         Manager.frame_number += 1
+        print Manager.keys_pressed
         self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
         self.update_animation()

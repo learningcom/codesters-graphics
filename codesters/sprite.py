@@ -196,9 +196,8 @@ class SpriteClass(object):
         self.hazard = False
         self.collision = True
         self.drag = False
-        self.key = False
 
-        self.keys = []
+        self.key_functions = {}
 
         self.have_clicked = False
 
@@ -442,7 +441,10 @@ class SpriteClass(object):
                         e.update_animation()
 
     def update_events(self):
-
+        for key in Manager.keys_pressed:
+            if key in self.key_functions.keys():
+                for i in self.key_functions[key]:
+                    i()
         if self.drag:
             if Manager.mouse_down and self.have_clicked:
                 top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
@@ -1074,55 +1076,71 @@ class SpriteClass(object):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Left>", f, add="+")
+        if "Left" not in self.key_functions.keys():
+            self.key_functions['Left'] = [f]
+        else:
+            self.key_functions['Left'].append(f)
 
     def event_right_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Right>", f, add="+")
+        if "Right" not in self.key_functions.keys():
+            self.key_functions['Right'] = [f]
+        else:
+            self.key_functions['Right'].append(f)
 
     def event_up_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Up>", f, add="+")
+        if "Up" not in self.key_functions.keys():
+            self.key_functions['Up'] = [f]
+        else:
+            self.key_functions['Up'].append(f)
 
     def event_down_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<Down>", f, add="+")
+        if "Down" not in self.key_functions.keys():
+            self.key_functions['Down'] = [f]
+        else:
+            self.key_functions['Down'].append(f)
 
     def event_space_key(self, function):
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind("<space>", f, add="+")
+        if "space" not in self.key_functions.keys():
+            self.key_functions['space'] = [f]
+        else:
+            self.key_functions['space'].append(f)
 
     def event_key(self, key, function):
         newkey = key
         if newkey.upper() == "DOWN":
-            newkey = "<Down>"
+            newkey = "Down"
         if newkey.upper() == "UP":
-            newkey = "<Up>"
+            newkey = "Up"
         if newkey.upper() == "LEFT":
-            newkey = "<Left>"
+            newkey = "Left"
         if newkey.upper() == "RIGHT":
-            newkey = "<Right>"
+            newkey = "Right"
         if newkey.upper() == "RETURN":
-            newkey = "<Return>"
+            newkey = "Return"
         if newkey.upper() == "ENTER":
-            newkey = "<Return>"
+            newkey = "Return"
         if newkey.upper() == "SPACE":
-            newkey = "<Space>"
-        self.keys.append(newkey)
+            newkey = "space"
 
         def f(event):
             self.clear_queue()
             function()
-        self.canvas.bind(newkey, f, add="+")
-        self.key = True
+        if newkey not in self.key_functions.keys():
+            self.key_functions[newkey] = [f]
+        else:
+            self.key_functions[newkey].append(f)
 
     def event_click(self, function):
         def click(event):

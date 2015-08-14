@@ -71,6 +71,8 @@ class StageClass(object):
         self.interval_function = None
         self.interval_length = 0
 
+        self.key_functions = {}
+
     #### IMPORTANT FUNCTIONS ####
 
     def update_physics(self):
@@ -83,7 +85,10 @@ class StageClass(object):
         pass
 
     def update_events(self):
-        pass
+        for key in Manager.keys_pressed:
+            if key in self.key_functions.keys():
+                for i in self.key_functions[key]:
+                    i()
 
     def draw(self):
         if self.forever_function is not None:
@@ -126,65 +131,83 @@ class StageClass(object):
         pass
 
     def event_left_key(self, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
-        self.canvas.bind("<Left>", newfunction, add="+")
+        if "Left" not in self.key_functions.keys():
+            self.key_functions['Left'] = [newfunction]
+        else:
+            self.key_functions['Left'].append(newfunction)
+
 
     def event_right_key(self, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
-        self.canvas.bind("<Right>", newfunction, add="+")
+        if "Right" not in self.key_functions.keys():
+            self.key_functions['Right'] = [function]
+        else:
+            self.key_functions['Right'].append(function)
 
     def event_up_key(self, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
-        self.canvas.bind("<Up>", newfunction, add="+")
+        if "Up" not in self.key_functions.keys():
+            self.key_functions['Up'] = [function]
+        else:
+            self.key_functions['Up'].append(function)
 
     def event_down_key(self, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
-        self.canvas.bind("<Down>", newfunction, add="+")
+        if "Down" not in self.key_functions.keys():
+            self.key_functions['Down'] = [function]
+        else:
+            self.key_functions['Down'].append(function)
 
     def event_space_key(self, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
-
-        self.canvas.bind("<space>", newfunction, add="+")
+        if "space" not in self.key_functions.keys():
+            self.key_functions['space'] = [function]
+        else:
+            self.key_functions['space'].append(function)
 
     def event_key(self, key, function):
-        def newfunction(event):
+        def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            self.event = event
+            #self.event = event
             function()
         bound_key_name = key
         if key == "left":
-            bound_key_name = "<Left>"
+            bound_key_name = "Left"
         if key == "right":
-            bound_key_name = "<Right>"
+            bound_key_name = "Right"
         if key == "up":
-            bound_key_name = "<Up>"
+            bound_key_name = "Up"
         if key == "down":
-            bound_key_name = "<Down>"
+            bound_key_name = "Down"
         if key == "space":
-            bound_key_name = "<space>"
+            bound_key_name = "space"
         # print bound_key_name
-        self.canvas.bind(bound_key_name, newfunction, add="+")
+        if bound_key_name not in self.key_functions.keys():
+            self.key_functions[bound_key_name] = [function]
+        else:
+            self.key_functions[bound_key_name].append(function)
 
     def event_click(self, function):
         def newfunction(event):
