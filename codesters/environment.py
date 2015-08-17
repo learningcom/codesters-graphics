@@ -145,7 +145,6 @@ class StageClass(object):
         else:
             self.key_functions['Left'].append(newfunction)
 
-
     def event_right_key(self, function):
         def newfunction():
             for e in Manager.elements:
@@ -153,9 +152,9 @@ class StageClass(object):
             #self.event = event
             function()
         if "Right" not in self.key_functions.keys():
-            self.key_functions['Right'] = [function]
+            self.key_functions['Right'] = [newfunction]
         else:
-            self.key_functions['Right'].append(function)
+            self.key_functions['Right'].append(newfunction)
 
     def event_up_key(self, function):
         def newfunction():
@@ -164,9 +163,9 @@ class StageClass(object):
             #self.event = event
             function()
         if "Up" not in self.key_functions.keys():
-            self.key_functions['Up'] = [function]
+            self.key_functions['Up'] = [newfunction]
         else:
-            self.key_functions['Up'].append(function)
+            self.key_functions['Up'].append(newfunction)
 
     def event_down_key(self, function):
         def newfunction():
@@ -175,9 +174,9 @@ class StageClass(object):
             #self.event = event
             function()
         if "Down" not in self.key_functions.keys():
-            self.key_functions['Down'] = [function]
+            self.key_functions['Down'] = [newfunction]
         else:
-            self.key_functions['Down'].append(function)
+            self.key_functions['Down'].append(newfunction)
 
     def event_space_key(self, function):
         def newfunction():
@@ -186,9 +185,9 @@ class StageClass(object):
             #self.event = event
             function()
         if "space" not in self.key_functions.keys():
-            self.key_functions['space'] = [function]
+            self.key_functions['space'] = [newfunction]
         else:
-            self.key_functions['space'].append(function)
+            self.key_functions['space'].append(newfunction)
 
     def event_key(self, key, function):
         def newfunction():
@@ -209,9 +208,9 @@ class StageClass(object):
             bound_key_name = "space"
         # print bound_key_name
         if bound_key_name not in self.key_functions.keys():
-            self.key_functions[bound_key_name] = [function]
+            self.key_functions[bound_key_name] = [newfunction]
         else:
-            self.key_functions[bound_key_name].append(function)
+            self.key_functions[bound_key_name].append(newfunction)
 
     def event_click(self, function):
         def newfunction(event):

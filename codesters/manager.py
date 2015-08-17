@@ -14,7 +14,7 @@ class Manager(object):
 
     keys_pressed = []
 
-    event_delay = 2
+    event_delay = 1
 
     def __init__(self):
         # Keeping here essentially global variables to get whether the mouse is pressed at any given moment.
@@ -46,7 +46,6 @@ class Manager(object):
         self.canvas.bind('<Up>', up_press, add="+")
         self.canvas.bind('<Left>', left_press, add="+")
         self.canvas.bind('<Right>', right_press, add="+")
-
 
     ## THE FRAME MANAGER, THE MOST IMPORTANT FUNCTION. ##
 
