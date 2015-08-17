@@ -282,6 +282,8 @@ class SpriteClass(object):
         self.collision_hazard_function = None
 
     def draw(self):
+        if self.get_name() == "hedgehog":
+            print self.modes
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and not self.hidden:
@@ -374,6 +376,9 @@ class SpriteClass(object):
         self.hitbox.update_corners()
 
     def clear_queue(self):
+        # for i in range(len(self.wait_list)):
+         #    if not isinstance(self.wait_list[i], basestring):
+          #       self.wait_list[i] = 0
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
                 (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
                 (len(self.scale_plans) > 1 and isinstance(self.scale_plans[1], basestring)) or\
