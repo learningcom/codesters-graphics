@@ -14,6 +14,8 @@ class Manager(object):
 
     keys_pressed = []
 
+    event_delay = 2
+
     def __init__(self):
         # Keeping here essentially global variables to get whether the mouse is pressed at any given moment.
         def mouse_press(event):

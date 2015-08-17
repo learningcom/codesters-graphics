@@ -86,7 +86,9 @@ class StageClass(object):
 
     def update_events(self):
         for key in Manager.keys_pressed:
-            if key in self.key_functions.keys():
+            if key in self.key_functions.keys() and Manager.frame_number % Manager.event_delay == 0:
+                for e in Manager.elements:
+                    e.clear_queue()
                 # print key
                 for i in self.key_functions[key]:
                     i()
