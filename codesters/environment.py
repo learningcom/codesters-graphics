@@ -46,6 +46,7 @@ class StageClass(object):
         self.size = 1
         self.bg_image_name = None
         self.bg_image = None
+        self.bg_photoimg = None
         self.bg_scale_y = 1
         self.bg_scale_x = 1
         self.scaled_image = None
@@ -100,7 +101,9 @@ class StageClass(object):
                 if self.interval_function is not None:
                     self.interval_function()
         self.canvas.create_rectangle((0, 0, self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight()), fill='white')
-        if self.bg_image is not None:
+        if self.bg_photoimg is not None:
+            self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
+        elif self.bg_image is not None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
             self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
 

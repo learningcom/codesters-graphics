@@ -317,7 +317,6 @@ class SpriteClass(object):
             self.say_size = self.say_queue[0][3]
             self.say_font = self.say_queue[0][4]
             self.say_queue.pop(0)
-            # print self.say_text, self.say_time
 
     def update_physics(self):
         prevx = self.xcor
@@ -344,7 +343,7 @@ class SpriteClass(object):
             self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
             self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
 
-        self.hitbox.update_corners()
+        # self.hitbox.update_corners()
 
         top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
         right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
@@ -354,25 +353,26 @@ class SpriteClass(object):
         tempheight = top-bottom
         tempwidth = right-left
 
-        if Manager.stage.wall_bottom_on and self.gravity_true:
-            if bottom < -self.canvas.winfo_reqheight()/2:
-                self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
-                self.jump(abs(self.yspeed * Manager.stage.bounce))
+        if self.gravity_true:
+            if Manager.stage.wall_bottom_on and self.gravity_true:
+                if bottom < -self.canvas.winfo_reqheight()/2:
+                    self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
+                    self.jump(abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_top_on and self.gravity_true:
-            if top > self.canvas.winfo_reqheight()/2:
-                self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
-                self.jump(-abs(self.yspeed * Manager.stage.bounce))
+            if Manager.stage.wall_top_on and self.gravity_true:
+                if top > self.canvas.winfo_reqheight()/2:
+                    self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
+                    self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
-        if Manager.stage.wall_left_on and self.gravity_true:
-            if left < -self.canvas.winfo_reqwidth()/2:
-                self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
-                self.xspeed = abs(self.xspeed * Manager.stage.bounce)
+            if Manager.stage.wall_left_on and self.gravity_true:
+                if left < -self.canvas.winfo_reqwidth()/2:
+                    self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
+                    self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
-        if Manager.stage.wall_right_on and self.gravity_true:
-            if right > self.canvas.winfo_reqwidth()/2:
-                self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
-                self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
+            if Manager.stage.wall_right_on and self.gravity_true:
+                if right > self.canvas.winfo_reqwidth()/2:
+                    self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
+                    self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
 

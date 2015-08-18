@@ -50,13 +50,9 @@ def poly_rect(x, y, width, height, rotation):
     x1 = x-width/2
     y1 = y-height/2
     x2 = x+width/2
-    y2 = y-height/2
-    x3 = x+width/2
-    y3 = y+height/2
-    x4 = x-width/2
-    y4 = y+height/2
+    y2 = y+height/2
 
-    point_list = [x1, y1, x2, y2, x3, y3, x4, y4]
+    point_list = [x1, y1, x2, y1, x2, y2, x1, y2]
     return poly_poly(x, y, point_list, rotation)
 
 
