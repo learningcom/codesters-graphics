@@ -94,5 +94,3 @@ def get_present(fox, present):
 # tell the fox to run the get_presents
 # function when it hits something else
 fox.event_collision(get_present)
-
-

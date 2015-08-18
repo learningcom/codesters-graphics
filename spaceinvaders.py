@@ -4,7 +4,7 @@ global ship, index_collision, laser
 
 x = -200
 y = 210
-    
+
 for row in range(3):
     for column in range(6):
         alien = codesters.Sprite("alien1", x, y)
@@ -43,7 +43,7 @@ def index_collision(index):
 
 def space():
     x = ship.get_x()
-    laser = codesters.Circle(x, 0, 8, "red")
+    laser = codesters.Circle(x, -190, 8, "red")
     laser.move_up(500)
     laser.event_collision(index_collision)
 stage.event_space_key(space)
@@ -68,8 +68,7 @@ def index_collision(index):
 
 def space():
     x = ship.get_x()
-    global laser
-    laser = codesters.Circle(x, -150, 8, "red")
+    laser = codesters.Circle(x, -190, 8, "red")
     laser.move_up(500)
     laser.event_collision(index_collision)
 stage.event_space_key(space)

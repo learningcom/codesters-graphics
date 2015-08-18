@@ -282,8 +282,6 @@ class SpriteClass(object):
         self.collision_hazard_function = None
 
     def draw(self):
-        if self.get_name() == "hedgehog":
-            print self.modes
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and not self.hidden:
@@ -345,10 +343,10 @@ class SpriteClass(object):
 
         self.hitbox.update_corners()
 
-        top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-        right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-        bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-        left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+        top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+        right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+        bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+        left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
 
         tempheight = top-bottom
         tempwidth = right-left
@@ -376,12 +374,16 @@ class SpriteClass(object):
         self.hitbox.update_corners()
 
     def clear_queue(self):
+        # This function clears whatever the sprite has left to do, excepting some certain specific things.
+        # Some instantaneous actions it out to finish up.
+        # It's mostly continuous motion that has to be stopped.
+        # To be called in case of a collision or event that would interfere with motion.
+        skips = ['say', 'wait']  # ,'pen', 'pen_color', 'pen_size', 'pen_clear', 'fill', 'fill_color', 'print_corners']
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
                 (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
                 (len(self.scale_plans) > 1 and isinstance(self.scale_plans[1], basestring)) or\
                 (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)) or\
-                (len(self.modes) > 0 and self.modes[0] == 'say') or\
-                (len(self.modes) > 0 and self.modes[0] == 'wait'):
+                (len(self.modes) > 0 and self.modes[0] in skips):
             self.update_animation()
             self.update_animation()
         self.future_x = self.xcor
@@ -405,7 +407,7 @@ class SpriteClass(object):
         self.y_flip_plans = []
 
         for i in self.modes:
-            if not (i == 'say' or i == 'wait'):
+            if i not in skips:
                 self.modes.remove(i)
 
     def update_collision(self):
@@ -447,16 +449,20 @@ class SpriteClass(object):
             if key in self.key_functions.keys() and Manager.frame_number % Manager.event_delay == 0:
                 self.clear_queue()
                 for i in self.key_functions[key]:
-                    i()
+                    if len(inspect.getargspec(i)[0]) == 0:
+                        i()
+                    elif len(inspect.getargspec(i)[0]) == 1:
+                        i(self)
         if self.drag:
             if Manager.mouse_down and self.have_clicked:
-                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
                 ex = self.canvas.winfo_pointerx()
                 ey = self.canvas.winfo_pointery()
                 if left < ex < right and bottom < ey < top:
+                    self.clear_queue()
                     changex = ex - self.xcor
                     changey = ey - self.ycor
                     self.xcor = ex
@@ -472,14 +478,14 @@ class SpriteClass(object):
                             self.animation_y_coords[i] += changey
 
     def check_two_sprites_for_collision(self, sprite):
-        this_top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-        this_right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-        this_bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-        this_left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-        sprite_top = max(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
-        sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
-        sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1],sprite.hitbox.bottom_left[1],sprite.hitbox.bottom_right[1])
-        sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0],sprite.hitbox.bottom_left[0],sprite.hitbox.bottom_right[0])
+        this_top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+        this_right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+        this_bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+        this_left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+        sprite_top = max(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1], sprite.hitbox.bottom_left[1], sprite.hitbox.bottom_right[1])
+        sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0], sprite.hitbox.bottom_left[0], sprite.hitbox.bottom_right[0])
+        sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1], sprite.hitbox.bottom_left[1], sprite.hitbox.bottom_right[1])
+        sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0], sprite.hitbox.bottom_left[0], sprite.hitbox.bottom_right[0])
         if this_top > sprite_bottom and this_bottom < sprite_top:
             if this_right > sprite_left and this_left < sprite_right:
                 if self != sprite:
@@ -813,7 +819,7 @@ class SpriteClass(object):
         return self.total_wait_time
 
     def say(self, text, seconds=-1, color="#000000", size=12, font="Helvetica"):
-        print text
+        # print text
         self.modes.append('say')
         self.say_plans.append([text, seconds*50, color, size, font])
 
@@ -1139,7 +1145,10 @@ class SpriteClass(object):
 
         def f(event):
             self.clear_queue()
-            function()
+            if len(inspect.getargspec(function)[0]) == 0:
+                function()
+            elif len(inspect.getargspec(function)[0]) == 1:
+                function(self)
         if newkey not in self.key_functions.keys():
             self.key_functions[newkey] = [f]
         else:
