@@ -39,7 +39,7 @@ class StageClass(object):
 
         self.type = Environment
 
-        self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
+        self.canvas.create_rectangle((0, 0, self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight()), fill='white')
 
         self.xcor = 0
         self.ycor = 0
@@ -89,19 +89,17 @@ class StageClass(object):
             if key in self.key_functions.keys() and Manager.frame_number % Manager.event_delay == 0:
                 for e in Manager.elements:
                     e.clear_queue()
-                # print key
                 for i in self.key_functions[key]:
                     i()
 
     def draw(self):
-        # print self.key_functions
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >= 1:
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
                     self.interval_function()
-        self.canvas.create_rectangle((0, 0, 500, 500), fill='white')
+        self.canvas.create_rectangle((0, 0, self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight()), fill='white')
         if self.bg_image is not None:
             self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
             self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
@@ -138,7 +136,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         if "Left" not in self.key_functions.keys():
             self.key_functions['Left'] = [newfunction]
@@ -149,7 +146,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         if "Right" not in self.key_functions.keys():
             self.key_functions['Right'] = [newfunction]
@@ -160,7 +156,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         if "Up" not in self.key_functions.keys():
             self.key_functions['Up'] = [newfunction]
@@ -171,7 +166,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         if "Down" not in self.key_functions.keys():
             self.key_functions['Down'] = [newfunction]
@@ -182,7 +176,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         if "space" not in self.key_functions.keys():
             self.key_functions['space'] = [newfunction]
@@ -193,7 +186,6 @@ class StageClass(object):
         def newfunction():
             for e in Manager.elements:
                 e.clear_queue()
-            #self.event = event
             function()
         bound_key_name = key
         if key == "left":
@@ -206,7 +198,6 @@ class StageClass(object):
             bound_key_name = "Down"
         if key == "space":
             bound_key_name = "space"
-        # print bound_key_name
         if bound_key_name not in self.key_functions.keys():
             self.key_functions[bound_key_name] = [newfunction]
         else:
@@ -257,8 +248,6 @@ class StageClass(object):
         else:
             self.bg_image_name = self.image_dictionary['grid']
             self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
-    #    self.bg_image_name = image
-    #    self.bg_image = Image.open("./codesters/sprites/"+image+".gif")
 
     def set_background_x(self, amount):
         self.xcor = amount + self.canvas.winfo_reqwidth()

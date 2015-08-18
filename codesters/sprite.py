@@ -270,7 +270,10 @@ class SpriteClass(object):
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
         self.base_bottom_left = [-self.width/2, -self.height/2]
-        self.hitbox = Hitbox(self.base_top_right, self.base_top_left, self.base_bottom_right, self.base_bottom_left, self)
+        self.hitbox = Hitbox(self.base_top_right,
+                             self.base_top_left,
+                             self.base_bottom_right,
+                             self.base_bottom_left, self)
         self.top_left = [self.xcor-self.width/2, self.ycor+self.height/2]
         self.top_right = [self.xcor+self.width/2, self.ycor+self.height/2]
         self.bottom_right = [self.xcor+self.width/2, self.ycor-self.height/2]
@@ -827,10 +830,13 @@ class SpriteClass(object):
         return raw_input(text+'\n')
 
     def reset_animation(self):
+        self.clear_queue()
+        '''
         self.animation_rotation_degrees = []
         self.animation_x_coords = []
         self.animation_y_coords = []
         self.modes = []
+        '''
 
     def pause(self):
         self.paused = True
@@ -1156,10 +1162,10 @@ class SpriteClass(object):
 
     def event_click(self, function):
         def click(event):
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1],self.hitbox.bottom_left[1],self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0],self.hitbox.bottom_left[0],self.hitbox.bottom_right[0])
+            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
+            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
             ex = event.x - self.canvas.winfo_reqwidth()/2
             ey = self.canvas.winfo_reqwidth()/2 - event.y
             if left < ex < right and bottom < ey < top:
