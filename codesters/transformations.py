@@ -15,6 +15,8 @@ def poly_circle(x,y,r):
 
 def poly_oval(x0, y0, x1, y1, steps=20, rotation=0):
     rotation = rotation * math.pi / 180.0
+    cos_rot = math.cos(rotation)
+    sin_rot = math.sin(rotation)
 
     # major and minor axes
     a = (x1 - x0) / 2.0
@@ -37,8 +39,8 @@ def poly_oval(x0, y0, x1, y1, steps=20, rotation=0):
         y1 = b * math.sin(theta)
 
         # rotate x, y
-        x = (x1 * math.cos(rotation)) + (y1 * math.sin(rotation))
-        y = (y1 * math.cos(rotation)) - (x1 * math.sin(rotation))
+        x = (x1 * cos_rot) + (y1 * sin_rot)
+        y = (y1 * cos_rot) - (x1 * sin_rot)
 
         point_list.append(round(x + xc))
         point_list.append(round(y + yc))
@@ -70,6 +72,8 @@ def poly_line(x, y, width, height, rotation):
 
 def poly_poly(cx, cy, points, rotation):
     theta = -rotation*math.pi / 180
+    cos_theta = math.cos(theta)
+    sin_theta = math.sin(theta)
 
     point_list = []
 
@@ -77,8 +81,8 @@ def poly_poly(cx, cy, points, rotation):
         x = points[i*2] - cx
         y = points[i*2 + 1] - cy
 
-        x1 = math.cos(theta) * x - math.sin(theta) * y
-        y1 = math.sin(theta) * x + math.cos(theta) * y
+        x1 = cos_theta * x - sin_theta * y
+        y1 = sin_theta * x + cos_theta * y
         x1 += cx
         y1 += cy
 
@@ -90,6 +94,8 @@ def poly_poly(cx, cy, points, rotation):
 
 def poly_star(x, y, width, height, num_points, rotation):
     rotation = rotation * math.pi / 180.0
+    cos_rot = math.cos(rotation)
+    sin_rot = math.sin(rotation)
 
     a = width/2
     b = height/2
@@ -104,8 +110,8 @@ def poly_star(x, y, width, height, num_points, rotation):
         x1 = a * math.cos(theta)
         y1 = b * math.sin(theta)
 
-        x2 = (x1 * math.cos(rotation)) + (y1 * math.sin(rotation))
-        y2 = (y1 * math.cos(rotation)) - (x1 * math.sin(rotation))
+        x2 = (x1 * cos_rot) + (y1 * sin_rot)
+        y2 = (y1 * cos_rot) - (x1 * sin_rot)
 
         point_list.append(round(x2 + x))
         point_list.append(round(y2 + y))
@@ -115,8 +121,8 @@ def poly_star(x, y, width, height, num_points, rotation):
         x1 = a * math.cos(theta)/2
         y1 = b * math.sin(theta)/2
 
-        x2 = (x1 * math.cos(rotation)) + (y1 * math.sin(rotation))
-        y2 = (y1 * math.cos(rotation)) - (x1 * math.sin(rotation))
+        x2 = (x1 * cos_rot) + (y1 * sin_rot)
+        y2 = (y1 * cos_rot) - (x1 * sin_rot)
 
         point_list.append(round(x2 + x))
         point_list.append(round(y2 + y))
@@ -126,6 +132,8 @@ def poly_star(x, y, width, height, num_points, rotation):
 
 def poly_arc(x0, y0, x1, y1, start, end, steps=90, rotation=0):
     rotation = rotation * math.pi / 180.0
+    cos_rot = math.cos(rotation)
+    sin_rot = math.sin(rotation)
 
     # major and minor axes
     a = (x1 - x0) / 2.0
@@ -148,8 +156,8 @@ def poly_arc(x0, y0, x1, y1, start, end, steps=90, rotation=0):
         y1 = b * math.sin(theta)
 
         # rotate x, y
-        x = (x1 * math.cos(rotation)) + (y1 * math.sin(rotation))
-        y = (y1 * math.cos(rotation)) - (x1 * math.sin(rotation))
+        x = (x1 * cos_rot) + (y1 * sin_rot)
+        y = (y1 * cos_rot) - (x1 * sin_rot)
 
         point_list.append(round(x + xc))
         point_list.append(round(y + yc))

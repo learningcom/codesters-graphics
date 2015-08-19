@@ -481,19 +481,18 @@ class SpriteClass(object):
                             self.animation_y_coords[i] += changey
 
     def check_two_sprites_for_collision(self, sprite):
-        this_top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-        this_right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-        this_bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-        this_left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-        sprite_top = max(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1], sprite.hitbox.bottom_left[1], sprite.hitbox.bottom_right[1])
-        sprite_right = max(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0], sprite.hitbox.bottom_left[0], sprite.hitbox.bottom_right[0])
-        sprite_bottom = min(sprite.hitbox.top_left[1], sprite.hitbox.top_right[1], sprite.hitbox.bottom_left[1], sprite.hitbox.bottom_right[1])
-        sprite_left = min(sprite.hitbox.top_left[0], sprite.hitbox.top_right[0], sprite.hitbox.bottom_left[0], sprite.hitbox.bottom_right[0])
-        if this_top > sprite_bottom and this_bottom < sprite_top:
-            if this_right > sprite_left and this_left < sprite_right:
+        this_edges = self.get_hitbox_edges()
+        sprite_edges = sprite.get_hitbox_edges()
+        if this_edges[0] > sprite_edges[2] and this_edges[2] < sprite_edges[0]:
+            if this_edges[1] > sprite_edges[3] and this_edges[3] < sprite_edges[1]:
                 if self != sprite:
                     return True
         return False
+
+    def get_hitbox_edges(self):
+        hit_x = [self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0]]
+        hit_y = [self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1]]
+        return [max(hit_y), max(hit_x), min(hit_y), min(hit_x)]
 
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
