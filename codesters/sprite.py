@@ -211,6 +211,7 @@ class SpriteClass(object):
             ey = self.canvas.winfo_pointery()
             if left < ex < right and bottom < ey < top:
                 self.have_clicked = True
+
         def release_sprite(event):
             self.have_clicked = False
         self.canvas.bind("<Button-1>", click_on_sprite, add="+")

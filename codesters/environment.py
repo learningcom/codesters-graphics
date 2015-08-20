@@ -82,7 +82,7 @@ class StageClass(object):
     def update_animation(self):
         pass
 
-    def update_collision(self,i):
+    def update_collision(self, i):
         pass
 
     def update_events(self):
@@ -137,6 +137,8 @@ class StageClass(object):
 
     def event_left_key(self, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         if "Left" not in self.key_functions.keys():
             self.key_functions['Left'] = [newfunction]
@@ -145,6 +147,8 @@ class StageClass(object):
 
     def event_right_key(self, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         if "Right" not in self.key_functions.keys():
             self.key_functions['Right'] = [newfunction]
@@ -153,6 +157,8 @@ class StageClass(object):
 
     def event_up_key(self, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         if "Up" not in self.key_functions.keys():
             self.key_functions['Up'] = [newfunction]
@@ -161,6 +167,8 @@ class StageClass(object):
 
     def event_down_key(self, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         if "Down" not in self.key_functions.keys():
             self.key_functions['Down'] = [newfunction]
@@ -169,6 +177,8 @@ class StageClass(object):
 
     def event_space_key(self, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         if "space" not in self.key_functions.keys():
             self.key_functions['space'] = [newfunction]
@@ -177,6 +187,8 @@ class StageClass(object):
 
     def event_key(self, key, function):
         def newfunction():
+            for e in Manager.elements:
+                e.clear_queue()
             function()
         bound_key_name = key
         if key == "left":
