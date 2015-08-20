@@ -558,119 +558,117 @@ class SpriteClass(object):
                         self.wait_list.pop(0)
                     else:
                         self.wait_list[0] = self.wait_list[0] - 1
-            else:
-                if self.modes[0] == "translate":
-                    if len(self.animation_y_coords) > 0 and len(self.animation_x_coords) > 0:
-                        if isinstance(self.animation_x_coords[0], basestring) \
-                                and isinstance(self.animation_y_coords[0], basestring):
-                            self.animation_x_coords.pop(0)
-                            self.animation_y_coords.pop(0)
-                            self.modes.pop(0)
-                        else:
-                            prevx = self.xcor
-                            prevy = self.ycor
-                            self.xcor = (self.animation_x_coords.pop(0))
-                            self.ycor = (self.animation_y_coords.pop(0))
-                            if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
-                                self.xcor = prevx
-                                self.ycor = prevy
-                            if self.pen:
-                                newline = []
-                                newline.append((self.canvas.winfo_reqwidth()/2 + prevx,
-                                                self.canvas.winfo_reqheight()/2 - prevy,
-                                                self.canvas.winfo_reqwidth()/2 + self.xcor,
-                                                self.canvas.winfo_reqheight()/2 - self.ycor))
-                                newline.append(self.pen_color_var)
-                                newline.append(self.pen_size_var)
-                                self.lines.append(newline)
-                            if self.fill and self.pen:
-                                self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
-                                self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
-                            if len(self.animation_x_coords) > 1:
-                                self.future_x = self.animation_x_coords[-2]
-                            if len(self.animation_y_coords) > 1:
-                                self.future_y = self.animation_y_coords[-2]
-                            self.hitbox.update_corners()
+            elif self.modes[0] == "translate":
+                if len(self.animation_y_coords) > 0 and len(self.animation_x_coords) > 0:
+                    if isinstance(self.animation_x_coords[0], basestring) \
+                            and isinstance(self.animation_y_coords[0], basestring):
+                        self.animation_x_coords.pop(0)
+                        self.animation_y_coords.pop(0)
+                        self.modes.pop(0)
                     else:
+                        prevx = self.xcor
+                        prevy = self.ycor
+                        self.xcor = (self.animation_x_coords.pop(0))
+                        self.ycor = (self.animation_y_coords.pop(0))
+                        if isinstance(self.xcor, basestring) or isinstance(self.ycor, basestring):
+                            self.xcor = prevx
+                            self.ycor = prevy
+                        if self.pen:
+                            newline = []
+                            newline.append((self.canvas.winfo_reqwidth()/2 + prevx,
+                                            self.canvas.winfo_reqheight()/2 - prevy,
+                                            self.canvas.winfo_reqwidth()/2 + self.xcor,
+                                            self.canvas.winfo_reqheight()/2 - self.ycor))
+                            newline.append(self.pen_color_var)
+                            newline.append(self.pen_size_var)
+                            self.lines.append(newline)
+                        if self.fill and self.pen:
+                            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
+                            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
+                        if len(self.animation_x_coords) > 1:
+                            self.future_x = self.animation_x_coords[-2]
+                        if len(self.animation_y_coords) > 1:
+                            self.future_y = self.animation_y_coords[-2]
+                        self.hitbox.update_corners()
+                else:
+                    self.modes.pop(0)
+            elif self.modes[0] == "rotate":
+                if len(self.animation_rotation_degrees) > 0:
+                    if isinstance(self.animation_rotation_degrees[0], basestring):
+                        self.animation_rotation_degrees.pop(0)
                         self.modes.pop(0)
-                elif self.modes[0] == "rotate":
-                    if len(self.animation_rotation_degrees) > 0:
-                        if isinstance(self.animation_rotation_degrees[0], basestring):
-                            self.animation_rotation_degrees.pop(0)
-                            self.modes.pop(0)
-                        else:
-                            self.heading = self.animation_rotation_degrees.pop(0)
-                            self.hitbox.update_corners()
-                            self.update_image()
-                elif self.modes[0] == "xflip":
-                    if len(self.x_flip_plans) > 0:
-                        state = self.x_flip_plans.pop(0)
-                        self.x_flipped = state
+                    else:
+                        self.heading = self.animation_rotation_degrees.pop(0)
+                        self.hitbox.update_corners()
                         self.update_image()
+            elif self.modes[0] == "xflip":
+                if len(self.x_flip_plans) > 0:
+                    state = self.x_flip_plans.pop(0)
+                    self.x_flipped = state
+                    self.update_image()
+                    self.modes.pop(0)
+            elif self.modes[0] == "yflip":
+                if len(self.y_flip_plans) > 0:
+                    state = self.y_flip_plans.pop(0)
+                    self.y_flipped = state
+                    self.update_image()
+                    self.modes.pop(0)
+            elif self.modes[0] == "scale":
+                if len(self.scale_plans) > 0:
+                    if isinstance(self.scale_plans[0], basestring):
                         self.modes.pop(0)
-                elif self.modes[0] == "yflip":
-                    if len(self.y_flip_plans) > 0:
-                        state = self.y_flip_plans.pop(0)
-                        self.y_flipped = state
+                        self.scale_plans.pop(0)
+                    else:
+                        self.size = self.scale_plans.pop(0)
                         self.update_image()
-                        self.modes.pop(0)
-                elif self.modes[0] == "scale":
-                    if len(self.scale_plans) > 0:
-                        if isinstance(self.scale_plans[0], basestring):
-                            self.modes.pop(0)
-                            self.scale_plans.pop(0)
-                        else:
-                            self.size = self.scale_plans.pop(0)
-                            self.update_image()
-                elif self.modes[0] == "pen":
-                    if len(self.pen_plans) > 0:
-                        self.pen = self.pen_plans.pop(0)
-                        self.modes.pop(0)
-                elif self.modes[0] == "pen_color":
-                    if len(self.pen_color_plans) > 0:
-                        self.pen_color_var = self.pen_color_plans.pop(0)
-                        self.modes.pop(0)
-                elif self.modes[0] == "pen_size":
-                    if len(self.pen_size_plans) > 0:
-                        self.pen_size_var = self.pen_size_plans.pop(0)
-                        self.modes.pop(0)
-                elif self.modes[0] == "pen_clear":
-                    self.lines = []
-                    self.polygons = []
+            elif self.modes[0] == "pen":
+                if len(self.pen_plans) > 0:
+                    self.pen = self.pen_plans.pop(0)
                     self.modes.pop(0)
-                elif self.modes[0] == "fill":
-                    if len(self.fill_plans) > 0:
-                        state = self.fill_plans.pop(0)
-                        self.modes.pop(0)
-                        if state and not self.fill:
-                            color = self.fill_color_var
-                            self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor,
-                                                   self.canvas.winfo_reqheight()/2 - self.ycor], color])
-                        self.fill = state
-                elif self.modes[0] == "fill_color":
-                    if len(self.fill_color_plans) > 0:
-                        self.fill_color_var = self.fill_color_plans.pop(0)
-                        self.modes.pop(0)
-                elif self.modes[0] == "print_corners":
-                    print self.get_name()
-                    print self.hitbox.top_left, "top_left"
-                    print self.hitbox.top_right, "top_right"
-                    print self.hitbox.bottom_right, "bottom_right"
-                    print self.hitbox.bottom_left, "bottom_left"
+            elif self.modes[0] == "pen_color":
+                if len(self.pen_color_plans) > 0:
+                    self.pen_color_var = self.pen_color_plans.pop(0)
                     self.modes.pop(0)
-                elif self.modes[0] == "dilate":
-                    if len(self.dilate_plans) > 0:
-                        self.set_size(self.dilate_plans[0])
-                        self.xcor = self.future_x * self.dilate_plans[0]
-                        self.dilate_plans.pop(0)
+            elif self.modes[0] == "pen_size":
+                if len(self.pen_size_plans) > 0:
+                    self.pen_size_var = self.pen_size_plans.pop(0)
                     self.modes.pop(0)
-
-                elif self.modes[0] == "say":
-                    if len(self.say_plans) > 0:
-                        # print'saying'
-                        self.say_queue.append(self.say_plans[0])
-                        self.say_plans.pop(0)
+            elif self.modes[0] == "pen_clear":
+                self.lines = []
+                self.polygons = []
+                self.modes.pop(0)
+            elif self.modes[0] == "fill":
+                if len(self.fill_plans) > 0:
+                    state = self.fill_plans.pop(0)
                     self.modes.pop(0)
+                    if state and not self.fill:
+                        color = self.fill_color_var
+                        self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor,
+                                               self.canvas.winfo_reqheight()/2 - self.ycor], color])
+                    self.fill = state
+            elif self.modes[0] == "fill_color":
+                if len(self.fill_color_plans) > 0:
+                    self.fill_color_var = self.fill_color_plans.pop(0)
+                    self.modes.pop(0)
+            elif self.modes[0] == "print_corners":
+                print self.get_name()
+                print self.hitbox.top_left, "top_left"
+                print self.hitbox.top_right, "top_right"
+                print self.hitbox.bottom_right, "bottom_right"
+                print self.hitbox.bottom_left, "bottom_left"
+                self.modes.pop(0)
+            elif self.modes[0] == "dilate":
+                if len(self.dilate_plans) > 0:
+                    self.set_size(self.dilate_plans[0])
+                    self.xcor = self.future_x * self.dilate_plans[0]
+                    self.dilate_plans.pop(0)
+                self.modes.pop(0)
+            elif self.modes[0] == "say":
+                if len(self.say_plans) > 0:
+                    # print'saying'
+                    self.say_queue.append(self.say_plans[0])
+                    self.say_plans.pop(0)
+                self.modes.pop(0)
 
     def print_corners(self):
         self.hitbox.printCorners()

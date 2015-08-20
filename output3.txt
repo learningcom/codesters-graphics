@@ -1,0 +1,552 @@
+         205355 function calls (204167 primitive calls) in 7.536 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    5.856    5.856    7.385    7.385 {built-in method mainloop}
+     6326    1.027    0.000    1.032    0.000 {built-in method call}
+      150    0.186    0.001    0.186    0.001 {method 'stretch' of 'ImagingCore' objects}
+        1    0.049    0.049    0.049    0.049 {_tkinter.create}
+      753    0.038    0.000    0.038    0.000 {method 'convert' of 'ImagingCore' objects}
+      590    0.022    0.000    0.034    0.000 transformations.py:95(poly_star)
+      151    0.017    0.000    0.017    0.000 {method 'paste' of 'ImagingCore' objects}
+     1657    0.014    0.000    0.039    0.000 Tkinter.py:1105(_options)
+      288    0.014    0.000    0.019    0.000 Tkinter.py:1148(_register)
+     5497    0.013    0.000    0.309    0.000 sprite.py:545(update_animation)
+     1655    0.012    0.000    0.812    0.000 Tkinter.py:2263(_create)
+     1289    0.012    0.000    0.013    0.000 hitbox.py:25(update_corners)
+     4159    0.011    0.000    0.012    0.000 sprite.py:517(get_hitbox_edges)
+      266    0.010    0.000    1.580    0.006 run.py:29(move_one)
+    26610    0.010    0.000    0.010    0.000 {isinstance}
+      266    0.009    0.000    1.540    0.006 manager.py:54(run)
+     1117    0.008    0.000    0.025    0.000 sprite.py:322(update_physics)
+      590    0.008    0.000    0.100    0.000 shapes.py:480(draw)
+     4381    0.007    0.000    0.007    0.000 {hasattr}
+      489    0.006    0.000    0.018    0.000 sprite.py:381(clear_queue)
+     2233    0.005    0.000    0.007    0.000 Image.py:628(load)
+      151    0.005    0.000    0.037    0.000 Image.py:1338(rotate)
+      266    0.005    0.000    0.109    0.000 sprite.py:288(draw)
+     1658    0.005    0.000    0.009    0.000 Tkinter.py:109(_cnfmerge)
+      267    0.005    0.000    0.019    0.000 Tkinter.py:3265(__init__)
+      266    0.005    0.000    0.030    0.000 Tkinter.py:523(after)
+      151    0.005    0.000    0.005    0.000 {method 'transform2' of 'ImagingCore' objects}
+     1356    0.005    0.000    0.007    0.000 Image.py:472(_new)
+      118    0.004    0.000    0.011    0.000 Tkinter.py:1179(_substitute)
+      266    0.004    0.000    0.114    0.000 environment.py:96(draw)
+      267    0.004    0.000    0.079    0.000 ImageTk.py:77(__init__)
+    20856    0.004    0.000    0.004    0.000 {method 'append' of 'list' objects}
+     3329    0.004    0.000    0.004    0.000 {method 'update' of 'dict' objects}
+     8097    0.004    0.000    0.004    0.000 {math.sin}
+     8097    0.004    0.000    0.004    0.000 {math.cos}
+      290    0.003    0.000    0.003    0.000 {built-in method createcommand}
+     1390    0.003    0.000    0.010    0.000 Tkinter.py:834(winfo_reqwidth)
+     1298    0.003    0.000    0.003    0.000 Tkinter.py:1185(getint_event)
+     3311    0.003    0.000    0.003    0.000 {_tkinter._flatten}
+      266    0.003    0.000    0.647    0.002 shapes.py:1051(draw)
+      266    0.003    0.000    0.005    0.000 Tkinter.py:72(_stringify)
+29747/29594    0.003    0.000    0.003    0.000 {len}
+      150    0.003    0.000    0.286    0.002 sprite.py:532(update_image)
+      753    0.003    0.000    0.050    0.000 Image.py:664(convert)
+        1    0.003    0.003    0.077    0.077 __init__.py:1(<module>)
+    11800    0.003    0.000    0.003    0.000 {round}
+  384/343    0.003    0.000    1.529    0.004 Tkinter.py:1484(__call__)
+      266    0.003    0.000    0.300    0.001 manager.py:75(update_animation)
+      851    0.003    0.000    0.012    0.000 sprite.py:418(update_collision)
+     1656    0.002    0.000    0.007    0.000 Tkinter.py:830(winfo_reqheight)
+     1675    0.002    0.000    0.002    0.000 Image.py:461(__init__)
+      265    0.002    0.000    1.517    0.006 Tkinter.py:534(callit)
+     1521    0.002    0.000    0.009    0.000 sprite.py:508(check_two_sprites_for_collision)
+        1    0.002    0.002    0.003    0.003 Tkinter.py:31(<module>)
+  300/150    0.002    0.000    0.209    0.001 Image.py:1299(resize)
+        1    0.002    0.002    0.060    0.060 environment.py:1(<module>)
+     2147    0.002    0.000    0.002    0.000 {range}
+      122    0.002    0.000    0.003    0.000 sre_compile.py:207(_optimize_charset)
+        6    0.002    0.000    0.002    0.000 collections.py:288(namedtuple)
+   121/10    0.002    0.000    0.004    0.000 sre_parse.py:379(_parse)
+      266    0.002    0.000    0.175    0.001 Tkinter.py:965(update)
+      532    0.002    0.000    0.002    0.000 {method 'search' of '_sre.SRE_Pattern' objects}
+      266    0.002    0.000    0.014    0.000 manager.py:79(update_collision)
+      151    0.002    0.000    0.021    0.000 Image.py:1046(paste)
+      267    0.002    0.000    0.052    0.000 ImageTk.py:153(paste)
+      266    0.002    0.000    0.020    0.000 Tkinter.py:2305(delete)
+      266    0.002    0.000    0.026    0.000 manager.py:70(update_physics)
+        1    0.002    0.002    0.002    0.002 __init__.py:4(<module>)
+        4    0.002    0.000    0.002    0.000 {method 'decode' of 'ImagingDecoder' objects}
+      266    0.002    0.000    0.024    0.000 environment.py:88(update_events)
+      151    0.002    0.000    0.002    0.000 {method 'copy' of 'ImagingCore' objects}
+  302/151    0.002    0.000    0.030    0.000 Image.py:1600(transform)
+      532    0.002    0.000    0.002    0.000 ImageTk.py:124(__str__)
+   270/10    0.002    0.000    0.005    0.001 sre_compile.py:32(_compile)
+     1944    0.001    0.000    0.001    0.000 {method 'items' of 'dict' objects}
+     2230    0.001    0.000    0.001    0.000 {method 'pixel_access' of 'ImagingCore' objects}
+     2509    0.001    0.000    0.001    0.000 {max}
+      848    0.001    0.000    0.001    0.000 Image.py:519(__getattr__)
+        1    0.001    0.001    0.015    0.015 shapes.py:1(<module>)
+      290    0.001    0.000    0.001    0.000 {built-in method deletecommand}
+      302    0.001    0.000    0.005    0.000 Image.py:1765(new)
+     1117    0.001    0.000    0.001    0.000 sprite.py:474(update_events)
+      151    0.001    0.000    0.001    0.000 {PIL._imaging.fill}
+        1    0.001    0.001    0.005    0.005 Image.py:27(<module>)
+      267    0.001    0.000    0.021    0.000 Tkinter.py:3324(__init__)
+      266    0.001    0.000    0.026    0.000 manager.py:86(update_events)
+      265    0.001    0.000    0.003    0.000 Tkinter.py:394(deletecommand)
+      490    0.001    0.000    0.001    0.000 {method 'remove' of 'list' objects}
+      590    0.001    0.000    0.053    0.000 Tkinter.py:2289(create_polygon)
+      288    0.001    0.000    0.001    0.000 Tkinter.py:1479(__init__)
+      772    0.001    0.000    0.002    0.000 Tkinter.py:1846(__getattr__)
+     1010    0.001    0.000    0.001    0.000 {getattr}
+      532    0.001    0.000    0.049    0.000 Tkinter.py:2280(create_image)
+      118    0.001    0.000    0.002    0.000 Tkinter.py:1131(nametowidget)
+      154    0.001    0.000    0.001    0.000 {PIL._imaging.new}
+     3045    0.001    0.000    0.001    0.000 {min}
+      301    0.001    0.000    0.001    0.000 {method 'join' of 'str' objects}
+      118    0.001    0.000    0.001    0.000 Tkinter.py:1170(_root)
+      153    0.001    0.000    0.005    0.000 ImageFile.py:125(load)
+      939    0.001    0.000    0.001    0.000 sre_parse.py:182(__next)
+       67    0.001    0.000    0.001    0.000 sprite.py:823(turn_counterclockwise)
+      295    0.001    0.000    0.001    0.000 {repr}
+      151    0.001    0.000    0.006    0.000 Image.py:1645(__transformer)
+       16    0.001    0.000    0.001    0.000 sprite.py:759(glide_to)
+      755    0.001    0.000    0.001    0.000 Image.py:1366(transform)
+      236    0.001    0.000    0.001    0.000 {built-in method getboolean}
+      463    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      267    0.001    0.000    0.072    0.000 Tkinter.py:2292(create_rectangle)
+       26    0.001    0.000    0.001    0.000 sre_compile.py:258(_mk_bitmap)
+      266    0.001    0.000    0.642    0.002 Tkinter.py:2295(create_text)
+  387/129    0.001    0.000    0.001    0.000 sre_parse.py:140(getwidth)
+      265    0.001    0.000    0.003    0.000 ImageTk.py:115(__del__)
+     1356    0.001    0.000    0.001    0.000 {method 'copy' of 'dict' objects}
+     1205    0.001    0.000    0.001    0.000 sre_parse.py:130(__getitem__)
+       46    0.001    0.000    0.001    0.000 sprite.py:803(turn_clockwise)
+      625    0.001    0.000    0.001    0.000 {method 'read' of 'file' objects}
+        1    0.000    0.000    0.001    0.001 hashlib.py:55(<module>)
+       17    0.000    0.000    0.001    0.000 GifImagePlugin.py:93(seek)
+       17    0.000    0.000    0.002    0.000 Image.py:316(preinit)
+        1    0.000    0.000    0.000    0.000 {method 'convert2' of 'ImagingCore' objects}
+     1226    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+      151    0.000    0.000    0.003    0.000 Image.py:773(copy)
+      151    0.000    0.000    0.024    0.000 Image.py:2071(composite)
+    62/10    0.000    0.000    0.004    0.000 sre_parse.py:301(_parse_sub)
+        7    0.000    0.000    0.004    0.001 sprite.py:141(__init__)
+        1    0.000    0.000    0.004    0.004 {execfile}
+      122    0.000    0.000    0.003    0.000 sre_compile.py:178(_compile_charset)
+      800    0.000    0.000    0.000    0.000 Tkinter.py:3287(__str__)
+        1    0.000    0.000    0.014    0.014 sprite.py:1(<module>)
+        1    0.000    0.000    0.001    0.001 io.py:34(<module>)
+        1    0.000    0.000    0.000    0.000 collections.py:1(<module>)
+        1    0.000    0.000    0.002    0.002 FixTk.py:1(<module>)
+        1    0.000    0.000    7.537    7.537 run.py:2(<module>)
+      302    0.000    0.000    0.001    0.000 _util.py:4(isStringType)
+      244    0.000    0.000    0.001    0.000 GifImagePlugin.py:59(data)
+        1    0.000    0.000    0.000    0.000 {method 'new_block' of 'ImagingCore' objects}
+      129    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+      764    0.000    0.000    0.001    0.000 sre_parse.py:201(get)
+        1    0.000    0.000    0.001    0.001 random.py:40(<module>)
+        1    0.000    0.000    0.013    0.013 inspect.py:25(<module>)
+      289    0.000    0.000    0.000    0.000 {id}
+       17    0.000    0.000    0.000    0.000 {open}
+       17    0.000    0.000    0.002    0.000 GifImagePlugin.py:65(_open)
+      858    0.000    0.000    0.000    0.000 _binary.py:15(i8)
+      302    0.000    0.000    0.001    0.000 Image.py:104(isImageType)
+        1    0.000    0.000    0.000    0.000 opcode.py:5(<module>)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:34(<module>)
+        1    0.000    0.000    0.010    0.010 tokenize.py:23(<module>)
+        1    0.000    0.000    0.001    0.001 BmpImagePlugin.py:27(<module>)
+       17    0.000    0.000    0.005    0.000 Image.py:1973(open)
+      265    0.000    0.000    0.000    0.000 Tkinter.py:3288(__del__)
+      302    0.000    0.000    0.000    0.000 {math.ceil}
+       10    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x919120}
+       59    0.000    0.000    0.000    0.000 manager.py:35(key_release)
+      738    0.000    0.000    0.000    0.000 sre_parse.py:195(match)
+        9    0.000    0.000    0.000    0.000 abc.py:86(__new__)
+      574    0.000    0.000    0.000    0.000 sre_parse.py:126(__len__)
+        1    0.000    0.000    0.000    0.000 dis.py:1(<module>)
+        2    0.000    0.000    0.003    0.001 {__import__}
+       17    0.000    0.000    0.000    0.000 ImagePalette.py:26(__init__)
+       88    0.000    0.000    0.000    0.000 sprite.py:843(wait)
+       21    0.000    0.000    0.001    0.000 Tkinter.py:985(_bind)
+      119    0.000    0.000    0.000    0.000 sre_compile.py:354(_simple)
+       10    0.000    0.000    0.011    0.001 re.py:226(_compile)
+        1    0.000    0.000    0.000    0.000 heapq.py:31(<module>)
+       67    0.000    0.000    0.001    0.000 environment.py:139(newfunction)
+      266    0.000    0.000    0.000    0.000 environment.py:82(update_animation)
+     1148    0.000    0.000    0.000    0.000 {ord}
+      323    0.000    0.000    0.000    0.000 sre_parse.py:138(append)
+        1    0.000    0.000    0.000    0.000 ImagePalette.py:19(<module>)
+       54    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+      119    0.000    0.000    0.000    0.000 _binary.py:28(i16le)
+        1    0.000    0.000    0.000    0.000 GifImagePlugin.py:28(<module>)
+        1    0.000    0.000    0.000    0.000 ImageTk.py:28(<module>)
+       67    0.000    0.000    0.001    0.000 starhedgehog.py:20(left)
+       17    0.000    0.000    0.002    0.000 ImageFile.py:73(__init__)
+        1    0.000    0.000    0.000    0.000 __init__.py:265(_reset_cache)
+      270    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
+        1    0.000    0.000    0.001    0.001 ImageFile.py:30(<module>)
+      302    0.000    0.000    0.000    0.000 {math.floor}
+       67    0.000    0.000    0.001    0.000 sprite.py:837(turn_left)
+       16    0.000    0.000    0.001    0.000 sprite.py:697(move_forward)
+       16    0.000    0.000    0.000    0.000 environment.py:333(wait)
+        5    0.000    0.000    0.003    0.001 shapes.py:447(__init__)
+      266    0.000    0.000    0.000    0.000 environment.py:85(update_collision)
+       12    0.000    0.000    0.000    0.000 abc.py:148(__subclasscheck__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1817(readprofile)
+       46    0.000    0.000    0.001    0.000 starhedgehog.py:24(right)
+       16    0.000    0.000    0.001    0.000 starhedgehog.py:28(up)
+        1    0.000    0.000    0.000    0.000 JpegImagePlugin.py:35(<module>)
+      267    0.000    0.000    0.000    0.000 {method 'isblock' of 'ImagingCore' objects}
+        3    0.000    0.000    0.000    0.000 __init__.py:78(CFUNCTYPE)
+       71    0.000    0.000    0.000    0.000 sre_parse.py:257(_escape)
+       14    0.000    0.000    0.000    0.000 __init__.py:147(_check_size)
+       46    0.000    0.000    0.001    0.000 sprite.py:817(turn_right)
+      244    0.000    0.000    0.000    0.000 collections.py:329(<genexpr>)
+      119    0.000    0.000    0.000    0.000 opcode.py:27(def_op)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:377(Misc)
+       10    0.000    0.000    0.001    0.000 sre_compile.py:359(_compile_info)
+       41    0.000    0.000    0.000    0.000 manager.py:43(left_press)
+        1    0.000    0.000    0.000    0.000 _endian.py:4(<module>)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+       35    0.000    0.000    0.000    0.000 _weakrefset.py:36(__init__)
+       17    0.000    0.000    0.000    0.000 ImagePalette.py:111(raw)
+       46    0.000    0.000    0.001    0.000 environment.py:147(newfunction)
+       17    0.000    0.000    0.000    0.000 copy.py:123(_copy_inst)
+        1    0.000    0.000    0.000    0.000 ascii.py:8(<module>)
+       10    0.000    0.000    0.005    0.000 sre_parse.py:675(parse)
+       37    0.000    0.000    0.000    0.000 {method 'seek' of 'file' objects}
+       10    0.000    0.000    0.000    0.000 random.py:173(randrange)
+       10    0.000    0.000    0.011    0.001 sre_compile.py:493(compile)
+       50    0.000    0.000    0.000    0.000 abc.py:89(<genexpr>)
+        3    0.000    0.000    0.000    0.000 __init__.py:493(PYFUNCTYPE)
+      205    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+      129    0.000    0.000    0.000    0.000 environment.py:135(clear_queue)
+        1    0.000    0.000    0.000    0.000 PpmImagePlugin.py:18(<module>)
+        5    0.000    0.000    0.003    0.001 starhedgehog.py:14(interval)
+        1    0.000    0.000    0.050    0.050 Tkinter.py:1747(__init__)
+        1    0.000    0.000    0.001    0.001 Tkinter.py:1808(destroy)
+       17    0.000    0.000    0.000    0.000 copy.py:66(copy)
+        1    0.000    0.000    0.050    0.050 manager.py:1(<module>)
+       10    0.000    0.000    0.000    0.000 {_sre.compile}
+       17    0.000    0.000    0.000    0.000 sprite.py:743(go_to)
+       12    0.000    0.000    0.000    0.000 hitbox.py:8(__init__)
+      356    0.000    0.000    0.000    0.000 sre_compile.py:24(_identityfunction)
+       24    0.000    0.000    0.000    0.000 _weakrefset.py:58(__iter__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1777(_loadtk)
+        2    0.000    0.000    0.000    0.000 {_ctypes.POINTER}
+        1    0.000    0.000    0.000    0.000 sprite.py:8(SpriteClass)
+       40    0.000    0.000    0.000    0.000 sre_parse.py:225(_class_escape)
+        1    0.000    0.000    0.000    0.000 token.py:1(<module>)
+       30    0.000    0.000    0.000    0.000 {all}
+        6    0.000    0.000    0.000    0.000 {posix.stat}
+        1    0.000    0.000    0.001    0.001 numbers.py:6(<module>)
+       40    0.000    0.000    0.000    0.000 sre_parse.py:72(opengroup)
+        1    0.000    0.000    0.000    0.000 environment.py:34(__init__)
+       12    0.000    0.000    0.000    0.000 abc.py:105(register)
+      119    0.000    0.000    0.000    0.000 sre_parse.py:134(__setitem__)
+       16    0.000    0.000    0.001    0.000 environment.py:155(newfunction)
+       21    0.000    0.000    0.001    0.000 Tkinter.py:1002(bind)
+       40    0.000    0.000    0.000    0.000 sre_parse.py:83(closegroup)
+       18    0.000    0.000    0.000    0.000 {_struct.calcsize}
+        2    0.000    0.000    0.000    0.000 Tkinter.py:384(destroy)
+        1    0.000    0.000    0.000    0.000 __init__.py:349(__init__)
+       34    0.000    0.000    0.000    0.000 _util.py:6(isPath)
+        1    0.000    0.000    0.050    0.050 manager.py:4(Manager)
+        1    0.000    0.000    0.000    0.000 hitbox.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 ImageColor.py:20(<module>)
+      100    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+       10    0.000    0.000    0.006    0.001 sre_compile.py:478(_code)
+        1    0.000    0.000    0.004    0.004 starhedgehog.py:1(<module>)
+       48    0.000    0.000    0.000    0.000 {method 'tell' of 'file' objects}
+        9    0.000    0.000    0.000    0.000 manager.py:45(right_press)
+      214    0.000    0.000    0.000    0.000 {method 'isalnum' of 'str' objects}
+       30    0.000    0.000    0.000    0.000 collections.py:355(<genexpr>)
+        1    0.000    0.000    0.000    0.000 environment.py:314(disable_all_walls)
+       17    0.000    0.000    0.000    0.000 BmpImagePlugin.py:53(_accept)
+       24    0.000    0.000    0.000    0.000 _weakrefset.py:83(add)
+        3    0.000    0.000    0.000    0.000 {PIL._imaging.gif_decoder}
+       12    0.000    0.000    0.000    0.000 _weakrefset.py:26(__exit__)
+       30    0.000    0.000    0.000    0.000 collections.py:353(<genexpr>)
+        1    0.000    0.000    0.000    0.000 _util.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2186(Canvas)
+       17    0.000    0.000    0.000    0.000 GifImagePlugin.py:46(_accept)
+      116    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        9    0.000    0.000    0.000    0.000 manager.py:41(up_press)
+       10    0.000    0.000    0.000    0.000 sre_parse.py:178(__init__)
+    36/24    0.000    0.000    0.000    0.000 {issubclass}
+       15    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+       20    0.000    0.000    0.000    0.000 sre_compile.py:472(isstring)
+        7    0.000    0.000    0.010    0.001 {map}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1538(Wm)
+        1    0.000    0.000    0.000    0.000 environment.py:6(StageClass)
+        1    0.000    0.000    0.000    0.000 {posix.urandom}
+        1    0.000    0.000    0.000    0.000 random.py:100(seed)
+        1    0.000    0.000    0.000    0.000 __future__.py:48(<module>)
+        1    0.000    0.000    0.000    0.000 {dir}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2043(__init__)
+        1    0.000    0.000    0.000    0.000 Image.py:447(Image)
+        1    0.000    0.000    0.000    0.000 numbers.py:34(Complex)
+       10    0.000    0.000    0.000    0.000 random.py:236(randint)
+        6    0.000    0.000    0.000    0.000 posixpath.py:68(join)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2061(destroy)
+       37    0.000    0.000    0.000    0.000 abc.py:15(abstractmethod)
+        4    0.000    0.000    0.000    0.000 genericpath.py:26(isfile)
+        3    0.000    0.000    0.000    0.000 {method 'putpalette' of 'ImagingCore' objects}
+        3    0.000    0.000    0.000    0.000 {method 'sort' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:465(focus_set)
+        1    0.000    0.000    0.000    0.000 {function seed at 0x7f9c1f69d230}
+       12    0.000    0.000    0.000    0.000 _weakrefset.py:20(__enter__)
+        1    0.000    0.000    0.000    0.000 __init__.py:71(search_function)
+        3    0.000    0.000    0.000    0.000 ImageFile.py:246(load_prepare)
+        1    0.000    0.000    0.000    0.000 posixpath.py:336(normpath)
+        3    0.000    0.000    0.000    0.000 Image.py:378(_getdecoder)
+        1    0.000    0.000    0.000    0.000 locale.py:363(normalize)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2018(_setup)
+        1    0.000    0.000    0.073    0.073 run.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {math.exp}
+        1    0.000    0.000    0.000    0.000 JpegPresets.py:67(<module>)
+        6    0.000    0.000    0.000    0.000 hashlib.py:94(__get_openssl_constructor)
+        1    0.000    0.000    0.000    0.000 <string>:1(Attribute)
+        2    0.000    0.000    0.000    0.000 {built-in method getvar}
+       16    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 bezier.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2561(Listbox)
+        1    0.000    0.000    0.000    0.000 manager.py:19(__init__)
+       10    0.000    0.000    0.011    0.001 re.py:188(compile)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2655(Menu)
+        2    0.000    0.000    0.000    0.000 genericpath.py:15(exists)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1700(wm_protocol)
+        5    0.000    0.000    0.000    0.000 Image.py:2131(register_open)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2886(Text)
+       17    0.000    0.000    0.000    0.000 {math.sqrt}
+        1    0.000    0.000    0.000    0.000 collections.py:26(OrderedDict)
+        1    0.000    0.000    0.000    0.000 numbers.py:295(Integral)
+       30    0.000    0.000    0.000    0.000 {method '__contains__' of 'frozenset' objects}
+        2    0.000    0.000    0.000    0.000 __init__.py:49(normalize_encoding)
+        1    0.000    0.000    0.000    0.000 collections.py:387(Counter)
+        1    0.000    0.000    0.000    0.000 random.py:72(Random)
+       10    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects}
+        1    0.000    0.000    0.000    0.000 <string>:1(ModuleInfo)
+        1    0.000    0.000    0.000    0.000 <string>:1(ArgSpec)
+        1    0.000    0.000    0.000    0.000 <string>:1(Arguments)
+       11    0.000    0.000    0.000    0.000 opcode.py:31(name_op)
+       19    0.000    0.000    0.000    0.000 tokenize.py:45(group)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1963(Grid)
+        1    0.000    0.000    0.000    0.000 <string>:1(ArgInfo)
+        1    0.000    0.000    0.000    0.000 {method 'encode' of 'unicode' objects}
+        1    0.000    0.000    0.000    0.000 keyword.py:11(<module>)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2456(Entry)
+       10    0.000    0.000    0.000    0.000 Image.py:2168(register_extension)
+        1    0.000    0.000    0.000    0.000 <string>:1(Traceback)
+       23    0.000    0.000    0.000    0.000 {method 'upper' of 'str' objects}
+        1    0.000    0.000    0.001    0.001 sprite.py:1332(__init__)
+        6    0.000    0.000    0.000    0.000 opcode.py:35(jrel_op)
+        1    0.000    0.000    0.000    0.000 ascii.py:41(getregentry)
+        1    0.000    0.000    0.002    0.002 environment.py:231(set_background)
+        2    0.000    0.000    0.000    0.000 {math.log}
+        1    0.000    0.000    0.000    0.000 shapes.py:1032(__init__)
+        1    0.000    0.000    7.385    7.385 Tkinter.py:1071(mainloop)
+        1    0.000    0.000    0.000    0.000 locale.py:546(getlocale)
+        1    0.000    0.000    0.000    0.000 Tkconstants.py:4(<module>)
+        1    0.000    0.000    0.005    0.005 run.py:24(do)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2188(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:201(Variable)
+        1    0.000    0.000    0.000    0.000 {_codecs.utf_8_decode}
+        1    0.000    0.000    0.000    0.000 {sorted}
+        1    0.000    0.000    0.000    0.000 random.py:650(WichmannHill)
+       12    0.000    0.000    0.000    0.000 _weakrefset.py:52(_commit_removals)
+        1    0.000    0.000    0.000    0.000 ImageMode.py:17(<module>)
+        6    0.000    0.000    0.000    0.000 opcode.py:39(jabs_op)
+        6    0.000    0.000    0.000    0.000 {sys._getframe}
+        1    0.000    0.000    0.000    0.000 transformations.py:1(<module>)
+       10    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3577(PanedWindow)
+       12    0.000    0.000    0.000    0.000 _weakrefset.py:16(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1872(pack_configure)
+        1    0.000    0.000    0.000    0.000 numbers.py:270(Rational)
+        1    0.000    0.000    0.000    0.000 codecs.py:77(__new__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2846(Scrollbar)
+        1    0.000    0.000    0.000    0.000 numbers.py:169(Real)
+        1    0.000    0.000    0.000    0.000 {method 'decode' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {PIL._imagingtk.tkinit}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2107(Button)
+        1    0.000    0.000    0.000    0.000 locale.py:347(_replace_encoding)
+       12    0.000    0.000    0.000    0.000 {method '__subclasses__' of 'type' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3262(Image)
+        3    0.000    0.000    0.000    0.000 __init__.py:494(CFunctionType)
+       12    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        1    0.000    0.000    0.000    0.000 posixpath.py:104(splitext)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1868(Pack)
+        2    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+       12    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+        8    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 Image.py:417(_E)
+       38    0.000    0.000    0.000    0.000 {_ctypes.sizeof}
+        3    0.000    0.000    0.000    0.000 {method 'setimage' of 'ImagingDecoder' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3397(Spinbox)
+        1    0.000    0.000    0.000    0.000 locale.py:447(_parse_localename)
+       10    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 environment.py:343(__init__)
+       26    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 posixpath.py:119(basename)
+        1    0.000    0.000    0.000    0.000 shapes.py:388(Line)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2813(Scale)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1743(Tk)
+        1    0.000    0.000    0.000    0.000 {_ctypes.set_conversion_mode}
+        2    0.000    0.000    0.000    0.000 {method 'putpalettealpha' of 'ImagingCore' objects}
+        3    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2427(Checkbutton)
+        1    0.000    0.000    0.000    0.000 random.py:800(SystemRandom)
+        3    0.000    0.000    0.000    0.000 ImagePalette.py:35(getdata)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2016(BaseWidget)
+       30    0.000    0.000    0.000    0.000 {method 'isdigit' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 shapes.py:889(Arc)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:345(BooleanVar)
+        1    0.000    0.000    0.000    0.000 __future__.py:74(_Feature)
+        3    0.000    0.000    0.000    0.000 Image.py:2146(register_mime)
+        1    0.000    0.000    0.000    0.000 hitbox.py:6(Hitbox)
+        1    0.000    0.000    0.000    0.000 _binary.py:14(<module>)
+        1    0.000    0.000    0.000    0.000 ImageMode.py:22(ModeDescriptor)
+        1    0.000    0.000    0.000    0.000 environment.py:154(event_up_key)
+        1    0.000    0.000    0.000    0.000 {binascii.hexlify}
+        1    0.000    0.000    0.000    0.000 environment.py:146(event_right_key)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1913(Place)
+        7    0.000    0.000    0.000    0.000 __future__.py:75(__init__)
+        3    0.000    0.000    0.000    0.000 __init__.py:104(CFunctionType)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:301(IntVar)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_md5}
+        1    0.000    0.000    0.000    0.000 environment.py:138(event_left_key)
+        1    0.000    0.000    0.000    0.000 {_ctypes.dlopen}
+        1    0.000    0.000    0.000    0.000 __init__.py:332(CDLL)
+        1    0.000    0.000    0.000    0.000 utf_8.py:15(decode)
+        1    0.000    0.000    0.000    0.000 tokenize.py:46(any)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:484(_idat)
+        1    0.000    0.000    0.000    0.000 numbers.py:13(Number)
+        1    0.000    0.000    0.000    0.000 tokenize.py:179(Untokenizer)
+        1    0.000    0.000    0.000    0.000 ascii.py:13(Codec)
+        1    0.000    0.000    0.000    0.000 ascii.py:20(IncrementalEncoder)
+        1    0.000    0.000    0.000    0.000 {built-in method interpaddr}
+        1    0.000    0.000    0.000    0.000 io.py:72(RawIOBase)
+        1    0.000    0.000    0.000    0.000 __init__.py:243(c_char_p)
+        1    0.000    0.000    0.000    0.000 __init__.py:14(<module>)
+        1    0.000    0.000    0.000    0.000 UserDict.py:18(__getitem__)
+        1    0.000    0.000    0.000    0.000 environment.py:287(disable_floor)
+        1    0.000    0.000    0.000    0.000 {_locale.setlocale}
+        1    0.000    0.000    0.000    0.000 ImageTk.py:57(PhotoImage)
+        1    0.000    0.000    0.000    0.000 shapes.py:324(Ellipse)
+        1    0.000    0.000    0.000    0.000 ImageFile.py:298(Parser)
+        1    0.000    0.000    0.000    0.000 __init__.py:294(c_wchar)
+        1    0.000    0.000    0.000    0.000 shapes.py:67(Circle)
+        1    0.000    0.000    0.000    0.000 ImageFile.py:70(ImageFile)
+        1    0.000    0.000    0.000    0.000 run.py:13(App)
+        1    0.000    0.000    0.000    0.000 io.py:75(BufferedIOBase)
+        1    0.000    0.000    0.000    0.000 __init__.py:226(c_ubyte)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3322(PhotoImage)
+        1    0.000    0.000    0.000    0.000 JpegImagePlugin.py:267(JpegImageFile)
+        1    0.000    0.000    0.000    0.000 io.py:78(TextIOBase)
+        1    0.000    0.000    0.000    0.000 shapes.py:957(Curve)
+        1    0.000    0.000    0.000    0.000 ImageFile.py:268(StubImageFile)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3382(BitmapImage)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2786(Radiobutton)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2776(Menubutton)
+        1    0.000    0.000    0.000    0.000 environment.py:224(event_interval)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2072(Widget)
+        1    0.000    0.000    0.000    0.000 __init__.py:233(c_byte)
+        1    0.000    0.000    0.000    0.000 shapes.py:820(Polygon)
+        1    0.000    0.000    0.000    0.000 BmpImagePlugin.py:171(DibImageFile)
+        1    0.000    0.000    0.000    0.000 tokenize.py:148(StopTokenizing)
+        1    0.000    0.000    0.000    0.000 genericpath.py:85(_splitext)
+        1    0.000    0.000    0.000    0.000 sprite.py:942(collision_off)
+        1    0.000    0.000    0.000    0.000 posixpath.py:59(isabs)
+        1    0.000    0.000    0.000    0.000 shapes.py:584(TriangleRight)
+        3    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 UserDict.py:70(__contains__)
+        1    0.000    0.000    0.000    0.000 shapes.py:189(Square)
+        1    0.000    0.000    0.000    0.000 ImagePalette.py:23(ImagePalette)
+        2    0.000    0.000    0.000    0.000 tokenize.py:47(maybe)
+        1    0.000    0.000    0.000    0.000 __init__.py:159(py_object)
+        1    0.000    0.000    0.000    0.000 shapes.py:735(Quad)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha256}
+        1    0.000    0.000    0.000    0.000 posixpath.py:365(abspath)
+        1    0.000    0.000    0.000    0.000 GifImagePlugin.py:53(GifImageFile)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3214(_setit)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:179(PngStream)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1496(XView)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:341(PngImageFile)
+        1    0.000    0.000    0.000    0.000 ImageTk.py:195(BitmapImage)
+        1    0.000    0.000    0.000    0.000 ascii.py:34(StreamConverter)
+        1    0.000    0.000    0.000    0.000 shapes.py:513(TriangleIso)
+        3    0.000    0.000    0.000    0.000 ImageFile.py:62(_tilesort)
+        1    0.000    0.000    0.000    0.000 shapes.py:254(Triangle)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1517(YView)
+        1    0.000    0.000    0.000    0.000 shapes.py:655(Triangle3Pts)
+        1    0.000    0.000    0.000    0.000 shapes.py:1071(Display)
+        1    0.000    0.000    0.000    0.000 __init__.py:388(PyDLL)
+        1    0.000    0.000    0.000    0.000 __init__.py:193(c_uint)
+        1    0.000    0.000    0.000    0.000 bezier.py:4(Bezier)
+        1    0.000    0.000    0.000    0.000 __init__.py:201(c_double)
+        1    0.000    0.000    0.000    0.000 __init__.py:359(_FuncPtr)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:154(PngInfo)
+        1    0.000    0.000    0.000    0.000 PngImagePlugin.py:78(ChunkStream)
+        1    0.000    0.000    0.000    0.000 Image.py:1745(ImagePointHandler)
+        1    0.000    0.000    0.000    0.000 __init__.py:180(c_ulong)
+        1    0.000    0.000    0.000    0.000 sprite.py:1330(Sprite)
+        1    0.000    0.000    0.000    0.000 {method 'index' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha512}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2079(Toplevel)
+        1    0.000    0.000    0.000    0.000 shapes.py:446(Star)
+        5    0.000    0.000    0.000    0.000 Image.py:2157(register_save)
+        2    0.000    0.000    0.000    0.000 __init__.py:429(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:326(DoubleVar)
+        1    0.000    0.000    0.000    0.000 random.py:91(__init__)
+        1    0.000    0.000    0.000    0.000 PpmImagePlugin.py:56(PpmImageFile)
+        1    0.000    0.000    0.000    0.000 io.py:69(IOBase)
+        1    0.000    0.000    0.000    0.000 shapes.py:1031(Text)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha1}
+        1    0.000    0.000    0.000    0.000 __init__.py:291(c_wchar_p)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3555(LabelFrame)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2521(Frame)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1476(CallWrapper)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3776(Tributton)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha224}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:129(Event)
+        1    0.000    0.000    0.000    0.000 environment.py:293(disable_ceiling)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:279(StringVar)
+        1    0.000    0.000    0.000    0.000 __init__.py:428(LibraryLoader)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3768(Studbutton)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2539(Label)
+        1    0.000    0.000    0.000    0.000 Image.py:1749(ImageTransformHandler)
+        1    0.000    0.000    0.000    0.000 BmpImagePlugin.py:59(BmpImageFile)
+        1    0.000    0.000    0.000    0.000 sprite.py:894(gravity_off)
+        1    0.000    0.000    0.000    0.000 ascii.py:24(IncrementalDecoder)
+        7    0.000    0.000    0.000    0.000 {globals}
+        2    0.000    0.000    0.000    0.000 {method 'clear' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 inspect.py:630(EndOfBlock)
+        1    0.000    0.000    0.000    0.000 __init__.py:172(c_ushort)
+        1    0.000    0.000    0.000    0.000 environment.py:299(disable_right_wall)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3225(OptionMenu)
+        1    0.000    0.000    0.000    0.000 environment.py:305(disable_left_wall)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2781(Message)
+        1    0.000    0.000    0.000    0.000 sprite.py:1212(event_collision)
+        1    0.000    0.000    0.000    0.000 ascii.py:28(StreamWriter)
+        1    0.000    0.000    0.000    0.000 Image.py:1710(_ImageCrop)
+        6    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 environment.py:342(Environment)
+        3    0.000    0.000    0.000    0.000 ImageFile.py:255(load_end)
+        1    0.000    0.000    0.000    0.000 __init__.py:255(c_void_p)
+        1    0.000    0.000    0.000    0.000 tokenize.py:146(TokenError)
+        1    0.000    0.000    0.000    0.000 __init__.py:168(c_short)
+        1    0.000    0.000    0.000    0.000 shapes.py:11(Point)
+        1    0.000    0.000    0.000    0.000 ascii.py:31(StreamReader)
+        1    0.000    0.000    0.000    0.000 __init__.py:260(c_bool)
+        1    0.000    0.000    0.000    0.000 shapes.py:124(Rectangle)
+        1    0.000    0.000    0.000    0.000 __init__.py:189(c_int)
+        1    0.000    0.000    0.000    0.000 __init__.py:238(c_char)
+        1    0.000    0.000    0.000    0.000 _endian.py:26(_swapped_meta)
+        1    0.000    0.000    0.000    0.000 _endian.py:49(BigEndianStructure)
+        1    0.000    0.000    0.000    0.000 __init__.py:205(c_longdouble)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha384}
+        1    0.000    0.000    0.000    0.000 __init__.py:197(c_float)
+        1    0.000    0.000    0.000    0.000 __init__.py:176(c_long)
+        1    0.000    0.000    0.000    0.000 inspect.py:632(BlockFinder)
+        1    0.000    0.000    0.000    0.000 Image.py:33(_imaging_not_installed)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
