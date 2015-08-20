@@ -202,10 +202,11 @@ class SpriteClass(object):
         self.have_clicked = False
 
         def click_on_sprite(event):
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+            hit = self.get_hitbox_edges()
+            top = hit[0]
+            right = hit[1]
+            bottom = hit[2]
+            left = hit[3]
             ex = self.canvas.winfo_pointerx()
             ey = self.canvas.winfo_pointery()
             if left < ex < right and bottom < ey < top:
@@ -345,10 +346,11 @@ class SpriteClass(object):
 
         # self.hitbox.update_corners()
 
-        top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-        right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-        bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-        left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+        hit = self.get_hitbox_edges()
+        top = hit[0]
+        right = hit[1]
+        bottom = hit[2]
+        left = hit[3]
 
         tempheight = top-bottom
         tempwidth = right-left
@@ -413,9 +415,9 @@ class SpriteClass(object):
             if i not in skips:
                 self.modes.remove(i)
 
-    def update_collision(self):
-        if self.collision:
-            for e in Manager.elements:
+    def update_collision(self,i):
+        if self.collision or self.hazard or self.goal:
+            for e in Manager.elements[i:]:
                 if isinstance(e, SpriteClass):
                     if self.check_two_sprites_for_collision(e):
                         if e.goal or e.hazard or e.collision:
@@ -444,6 +446,28 @@ class SpriteClass(object):
                             else:
                                 self.collision_function()
 
+                        if self.goal and e.collision_goal_function is not None:
+                            if len(inspect.getargspec(e.collision_goal_function)[0]) == 2:
+                                e.collision_goal_function(e, self)
+                            elif len(inspect.getargspec(e.collision_goal_function)[0]) == 1:
+                                e.collision_goal_function(Manager.elements.index(self))
+                            else:
+                                e.collision_goal_function()
+                        elif self.hazard and e.collision_hazard_function is not None:
+                            if len(inspect.getargspec(e.collision_hazard_function)[0]) == 2:
+                                e.collision_hazard_function(e, self)
+                            elif len(inspect.getargspec(e.collision_hazard_function)[0]) == 1:
+                                e.collision_hazard_function(Manager.elements.index(self))
+                            else:
+                                self.collision_hazard_function()
+                        elif self.collision and e.collision_function is not None:
+                            if len(inspect.getargspec(e.collision_function)[0]) == 2:
+                                e.collision_function(e, self)
+                            elif len(inspect.getargspec(e.collision_function)[0]) == 1:
+                                e.collision_function(Manager.elements.index(self))
+                            else:
+                                e.collision_function()
+
                         self.update_animation()
                         e.update_animation()
 
@@ -458,10 +482,11 @@ class SpriteClass(object):
                         i(self)
         if self.drag:
             if Manager.mouse_down and self.have_clicked:
-                top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-                right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-                bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-                left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+                hit = self.get_hitbox_edges()
+                top = hit[0]
+                right = hit[1]
+                bottom = hit[2]
+                left = hit[3]
                 ex = self.canvas.winfo_pointerx()
                 ey = self.canvas.winfo_pointery()
                 if left < ex < right and bottom < ey < top:
@@ -1161,10 +1186,11 @@ class SpriteClass(object):
 
     def event_click(self, function):
         def click(event):
-            top = max(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-            right = max(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
-            bottom = min(self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1])
-            left = min(self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0])
+            hit = self.get_hitbox_edges()
+            top = hit[0]
+            right = hit[1]
+            bottom = hit[2]
+            left = hit[3]
             ex = event.x - self.canvas.winfo_reqwidth()/2
             ey = self.canvas.winfo_reqwidth()/2 - event.y
             if left < ex < right and bottom < ey < top:

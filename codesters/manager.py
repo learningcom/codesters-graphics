@@ -77,8 +77,11 @@ class Manager(object):
             e.update_animation()
 
     def update_collision(self):
-        for e in self.elements:
-            e.update_collision()
+        for i in range(len(self.elements) - 1):
+            try:
+                self.elements[i].update_collision(i + 1)
+            except IndexError:
+                pass
 
     def update_events(self):
         for e in self.elements:

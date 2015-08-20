@@ -82,7 +82,7 @@ class StageClass(object):
     def update_animation(self):
         pass
 
-    def update_collision(self):
+    def update_collision(self,i):
         pass
 
     def update_events(self):
