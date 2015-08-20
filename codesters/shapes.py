@@ -1045,6 +1045,9 @@ class Text(sprite.SpriteClass):
     def set_text(self, text):
         self.say_text = text
 
+    def say(self):
+        pass
+
     def draw(self):
         if self.forever_function is not None:
             self.forever_function()
