@@ -518,17 +518,7 @@ class SpriteClass(object):
     def get_hitbox_edges(self):
         hit_x = [self.hitbox.top_left[0], self.hitbox.top_right[0], self.hitbox.bottom_left[0], self.hitbox.bottom_right[0]]
         hit_y = [self.hitbox.top_left[1], self.hitbox.top_right[1], self.hitbox.bottom_left[1], self.hitbox.bottom_right[1]]
-        headmod = self.heading % 360
-        if headmod <= 1 or headmod >= 359:
-            return[hit_y[0], hit_x[1], hit_y[2], hit_x[3]]
-        elif 89 <= headmod <= 91:
-            return[hit_y[1], hit_x[2], hit_y[3], hit_x[0]]
-        elif 179 <= headmod <= 181:
-            return[hit_y[2], hit_x[3], hit_y[0], hit_x[1]]
-        elif 269 <= headmod <= 271:
-            return[hit_y[3], hit_x[0], hit_y[1], hit_x[2]]
-        else:
-            return [max(hit_y), max(hit_x), min(hit_y), min(hit_x)]
+        return [max(hit_y), max(hit_x), min(hit_y), min(hit_x)]
 
     def update_image(self):
         im2 = self.base_photo.convert('RGBA')
@@ -590,7 +580,8 @@ class SpriteClass(object):
                             self.future_x = self.animation_x_coords[-2]
                         if len(self.animation_y_coords) > 1:
                             self.future_y = self.animation_y_coords[-2]
-                        self.hitbox.update_corners()
+                        if not self.physics_true:
+                            self.hitbox.update_corners()
                 else:
                     self.modes.pop(0)
             elif self.modes[0] == "rotate":
@@ -600,7 +591,8 @@ class SpriteClass(object):
                         self.modes.pop(0)
                     else:
                         self.heading = self.animation_rotation_degrees.pop(0)
-                        self.hitbox.update_corners()
+                        if not self.physics_true:
+                            self.hitbox.update_corners()
                         self.update_image()
             elif self.modes[0] == "xflip":
                 if len(self.x_flip_plans) > 0:
