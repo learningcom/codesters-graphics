@@ -688,15 +688,16 @@ class SpriteClass(object):
         self.glide_to(self.future_x, self.future_y+amount)
 
     def move_forward(self, amount):
+        angle = self.future_heading * (math.pi/180)
         if len(self.x_flip_plans) >= 1 and not self.x_flip_plans[-1]:
-            desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-            desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+            desired_x = amount * math.cos(angle) + self.future_x
+            desired_y = amount * math.sin(angle) + self.future_y
         elif not self.future_x_flipped and len(self.x_flip_plans) < 1:
-            desired_x = amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-            desired_y = amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+            desired_x = amount * math.cos(angle) + self.future_x
+            desired_y = amount * math.sin(angle) + self.future_y
         else:
-            desired_x = -amount * math.cos(self.future_heading * (math.pi/180)) + self.future_x
-            desired_y = -amount * math.sin(self.future_heading * (math.pi/180)) + self.future_y
+            desired_x = -amount * math.cos(angle) + self.future_x
+            desired_y = -amount * math.sin(angle) + self.future_y
         self.glide_to(desired_x, desired_y)
 
     def forward(self, amount):
@@ -1285,8 +1286,10 @@ class SpriteClass(object):
 
     def rotate_about(self, degrees, x, y):
         theta = degrees*math.pi/180
-        x1 = math.cos(theta) * (self.xcor-x) - math.sin(theta) * (self.ycor-y) + x
-        y1 = math.sin(theta) * (self.xcor-x) + math.cos(theta) * (self.ycor-y) + y
+        costhe = math.cos(theta)
+        sinthe = math.sin(theta)
+        x1 = costhe * (self.xcor-x) - sinthe * (self.ycor-y) + x
+        y1 = sinethe * (self.xcor-x) + costhe * (self.ycor-y) + y
         self.set_heading(self.future_heading+degrees)
         self.go_to(x1, y1)
 

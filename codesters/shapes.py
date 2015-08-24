@@ -990,15 +990,17 @@ class Curve(sprite.SpriteClass):
         y1, cy1, cy2, y2 = cy-self.y1, cy-self.cy1, cy-self.cy2, cy-self.y2
 
         theta = -self.heading * math.pi/180
+        costhe = math.cos(theta)
+        sinthe = math.sin(theta)
 
-        newx1 = (math.cos(theta) * (x1-cx) - math.sin(theta) * (y1-cy))*self.size*xf + cx
-        newy1 = (math.sin(theta) * (x1-cx) + math.cos(theta) * (y1-cy))*self.size*yf + cy
-        newcx1 = (math.cos(theta) * (cx1-cx) - math.sin(theta) * (cy1-cy))*self.size*xf + cx
-        newcy1 = (math.sin(theta) * (cx1-cx) + math.cos(theta) * (cy1-cy))*self.size*yf + cy
-        newcx2 = (math.cos(theta) * (cx2-cx) - math.sin(theta) * (cy2-cy))*self.size*xf + cx
-        newcy2 = (math.sin(theta) * (cx2-cx) + math.cos(theta) * (cy2-cy))*self.size*yf + cy
-        newx2 = (math.cos(theta) * (x2-cx) - math.sin(theta) * (y2-cy))*self.size*xf + cx
-        newy2 = (math.sin(theta) * (x2-cx) + math.cos(theta) * (y2-cy))*self.size*yf + cy
+        newx1 = (costhe * (x1-cx) - sinthe * (y1-cy))*self.size*xf + cx
+        newy1 = (sinthe * (x1-cx) + costhe * (y1-cy))*self.size*yf + cy
+        newcx1 = (costhe * (cx1-cx) - sinthe * (cy1-cy))*self.size*xf + cx
+        newcy1 = (sinthe * (cx1-cx) + costhe * (cy1-cy))*self.size*yf + cy
+        newcx2 = (costhe * (cx2-cx) - sinthe * (cy2-cy))*self.size*xf + cx
+        newcy2 = (sinthe * (cx2-cx) + costhe * (cy2-cy))*self.size*yf + cy
+        newx2 = (costhe * (x2-cx) - sinthe * (y2-cy))*self.size*xf + cx
+        newy2 = (sinthe * (x2-cx) + costhe * (y2-cy))*self.size*yf + cy
 
         self.P0 = [newx1, newy1]
         self.P1 = [newcx1, newcy1]
