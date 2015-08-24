@@ -1,5 +1,5 @@
 import codesters
-#stage = codesters.Environment()
+stage = codesters.Environment()
 
 # we need a really long background like this field of flowers
 stage.set_background('flower_field')

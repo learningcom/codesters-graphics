@@ -373,7 +373,7 @@ class SpriteClass(object):
                     self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
             if Manager.stage.wall_right_on and self.gravity_true:
-                if right > self.canvas.Manager.width:
+                if right > Manager.width:
                     self.xcor = Manager.width - tempwidth/2
                     self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
