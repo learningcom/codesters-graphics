@@ -291,8 +291,8 @@ class SpriteClass(object):
             self.forever_function()
         if self.photo is not None and not self.hidden:
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
-            self.canvas.create_image((self.xcor + self.canvas.winfo_reqwidth()/2,
-                                      self.canvas.winfo_reqheight()/2 - self.ycor),
+            self.canvas.create_image((self.xcor + Manager.width,
+                                      Manager.height - self.ycor),
                                      image=self.bg_photoimg)
         elif not self.hidden:
             self.canvas.create_oval((self.xcor-(self.size/2),
@@ -305,8 +305,8 @@ class SpriteClass(object):
         for l in self.lines:
             self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + self.canvas.winfo_reqwidth()/2,
-                                    self.canvas.winfo_reqheight()/2 - self.ycor - 100,
+            self.canvas.create_text(self.xcor + Manager.width,
+                                    Manager.height - self.ycor - 100,
                                     text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
             self.say_time -= 1
@@ -337,13 +337,13 @@ class SpriteClass(object):
 
         if self.pen:
             newline = []
-            newline.append((self.canvas.winfo_reqwidth()/2 + prevx,self.canvas.winfo_reqheight()/2 - prevy,self.canvas.winfo_reqwidth()/2 + self.xcor,self.canvas.winfo_reqheight()/2 - self.ycor))
+            newline.append((Manager.width + prevx, Manager.height - prevy, Manager.width + self.xcor, Manager.height - self.ycor))
             newline.append(self.pen_color_var)
             newline.append(self.pen_size_var)
             self.lines.append(newline)
         if self.fill and self.pen:
-            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
-            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
+            self.polygons[-1][0].append(Manager.width + self.xcor)
+            self.polygons[-1][0].append(Manager.height - self.ycor)
 
         # self.hitbox.update_corners()
 
@@ -358,23 +358,23 @@ class SpriteClass(object):
 
         if self.gravity_true:
             if Manager.stage.wall_bottom_on and self.gravity_true:
-                if bottom < -self.canvas.winfo_reqheight()/2:
-                    self.ycor = -self.canvas.winfo_reqheight()/2 + tempheight/2
+                if bottom < -Manager.height:
+                    self.ycor = -Manager.height + tempheight/2
                     self.jump(abs(self.yspeed * Manager.stage.bounce))
 
             if Manager.stage.wall_top_on and self.gravity_true:
-                if top > self.canvas.winfo_reqheight()/2:
-                    self.ycor = self.canvas.winfo_reqheight()/2 - tempheight/2
+                if top > Manager.height:
+                    self.ycor = Manager.height - tempheight/2
                     self.jump(-abs(self.yspeed * Manager.stage.bounce))
 
             if Manager.stage.wall_left_on and self.gravity_true:
-                if left < -self.canvas.winfo_reqwidth()/2:
-                    self.xcor = -self.canvas.winfo_reqwidth()/2 + tempwidth/2
+                if left < -Manager.width:
+                    self.xcor = -Manager.width + tempwidth/2
                     self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
             if Manager.stage.wall_right_on and self.gravity_true:
-                if right > self.canvas.winfo_reqwidth()/2:
-                    self.xcor = self.canvas.winfo_reqwidth()/2 - tempwidth/2
+                if right > self.canvas.Manager.width:
+                    self.xcor = Manager.width - tempwidth/2
                     self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
 
         self.hitbox.update_corners()
@@ -566,16 +566,16 @@ class SpriteClass(object):
                             self.ycor = prevy
                         if self.pen:
                             newline = []
-                            newline.append((self.canvas.winfo_reqwidth()/2 + prevx,
-                                            self.canvas.winfo_reqheight()/2 - prevy,
-                                            self.canvas.winfo_reqwidth()/2 + self.xcor,
-                                            self.canvas.winfo_reqheight()/2 - self.ycor))
+                            newline.append((Manager.width + prevx,
+                                            Manager.height - prevy,
+                                            Manager.width + self.xcor,
+                                            Manager.height - self.ycor))
                             newline.append(self.pen_color_var)
                             newline.append(self.pen_size_var)
                             self.lines.append(newline)
                         if self.fill and self.pen:
-                            self.polygons[-1][0].append(self.canvas.winfo_reqwidth()/2 + self.xcor)
-                            self.polygons[-1][0].append(self.canvas.winfo_reqheight()/2 - self.ycor)
+                            self.polygons[-1][0].append(Manager.width + self.xcor)
+                            self.polygons[-1][0].append(Manager.height - self.ycor)
                         if len(self.animation_x_coords) > 1:
                             self.future_x = self.animation_x_coords[-2]
                         if len(self.animation_y_coords) > 1:
@@ -636,8 +636,8 @@ class SpriteClass(object):
                     self.modes.pop(0)
                     if state and not self.fill:
                         color = self.fill_color_var
-                        self.polygons.append([[self.canvas.winfo_reqwidth()/2 + self.xcor,
-                                               self.canvas.winfo_reqheight()/2 - self.ycor], color])
+                        self.polygons.append([[Manager.width + self.xcor,
+                                               Manager.height - self.ycor], color])
                     self.fill = state
             elif self.modes[0] == "fill_color":
                 if len(self.fill_color_plans) > 0:
@@ -1193,8 +1193,8 @@ class SpriteClass(object):
             right = hit[1]
             bottom = hit[2]
             left = hit[3]
-            ex = event.x - self.canvas.winfo_reqwidth()/2
-            ey = self.canvas.winfo_reqwidth()/2 - event.y
+            ex = event.x - Manager.width
+            ey = Manager.height - event.y
             if left < ex < right and bottom < ey < top:
                 self.clear_queue()
                 function()

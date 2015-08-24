@@ -16,7 +16,13 @@ class Manager(object):
 
     event_delay = 2
 
+    width = 250
+    height = 250
+
     def __init__(self):
+        Manager.width = self.canvas.winfo_reqwidth()/2
+        Manager.height = self.canvas.winfo_reqwidth()/2
+
         # Keeping here essentially global variables to get whether the mouse is pressed at any given moment.
         def mouse_press(event):
             Manager.mouse_down = True
