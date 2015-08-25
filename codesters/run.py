@@ -27,10 +27,8 @@ class App(object):
         global stage
         stage = Environment()
 
-        try:
-            execfile(os.path.dirname(os.path.abspath(__file__)) + '/' + filename)
-        except Exception:
-            print('file not found')
+        execfile(os.path.dirname(os.path.abspath(__file__)) + '/' + filename)
+
 
 
     def move_one(self):

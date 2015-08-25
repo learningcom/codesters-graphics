@@ -1,8 +1,9 @@
 import codesters
+import random
 #global hedgey, stage, text
 global hedgey, text
-#stage = codesters.Environment()
 
+stage = codesters.Environment()
 stage.set_background("moon")
 
 hedgey = codesters.Sprite("hedgehog")
@@ -10,6 +11,7 @@ hedgey.go_to(0, -210)
 
 points = 0
 text = codesters.Text(str(points), 190, -65, "black")
+
 
 def interval():
     x = random.randint(-230,230)
