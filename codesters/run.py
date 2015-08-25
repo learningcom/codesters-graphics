@@ -26,14 +26,9 @@ class App(object):
     def do(self):
         global stage
         stage = Environment()
-        print(os.path.dirname(os.path.abspath(__file__)))
-        try:
-            execfile(filename)
-        except Exception:
-            print('file not found')
 
         try:
-            execfile(os.path.dirname(os.path.abspath(__file__)) + '/examples/' + filename)
+            execfile(os.path.dirname(os.path.abspath(__file__)) + '/' + filename)
         except Exception:
             print('file not found')
 
