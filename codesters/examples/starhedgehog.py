@@ -12,12 +12,12 @@ hedgey.go_to(0, -210)
 points = 0
 text = codesters.Text(str(points), 190, -65, "black")
 
-
 def interval():
     x = random.randint(-230,230)
     y = random.randint(0,230)
     star = codesters.Star(x, y, 5, 20, "yellow")
 stage.event_interval(interval, 2)
+
 
 def left():
     hedgey.turn_left(10)

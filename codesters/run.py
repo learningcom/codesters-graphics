@@ -27,7 +27,8 @@ class App(object):
         global stage
         stage = Environment()
 
-        execfile(os.path.dirname(os.path.abspath(__file__)) + '/' + filename)
+        filepath = os.path.dirname(os.path.abspath(__file__)) + '/' + filename
+        execfile(filepath, globals())
 
 
 
