@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 CLASSIFIERS = [
     'Programming Language :: Python',
 
@@ -20,10 +20,8 @@ setup(
     packages=['codesters'],
     include_package_data = True,
     package_data = {
-        '': ['codesters/sprites/codestersLogo.gif']
+        'codesters': ['codesters/sprites/codestersLogo.gif']
     },
-    #package_data={'admin_tools': data_files},
-    #include_package_data=True,
     install_requires=install_requires,
     entry_points={
         'console_scripts':[

@@ -11,4 +11,3 @@ codesters/run.py
 codesters/shapes.py
 codesters/sprite.py
 codesters/transformations.py
-recursive-include codesters/sprites/codestersLogo.gif
