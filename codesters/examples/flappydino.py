@@ -1,5 +1,5 @@
 import codesters
-# stage = codesters.Environment()
+stage = codesters.Environment()
 global sprite, pipe_list, flappiness, game_over, pipe_speed, pipe_gap, pipe_interval, score_display
 
 number = 10
@@ -10,7 +10,7 @@ pipe_interval = 1.5
 gravity = 10
 flappiness = 5
 
-stage.set_background("moon")
+# stage.set_background("moon")
 sprite = codesters.Sprite("dinosaur")
 sprite.set_size(0.4)
 sprite.go_to(-200, 0)
