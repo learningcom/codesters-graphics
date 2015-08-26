@@ -20,7 +20,7 @@ setup(
     packages=['codesters'],
     include_package_data = True,
     package_data = {
-        '': ['codesters/sprites/codestersLogo.gif']
+        'codesters': ['codesters/sprites/codestersLogo.gif']
     },
     #package_data={'admin_tools': data_files},
     #include_package_data=True,
