@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VERSION = '0.0.8'
+VERSION = '0.0.9'
 
 CLASSIFIERS = [
     'Programming Language :: Python',
@@ -25,7 +25,7 @@ setup(
     },
     install_requires=install_requires,
     entry_points={
-        'console_scripts':['codesters = script.codesters']
+        'console_scripts':['codesters = codesters.execute:execute']
     },
     classifiers=CLASSIFIERS,
 )

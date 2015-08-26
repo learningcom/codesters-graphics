@@ -21,9 +21,7 @@ class App(object):
     def do(self):
         global stage
         stage = Environment()
-        print os.getcwd()
         filepath = str(os.getcwd())+ '/' + self.filename
-        print filepath
         execfile(filepath, globals())
 
     def move_one(self):
@@ -32,7 +30,6 @@ class App(object):
 
 #Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
 def run(filename):
-    print "hello friend"
     app = App(filename)
     app.root.mainloop()
 
