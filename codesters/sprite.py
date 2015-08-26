@@ -6,6 +6,10 @@ import inspect
 
 
 class SpriteClass(object):
+    """The base class of the Sprite class
+    This defines all methods of the Sprite class
+
+    """
     image_dictionary = {
         "": "codestersLogo",
         "person1": "Character2",

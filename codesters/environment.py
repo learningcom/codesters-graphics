@@ -2,7 +2,6 @@ from Tkinter import Canvas
 from PIL import Image, ImageTk
 from .manager import Manager
 
-
 class StageClass(object):
     """The base class of the Environment class
 
@@ -103,6 +102,9 @@ class StageClass(object):
                     i()
 
     def draw(self):
+        """The draw function updates the tk canvas
+
+        """
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >= 1:
@@ -119,6 +121,12 @@ class StageClass(object):
     #### END OF IMPORTANT FUNCTIONS ####
 
     def add_sprite(self, sprite):
+        """add_sprite will add a sprite to the stage.
+        Note that a sprite may not be visible on the tk canvas when added if there
+        is no image for the sprite or if the sprite is hidden.
+        Manager.elements keeps a list of all sprites that have been added to the stage.
+
+        """
         if sprite not in Manager.elements:
             Manager.elements.append(sprite)
 
@@ -216,6 +224,8 @@ class StageClass(object):
             self.key_functions[bound_key_name].append(newfunction)
 
     def event_click(self, function):
+        """sets the function to call on the event of a click on the tk canvas.
+        """
         def newfunction(event):
             self.event = event
             function()
@@ -361,6 +371,15 @@ class StageClass(object):
 
 
 class Environment(StageClass):
+    """The class of the Environment class
+
+    This defines all the methods of the Environment class
+
+    .. note::
+
+       This is an example note
+
+    """
     def __init__(self):
         super(Environment, self).__init__()
         self.disable_all_walls()
