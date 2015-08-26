@@ -12,6 +12,7 @@ if len(sys.argv) != 2:
 
 filename = sys.argv[1]
 
+
 class App(object):
 
     def __init__(self):
@@ -27,11 +28,8 @@ class App(object):
         global stage
         stage = Environment()
 
-        try:
-            execfile(os.path.dirname(os.path.abspath(__file__)) + '/' + filename)
-        except Exception:
-            print('file not found')
-
+        filepath = os.path.dirname(os.path.abspath(__file__)) + '/' + filename
+        execfile(filepath, globals())
 
     def move_one(self):
         self.manager.run()

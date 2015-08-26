@@ -1,8 +1,9 @@
 import codesters
+import random
 #global hedgey, stage, text
 global hedgey, text
-#stage = codesters.Environment()
 
+stage = codesters.Environment()
 stage.set_background("moon")
 
 hedgey = codesters.Sprite("hedgehog")
@@ -16,6 +17,7 @@ def interval():
     y = random.randint(0,230)
     star = codesters.Star(x, y, 5, 20, "yellow")
 stage.event_interval(interval, 2)
+
 
 def left():
     hedgey.turn_left(10)

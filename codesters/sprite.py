@@ -155,8 +155,12 @@ class SpriteClass(object):
         self.color = 'black'
         self.heading = 0
         self.future_heading = self.heading
-        self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
-        self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
+	import os
+	self.directory = os.path.dirname(str(os.path.abspath(__file__)))
+	import glob
+	self.sprite_list = glob.glob(self.directory+'/sprites/*')
+        self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
+        self.base_photo = Image.open(self.directory+"/sprites/codestersLogo.gif")
 
         self.forever_function = None
 
@@ -248,9 +252,9 @@ class SpriteClass(object):
                 self.filename = self.image_dictionary[image]
                 self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
                 self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
-            except KeyError:
-                self.base_photo = Image.open("./codesters/sprites/codestersLogo.gif")
-                self.photo = Image.open("./codesters/sprites/codestersLogo.gif")
+            except:
+                self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
+                self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
             im2 = self.photo.convert('RGBA')
             rot = im2.rotate(self.heading, expand=1)
             fff = Image.new("RGBA", rot.size, (0,)*4)

@@ -18,6 +18,10 @@ setup(
     #download_url="https://bitbucket.org/guillaumepiot/cotidia-admin-tools/downloads/cotidia-admin-tools-0.4.1.tar.gz",
     #package_dir={'codesters': 'codesters'},
     packages=['codesters'],
+    include_package_data = True,
+    package_data = {
+        '': ['codesters/sprites/codestersLogo.gif']
+    },
     #package_data={'admin_tools': data_files},
     #include_package_data=True,
     install_requires=install_requires,
