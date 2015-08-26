@@ -11,3 +11,4 @@ codesters/run.py
 codesters/shapes.py
 codesters/sprite.py
 codesters/transformations.py
+include codesters/sprites/codestersLogo.gif
