@@ -6,19 +6,13 @@ import random
 from manager import Manager
 from environment import Environment
 
-if len(sys.argv) != 2:
-    print 'You must supply a filename to run with the codesters library e.g. "python run.py example1.py"'
-    exit()
-
-filename = sys.argv[1]
-
-
 class App(object):
 
-    def __init__(self):
+    def __init__(self, filename):
         self.manager = Manager()
         self.canvas = Manager.canvas
         self.root = Manager.root
+        self.filename = filename
         self.canvas.pack()
         self.do()
         self.move_one()
@@ -27,8 +21,9 @@ class App(object):
     def do(self):
         global stage
         stage = Environment()
-
-        filepath = os.path.dirname(os.path.abspath(__file__)) + '/' + filename
+        print os.getcwd()
+        filepath = str(os.getcwd())+ '/' + self.filename
+        print filepath
         execfile(filepath, globals())
 
     def move_one(self):
@@ -36,5 +31,9 @@ class App(object):
         self.animate = Manager.root.after(5, self.move_one)
 
 #Workaround; for right now, this like has to be in the program being run, rather than __init__.py as it should.
-app = App()
-app.root.mainloop()
+def run(filename):
+    print "hello friend"
+    app = App(filename)
+    app.root.mainloop()
+
+run(sys.argv[1])
