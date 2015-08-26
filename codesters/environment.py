@@ -4,6 +4,15 @@ from .manager import Manager
 
 
 class StageClass(object):
+    """The base class of the Environment class
+
+    This defines all the methods of the Environment class
+
+    .. note::
+
+       This is an example note
+
+    """
     image_dictionary = {
         "underwater": "Underwater_BG-01",
         "summer": "beach",
