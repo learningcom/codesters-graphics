@@ -33,4 +33,4 @@ def run(filename):
     app = App(filename)
     app.root.mainloop()
 
-run(sys.argv[1])
+#run(sys.argv[1])
