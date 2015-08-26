@@ -155,12 +155,15 @@ class SpriteClass(object):
         self.color = 'black'
         self.heading = 0
         self.future_heading = self.heading
+        self.width = 50
+        self.height = 50
 	import os
 	self.directory = os.path.dirname(str(os.path.abspath(__file__)))
 	import glob
 	self.sprite_list = glob.glob(self.directory+'/sprites/*')
-        self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
-        self.base_photo = Image.open(self.directory+"/sprites/codestersLogo.gif")
+        if kwargs.get('shape') is None:
+            self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
+            self.base_photo = Image.open(self.directory+"/sprites/codestersLogo.gif")
 
         self.forever_function = None
 
@@ -247,31 +250,32 @@ class SpriteClass(object):
         self.fill_plans = []
         self.polygons = []
 
-        if image != '':
-            try:
-                self.filename = self.image_dictionary[image]
-                self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
-                self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
-            except:
-                self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
-                self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
-            im2 = self.photo.convert('RGBA')
-            rot = im2.rotate(self.heading, expand=1)
-            fff = Image.new("RGBA", rot.size, (0,)*4)
-            self.photo = Image.composite(rot, fff, rot)
-
-        self.base_photo_width = self.photo.size[0]
-        self.base_photo_height = self.photo.size[1]
-        self.height = self.base_photo_height
-        self.width = self.base_photo_width
-        self.image_name = image
-        self.name = image
+        if kwargs.get('shape') is None:
+            if image != '':
+                try:
+                    self.filename = self.image_dictionary[image]
+                    self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+                    self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+                except:
+                    self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
+                    self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
+                    im2 = self.photo.convert('RGBA')
+                    rot = im2.rotate(self.heading, expand=1)
+                    fff = Image.new("RGBA", rot.size, (0,)*4)
+                    self.photo = Image.composite(rot, fff, rot)
+                    
+                self.base_photo_width = self.photo.size[0]
+                self.base_photo_height = self.photo.size[1]
+                self.height = self.base_photo_height
+                self.width = self.base_photo_width
+                self.image_name = image
+                self.name = image
 
         self.shape = ''
         if kwargs.get('shape') is not None:
             self.shape = kwargs.get('shape')
             self.name = self.shape
-
+            
         self.base_top_left = [-self.width/2, self.height/2]
         self.base_top_right = [self.width/2, self.height/2]
         self.base_bottom_right = [self.width/2, -self.height/2]
@@ -525,17 +529,20 @@ class SpriteClass(object):
         return [max(hit_y), max(hit_x), min(hit_y), min(hit_x)]
 
     def update_image(self):
-        im2 = self.base_photo.convert('RGBA')
-        if self.x_flipped:
-            im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
-        if self.y_flipped:
-            im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
-        if self.opacity < 255:
-            im2.putalpha(self.opacity)
-        scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
-        rot = scale.rotate(self.heading, expand=1)
-        fff = Image.new("RGBA", rot.size, (0,)*4)
-        self.photo = Image.composite(rot, fff, rot)
+        if self.shape != '':
+            pass
+        else:
+            im2 = self.base_photo.convert('RGBA')
+            if self.x_flipped:
+                im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
+            if self.y_flipped:
+                im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
+            if self.opacity < 255:
+                im2.putalpha(self.opacity)
+            scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
+            rot = scale.rotate(self.heading, expand=1)
+            fff = Image.new("RGBA", rot.size, (0,)*4)
+            self.photo = Image.composite(rot, fff, rot)
 
     def update_animation(self):
         if isinstance(self.future_x, basestring):
