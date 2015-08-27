@@ -17,6 +17,17 @@ You can run a python file with the codesters graphics library like this:
 ```
 codesters my_project_file.py
 ```
+If you need inspiration, run one of our examples with
+```
+codesters-example our_example.py
+```
+Some examples are:
+* flappydino.py
+* flowerfoxscroller.py
+* starhedgehog.py
+* pictionary.py
+
+
 
 ## Motivation
 
