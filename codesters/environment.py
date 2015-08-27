@@ -264,12 +264,18 @@ class StageClass(object):
             try:
                 self.bg_image_name = self.image_dictionary[image]
                 self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
-            except KeyError:
-                self.bg_image_name = self.image_dictionary['grid']
-                self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+            except:
+                try:
+                    self.bg_image_name = self.image_dictionary['grid']
+                    self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+                except:
+                    self.bg_photoimg = None
+                    self.bg_image = None
+                    self.bg_image_name = ''
         else:
-            self.bg_image_name = self.image_dictionary['grid']
-            self.bg_image = Image.open("./codesters/sprites/"+self.bg_image_name+".gif")
+            self.bg_photoimg = None
+            self.bg_image = None
+            self.bg_image_name = ''
 
     def set_background_x(self, amount):
         self.xcor = amount + self.canvas.winfo_reqwidth()

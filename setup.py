@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VERSION = '0.0.17'
+VERSION = '0.0.18'
 
 CLASSIFIERS = [
     'Programming Language :: Python',
