@@ -80,10 +80,10 @@ class StageClass(object):
         self.interval_function = None
         self.interval_length = 0
 
-    	import os
-	    self.directory = os.path.dirname(str(os.path.abspath(__file__)))
-    	import glob
-	    self.sprite_list = glob.glob(self.directory+'/sprites/*')
+        import os
+        self.directory = os.path.dirname(str(os.path.abspath(__file__)))
+        import glob
+        self.sprite_list = glob.glob(self.directory+'/sprites/*')
 
         self.key_functions = {}
 
@@ -272,7 +272,7 @@ class StageClass(object):
             except:
                 try:
                     self.bg_image_name = self.image_dictionary['grid']
-                    self.bg_image = Image.open(self.directory"/sprites/"+self.bg_image_name+".gif")
+                    self.bg_image = Image.open(self.directory+"/sprites/"+self.bg_image_name+".gif")
                 except:
                     self.bg_photoimg = None
                     self.bg_image = None

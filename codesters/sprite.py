@@ -258,8 +258,12 @@ class SpriteClass(object):
             if image != '':
                 try:
                     self.filename = self.image_dictionary[image]
-                    self.base_photo = Image.open("./codesters/sprites/"+self.filename+".gif")
-                    self.photo = Image.open("./codesters/sprites/"+self.filename+".gif")
+                    self.base_photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
+                    self.photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
+                    im2 = self.photo.convert('RGBA')
+                    rot = im2.rotate(self.heading, expand=1)
+                    fff = Image.new("RGBA", rot.size, (0,)*4)
+                    self.photo = Image.composite(rot, fff, rot)
                 except:
                     self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
                     self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
