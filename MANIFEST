@@ -5,7 +5,6 @@ codesters/bezier.py
 codesters/display_object.py
 codesters/environment.py
 codesters/example.py
-codesters/excute.py
 codesters/execute.py
 codesters/hitbox.py
 codesters/manager.py
@@ -22,6 +21,7 @@ codesters/examples/flappyfish.py
 codesters/examples/flowerfoxscroller.py
 codesters/examples/frogger.py
 codesters/examples/pictionary.py
+codesters/examples/quickbaseball.py
 codesters/examples/spaceinvaders.py
 codesters/examples/starhedgehog.py
 codesters/examples/trianglebasketball.py
