@@ -70,8 +70,3 @@ def test_counterclockwise():
     amount_to_turn_counterclockwise = -0
     new_heading = counterclockwise(amount_to_turn_counterclockwise)
     assert new_heading == amount_to_turn_counterclockwise
-
-sprite = codesters.Sprite()
-sprite.wait(1)
-sprite.left(78)
-print sprite.width

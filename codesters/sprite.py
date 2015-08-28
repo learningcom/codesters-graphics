@@ -172,7 +172,6 @@ class SpriteClass(object):
             self.base_photo_height = self.photo.size[1]
             self.height = self.base_photo_height
             self.width = self.base_photo_width
-            print self.width
 
         self.forever_function = None
 
