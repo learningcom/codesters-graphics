@@ -4,6 +4,9 @@ VERSION = '0.0.21'
 
 CLASSIFIERS = [
     'Programming Language :: Python',
+    'Intended Audience :: Education',
+    'Topic :: Education :: Computer Aided Instruction (CAI)',
+    'Development Status :: 2 - Pre-Alpha',
 
 ]
 install_requires = [
