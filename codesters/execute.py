@@ -12,7 +12,7 @@ def execute_example(filename):
 def runner():
     parser = argparse.ArgumentParser(
                                     usage = "\nThis command runs codesters files. A default command would be as follows:\n\n codesters <options> filename\n",
-                                    description = "Options: \n -e <examplename> runs a pre-made example codesters file\n -h for help",
+                                    description = "Offline codesters library",
                                     epilog = "",
 
                                     )
