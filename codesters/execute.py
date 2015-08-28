@@ -7,8 +7,7 @@ def execute(filename):
 def execute_example(filename):
     example.run(filename)
 
-# Standard boilerplate to call the main() function to begin
-# the program.
+
 def runner():
     parser = argparse.ArgumentParser(
                                     usage = "\nThis command runs codesters files. A default command would be as follows:\n\n codesters <options> filename\n",

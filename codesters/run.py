@@ -21,7 +21,8 @@ class App(object):
     def do(self):
         global stage
         stage = Environment()
-        filepath = str(os.getcwd())+ '/' + self.filename
+        #filepath = str(os.getcwd())+ '/' + self.filename
+        filepath = self.filename
         try:
             execfile(filepath, globals())
         except IOError:

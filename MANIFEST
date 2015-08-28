@@ -24,6 +24,7 @@ codesters/examples/pictionary.py
 codesters/examples/quickbaseball.py
 codesters/examples/spaceinvaders.py
 codesters/examples/starhedgehog.py
+codesters/examples/tester.py
 codesters/examples/trianglebasketball.py
 codesters/examples/volleyball.py
 codesters/sprites/Alien-1.gif
