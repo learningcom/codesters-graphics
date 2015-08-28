@@ -12,6 +12,17 @@ def test_go_to():
     y = coords[1]
     assert x == 200 and y == 300
 
+def glide_to(x,y):
+    sprite = codesters.Sprite()
+    sprite.go_to(x,y)
+    return [sprite.get_x(),sprite.get_y()]
+
+def test_glide_to():
+    coords = glide_to(200,300)
+    x = coords[0]
+    y = coords[1]
+    assert x == 200 and y == 300
+
 def right(amount):
     sprite = codesters.Sprite()
     sprite.move_right(amount)
