@@ -1,4 +1,5 @@
 import codesters
+import math
 
 def go_to(x,y):
     sprite = codesters.Sprite()
@@ -70,3 +71,31 @@ def test_counterclockwise():
     amount_to_turn_counterclockwise = -0
     new_heading = counterclockwise(amount_to_turn_counterclockwise)
     assert new_heading == amount_to_turn_counterclockwise
+
+def forward(amount, angle):
+    sprite = codesters.Sprite()
+    sprite.turn_counterclockwise(angle)
+    sprite.forward(amount)
+    return [sprite.get_x(), sprite.get_y(), sprite.get_rotation()]
+
+def test_forward():
+    turn_angle = -78
+    step_size = -82
+    coords = forward(step_size, turn_angle)
+    assert coords[0] == step_size * math.cos(turn_angle * math.pi/180)
+    assert coords[1] == step_size * math.sin(turn_angle * math.pi/180)
+    assert coords[2] == turn_angle
+
+def backward(amount, angle):
+    sprite = codesters.Sprite()
+    sprite.turn_counterclockwise(angle)
+    sprite.backward(amount)
+    return [-sprite.get_x(), -sprite.get_y(), sprite.get_rotation()]
+
+def test_backward():
+    turn_angle = 40
+    step_size = 100
+    coords = backward(step_size, turn_angle)
+    assert coords[0] == step_size * math.cos(turn_angle * math.pi/180)
+    assert coords[1] == step_size * math.sin(turn_angle * math.pi/180)
+    assert coords[2] == turn_angle
