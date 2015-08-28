@@ -140,5 +140,3 @@ def test_size():
     amount = -0.4
     new_size = size(amount)
     assert amount == new_size
-
-test_size()
