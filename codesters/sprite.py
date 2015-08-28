@@ -545,13 +545,13 @@ class SpriteClass(object):
             pass
         else:
             im2 = self.base_photo.convert('RGBA')
-            if self.x_flipped:
+            if (self.x_flipped) != (self.width < 0):
                 im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
-            if self.y_flipped:
+            if (self.y_flipped) != (self.height < 0):
                 im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
             if self.opacity < 255:
                 im2.putalpha(self.opacity)
-            scale = im2.resize((int(self.size * self.width), int(self.size*self.height)), Image.ANTIALIAS)
+            scale = im2.resize((abs(int(self.size * self.width)), abs(int(self.size*self.height))), Image.ANTIALIAS)
             rot = scale.rotate(self.heading, expand=1)
             fff = Image.new("RGBA", rot.size, (0,)*4)
             self.photo = Image.composite(rot, fff, rot)

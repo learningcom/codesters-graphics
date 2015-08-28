@@ -99,3 +99,23 @@ def test_backward():
     assert coords[0] == step_size * math.cos(turn_angle * math.pi/180)
     assert coords[1] == step_size * math.sin(turn_angle * math.pi/180)
     assert coords[2] == turn_angle
+
+def width(amount):
+    sprite = codesters.Sprite()
+    sprite.set_width(amount)
+    return sprite.get_width()
+
+def test_width():
+    amount = -32
+    new_width = width(amount)
+    assert amount == new_width
+
+def height(amount):
+    sprite = codesters.Sprite()
+    sprite.set_height(amount)
+    return sprite.get_height()
+
+def test_height():
+    amount = 44
+    new_height = height(amount)
+    assert amount == new_height
