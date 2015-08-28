@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-VERSION = '0.0.21'
+VERSION = '0.0.25'
 
 CLASSIFIERS = [
     'Programming Language :: Python',
@@ -19,8 +19,6 @@ setup(
     author="Codesters",
     author_email="matthew@codesters.com",
     url="https://github.com/codestersnyc/codesters-graphics",
-    #download_url="https://bitbucket.org/guillaumepiot/cotidia-admin-tools/downloads/cotidia-admin-tools-0.4.1.tar.gz",
-    #package_dir={'codesters': 'codesters'},
     packages=['codesters'],
     include_package_data = True,
     package_data = {
@@ -29,8 +27,7 @@ setup(
     },
     install_requires=install_requires,
     entry_points={
-        'console_scripts':['codesters = codesters.execute:execute',
-                           'codesters-example = codesters.execute:execute_example']
+        'console_scripts':['codesters = codesters.execute:runner']
     },
     classifiers=CLASSIFIERS,
 )

@@ -22,7 +22,12 @@ class App(object):
         global stage
         stage = Environment()
         filepath = str(os.getcwd())+ '/' + self.filename
-        execfile(filepath, globals())
+        try:
+            execfile(filepath, globals())
+        except IOError:
+            print "There is no file named "+filepath+". Please try again!"
+        except SyntaxError:
+            print filepath+" is not a codesters Python file. Please try again!"
 
     def move_one(self):
         self.manager.run()
