@@ -130,3 +130,15 @@ def test_height():
     amount = 44
     new_height = height(amount)
     assert amount == new_height
+
+def size(amount):
+    sprite = codesters.Sprite()
+    sprite.set_size(amount)
+    return sprite.get_size()
+
+def test_size():
+    amount = -0.4
+    new_size = size(amount)
+    assert amount == new_size
+
+test_size()

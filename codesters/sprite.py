@@ -156,6 +156,7 @@ class SpriteClass(object):
         self.speed = 1
         self.modes = []
         self.size = 1
+        self.future_size = 1
         self.color = 'black'
         self.heading = 0
         self.future_heading = self.heading
@@ -415,6 +416,7 @@ class SpriteClass(object):
         self.future_x = self.xcor
         self.future_y = self.ycor
         self.future_heading = self.heading
+        self.future_size = self.size
         self.future_y_flipped = self.y_flipped
         self.future_x_flipped = self.x_flipped
         self.animation_x_coords = []
@@ -548,6 +550,9 @@ class SpriteClass(object):
             if (self.x_flipped) != (self.width < 0):
                 im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
             if (self.y_flipped) != (self.height < 0):
+                im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
+            if self.size < 0:
+                im2 = im2.transpose(Image.FLIP_LEFT_RIGHT)
                 im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
             if self.opacity < 255:
                 im2.putalpha(self.opacity)
@@ -1076,9 +1081,9 @@ class SpriteClass(object):
     def get_x_scale(self):
         pass
     def get_size(self):
-        return self.size
+        return self.future_size
     def get_scale(self):
-        return self.size
+        return self.future_size
     def get_y_scale(self):
         pass
     def get_type(self):
@@ -1097,6 +1102,7 @@ class SpriteClass(object):
         self.scale_plans.append(newsize)
         self.modes.append("scale")
         self.scale_plans.append("Finished current animatoin")
+        self.future_size = newsize
 
     # flippers
     def flip_horizontal(self):
