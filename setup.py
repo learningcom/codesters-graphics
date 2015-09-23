@@ -17,7 +17,7 @@ setup(
     description="Offline replication of the graphics on codesters.com",
     version=VERSION,
     author="Codesters",
-    author_email="matthew@codesters.com",
+    author_email="thomas@codesters.com",
     url="https://github.com/codestersnyc/codesters-graphics",
     packages=['codesters'],
     include_package_data = True,
