@@ -3,7 +3,8 @@ from PIL import Image, ImageTk
 from .manager import Manager
 from .hitbox import Hitbox
 import inspect
-
+import os
+import glob
 
 class SpriteClass(object):
     """The base class of the Sprite class
@@ -162,10 +163,10 @@ class SpriteClass(object):
         self.future_heading = self.heading
         self.width = 50
         self.height = 50
-	import os
-	self.directory = os.path.dirname(str(os.path.abspath(__file__)))
-	import glob
-	self.sprite_list = glob.glob(self.directory+'/sprites/*')
+
+        self.directory = os.path.dirname(str(os.path.abspath(__file__)))
+        print self.directory
+        self.sprite_list = glob.glob(self.directory+'/sprites/*')
         if kwargs.get('shape') is None:
             self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
             self.base_photo = Image.open(self.directory+"/sprites/codestersLogo.gif")
