@@ -5,6 +5,7 @@ from .hitbox import Hitbox
 import inspect
 import os
 import glob
+import sys
 
 class SpriteClass(object):
     """The base class of the Sprite class
@@ -165,7 +166,6 @@ class SpriteClass(object):
         self.height = 50
 
         self.directory = os.path.dirname(str(os.path.abspath(__file__)))
-        print self.directory
         self.sprite_list = glob.glob(self.directory+'/sprites/*')
         if kwargs.get('shape') is None:
             self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
@@ -264,13 +264,16 @@ class SpriteClass(object):
             if image != '':
                 try:
                     self.filename = self.image_dictionary[image]
+                    print(self.directory+"/sprites/"+self.filename+".gif")
                     self.base_photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
                     self.photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
                     im2 = self.photo.convert('RGBA')
                     rot = im2.rotate(self.heading, expand=1)
                     fff = Image.new("RGBA", rot.size, (0,)*4)
                     self.photo = Image.composite(rot, fff, rot)
-                except:
+                except Exception:
+                    t, v, tb = sys.exc_info()
+                    raise t, v, tb
                     self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
                     self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
                     im2 = self.photo.convert('RGBA')
@@ -557,10 +560,12 @@ class SpriteClass(object):
                 im2 = im2.transpose(Image.FLIP_TOP_BOTTOM)
             if self.opacity < 255:
                 im2.putalpha(self.opacity)
-            scale = im2.resize((abs(int(self.size * self.width)), abs(int(self.size*self.height))), Image.ANTIALIAS)
+            width = abs(int(self.size * self.width))
+            height = abs(int(self.size * self.height))
+            scale = im2.resize((width, height), Image.NEAREST)
             rot = scale.rotate(self.heading, expand=1)
-            fff = Image.new("RGBA", rot.size, (0,)*4)
-            self.photo = Image.composite(rot, fff, rot)
+            final = Image.new("RGBA", rot.size, (0,)*4)
+            self.photo = Image.composite(rot, final, rot)
 
     def update_animation(self):
         if isinstance(self.future_x, basestring):
