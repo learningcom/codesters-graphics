@@ -151,6 +151,8 @@ class SpriteClass(object):
         # Default values
         self.type = Sprite
 
+        self.canvas_object = None
+
         self.xcor = x
         self.ycor = y
         self.xspeed = 0
@@ -164,6 +166,9 @@ class SpriteClass(object):
         self.future_heading = self.heading
         self.width = 50
         self.height = 50
+
+        self.old_x = x
+        self.old_y = y
 
         self.directory = os.path.dirname(str(os.path.abspath(__file__)))
         self.sprite_list = glob.glob(self.directory+'/sprites/*')
@@ -312,25 +317,29 @@ class SpriteClass(object):
         self.collision_hazard_function = None
 
     def draw(self):
+        if self.canvas_object:
+            self.update()
+            return
+
         if self.forever_function is not None:
             self.forever_function()
         if self.photo is not None and not self.hidden:
             self.bg_photoimg = ImageTk.PhotoImage(self.photo)
-            self.canvas.create_image((self.xcor + Manager.width,
+            self.canvas_object = self.canvas.create_image((self.xcor + Manager.width,
                                       Manager.height - self.ycor),
                                      image=self.bg_photoimg)
         elif not self.hidden:
-            self.canvas.create_oval((self.xcor-(self.size/2),
+            self.canvas_object = self.canvas.create_oval((self.xcor-(self.size/2),
                                      self.ycor-(self.size/2),
                                      self.xcor+(self.size/2),
                                      self.ycor+(self.size/2)),
                                     fill=self.color)
         for p in self.polygons:
-            self.canvas.create_polygon(tuple(p[0]), fill=p[1])
+            self.canvas_object = self.canvas.create_polygon(tuple(p[0]), fill=p[1])
         for l in self.lines:
-            self.canvas.create_line(l[0], fill=l[1], width=l[2])
+            self.canvas_object = self.canvas.create_line(l[0], fill=l[1], width=l[2])
         if self.say_time != 0:
-            self.canvas.create_text(self.xcor + Manager.width,
+            self.canvas_object = self.canvas.create_text(self.xcor + Manager.width,
                                     Manager.height - self.ycor - 100,
                                     text=self.say_text, font=(self.say_font, self.say_size),
                                     fill=self.say_color)
@@ -344,6 +353,16 @@ class SpriteClass(object):
             self.say_size = self.say_queue[0][3]
             self.say_font = self.say_queue[0][4]
             self.say_queue.pop(0)
+
+        self.old_x = self.xcor
+        self.old_y = self.ycor
+
+    def update(self):
+        x = self.xcor - self.old_x
+        y = self.ycor - self.old_y
+        self.canvas.move(self.canvas_object, x, y * -1)
+        self.old_x = self.xcor
+        self.old_y = self.ycor
 
     def update_physics(self):
         prevx = self.xcor

@@ -42,12 +42,15 @@ class StageClass(object):
     def __init__(self):
         self.root = Manager.canvas
         self.canvas = Manager.canvas
+        self.req_height = self.canvas.winfo_reqheight()
+        self.req_width = self.canvas.winfo_reqwidth()
         Manager.elements.append(self)
         Manager.stage = self
 
         self.type = Environment
 
-        self.canvas.create_rectangle((0, 0, self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight()), fill='white')
+        self.canvas.create_rectangle((0, 0, self.req_width, self.req_height), fill='white')
+        self.canvas_object = None
 
         self.xcor = 0
         self.ycor = 0
@@ -60,8 +63,8 @@ class StageClass(object):
         self.scaled_image = None
         self.canvas.focus_set()
 
-        self.xcor = self.canvas.winfo_reqwidth()/2
-        self.ycor = self.canvas.winfo_reqheight()/2
+        self.xcor = self.req_width/2
+        self.ycor = self.req_height/2
         self.size = 1
 
         self.physics_true = False
@@ -110,18 +113,25 @@ class StageClass(object):
         """The draw function updates the tk canvas
 
         """
+        if self.canvas_object:
+            self.update()
+            return
+
         if self.forever_function is not None:
             self.forever_function()
         if self.interval_length >= 1:
             if Manager.frame_number % self.interval_length == 0:
                 if self.interval_function is not None:
                     self.interval_function()
-        self.canvas.create_rectangle((0, 0, self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight()), fill='white')
+        #self.canvas.create_rectangle((0, 0, self.req_width, self.req_height), fill='white')
         if self.bg_photoimg is not None:
-            self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
-        elif self.bg_image is not None:
-            self.bg_photoimg = ImageTk.PhotoImage(self.bg_image)
-            self.canvas.create_image(self.xcor, Manager.canvas.winfo_reqheight() - self.ycor, image=self.bg_photoimg)
+            self.canvas_object = self.canvas.create_image(self.xcor, self.req_height - self.ycor, image=self.bg_photoimg)
+        elif self.bg_image_name is not None:
+            self.bg_photoimg = ImageTk.PhotoImage(file=self.directory+"/sprites/"+self.bg_image_name+".gif")
+            self.canvas_object = self.canvas.create_image(self.xcor, self.req_height - self.ycor, image=self.bg_photoimg)
+
+    def update(self):
+        pass
 
     #### END OF IMPORTANT FUNCTIONS ####
 
@@ -283,7 +293,7 @@ class StageClass(object):
             self.bg_image_name = ''
 
     def set_background_x(self, amount):
-        self.xcor = amount + self.canvas.winfo_reqwidth()
+        self.xcor = amount + self.req_width
 
     def set_background_y(self, amount):
         self.ycor = amount
@@ -318,10 +328,10 @@ class StageClass(object):
         return self.mouse_y()
 
     def mouse_x(self):
-        return (self.canvas.winfo_pointerx() - self.canvas.winfo_rootx()) - self.canvas.winfo_reqwidth()/2
+        return (self.canvas.winfo_pointerx() - self.canvas.winfo_rootx()) - self.req_width/2
 
     def mouse_y(self):
-        return self.canvas.winfo_reqheight()/2 - (self.canvas.winfo_pointery() - self.canvas.winfo_rooty())
+        return self.req_height/2 - (self.canvas.winfo_pointery() - self.canvas.winfo_rooty())
 
     def enable_floor(self):
         self.wall_bottom_on = True

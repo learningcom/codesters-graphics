@@ -59,7 +59,7 @@ class Manager(object):
 
     def run(self):
         Manager.frame_number += 1
-        self.canvas.delete("all")
+        #self.canvas.delete("all")
         ## THIS IS WHERE THE CHECKS FOR GRAVITY AND SPEED WOULD GO ##
         self.update_animation()
         self.update_physics()
