@@ -1,15 +1,29 @@
 import codesters
 stage = codesters.Environment()
 
-# we need a really long background like this field of flowers
-stage.set_background('flower_field')
+sky = codesters.Rectangle(0, 0, 510, 510, 'skyblue')
+sky.collision_off()
+sky.gravity_off()
+
+ground = codesters.Rectangle(0, -250, 510, 20, 'green')
+ground.collision_off()
+ground.gravity_off()
+
+flowers = []
+for i in range(10):
+    x = i * 230 - 200
+    flower = codesters.Sprite('flowers', x, -240)
+    flower.collision_off()
+    flower.gravity_off()
+    flowers.append(flower)
+
 
 # Make a character, we'll use a fox
 global fox
 fox = codesters.Sprite('fox', -200, 0)
 
 # Add some gravity so our fox doesn't float away
-stage.set_gravity(10)
+stage.set_gravity(15)
 stage.set_bounce(0.3)
 
 
@@ -46,25 +60,20 @@ for i in range(10):  # making 10 presents
 
 # make a function for when a key is pressed
 def stage_move_right():
-    global stage
-    global presents
-
-    # move the stage
-    stage.move_right(20)
-
     # move every present in our list
     for p in presents:
         p.set_x(p.get_x() + 20)
+    for f in flowers:
+        f.set_x(f.get_x() + 20)
 stage.event_key('left', stage_move_right)  # The left key makes the stage move right
 
 
 # Do the same thing for the other direction
 def stage_move_left():
-    global stage
-    global presents
-    stage.move_left(20)
     for p in presents:
         p.set_x(p.get_x() - 20)
+    for f in flowers:
+        f.set_x(f.get_x() - 20)
 stage.event_key('right', stage_move_left)
 
 
@@ -77,7 +86,6 @@ points_text = codesters.Text(str(points), -220, 200)
 def get_present(fox, present):
 
     # the present disappears
-    global stage
     stage.remove_sprite(present)
 
     # the fox spins
