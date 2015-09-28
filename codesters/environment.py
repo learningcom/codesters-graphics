@@ -106,8 +106,8 @@ class StageClass(object):
     def update_events(self):
         for key in Manager.keys_pressed:
             if key in self.key_functions.keys() and Manager.frame_number % Manager.event_delay == 0:
-                for e in Manager.elements:
-                    e.clear_queue()
+                # for e in Manager.elements:
+                #     e.clear_queue()
                 for i in self.key_functions[key]:
                     i()
 
@@ -166,8 +166,8 @@ class StageClass(object):
 
     def event_left_key(self, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         if "Left" not in self.key_functions.keys():
             self.key_functions['Left'] = [newfunction]
@@ -176,8 +176,8 @@ class StageClass(object):
 
     def event_right_key(self, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         if "Right" not in self.key_functions.keys():
             self.key_functions['Right'] = [newfunction]
@@ -186,8 +186,8 @@ class StageClass(object):
 
     def event_up_key(self, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         if "Up" not in self.key_functions.keys():
             self.key_functions['Up'] = [newfunction]
@@ -196,8 +196,8 @@ class StageClass(object):
 
     def event_down_key(self, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         if "Down" not in self.key_functions.keys():
             self.key_functions['Down'] = [newfunction]
@@ -206,8 +206,8 @@ class StageClass(object):
 
     def event_space_key(self, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         if "space" not in self.key_functions.keys():
             self.key_functions['space'] = [newfunction]
@@ -216,8 +216,8 @@ class StageClass(object):
 
     def event_key(self, key, function):
         def newfunction():
-            for e in Manager.elements:
-                e.clear_queue()
+            # for e in Manager.elements:
+            #     e.clear_queue()
             function()
         bound_key_name = key
         if key == "left":

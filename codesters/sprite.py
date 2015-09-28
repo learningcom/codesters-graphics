@@ -457,7 +457,7 @@ class SpriteClass(object):
                 if isinstance(e, SpriteClass):
                     if self.check_two_sprites_for_collision(e):
                         if e.goal or e.hazard or e.collision:
-                            self.clear_queue()
+                            #  self.clear_queue()
                             e.clear_queue()
 
                         # TODO we're double checking some elements here, this can be more efficiecnt
@@ -512,7 +512,7 @@ class SpriteClass(object):
     def update_events(self):
         for key in Manager.keys_pressed:
             if key in self.key_functions.keys() and Manager.frame_number % Manager.event_delay == 0:
-                self.clear_queue()
+                #  self.clear_queue()
                 for i in self.key_functions[key]:
                     if len(inspect.getargspec(i)[0]) == 0:
                         i()
@@ -528,7 +528,7 @@ class SpriteClass(object):
                 ex = self.canvas.winfo_pointerx()
                 ey = self.canvas.winfo_pointery()
                 if left < ex < right and bottom < ey < top:
-                    self.clear_queue()
+                    #  self.clear_queue()
                     changex = ex - self.xcor
                     changey = ey - self.ycor
                     self.xcor = ex
@@ -1166,7 +1166,7 @@ class SpriteClass(object):
 
     def event_left_key(self, function):
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             function()
         if "Left" not in self.key_functions.keys():
             self.key_functions['Left'] = [f]
@@ -1175,7 +1175,7 @@ class SpriteClass(object):
 
     def event_right_key(self, function):
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             function()
         if "Right" not in self.key_functions.keys():
             self.key_functions['Right'] = [f]
@@ -1184,7 +1184,7 @@ class SpriteClass(object):
 
     def event_up_key(self, function):
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             function()
         if "Up" not in self.key_functions.keys():
             self.key_functions['Up'] = [f]
@@ -1193,7 +1193,7 @@ class SpriteClass(object):
 
     def event_down_key(self, function):
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             function()
         if "Down" not in self.key_functions.keys():
             self.key_functions['Down'] = [f]
@@ -1202,7 +1202,7 @@ class SpriteClass(object):
 
     def event_space_key(self, function):
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             function()
         if "space" not in self.key_functions.keys():
             self.key_functions['space'] = [f]
@@ -1227,7 +1227,7 @@ class SpriteClass(object):
             newkey = "space"
 
         def f(event):
-            self.clear_queue()
+            #  self.clear_queue()
             if len(inspect.getargspec(function)[0]) == 0:
                 function()
             elif len(inspect.getargspec(function)[0]) == 1:
@@ -1247,7 +1247,7 @@ class SpriteClass(object):
             ex = event.x - Manager.width
             ey = Manager.height - event.y
             if left < ex < right and bottom < ey < top:
-                self.clear_queue()
+                #  self.clear_queue()
                 function()
         id = self.canvas.bind("<Button-1>", click, add='+')
         self.event_bindings[id] = "<Button-1>"
