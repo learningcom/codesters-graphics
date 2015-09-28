@@ -75,7 +75,7 @@ class Manager(object):
 
     def update_physics(self):
         for e in self.elements:
-            if e.physics_true:
+            if hasattr(e, 'physics_true') and e.physics_true:
                 e.update_physics()
 
     def update_animation(self):

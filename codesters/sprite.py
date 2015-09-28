@@ -6,6 +6,7 @@ import inspect
 import os
 import glob
 import sys
+from threading import Timer
 
 class SpriteClass(object):
     """The base class of the Sprite class
@@ -144,7 +145,7 @@ class SpriteClass(object):
     }
 
     ## PIVOTAL FUNCTIONS ##
-    def __init__(self, image, x, y, **kwargs):
+    def __init__(self, image, x=0, y=0, **kwargs):
         self.canvas = Manager.canvas
         Manager.elements.append(self)
 
@@ -165,11 +166,13 @@ class SpriteClass(object):
         self.width = 50
         self.height = 50
 
-        self.directory = os.path.dirname(str(os.path.abspath(__file__)))
-        self.sprite_list = glob.glob(self.directory+'/sprites/*')
+        self.default_directory = os.path.dirname(os.path.realpath(__file__))
+        self.script_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+        self.sprite_list = glob.glob(self.default_directory+'/sprites/*')
         if kwargs.get('shape') is None:
-            self.photo = Image.open(self.directory+'/sprites/codestersLogo.gif')
-            self.base_photo = Image.open(self.directory+"/sprites/codestersLogo.gif")
+            self.photo = Image.open(self.default_directory+'/sprites/codestersLogo.gif')
+            self.base_photo = Image.open(self.default_directory+"/sprites/codestersLogo.gif")
             self.base_photo_width = self.photo.size[0]
             self.base_photo_height = self.photo.size[1]
             self.height = self.base_photo_height
@@ -218,21 +221,23 @@ class SpriteClass(object):
 
         self.have_clicked = False
 
-        def click_on_sprite(event):
-            hit = self.get_hitbox_edges()
-            top = hit[0]
-            right = hit[1]
-            bottom = hit[2]
-            left = hit[3]
-            ex = self.canvas.winfo_pointerx()
-            ey = self.canvas.winfo_pointery()
-            if left < ex < right and bottom < ey < top:
-                self.have_clicked = True
+        # def click_on_sprite(event):
+        #     hit = self.get_hitbox_edges()
+        #     top = hit[0]
+        #     right = hit[1]
+        #     bottom = hit[2]
+        #     left = hit[3]
+        #     ex = self.canvas.winfo_pointerx()
+        #     ey = self.canvas.winfo_pointery()
+        #     if left < ex < right and bottom < ey < top:
+        #         self.have_clicked = True
+        #
+        # def release_sprite(event):
+        #     self.have_clicked = False
+        # self.canvas.bind("<Button-1>", click_on_sprite, add="+")
+        # self.canvas.bind("<ButtonRelease-1>", release_sprite, add="+")
 
-        def release_sprite(event):
-            self.have_clicked = False
-        self.canvas.bind("<Button-1>", click_on_sprite, add="+")
-        self.canvas.bind("<ButtonRelease-1>", release_sprite, add="+")
+        self.event_bindings = {}
 
         self.opacity = 255
 
@@ -260,33 +265,37 @@ class SpriteClass(object):
         self.fill_plans = []
         self.polygons = []
 
-        if kwargs.get('shape') is None:
-            if image != '':
-                try:
-                    self.filename = self.image_dictionary[image]
-                    print(self.directory+"/sprites/"+self.filename+".gif")
-                    self.base_photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
-                    self.photo = Image.open(self.directory+"/sprites/"+self.filename+".gif")
-                    im2 = self.photo.convert('RGBA')
-                    rot = im2.rotate(self.heading, expand=1)
-                    fff = Image.new("RGBA", rot.size, (0,)*4)
-                    self.photo = Image.composite(rot, fff, rot)
-                except Exception:
-                    t, v, tb = sys.exc_info()
-                    raise t, v, tb
-                    self.base_photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
-                    self.photo = Image.open(self.directory + "/sprites/codestersLogo.gif")
-                    im2 = self.photo.convert('RGBA')
-                    rot = im2.rotate(self.heading, expand=1)
-                    fff = Image.new("RGBA", rot.size, (0,)*4)
-                    self.photo = Image.composite(rot, fff, rot)
-                    
-                self.base_photo_width = self.photo.size[0]
-                self.base_photo_height = self.photo.size[1]
-                self.height = self.base_photo_height
-                self.width = self.base_photo_width
-                self.image_name = image
-                self.name = image
+        if image and kwargs.get('shape') is None:
+
+            if image in self.image_dictionary:
+                self.filename = self.image_dictionary[image]
+            else:
+                self.filename = image
+
+            script_img_path = self.script_directory + "/" + self.filename + ".gif"
+            default_img_path = self.default_directory + "/sprites/" + self.filename+".gif"
+            img_path = None
+            if os.path.isfile(script_img_path):
+                img_path = script_img_path
+            elif os.path.isfile(default_img_path):
+                img_path = default_img_path
+            else:
+                img_path = self.default_directory + "/sprites/codestersLogo.gif"
+
+            self.base_photo = Image.open(img_path)
+            self.photo = Image.open(img_path)
+
+            im2 = self.photo.convert('RGBA')
+            rot = im2.rotate(self.heading, expand=1)
+            fff = Image.new("RGBA", rot.size, (0,)*4)
+            self.photo = Image.composite(rot, fff, rot)
+
+            self.base_photo_width = self.photo.size[0]
+            self.base_photo_height = self.photo.size[1]
+            self.height = self.base_photo_height
+            self.width = self.base_photo_width
+            self.image_name = image
+            self.name = image
 
         self.shape = ''
         if kwargs.get('shape') is not None:
@@ -381,23 +390,23 @@ class SpriteClass(object):
         tempheight = top-bottom
         tempwidth = right-left
 
-        if self.gravity_true:
-            if Manager.stage.wall_bottom_on and self.gravity_true:
+        if self.xspeed != 0 or self.yspeed != 0:
+            if Manager.stage.wall_bottom_on:  # and self.gravity_true:
                 if bottom < -Manager.height:
                     self.ycor = -Manager.height + tempheight/2
-                    self.jump(abs(self.yspeed * Manager.stage.bounce))
+                    self.yspeed = abs(self.yspeed * Manager.stage.bounce)
 
-            if Manager.stage.wall_top_on and self.gravity_true:
+            if Manager.stage.wall_top_on:  # and self.gravity_true:
                 if top > Manager.height:
                     self.ycor = Manager.height - tempheight/2
-                    self.jump(-abs(self.yspeed * Manager.stage.bounce))
+                    self.yspeed = -abs(self.yspeed * Manager.stage.bounce)
 
-            if Manager.stage.wall_left_on and self.gravity_true:
+            if Manager.stage.wall_left_on:  # and self.gravity_true:
                 if left < -Manager.width:
                     self.xcor = -Manager.width + tempwidth/2
                     self.xspeed = abs(self.xspeed * Manager.stage.bounce)
 
-            if Manager.stage.wall_right_on and self.gravity_true:
+            if Manager.stage.wall_right_on:  # and self.gravity_true:
                 if right > Manager.width:
                     self.xcor = Manager.width - tempwidth/2
                     self.xspeed = -abs(self.xspeed * Manager.stage.bounce)
@@ -413,7 +422,7 @@ class SpriteClass(object):
         while (len(self.animation_x_coords) > 1 and isinstance(self.animation_x_coords[1], basestring)) or\
                 (len(self.animation_rotation_degrees) > 1 and isinstance(self.animation_rotation_degrees[1], basestring)) or\
                 (len(self.scale_plans) > 1 and isinstance(self.scale_plans[1], basestring)) or\
-                (len(self.dilate_plans) > 1 and instance(self.dilate_plans[1], basestring)) or\
+                (len(self.dilate_plans) > 1 and isinstance(self.dilate_plans[1], basestring)) or\
                 (len(self.modes) > 0 and self.modes[0] in skips):
             self.update_animation()
             self.update_animation()
@@ -451,6 +460,8 @@ class SpriteClass(object):
                             self.clear_queue()
                             e.clear_queue()
 
+                        # TODO we're double checking some elements here, this can be more efficiecnt
+
                         if e.goal and self.collision_goal_function is not None:
                             if len(inspect.getargspec(self.collision_goal_function)[0]) == 2:
                                 self.collision_goal_function(self, e)
@@ -466,7 +477,7 @@ class SpriteClass(object):
                             else:
                                 self.collision_hazard_function()
                         elif e.collision and self.collision_function is not None:
-                            if len(inspect.getargspec(self.collision_function)[0]) == 2:
+                            if len(inspect.getargspec(self.collision_function)[0]) >= 2:
                                 self.collision_function(self, e)
                             elif len(inspect.getargspec(self.collision_function)[0]) == 1:
                                 self.collision_function(Manager.elements.index(e))
@@ -488,7 +499,7 @@ class SpriteClass(object):
                             else:
                                 self.collision_hazard_function()
                         elif self.collision and e.collision_function is not None:
-                            if len(inspect.getargspec(e.collision_function)[0]) == 2:
+                            if len(inspect.getargspec(e.collision_function)[0]) >= 2:
                                 e.collision_function(e, self)
                             elif len(inspect.getargspec(e.collision_function)[0]) == 1:
                                 e.collision_function(Manager.elements.index(self))
@@ -568,10 +579,15 @@ class SpriteClass(object):
             self.photo = Image.composite(rot, final, rot)
 
     def update_animation(self):
-        if isinstance(self.future_x, basestring):
-            self.future_x = self.xcor
-        if isinstance(self.future_y, basestring):
-            self.future_y = self.ycor
+        try:
+            if isinstance(self.future_x, basestring):
+                self.future_x = self.xcor
+            if isinstance(self.future_y, basestring):
+                self.future_y = self.ycor
+        except AttributeError:
+            self.future_x = None
+            self.future_y = None
+
         if len(self.modes) > 0 and not self.paused:
             if self.modes[0] == "wait":
                 # print 'waiting'
@@ -1233,7 +1249,8 @@ class SpriteClass(object):
             if left < ex < right and bottom < ey < top:
                 self.clear_queue()
                 function()
-        self.canvas.bind("<Button-1>", click, add='+')
+        id = self.canvas.bind("<Button-1>", click, add='+')
+        self.event_bindings[id] = "<Button-1>"
 
     def event_forever(self, function):
         self.forever_function = function
@@ -1246,6 +1263,10 @@ class SpriteClass(object):
 
     def event_collision_hazard(self, function):
         self.collision_hazard_function = function
+
+    def event_delay(self, function, seconds):
+        self.event_delay_timer = Timer(seconds, function, (self,))
+        self.event_delay_timer.start()
 
     ##### END OF EVENTS #####
 
@@ -1292,9 +1313,19 @@ class SpriteClass(object):
         self.pen_size_plans.append(newsize)
         self.modes.append("pen_size")
 
-    def set_color(self, newcolor):
-        self.color = newcolor
-        self.pen_color_var = newcolor
+    def _rgb_to_hex(self, r, g, b):
+        color = None
+        if g and b:
+            color = "#{0:02x}{1:02x}{2:02x}".format(max(0, min(r, 255)),
+                                                    max(0, min(g, 255)),
+                                                    max(0, min(b, 255)))
+        else:
+            color = r
+        return color
+
+    def set_color(self, newcolor_or_r, g=None, b=None):
+        self.color = self._rgb_to_hex(newcolor_or_r, g, b)
+        self.pen_color_var = self.color
 
     def pen_color(self, newcolor):
         self.pen_color_plans.append(newcolor)
@@ -1324,7 +1355,7 @@ class SpriteClass(object):
         costhe = math.cos(theta)
         sinthe = math.sin(theta)
         x1 = costhe * (self.xcor-x) - sinthe * (self.ycor-y) + x
-        y1 = sinethe * (self.xcor-x) + costhe * (self.ycor-y) + y
+        y1 = sinthe * (self.xcor-x) + costhe * (self.ycor-y) + y
         self.set_heading(self.future_heading+degrees)
         self.go_to(x1, y1)
 
@@ -1357,6 +1388,11 @@ class SpriteClass(object):
         return not self.pen
     def get_pen_down(self):
         return self.pen
+
+    def clean_up(self):
+        for id in self.event_bindings:
+            event_string = self.event_bindings[id]
+            self.canvas.unbind(event_string, id)
 
 class Sprite(SpriteClass):
 

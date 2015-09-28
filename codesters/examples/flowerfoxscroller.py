@@ -6,7 +6,7 @@ stage.set_background('flower_field')
 
 # Make a character, we'll use a fox
 global fox
-fox = codesters.Sprite('dinosaur', -200, 0)
+fox = codesters.Sprite('fox', -200, 0)
 
 # Add some gravity so our fox doesn't float away
 stage.set_gravity(10)
@@ -15,7 +15,7 @@ stage.set_bounce(0.3)
 
 # Let's make the fox jump if you push the space bar
 def space_key():
-    fox.jump(10)
+    fox.jump(20)
 stage.event_key('space', space_key)
 
 # Let's make something for the fox to find
@@ -82,6 +82,7 @@ def get_present(fox, present):
 
     # the fox spins
     fox.left(720)
+    fox.set_rotation(0)
 
     # we get a point
     global points

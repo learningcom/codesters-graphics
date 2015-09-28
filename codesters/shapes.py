@@ -9,7 +9,7 @@ import re
 
 
 class Point(sprite.SpriteClass):
-    def __init__(self, x, y, size=5, color='black', outline=None):
+    def __init__(self, x=0, y=0, size=5, color='black', outline=None):
         super(Point, self).__init__('', x, y, shape='point')
         self.width = size
         self.height = size
@@ -65,7 +65,7 @@ class Point(sprite.SpriteClass):
 
 
 class Circle(sprite.SpriteClass):
-    def __init__(self, x, y, diam, color, outline=None):
+    def __init__(self, x=0, y=0, diam=20, color='black', outline=None):
         super(Circle, self).__init__('', x, y,  shape='circle')
         self.diam = diam
         self.width = diam
@@ -122,7 +122,7 @@ class Circle(sprite.SpriteClass):
 
 
 class Rectangle(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color='black', outline=None):
+    def __init__(self, x=0, y=0, width=100, height=50, color='black', outline=None):
         super(Rectangle, self).__init__('', x, y, shape='rectangle')
         self.width = width
         self.height = height
@@ -187,7 +187,7 @@ class Rectangle(sprite.SpriteClass):
 
 
 class Square(sprite.SpriteClass):
-    def __init__(self, x, y, side, color, outline=None):
+    def __init__(self, x=0, y=0, side=50, color='black', outline=None):
         super(Square, self).__init__('', x, y, shape='square')
         self.width = side
         self.height = side
@@ -252,7 +252,7 @@ class Square(sprite.SpriteClass):
 
 
 class Triangle(sprite.SpriteClass):
-    def __init__(self, x, y, side, color, outline=None):
+    def __init__(self, x=0, y=0, side=50, color='black', outline=None):
         super(Triangle, self).__init__('', x, y, shape='triangle')
         self.xcor = x
         self.ycor = y
@@ -322,7 +322,7 @@ class Triangle(sprite.SpriteClass):
 
 
 class Ellipse(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline=None):
+    def __init__(self, x=0, y=0, width=100, height=50, color='black', outline=None):
         super(Ellipse, self).__init__('', x, y, shape='ellipse')
         self.width = width
         self.height = height
@@ -386,7 +386,7 @@ class Ellipse(sprite.SpriteClass):
 
 
 class Line(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, color):
+    def __init__(self, x1=0, y1=0, x2=100, y2=100, color='black'):
         super(Line, self).__init__('', x1, y1, shape='line')
         self.xcor = (x2 - x1)/2 + x1
         self.ycor = (y2 - y1)/2 + y1
@@ -444,7 +444,7 @@ class Line(sprite.SpriteClass):
 
 
 class Star(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color, outline=None):
+    def __init__(self, x=0, y=0, num_points=5, diam=50, color='black', outline=None):
         super(Star, self).__init__('', x, y, shape='star')
         self.xcor = x
         self.ycor = y
@@ -511,7 +511,7 @@ class Star(sprite.SpriteClass):
 
 
 class TriangleIso(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline=None):
+    def __init__(self, x=0, y=0, width=100, height=50, color='black', outline=None):
         super(TriangleIso, self).__init__('', x, y, shape='triangleiso')
         self.xcor = x
         self.ycor = y
@@ -582,7 +582,7 @@ class TriangleIso(sprite.SpriteClass):
 
 
 class TriangleRight(sprite.SpriteClass):
-    def __init__(self, x, y, width, height, color, outline=None):
+    def __init__(self, x=0, y=0, width=50, height=50, color='black', outline=None):
         super(TriangleRight, self).__init__('', x, y, shape='triangleright')
         self.xcor = x
         self.ycor = y
@@ -653,7 +653,7 @@ class TriangleRight(sprite.SpriteClass):
 
 
 class Triangle3Pts(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, color, outline=None):
+    def __init__(self, x1=-50, y1=-50, x2=50, y2=-50, x3=0, y3=50, color='black', outline=None):
         x = (x1 + x2 + x3)/3
         y = (y1 + y2 + y3)/3
         super(Triangle3Pts, self).__init__('', x, y, shape='triangle3pts')
@@ -733,7 +733,7 @@ class Triangle3Pts(sprite.SpriteClass):
 
 
 class Quad(sprite.SpriteClass):
-    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, color, outline=None):
+    def __init__(self, x1=-50, y1=-50, x2=50, y2=-50, x3=50, y3=50, x4=-50, y4=50, color='black', outline=None):
         x = (x1 + x2 + x3 + x4)/4
         y = (y1 + y2 + y3 + x4)/4
         super(Quad, self).__init__('', x, y, shape='quad')
@@ -818,7 +818,7 @@ class Quad(sprite.SpriteClass):
 
 
 class Polygon(sprite.SpriteClass):
-    def __init__(self, x, y, num_points, diam, color, outline=None):
+    def __init__(self, x=0, y=0, num_points=6, diam=100, color='black', outline=None):
         super(Polygon, self).__init__('', x, y, shape='polygon')
         self.xcor = x
         self.ycor = y
@@ -887,7 +887,7 @@ class Polygon(sprite.SpriteClass):
 
 
 class Arc(sprite.SpriteClass):
-    def __init__(self, x, y, diam, start, end, color, outline=None):
+    def __init__(self, x=0, y=0, diam=50, start=0, end=270, color='black', outline=None):
         super(Arc, self).__init__('', x, y, shape='arc')
         self.width = diam
         self.height = diam
@@ -955,7 +955,7 @@ class Arc(sprite.SpriteClass):
 
 
 class Curve(sprite.SpriteClass):
-    def __init__(self, x1, y1, cx1, cy1, cx2, cy2, x2, y2, fill, color):
+    def __init__(self, x1=0, y1=0, cx1=0, cy1=100, cx2=0, cy2=100, x2=100, y2=100, fill='black', color='black'):
         super(Curve, self).__init__('', x1, y1, shape='curve')
         offsetx = self.canvas.winfo_reqwidth()/2
         offsety = self.canvas.winfo_reqheight()/2
@@ -1031,7 +1031,7 @@ class Curve(sprite.SpriteClass):
 
 
 class Text(sprite.SpriteClass):
-    def __init__(self, text, x, y, color="black"):
+    def __init__(self, text, x=0, y=0, color="black"):
         super(Text, self).__init__('', x, y, shape='text')
         self.say_text = text
         self.say_time = 10000000
@@ -1043,6 +1043,7 @@ class Text(sprite.SpriteClass):
         self.hidden = True
         self.gravity_off()
         self.collision_off()
+        self.drag = False
 
     def set_text(self, text):
         self.say_text = text

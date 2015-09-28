@@ -1,6 +1,8 @@
 from Tkinter import Canvas
 from PIL import Image, ImageTk
 from .manager import Manager
+import os
+import sys
 
 class StageClass(object):
     """The base class of the Environment class
@@ -84,6 +86,9 @@ class StageClass(object):
         self.directory = os.path.dirname(str(os.path.abspath(__file__)))
         import glob
         self.sprite_list = glob.glob(self.directory+'/sprites/*')
+        self.script_directory = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+
 
         self.key_functions = {}
 
@@ -144,7 +149,9 @@ class StageClass(object):
 
     def remove_sprite(self, sprite):
         if sprite in Manager.elements:
+            sprite.clean_up()
             Manager.elements.remove(sprite)
+
 
     def remove_shape(self, shape):
         if shape in Manager.elements:
@@ -233,25 +240,29 @@ class StageClass(object):
         """
         def newfunction(event):
             self.event = event
-            function()
+            if function:
+                function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_down(self, function):
         def newfunction(event):
             self.event = event
-            function()
+            if function:
+                function()
         self.canvas.bind("<Button-1>", newfunction, add="+")
 
     def event_click_up(self, function):
         def newfunction(event):
             self.event = event
-            function()
+            if function:
+                function()
         self.canvas.bind("<ButtonRelease-1>", newfunction, add="+")
 
     def event_mouse_move(self, function):
         def newfunction(event):
             self.event = event
-            function()
+            if function:
+                function()
         self.canvas.bind("<Motion>", newfunction, add="+")
 
     def event_forever(self, function):
@@ -265,18 +276,33 @@ class StageClass(object):
         pass
 
     def set_background(self, image):
-        if image != '':
-            try:
+        if image:
+
+            if image in self.image_dictionary:
                 self.bg_image_name = self.image_dictionary[image]
-                self.bg_image = Image.open(self.directory+"/sprites/"+self.bg_image_name+".gif")
-            except:
-                try:
-                    self.bg_image_name = self.image_dictionary['grid']
-                    self.bg_image = Image.open(self.directory+"/sprites/"+self.bg_image_name+".gif")
-                except:
-                    self.bg_photoimg = None
-                    self.bg_image = None
-                    self.bg_image_name = ''
+            else:
+                self.bg_image_name = image
+
+            default_img_path = self.directory+"/sprites/"+self.bg_image_name+".gif"
+            script_img_path = self.script_directory + "/" + self.bg_image_name + ".gif"
+            img_path = None
+
+            if os.path.isfile(script_img_path):
+                img_path = script_img_path
+            elif os.path.isfile(default_img_path):
+                img_path = default_img_path
+            else:
+                self.bg_image_name = self.image_dictionary['grid']
+                img_path = self.directory + "/sprites/" + self.bg_image_name + ".gif"
+
+            try:
+                self.bg_image = Image.open(img_path)
+            except Exception as ex:
+                print ex
+                self.bg_photoimg = None
+                self.bg_image = None
+                self.bg_image_name = ''
+
         else:
             self.bg_photoimg = None
             self.bg_image = None
@@ -393,4 +419,3 @@ class Environment(StageClass):
     """
     def __init__(self):
         super(Environment, self).__init__()
-        self.disable_all_walls()

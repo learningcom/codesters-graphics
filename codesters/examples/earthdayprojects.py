@@ -1,6 +1,7 @@
 import codesters
-global backpack_box, counter_text, pollution_box, pollution_image, pollution_text, timer_text, timer_box, sprite, update_backpack, update_pollution, goal, add_prize, prize
-#stage = codesters.Environment()
+import random
+#global backpack_box, counter_text, pollution_box, pollution_image, pollution_text, timer_text, timer_box, sprite, update_backpack, update_pollution, goal, add_prize, prize
+stage = codesters.Environment()
 
 stage.set_background('park')
 sprite = codesters.Sprite("person1")
@@ -9,16 +10,13 @@ recyclable = "sodacan"
 prize = "bike"
 goal = 5
 
-
-
 # This section creates the backpack, show_backpack(),
 # and update_backpack()
 counter = 0
 backpack_box = codesters.Rectangle(300, 230, 100, 30, "lightgrey")
-counter_text = codesters.Text(str(counter), 300, 230, "green")
+counter_text = codesters.Text(str(counter), 300, 230, "black")
 
 def add_backpack(counter):
-    global recyclable
     backpack_box.set_x(-200)
     backpack_image = codesters.Sprite(recyclable, -230, 230)
     backpack_image.set_size(.25)
@@ -64,8 +62,7 @@ def add_recyclables(which_object):
         global pollution
         x = random.randint(-225, 225)
         y = random.randint(-225, 0)
-        new_recyclable = codesters.Sprite(which_object)
-        new_recyclable.set_position(x, y)
+        new_recyclable = codesters.Sprite(which_object, x, y)
         new_recyclable.set_size(.3)
         timer -= 1
         timer_text.set_text("Time: " + str(timer))
@@ -73,7 +70,6 @@ def add_recyclables(which_object):
         pollution_text.set_text(str(pollution))
     stage.event_interval(interval, 2)
 
-# This section adds the prizes and makes them dragable
 # This section adds the prizes and makes them dragable
 def add_prize(which_prize):
     my_prize = codesters.Sprite(prize, 200, 0)

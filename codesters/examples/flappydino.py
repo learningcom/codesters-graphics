@@ -5,8 +5,8 @@ stage = codesters.Environment()
 pipe_speed = 6
 pipe_gap = 200
 pipe_interval = 1.5
-gravity = 4
-flappiness = 7
+gravity = 3
+flappiness = 12
 
 # Stage setup
 stage.set_background("moon")
@@ -14,7 +14,7 @@ stage.set_gravity(gravity)
 stage.disable_all_walls()
 
 # Dino setup
-sprite = codesters.Sprite("dinosaur")
+sprite = codesters.Sprite("fox")
 sprite.set_size(0.5)
 sprite.go_to(-200, 0)
 
